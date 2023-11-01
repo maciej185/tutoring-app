@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            TutoringApp, Edit profile
+        </title>
+        <link rel="stylesheet" href="../base.css">
+        <link rel="stylesheet" href="../generals.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/tutor_learning.css">
+        <link rel="stylesheet" href="./css/popup.css">
+        
+        <script defer src="./js/popup.js"></script>
+        <script defer src="./js/tutor_learning.js"></script>
+
+    </head>
+    <body>
+        <header>
+            <div class="header-left header-side">
+                <div class="header-left-logo">
+                    <a href="./home.html">
+                        <h2>
+                            TutorApp
+                        </h2>
+                    </a>
+                    
+                </div>
+                <div class="mobile header-left-search header-side-item_mobile">
+                    <div class="header-left-search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="desktop header-left-search header-side-item_desktop">
+                    <input type="text" class="header-left-search-name" id="header-left-search-name">
+                    <button class="header-left-search-button" id="header-left-search-button">
+                        <a href="./search_results.html">
+                            <div class="header-left-search-button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </button>  
+                </div>
+            </div>
+            <div class="header-right header-side">
+                <input type="checkbox" class="header-right-checkbox" id="header-right-checkbox">
+                <div class="header-right-profile">
+                    <img src="./img/img.jpg">
+                </div>
+                <label for="header-right-checkbox">
+                    <div class="header-right-arrow icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </label>
+                <div class="header-right-dropdown">
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_profile.html">
+                            Profile
+                        </a>
+                    </div>  
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_learning.html">
+                            Lessons
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./chat.html">
+                            Chats
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-log_out header-right-dropdown-item">
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="learning">
+                <div class="learning-left mobile">
+                    <div class="learnign-left-assigned box_dropdown">
+                        <input type="checkbox" class="box_dropdown-header-checkbox" id="box_dropdown-header-checkbox-0">
+                        <div class="learnign-left-assigned-header box_dropdown-header">
+                            
+                            <div class="learnign-left-assigned-header-text box_dropdown-header-text">
+                                Your students
+                            </div>
+                            <label for="box_dropdown-header-checkbox-0">
+                                <div class="learnign-left-assigned-header-arrow box_dropdown-header-arrow box_dropdown-header-arrow-down">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                      </svg>
+                                </div>
+
+                                <div class="learnign-left-assigned-header-arrow box_dropdown-header-arrow box_dropdown-header-arrow-up">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                                    </svg>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="learnign-left-assigned-main box_dropdown-main">
+                            <div class="learnign-left-assigned-main-student">
+                                <div class="learnign-left-assigned-main-student-add button_fill_green">
+                                    Add student
+                                </div>
+                            </div>
+                            <div class="learnign-left-assigned-main-student">
+                                John Smith
+                            </div>
+                            <div class="learnign-left-assigned-main-student">
+                                John Smith
+                            </div>
+                            <div class="learnign-left-assigned-main-student">
+                                John Smith
+                            </div>
+                        </div>
+                    </div>
+                    <div class="learnign-left-sessions box_dropdown">
+                        <input type="checkbox" class="box_dropdown-header-checkbox" id="box_dropdown-header-checkbox-1">
+                        <div class="learnign-left-sessions-header box_dropdown-header">
+                            
+                            <div class="learnign-left-sessions-header-text box_dropdown-header-text">
+                                Single sessions
+                            </div>
+                            <label for="box_dropdown-header-checkbox-1">
+                                <div class="learnign-left-sessions-header-arrow box_dropdown-header-arrow box_dropdown-header-arrow-down">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                      </svg>
+                                </div>
+                                <div class="learnign-left-sessions-header-arrow box_dropdown-header-arrow box_dropdown-header-arrow-up">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                                    </svg>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="learning-left-students-main box_dropdown-main">
+                            <div class="learning-left-students-main-student">
+                                John Smith
+                            </div>
+                            <div class="learning-left-students-main-student">
+                                John Smith
+                            </div>
+                            <div class="learning-left-students-main-student">
+                                John Smith
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="learning-left desktop">
+                    <div class="learnign-left-assigned box">
+                        <div class="learnign-left-assigned-header box-header">
+                            Your students
+                        </div>
+                        <div class="learnign-left-assigned-main box-main">
+                            <div class="learnign-left-assigned-main-student">
+                                <div class="learnign-left-assigned-main-student-add button_fill_green">
+                                    Add student
+                                </div>
+                            </div>
+                            <div class="learnign-left-assigned-main-student">
+                                John Smith
+                            </div>
+                            <div class="learnign-left-assigned-main-student">
+                                John Smith
+                            </div>
+                            <div class="learnign-left-assigned-main-student">
+                                John Smith
+                            </div>
+                        </div>
+                    </div>
+                    <div class="learning-left-students box">
+                        <div class="learning-left-students-header box-header">
+                            Single sessions
+                        </div>
+                        <div class="learning-left-students-main box-main">
+                            <div class="learning-left-students-main-student">
+                                John Smith
+                            </div>
+                            <div class="learning-left-students-main-student">
+                                John Smith
+                            </div>
+                            <div class="learning-left-students-main-student">
+                                John Smith
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="learning-right">
+                    <div class="learning-right-reminder box">
+                        <div class="learning-right-reminder-header box-header">
+                            Reminder
+                        </div>
+                        <div class="learning-right-reminder-main box-main_padded">
+                            <div class="learning-right-reminder-main-text">
+                                One task needs to be checked.
+                            </div>
+                            <div class="learning-right-reminder-main-button button_fill_red">
+                                <a href="./lesson3.html">
+                                    View lesson
+                                </a>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="learning-right-summary box">
+                        <div class="learning-right-summary-header box-header">
+                            Summary
+                        </div>
+                        <div class="learning-right-summary-main box-main_padded">
+                            <table class="learning-right-summary-main-table">
+                                <tr class="learning-right-summary-main-table-row">
+                                    <td class="learning-right-summary-main-table-cell">
+                                        <div class="learning-right-summary-main-table-cell-top">
+                                            Student 
+                                        </div>
+                                        <div class="learning-right-summary-main-table-cell-bottom">
+                                            John Smith
+                                        </div>
+                                    </td>
+                                    <td class="learning-right-summary-main-table-cell">
+                                        <div class="learning-right-summary-main-table-cell-top">
+                                            Subject
+                                        </div>
+                                        <div class="learning-right-summary-main-table-cell-bottom">
+                                            Math
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="learning-right-summary-main-table-row">
+                                    <td class="learning-right-summary-main-table-cell">
+                                        <div class="learning-right-summary-main-table-cell-top">
+                                            Total number of hours
+                                        </div>
+                                        <div class="learning-right-summary-main-table-cell-bottom">
+                                            2 
+                                        </div>
+                                    </td>
+                                    <td class="learning-right-summary-main-table-cell">
+                                        <div class="learning-right-summary-main-table-cell-top">
+                                            Hours left 
+                                        </div>
+                                        <div class="learning-right-summary-main-table-cell-bottom">
+                                            8
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="learning-right-add_service box">
+                        <div class="learning-right-add_service-header box-header">
+                            Add hours 
+                        </div>
+                        <div class="learning-right-add_service-main box-main_padded stack-container_small">
+                            <div class="learning-right-add_service-main-info info-bottom">
+                                Choose the type of service your student would like to purchase.
+                            </div>
+                            <div class="learning-right-add_service-main-input">
+                                <select class="learning-right-add_service-main-input-select options">
+                                    <option>Math, 15 lessons</option>
+                                    <option>Math, 10 lessons</option>
+                                    <option>Math, 1 lesson</option>
+                                </select>
+                            </div>
+                            <div class="learning-right-add_service-main-submit">
+                                <div class="learning-right-add_service-main-submit-button button_fill_green">
+                                    <a href="./tutor_learning.html">
+                                        Add
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="learning-right-sessions box">
+                        <div class="learning-right-sessions-header box-header">
+                            Sessions / Lessons / Classes
+                        </div>
+                        <div class="learning-right-sessions-main box-main">
+                            <div class="learning-right-sessions-session">
+                                <div class="learning-right-sessions-session-top">
+                                    <div class="learning-right-sessions-session-top-name">
+                                        <a href="./lesson1.html">
+                                            Session 1
+                                        </a>
+                                    </div>
+                                    <div class="learning-right-sessions-session-top-status-warning">
+                                        One assignment due.
+                                    </div>
+                                </div>  
+                                <div class="learning-right-sessions-session-bottom">
+                                    9. September 2023, 13:00-14:00
+                                </div>
+                            </div>
+                            <div class="learning-right-sessions-session">
+                                <div class="learning-right-sessions-session-top">
+                                    <div class="learning-right-sessions-session-top-name">
+                                        <a href="./lesson2.html">
+                                            Session 2
+                                        </a>
+                                    </div>
+                                    <div class="learning-right-sessions-session-top-status">
+                                        
+                                        <div class="learning-right-sessions-session-top-status">
+                                            <div class="learning-right-sessions-session-top-status-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                                <div class="learning-right-sessions-session-bottom">
+                                    13. September 2023, 13:00-14:00
+                                </div>
+                            </div>
+
+                            <div class="learning-right-sessions-session">
+                                <div class="learning-right-sessions-session-top">
+                                    <div class="learning-right-sessions-session-top-name">
+                                        <a href="./lesson3.html">
+                                            Session 3
+                                        </a>
+                                    </div>
+                                    <div class="learning-right-sessions-session-top-status-reminder">
+                                        One assignment to be checked.
+                                    </div>
+                                </div>  
+                                <div class="learning-right-sessions-session-bottom">
+                                    16. September 2023, 13:00-14:00
+                                </div>
+                            </div>
+
+                            <div class="learning-right-sessions-session">
+                                <div class="learning-right-sessions-session-top">
+                                    <div class="learning-right-sessions-session-top-name">
+                                        Session 4
+                                    </div>
+                                    <div class="learning-right-sessions-session-top-status icon_green">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                        </svg>
+                                    </div>
+                                </div>  
+                                <div class="learning-right-sessions-session-bottom">
+                                    Tomorrow, 13:00-14:00
+                                </div>
+                            </div>
+
+                            <div class="learning-right-sessions-session-add box-main_padded">
+                                <a href="./create_lesson.html">
+                                    <div class="learning-right-sessions-session-add-btn add_button">
+                                        <div class="learning-right-sessions-session-add-btn-icon add_button-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+                                
+                            </div>
+                            <div class="learning-right-sessions-session-pagination">
+                                <div class="learning-right-sessions-session-pagination-arrow_left icon_green">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="learning-right-sessions-session-pagination-start icon_green">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                        <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="learning-right-sessions-session-pagination-pages info-top">
+                                    2 of 3
+                                </div>
+                                <div class="learning-right-sessions-session-pagination-arrow_end icon_green">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                        <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                    </svg>
+                                </div>
+                                <div class="learning-right-sessions-session-pagination-arrow_right icon_green">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup">
+                <div class="popup-main box box-main_padded stack-container_small">
+                    <div class="popup-main-header adjacent-container">
+                        <div class="popup-main-header-text">
+                            Add student
+                        </div>
+                        <div class="popup-main-header-close icon_green">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                            </svg>
+                        </div>
+                        
+                    </div>
+                    <div class="popup-main-form adjacent-container">
+
+                        <div class="popup-main-form-student">
+                            <div class="popup-main-form-student-top info-top">
+                                Student
+                            </div>
+                            <div class="popup-main-form-student-bottom info-bottom">
+                                <select class="popup-main-form-student-bottom-select options">
+                                    <option>John Smith</option>
+                                    <option>John Smith</option>
+                                    <option>John Smith</option>
+                                </select>
+                            </div> 
+                        </div>
+                        <div class="popup-main-form-service">
+                            <div class="popup-main-form-service-top info-top">
+                                Service
+                            </div>
+                            <div class="popup-main-form-service-bottom info-bottom">
+                                <select class="popup-main-form-service-bottom-select options">
+                                    <option>Physics, 15 lessons</option>
+                                    <option>Physics, 10 lessons</option>
+                                    <option>Physics, 1 lesson</option>
+                                    <option>Math, 15 lessons</option>
+                                    <option>Math, 10 lessons</option>
+                                    <option>Math, 1 lesson</option>
+                                </select>
+                            </div>
+                        </div>
+                                                
+                    </div>
+                    <div class="popup-main-submit">
+                        <div class="popup-main-submit-btn button_fill_green">
+                            Add
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+main {
+    width: 90%
+}
+
+div.services {
+    padding: unset;
+}
+
+div.services-main-list-service {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.services-main-list-service-info {
+    align-items: stretch;
+}
+
+
+
+div.info-bottom > input[type="number"] {
+    height: 100%;
+}
+
+div.services-main-submit {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media(min-width: 800px) {
+    main {
+        display: flex;
+        width: 100%;
+        height: calc(100vh - var(--header-height));
+        align-items: flex-start;
+        justify-content: center;
+        overflow: scroll;
+    }
+
+    div.services {
+        width: 35rem;
+    }
+
+}

@@ -1,0 +1,59 @@
+@font-face {
+    font-family: "Poppins";
+    src: url(./Poppins-Regular.ttf) format("truetype");
+}
+
+:root {
+    --header-height: 4rem;
+    --main-top_bottom-padding: 1.5rem;
+    --bluegreen-extra-extra-light: rgb(232, 245, 241);
+    --bluegreen-extra-light: rgb(182, 225, 212);
+    --bluegreen-light: rgb(127, 222, 192);
+    --bluegreen-medium: rgb(68, 189, 150);
+    --bluegreen-dark: rgb(45, 126, 100);
+    --bluegreen-extra-dark: rgb(25, 82, 64);
+    --bluegreen-extra-extra-dark: rgb(15, 48, 38);
+
+    --gray-bluegreen-extra-extra-light: rgb(239, 245, 243);
+    --gray-bluegreen-extra-light: rgb(200, 225, 212);
+    --gray-bluegreen-light: rgb(179, 213, 197);
+    --gray-bluegreen-medium: rgb(115, 156, 140);
+    --gray-bluegreen-dark: rgb(76, 107, 92);
+    --gray-bluegreen-extra-dark: rgb(53, 82, 66);
+    --gray-bluegreen-extra-extra-dark: rgb(27, 43, 34);
+
+    --gray-red-extra-extra-light: rgb(247, 206, 206);
+    --gray-red-extra-light: rgb(233, 159, 156);
+    --gray-red-light: rgb(217, 99, 95);
+    --gray-red-medium: rgb(160, 32, 30);
+    --gray-red-dark: rgb(126, 18, 12);
+    --gray-red-extra-dark: rgb(95, 18, 14);
+    --gray-red-extra-extra-dark: rgb(45, 8, 6);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Poppins", Arial;
+}
+
+body {
+    width: 100%;
+    margin: unset;
+    background-color: var(--gray-bluegreen-extra-extra-light);
+}
+
+main {
+    margin-top: var(--header-height);
+    margin-bottom: var(--footer-height);
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px dashed darkgreen;
+    padding: var(--main-top_bottom-padding) 0;
+    position: relative;
+}
+
+main > div {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+}

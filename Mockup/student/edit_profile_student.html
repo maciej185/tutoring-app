@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            TutoringApp, Edit Profile
+        </title>
+        <link rel="stylesheet" href="../base.css">
+        <link rel="stylesheet" href="../generals.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/edit_profile_student.css">
+    </head>
+    <body>
+        <header>
+            <div class="header-left header-side">
+                <div class="header-left-logo">
+                    <a href="./home.html">
+                        <h2>
+                            TutorApp
+                        </h2>
+                    </a>
+                    
+                </div>
+                <div class="mobile header-left-search header-side-item_mobile">
+                    <div class="header-left-search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="desktop header-left-search header-side-item_desktop">
+                    <select class="header-left-search-subject" id="header-left-search-subject">
+                        <option value="physics">Physics</option>
+                        <option value="math">Math</option>
+                        <option value="english">English</option>
+                        <option value="french">French</option>
+                        <option value="chemistry">Chemistry</option>
+                    </select>
+                    <select class="header-left-search-city" id="header-left-search-city">
+                        <option value="lodz">Łódź</option>
+                        <option value="warsaw">Warsaw</option>
+                        <option value="wroclaw">Wrocław</option>
+                    </select>
+                    <input type="text" class="header-left-search-name" id="header-left-search-name">
+                    <button class="header-left-search-button" id="header-left-search-button">
+                        <a href="./search_results.html">
+                            <div class="header-left-search-button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </button>  
+                </div>
+            </div>
+            <div class="header-right header-side">
+                <input type="checkbox" class="header-right-checkbox" id="header-right-checkbox">
+                <div class="header-right-profile">
+                    <img src="./img/img.jpg">
+                </div>
+                <label for="header-right-checkbox">
+                    <div class="header-right-arrow icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </label>
+                <div class="header-right-dropdown">
+                    <div class="header-right-dropdown-item">
+                        <a href="./profile.html">
+                            Profile
+                        </a>
+                    </div>  
+                    <div class="header-right-dropdown-item">
+                        <a href="./student_learning.html">
+                            Lessons
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./chat.html">
+                            Chats
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-log_out header-right-dropdown-item">
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="profile stack-container">
+                <div class="profile-info box">
+                    <div class="profile-info-header box-header"> 
+                        General
+                    </div>
+                    <div class="profile-info-main box-main_padded stack-adjecent-container ">
+
+                        <div class="profile-info-main-left_top">
+                            <div class="profile-info-main-left_top-picture">
+                                <img src="./img/img.jpg">
+                            </div>
+                            <div class="profile-info-main-left_top-delete icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="profile-info-main-right_bottom">
+
+                            <div class="profile-info-main-right_bottom-info stack-container_smaller">
+                                <div class="profile-info-main-right_bottom-info-top info-top">
+                                    Name
+                                </div>
+                                <div class="profile-info-main-right_bottom-info-bottom">
+                                    <input type="text" class="text-input">
+                                </div>
+                            </div>
+
+                            <div class="profile-info-main-right_bottom-info stack-container_smaller">
+                                <div class="profile-info-main-right_bottom-info-top info-top">
+                                    Last name 
+                                </div>
+                                <div class="profile-info-main-right_bottom-info-bottom">
+                                    <input type="text" class="text-input">
+                                </div>
+                            </div>
+
+                            <div class="profile-info-main-right_bottom-info stack-container_smaller">
+                                <div class="profile-info-main-right_bottom-info-top info-top">
+                                    City 
+                                </div>
+                                <div class="profile-info-main-right_bottom-info-bottom">
+                                    <input type="text" class="text-input">
+                                </div>
+                            </div>
+
+                            <div class="profile-info-main-right_bottom-info stack-container_smaller">
+                                <div class="profile-info-main-right_bottom-info-top info-top">
+                                    Email
+                                </div>
+                                <div class="profile-info-main-right_bottom-info-bottom">
+                                    <input type="text" class="text-input">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="profile-description box">
+                    <div class="profile-description-header box-header">
+                        Description
+                    </div>
+                    <div class="profile-description-text box-main_padded">
+                        <textarea class="profile-description-text-textarea textarea"></textarea>
+                    </div>
+                </div>
+                <div class="profile-education box">
+                    <div class="profile-education-header box-header">
+                        Education
+                    </div>
+                    <div class="profile-education-main box-main_padded">
+                        <div class="profile-education-main-school box box-main_padded adjacent-container">
+                            <div class="profile-education-main-school-info stack-container_small">
+                                <div class="profile-education-main-school-info-name stack-container_small">
+                                    <div class="profile-education-main-school-info-name-top info-top">
+                                        School name
+                                    </div>
+                                    <div class="profile-education-main-school-info-name-bottom">
+                                        <input type="text" class="profile-education-main-school-info-name-bottom-input text-input">
+                                    </div>
+                                </div>
+                                <div class="profile-education-main-school-info-additional stack-container_small">
+                                    <div class="profile-education-main-school-info-additional-top info-top">
+                                        Additional info
+                                    </div>
+                                    <div class="profile-education-main-school-info-additional-bottom">
+                                        <input type="text" class="profile-education-main-school-info-additional-bottom-input text-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-education-main-school-delete icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="profile-education-main-add add_button">
+                            <div class="profile-education-main-add-icon add_button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-submit">
+                    <div class="profile-submit-btn button_fill_green">
+                        <a href="./profile.html">
+                            Submit
+                        </a>
+                    </div>
+                </div>
+            </div> 
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>
