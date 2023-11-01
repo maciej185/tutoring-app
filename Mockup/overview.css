@@ -1,0 +1,52 @@
+main {
+    width: 100%;
+}
+
+main > div {
+    width: 60%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px dashed darkgreen;
+    border-radius: unset;
+}
+
+main > div > div.header {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--gray-bluegreen-extra-dark);
+    margin-bottom: 1rem;
+}
+
+div.stacked > div {
+    border: 1px solid var(--gray-bluegreen-extra-dark);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+div.adjacent {
+    overflow-x: scroll;
+}
+
+div.adjacent > div {
+    flex: 1;
+    border: 1px solid var(--gray-bluegreen-extra-dark);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+div.link-container {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    border: 1px dashed var(--gray-bluegreen-extra-dark);
+}
+
+div.centered_button_container > div {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: 1px solid var(--gray-bluegreen-extra-dark);
+}
+
+div.btn {
+    display: inline;
+}

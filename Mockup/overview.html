@@ -1,0 +1,442 @@
+<html>
+    <head>
+        <title>
+            TutoringApp styles
+        </title>
+
+        <link rel="stylesheet" href="./generals.css">
+        <link rel="stylesheet" href="./base.css">
+        <link rel="stylesheet" href="./overview.css">
+        <link rel="stylesheet" href="./header_general.css">
+
+    </head>
+    <body>
+        <header>
+            <div class="header-left header-side">
+                <div class="header-left-logo">
+                    <a href="./home.html">
+                        <h2>
+                            TutorApp
+                        </h2>
+                    </a>
+                    
+                </div>
+                <div class="mobile header-left-search header-side-item_mobile">
+                    <div class="header-left-search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="desktop header-left-search header-side-item_desktop">
+                    <select class="header-left-search-subject" id="header-left-search-subject">
+                        <option value="physics">Physics</option>
+                        <option value="math">Math</option>
+                        <option value="english">English</option>
+                        <option value="french">French</option>
+                        <option value="chemistry">Chemistry</option>
+                    </select>
+                    <select class="header-left-search-city" id="header-left-search-city">
+                        <option value="lodz">Łódź</option>
+                        <option value="warsaw">Warsaw</option>
+                        <option value="wroclaw">Wrocław</option>
+                    </select>
+                    <input type="text" class="header-left-search-name" id="header-left-search-name">
+                    <button class="header-left-search-button" id="header-left-search-button">
+                        <a href="./search_results.html">
+                            <div class="header-left-search-button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </button>  
+                </div>
+            </div>
+            <div class="header-right header-side">
+                <input type="checkbox" class="header-right-checkbox" id="header-right-checkbox">
+                <div class="header-right-profile">
+                    <img src="./img/img.jpg">
+                </div>
+                <label for="header-right-checkbox">
+                    <div class="header-right-arrow icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </label>
+                <div class="header-right-dropdown">
+                    <div class="header-right-dropdown-item">
+                        <a href="./profile.html">
+                            Profile
+                        </a>
+                    </div>  
+                    <div class="header-right-dropdown-item">
+                        <a href="./student_learning.html">
+                            Lessons
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./chat.html">
+                            Chats
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-log_out header-right-dropdown-item">
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div>
+                <div class="header">
+                    Basic box
+                </div>
+                <div class="main">
+                    <div class="box">
+                        <div class="box-header">
+                            Box
+                        </div>
+                        <div class="box-main_padded">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque voluptatem laborum maxime possimus nihil consequuntur tenetur, quia optio nulla labore error repellendus pariatur voluptatum, nesciunt consectetur deserunt vero nostrum placeat praesentium. Alias quasi ipsum esse ut modi a natus eos? Eos, consequuntur facilis est temporibus vitae assumenda exercitationem cum magni quo totam vero atque nesciunt ipsam, ullam ex odio. Eaque perspiciatis ea, esse dolor error omnis libero nostrum veritatis quibusdam accusamus laborum ratione cumque harum facilis deserunt magnam quaerat aut corrupti fuga recusandae ipsam eius incidunt. Tempore ipsam dolore pariatur, saepe mollitia doloremque amet, repudiandae recusandae, ad corporis enim nemo?
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Box dropdown
+                </div>
+                <div class="main">
+                    <div class="box_dropdown">
+                        <input type="checkbox" class="box_dropdown-header-checkbox" id="box_dropdown-header-checkbox-0">
+                        <div class="box_dropdown-header">
+                            <div class="box_dropdown-header-text">
+                                Click me!
+                            </div>
+                            <label for="box_dropdown-header-checkbox-0">
+                                <div class="box_dropdown-header-arrow box_dropdown-header-arrow-down">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                      </svg>
+                                </div>
+
+                                <div class="box_dropdown-header-arrow box_dropdown-header-arrow-up">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                                    </svg>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="box_dropdown-main_padded">
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum similique iste tenetur dolor laboriosam sunt perferendis animi nam voluptatum mollitia. Exercitationem, consequatur porro! Minima porro officia eveniet quam, consectetur eum nostrum possimus, quos beatae ducimus magnam sapiente? Officia, deserunt ex incidunt minus accusamus eos in. Saepe officiis, obcaecati qui quae perferendis illo incidunt neque dolorem sunt repellendus mollitia consectetur non nulla? Itaque corporis, voluptatibus minima, veniam in molestias temporibus unde sequi, reprehenderit voluptates aut libero tempore nulla neque? Cum assumenda, id distinctio eos tempora placeat mollitia eveniet? Nihil repellat, odit aspernatur excepturi porro dicta sed hic cumque saepe, eveniet ducimus.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Buttons
+                </div>
+                <div class="main">
+                    <h5>
+                        Filled green
+                    </h5>
+                    <div class="button_fill_green btn">
+                        Button
+                    </div>
+                    <h5>
+                        White green
+                    </h5>
+                    <div class="button_white_green btn">
+                        Button
+                    </div>
+                    <h5>
+                        Filled red
+                    </h5>
+                    <div class="button_fill_red btn">
+                        Button
+                    </div>
+                    <h5>
+                        White red
+                    </h5>
+                    <div class="button_white_red btn">
+                        Button
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Bullet list
+                </div>
+                <div class="main">
+                    <ul class="list">
+                        <li>
+                            <div class="list-element-top">
+                                List element top
+                            </div>
+                            <div class="list-element-bottom">
+                                List element bottom
+                            </div>
+                        </li>
+                        <li>
+                            <div class="list-element-top">
+                                List element top
+                            </div>
+                            <div class="list-element-bottom">
+                                List element bottom
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Icons
+                </div>
+                <div class="main">
+                    <div class="icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-file-earmark-slides" viewBox="0 0 16 16">
+                            <path d="M5 6a.5.5 0 0 0-.496.438l-.5 4A.5.5 0 0 0 4.5 11h3v2.016c-.863.055-1.5.251-1.5.484 0 .276.895.5 2 .5s2-.224 2-.5c0-.233-.637-.429-1.5-.484V11h3a.5.5 0 0 0 .496-.562l-.5-4A.5.5 0 0 0 11 6H5zm2 3.78V7.22c0-.096.106-.156.19-.106l2.13 1.279a.125.125 0 0 1 0 .214l-2.13 1.28A.125.125 0 0 1 7 9.778z"/>
+                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Stacked divs
+                </div>
+                <div class="main">
+                    <h5>
+                        1rem margin
+                    </h5>
+                    <div class="stack-container stacked">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <h5>
+                        0.5rem margin
+                    </h5>
+                    <div class="stack-container_small stacked">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <h5>
+                        0.25rem margin
+                    </h5>
+                    <div class="stack-container_smaller stacked">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Adjacent divs
+                </div>
+                <div class="main">
+                    <h5>
+                        1rem margin
+                    </h5>
+                    <div class="adjacent adjacent-container adjacent">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <h5>
+                        0.5rem margin
+                    </h5>
+                    <div class="adjacent adjacent-container_small adjacent">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Adjacent on desktop but stacked on mobile
+                </div>
+                <div class="main stack-adjecent-container adjacent">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Select
+                </div>
+                <div class="main">
+                    <select class="options">
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                        <option>Option 4</option>
+                        <option>Option 5</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Tag
+                </div>
+                <div class="main adjacent-container">
+                    <div class="tag">
+                        Tag1
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Container with link
+                </div>
+                <div class="main adjacent-container">
+                    <div class="link-container">
+                        <a href="#">Sample link</a>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Text input
+                </div>
+                <div class="main">
+                    <input type="text" class="text-input" placeholder="Text input">
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Number input
+                </div>
+                <div class="main">
+                    <input type="number" class="number-input">
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Date input
+                </div>
+                <div class="main">
+                    <input type="date" class="date-input">
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Time input
+                </div>
+                <div class="main">
+                    <h5>
+                        Time input active
+                    </h5>
+                    <input type="time" class="time-input">
+                    <h5>
+                        Time input read-only
+                    </h5>
+                    <input type="time" class="time-input_readonly" readonly>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Datetime input
+                </div>
+                <div class="main">
+                    <input type="datetime-local" class="datetime-input">
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Textarea
+                </div>
+                <div class="main">
+                    <textarea class="textarea"></textarea>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Add button
+                </div>
+                <div class="main">
+                    <div class="add_button">
+                        <div class="add_button-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Info cell
+                </div>
+                <div class="main">
+                    <div class="info-top">
+                        Info top
+                    </div>
+                    <div class="info-bottom">
+                        Info bottom
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Info popup
+                </div>
+                <div class="main adjacent-container_small">
+                    <div class="info-top">Hover over the icon!</div>
+                    <div class="info">
+                        <div class="info-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg>
+                        </div>
+                        <div class="info-popup">
+                            This information is displayed only after the icon is hovered
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="header">
+                    Div with centered items
+                </div>
+                <div class="main centered_button_container">
+                    <div class="info-top">Centered item</div>
+                </div>
+            </div>
+
+        </main>
+    </body>
+</htm>
