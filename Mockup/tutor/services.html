@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            TutoringApp, Your offer
+        </title>
+        <link rel="stylesheet" href="../base.css">
+        <link rel="stylesheet" href="../generals.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/services.css">
+
+        <script defer src="./js/services.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="header-left header-side">
+                <div class="header-left-logo">
+                    <a href="./home.html">
+                        <h2>
+                            TutorApp
+                        </h2>
+                    </a>
+                    
+                </div>
+                <div class="mobile header-left-search header-side-item_mobile">
+                    <div class="header-left-search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="desktop header-left-search header-side-item_desktop">
+                    <input type="text" class="header-left-search-name" id="header-left-search-name">
+                    <button class="header-left-search-button" id="header-left-search-button">
+                        <a href="./search_results.html">
+                            <div class="header-left-search-button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </button>  
+                </div>
+            </div>
+            <div class="header-right header-side">
+                <input type="checkbox" class="header-right-checkbox" id="header-right-checkbox">
+                <div class="header-right-profile">
+                    <img src="./img/img.jpg">
+                </div>
+                <label for="header-right-checkbox">
+                    <div class="header-right-arrow icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </label>
+                <div class="header-right-dropdown">
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_profile.html">
+                            Profile
+                        </a>
+                    </div>  
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_learning.html">
+                            Lessons
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./chat.html">
+                            Chats
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-log_out header-right-dropdown-item">
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="services box">
+                <div class="services-header box-header">
+                    Your services
+                </div>
+                <div class="services-main box-main_padded">
+                    <div class="services-main-list box-main_padded">
+
+                        <div class="services-main-list-service box box-main_padded">
+                            <div class="services-main-list-service-info stack-adjecent-container">
+
+                                <div class="services-main-list-service-info-subject stack-container_smaller">
+                                    <div class="services-main-list-service-info-subject-top info-top">
+                                        Subject
+                                    </div>
+                                    <div class="services-main-list-service-info-subject-bottom info-bottom">
+                                        Math
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-duration stack-container_smaller">
+                                    <div class="services-main-list-service-info-duration-top info-top">
+                                        Duration
+                                    </div>
+                                    <div class="services-main-list-service-info-duration-bottom info-bottom">
+                                        <select class="services-main-list-service-info-duration-bottom-select options">
+                                            <option>30 min</option>
+                                            <option>45 min</option>
+                                            <option>60 min</option>
+                                            <option>75 min</option>
+                                            <option>90 min</option>
+                                            <option>105 min</option>
+                                            <option>120 min</option>  
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-hours stack-container_smaller">
+                                    <div class="services-main-list-service-info-hours-top info-top">
+                                        No. of hours
+                                    </div>
+                                    <div class="services-main-list-service-info-hours-bottom info-bottom">
+                                        1
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-price stack-container_smaller">
+                                    <div class="services-main-list-service-info-price-top info-top">
+                                        Price per hour
+                                    </div>
+                                    <div class="services-main-list-service-info-price-bottom info-bottom">
+                                        <input type="number" class="services-main-list-service-info-price-bottom-input number-input" default="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="services-main-list-service box box-main_padded">
+                            <div class="services-main-list-service-info stack-adjecent-container">
+
+                                <div class="services-main-list-service-info-subject stack-container_smaller">
+                                    <div class="services-main-list-service-info-subject-top info-top">
+                                        Subject
+                                    </div>
+                                    <div class="services-main-list-service-info-subject-bottom info-bottom">
+                                        <div class="services-main-list-service-info-subject-bottom info-bottom">
+                                            Physics
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-duration stack-container_smaller">
+                                    <div class="services-main-list-service-info-duration-top info-top">
+                                        Duration
+                                    </div>
+                                    <div class="services-main-list-service-info-duration-bottom info-bottom">
+                                        <select class="services-main-list-service-info-duration-bottom-select options">
+                                            <option>30 min</option>
+                                            <option>45 min</option>
+                                            <option selected>60 min</option>
+                                            <option>75 min</option>
+                                            <option>90 min</option>
+                                            <option>105 min</option>
+                                            <option>120 min</option>  
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-hours stack-container_smaller">
+                                    <div class="services-main-list-service-info-hours-top info-top">
+                                        No. of hours
+                                    </div>
+                                    <div class="services-main-list-service-info-hours-bottom info-bottom">
+                                        1
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-price stack-container_smaller">
+                                    <div class="services-main-list-service-info-price-top info-top">
+                                        Price per hour
+                                    </div>
+                                    <div class="services-main-list-service-info-price-bottom info-bottom">
+                                        <input type="number" class="services-main-list-service-info-price-bottom-input number-input" placeholder="120">
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                        </div>
+
+                        <div class="services-main-list-service service-removable box box-main_padded" id="service-removable-0">
+                            <div class="services-main-list-service-info stack-adjecent-container">
+
+                                <div class="services-main-list-service-info-subject stack-container_smaller">
+                                    <div class="services-main-list-service-info-subject-top info-top">
+                                        Subject
+                                    </div>
+                                    <div class="services-main-list-service-info-subject-bottom info-bottom">
+                                        <select class="services-main-list-service-info-subject-bottom-select options">
+                                            <option selected>Math</option>
+                                            <option>Physics</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-duration stack-container_smaller">
+                                    <div class="services-main-list-service-info-duration-top info-top">
+                                        Duration
+                                    </div>
+                                    <div class="services-main-list-service-info-duration-bottom info-bottom">
+                                        <select class="services-main-list-service-info-duration-bottom-select options">
+                                            <option>30 min</option>
+                                            <option>45 min</option>
+                                            <option selected>60 min</option>
+                                            <option>75 min</option>
+                                            <option>90 min</option>
+                                            <option>105 min</option>
+                                            <option>120 min</option>  
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-hours stack-container_smaller">
+                                    <div class="services-main-list-service-info-hours-top info-top">
+                                        No. of hours
+                                    </div>
+                                    <div class="services-main-list-service-info-hours-bottom info-bottom">
+                                        <input type="number" class="services-main-list-service-info-hours-bottom-input number-input" placeholder="10">
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-price stack-container_smaller">
+                                    <div class="services-main-list-service-info-price-top info-top">
+                                        Price per hour
+                                    </div>
+                                    <div class="services-main-list-service-info-price-bottom info-bottom">
+                                        <input type="number" class="services-main-list-service-info-price-bottom-input number-input" placeholder="85">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="services-main-list-service-delete icon_green" id="services-main-list-service-delete-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="services-main-list-service service-removable box box-main_padded" id="service-removable-1">
+                            <div class="services-main-list-service-info stack-adjecent-container">
+
+                                <div class="services-main-list-service-info-subject stack-container_smaller">
+                                    <div class="services-main-list-service-info-subject-top info-top">
+                                        Subject
+                                    </div>
+                                    <div class="services-main-list-service-info-subject-bottom info-bottom">
+                                        <select class="services-main-list-service-info-subject-bottom-select options">
+                                            <option selected>Math</option>
+                                            <option>Physics</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-duration stack-container_smaller">
+                                    <div class="services-main-list-service-info-duration-top info-top">
+                                        Duration
+                                    </div>
+                                    <div class="services-main-list-service-info-duration-bottom info-bottom">
+                                        <select class="services-main-list-service-info-duration-bottom-select options">
+                                            <option>30 min</option>
+                                            <option>45 min</option>
+                                            <option selected>60 min</option>
+                                            <option>75 min</option>
+                                            <option>90 min</option>
+                                            <option>105 min</option>
+                                            <option>120 min</option>  
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-hours stack-container_smaller">
+                                    <div class="services-main-list-service-info-hours-top info-top">
+                                        No. of hours
+                                    </div>
+                                    <div class="services-main-list-service-info-hours-bottom info-bottom">
+                                        <input type="number" class="services-main-list-service-info-hours-bottom-input number-input" placeholder="15">
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-price stack-container_smaller">
+                                    <div class="services-main-list-service-info-price-top info-top">
+                                        Price per hour
+                                    </div>
+                                    <div class="services-main-list-service-info-price-bottom info-bottom">
+                                        <input type="number" class="services-main-list-service-info-price-bottom-input number-input" placeholder="75">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="services-main-list-service-delete icon_green" id="services-main-list-service-delete-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="services-main-list-service service-removable box box-main_padded" id="service-removable-2">
+                            <div class="services-main-list-service-info stack-adjecent-container">
+
+                                <div class="services-main-list-service-info-subject stack-container_smaller">
+                                    <div class="services-main-list-service-info-subject-top info-top">
+                                        Subject
+                                    </div>
+                                    <div class="services-main-list-service-info-subject-bottom info-bottom">
+                                        <select class="services-main-list-service-info-subject-bottom-select options">
+                                            <option>Math</option>
+                                            <option selected>Physics</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-duration stack-container_smaller">
+                                    <div class="services-main-list-service-info-duration-top info-top">
+                                        Duration
+                                    </div>
+                                    <div class="services-main-list-service-info-duration-bottom info-bottom">
+                                        <select class="services-main-list-service-info-duration-bottom-select options">
+                                            <option>30 min</option>
+                                            <option>45 min</option>
+                                            <option selected>60 min</option>
+                                            <option>75 min</option>
+                                            <option>90 min</option>
+                                            <option>105 min</option>
+                                            <option>120 min</option>  
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-hours stack-container_smaller">
+                                    <div class="services-main-list-service-info-hours-top info-top">
+                                        No. of hours
+                                    </div>
+                                    <div class="services-main-list-service-info-hours-bottom info-bottom">
+                                        <input type="number" class="services-main-list-service-info-hours-bottom-input number-input" placeholder="10">
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-price stack-container_smaller">
+                                    <div class="services-main-list-service-info-price-top info-top">
+                                        Price per hour
+                                    </div>
+                                    <div class="services-main-list-service-info-price-bottom info-bottom">
+                                        <input type="number" class="services-main-list-service-info-price-bottom-input number-input" placeholder="100">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="services-main-list-service-delete icon_green" id="services-main-list-service-delete-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="services-main-list-service service-removable box box-main_padded" id="service-removable-3">
+                            <div class="services-main-list-service-info stack-adjecent-container">
+
+                                <div class="services-main-list-service-info-subject stack-container_smaller">
+                                    <div class="services-main-list-service-info-subject-top info-top">
+                                        Subject
+                                    </div>
+                                    <div class="services-main-list-service-info-subject-bottom info-bottom">
+                                        <select class="services-main-list-service-info-subject-bottom-select options">
+                                            <option>Math</option>
+                                            <option selected>Physics</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-duration stack-container_smaller">
+                                    <div class="services-main-list-service-info-duration-top info-top">
+                                        Duration
+                                    </div>
+                                    <div class="services-main-list-service-info-duration-bottom info-bottom">
+                                        <select class="services-main-list-service-info-duration-bottom-select options">
+                                            <option>30 min</option>
+                                            <option>45 min</option>
+                                            <option selected>60 min</option>
+                                            <option>75 min</option>
+                                            <option>90 min</option>
+                                            <option>105 min</option>
+                                            <option>120 min</option>  
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-hours stack-container_smaller">
+                                    <div class="services-main-list-service-info-hours-top info-top">
+                                        No. of hours
+                                    </div>
+                                    <div class="services-main-list-service-info-hours-bottom info-bottom">
+                                        <input type="number" class="services-main-list-service-info-hours-bottom-input number-input" placeholder="15">
+                                    </div>
+                                </div>
+
+                                <div class="services-main-list-service-info-price stack-container_smaller">
+                                    <div class="services-main-list-service-info-price-top info-top">
+                                        Price per hour
+                                    </div>
+                                    <div class="services-main-list-service-info-price-bottom info-bottom">
+                                        <input type="number" class="services-main-list-service-info-price-bottom-input number-input" placeholder="80">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="services-main-list-service-delete icon_green" id="services-main-list-service-delete-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="services-main-list-add add_button">
+                            <div class="services-main-list-add-icon add_button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="services-main-submit box-main_padded">
+                        <div class="services-main-submit-btn button_fill_green">
+                            <a href="./tutor_profile.html">
+                                Submit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>

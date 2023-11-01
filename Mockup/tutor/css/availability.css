@@ -1,0 +1,91 @@
+:root {
+    --calendar-day-height: 1.75rem;
+}
+
+main {
+    width: 100%
+}
+
+div.availability {
+    padding: unset;
+}
+
+div.availability-main-subject-top {
+    align-items: center;
+}
+
+div.availability-main-subject-top-popup {
+    width: 10rem;
+}
+
+div.availability-main-length-top-popup {
+    width: 7.5rem;
+}
+
+div.availability-main-calendar-grid-month {
+    text-align: center;
+    color: var(--gray-bluegreen-extra-dark);
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+div.availability-main-calendar-grid-days {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: var(--calendar-day-height);
+}
+
+div.availability-main-calendar-grid-days > div {
+    text-align: center;
+}
+
+div.availability-main-calendar-grid-days-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+div.availability-main-calendar-grid-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(6, var(--calendar-day-height));
+    row-gap: 0.25rem;
+    column-gap: 0.25rem;
+}
+
+div.availability-main-calendar-grid-grid > div {
+    text-align: center;
+    border-radius: 0.25rem;
+}
+
+div.availability-main-calendar-grid-grid-day-current {
+    border: 1px solid var(--gray-bluegreen-medium);
+    color: var(--gray-bluegreen-medium);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+div.availability-main-calendar-grid-grid-day-current:hover {
+    box-shadow: 0 0 0 1px var(--gray-bluegreen-medium) inset;
+}
+
+div.availability-main-calendar-grid-grid-day-not_current {
+    border: 1px solid var(--gray-bluegreen-extra-light);
+    color: var(--gray-bluegreen-extra-light);
+}
+
+
+@media(min-width: 800px) {
+    main {
+        display: flex;
+        height: calc(100vh - var(--header-height));
+        align-items: center;
+        justify-content: center;
+    }
+
+    div.availability {
+        width: 65%;
+    }
+
+}

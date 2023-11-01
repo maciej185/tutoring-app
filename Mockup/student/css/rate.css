@@ -1,0 +1,62 @@
+main {
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.rate {
+    width: 90%;
+}
+
+div.rate-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.rate-header-text {
+    color: var(--gray-bluegreen-extra-dark);
+    font-size: 1.125rem;
+    cursor: default;
+}
+
+div.rate-number > label {
+    color: var(--gray-bluegreen-medium);
+    margin-right: 0.5rem;
+}
+
+div.rate-number > input[type="number"] {
+    width: 5rem;
+    outline: unset;
+}
+
+div.rate-comment, div.rate-comment > textarea {
+    width: 100%;
+    font-size: 0.85rem;
+}
+
+div.rate-comment {
+    height: 10rem;
+}
+
+div.rate-comment > textarea {
+    resize: unset;
+    height: 100%;
+    outline: unset;
+}
+
+div.rate-submit {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media(min-width: 800px) {
+    div.rate {
+        width: 40rem;
+    }
+}
+

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            TutoringApp, Edit profile
+        </title>
+        <link rel="stylesheet" href="../base.css">
+        <link rel="stylesheet" href="../generals.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/availability.css">
+        <link rel="stylesheet" href="./css/popup.css">
+
+        <script defer src="./js/availability.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="header-left header-side">
+                <div class="header-left-logo">
+                    <a href="./home.html">
+                        <h2>
+                            TutorApp
+                        </h2>
+                    </a>
+                    
+                </div>
+                <div class="mobile header-left-search header-side-item_mobile">
+                    <div class="header-left-search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="desktop header-left-search header-side-item_desktop">
+                    <input type="text" class="header-left-search-name" id="header-left-search-name">
+                    <button class="header-left-search-button" id="header-left-search-button">
+                        <a href="./search_results.html">
+                            <div class="header-left-search-button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </button>  
+                </div>
+            </div>
+            <div class="header-right header-side">
+                <input type="checkbox" class="header-right-checkbox" id="header-right-checkbox">
+                <div class="header-right-profile">
+                    <img src="./img/img.jpg">
+                </div>
+                <label for="header-right-checkbox">
+                    <div class="header-right-arrow icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </label>
+                <div class="header-right-dropdown">
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_profile.html">
+                            Profile
+                        </a>
+                    </div>  
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_learning.html">
+                            Lessons
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./chat.html">
+                            Chats
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-log_out header-right-dropdown-item">
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="availability box">
+                <div class="availability-header box-header">
+                    Availability
+                </div>
+                <div class="availability-main box-main_padded stack-container_small">
+                    <div class="availability-main-subject stack-container_small">
+                        <div class="availability-main-subject-top  info-top adjacent-container_small">
+                             <div class="availability-main-subject-top-text">
+                                Subject
+                             </div>
+                             <div class="availability-main-subject-top-info info">
+                                <div class="availability-main-subject-top-info-icon info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="availability-main-subject-top-popup info-popup">
+                                    This will be the availability displayed to the users who are viewing your page
+                                    and are not your assigned students.
+                                </div>
+                             </div>
+                        </div>
+                        <div class="availability-main-subject-bottom">
+                            <select class="availability-main-subject-bottom-select options">
+                                <option>Math</option>
+                                <option>Physics</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="availability-main-length stack-container_small">
+                        <div class="availability-main-length-top  info-top adjacent-container_small">
+                             <div class="availability-main-length-top-text">
+                                Sessions length
+                             </div>
+                             <div class="availability-main-length-top-info info">
+                                <div class="availability-main-length-top-info-icon info-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="availability-main-length-top-popup info-popup">
+                                    The length of the sessions can be configured in your profile.
+                                </div>
+                             </div>
+                        </div>
+                        <div class="availability-main-length-bottom info-bottom">
+                            60 minutes
+                        </div>
+                    </div>
+
+                    <div class="availability-main-calendar stack-container_smaller">
+                        <div class="availability-main-calendar-header info-top">
+                            Calendar
+                        </div>
+                        <div class="availability-main-calendar-info info-bottom">
+                            Input the hours for each day. The form for inputting the availability is displayed after clicking on a given day in the calendar below. 
+                        </div>
+                        <div class="availability-main-calendar-grid">
+                            <div class="availability-main-calendar-grid-month">
+                                October
+                            </div>
+                            <div class="availability-main-calendar-grid-days">
+                                <div class="availability-main-calendar-grid-days-arrow">
+                                    <div class="availability-main-calendar-grid-days-arrow-icon icon_green">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div class="availability-main-calendar-grid-days-day desktop">
+                                    Mon
+                                </div>
+                                <div class="availability-main-calendar-grid-days-day mobile">
+                                    M
+                                </div>
+
+                                <div class="availability-main-calendar-grid-days-day desktop">
+                                    Tue
+                                </div>
+                                <div class="availability-main-calendar-grid-days-day mobile">
+                                    T
+                                </div>
+
+                                <div class="availability-main-calendar-grid-days-day desktop">
+                                    Wed
+                                </div>
+                                <div class="availability-main-calendar-grid-days-day mobile">
+                                    W
+                                </div>
+
+                                <div class="availability-main-calendar-grid-days-day desktop">
+                                    Thu
+                                </div>
+                                <div class="availability-main-calendar-grid-days-day mobile">
+                                    Th
+                                </div>
+
+                                <div class="availability-main-calendar-grid-days-day desktop">
+                                    Fri
+                                </div>
+                                <div class="availability-main-calendar-grid-days-day mobile">
+                                    F
+                                </div>
+
+                                <div class="availability-main-calendar-grid-days-day desktop">
+                                    Sat
+                                </div>
+                                <div class="availability-main-calendar-grid-days-day mobile">
+                                    S
+                                </div>
+
+                                <div class="availability-main-calendar-grid-days-day desktop">
+                                    Sun
+                                </div>
+                                <div class="availability-main-calendar-grid-days-day mobile">
+                                    Su
+                                </div>
+
+                                <div class="availability-main-calendar-grid-days-arrow">
+                                    <div class="availability-main-calendar-grid-days-arrow-icon icon_green">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="availability-main-calendar-grid-grid">
+                                <div class="availability-main-calendar-grid-grid-day-placeholder">
+                                    
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-not_current">
+                                    25
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-not_current">
+                                    26
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-not_current">
+                                    27
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-not_current">
+                                    28
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-not_current">
+                                    29
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-not_current">
+                                    30
+                                </div>
+                         
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    1
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-placeholder">
+                                    
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-placeholder">
+                                    
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    2
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    3
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    4
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    5
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    6
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    7
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    8
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-placeholder">
+                                    
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-placeholder">
+                                    
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    9
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    10
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    11
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    12
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    13
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    14
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    15
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-placeholder">
+                                    
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-placeholder">
+                                    
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    16
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    17
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    18
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    19
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    20
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    21
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    22
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-placeholder">
+                                    
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-placeholder">
+                                    
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    23
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    24
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    25
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    26
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    27
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    28
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    29
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-placeholder">
+                                    
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-placeholder">
+                                    
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    30
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    31
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-not_current">
+                                    1
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-not_current">
+                                    2
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-not_current">
+                                    3
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-not_current">
+                                    4
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-not_current">
+                                    5
+                                </div>
+                                <div class="availability-main-calendar-grid-grid-day-placeholder">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="popup">
+                <div class="popup-main box box-main_padded stack-container_smaller">
+                    <div class="popup-main-header adjacent-container">
+                        <div class="popup-main-header-text">
+                            Availability for 24. October 2023
+                        </div>
+                        <div class="popup-main-header-close icon_green">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                            </svg>
+                        </div>
+                        
+                    </div>
+                    <div class="popup-main-info info-bottom">
+                        Input the begginig of each individual timeslot and the end of it will be calculated automatically based on your configuration. 
+                    </div>
+                    <div class="popup-main-form box box-main adjacent-container">
+                        <div class="popup-main-form-info adjacent-container">
+                            <div class="popup-main-form-info-start">
+
+                                <div class="popup-main-form-info-start-top info-top">
+                                    Start
+                                </div>
+                                <div class="popup-main-form-info-start-bottom info-bottom">
+                                    <input type="time" class="popup-main-form-info-start-bottom-input time-input">
+                                </div> 
+                            </div>
+                            <div class="popup-main-form-info-end">
+                                <div class="popup-main-form-info-end-top info-top">
+                                    End
+                                </div>
+                                <div class="popup-main-form-info-end-bottom info-bottom">
+                                    <input type="time" class="popup-main-form-info-end-bottom-input time-input_readonly" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="popup-main-form-delete icon_green">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                              </svg>
+                        </div>
+                    </div>
+                    <div class="popup-main-add add_button">
+                        <div class="popup-main-add-icon add_button-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                              </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>

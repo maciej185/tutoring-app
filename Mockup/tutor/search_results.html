@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            TutoringApp, Lesson1
+        </title>
+        <link rel="stylesheet" href="../base.css">
+        <link rel="stylesheet" href="../generals.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/search_results.css">
+        <link rel="stylesheet" href="./css/popup.css">
+
+        <script defer src="./js/popup.js"></script>
+        <script defer src="./js/search_results.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="header-left header-side">
+                <div class="header-left-logo">
+                    <a href="./home.html">
+                        <h2>
+                            TutorApp
+                        </h2>
+                    </a>
+                    
+                </div>
+                <div class="mobile header-left-search header-side-item_mobile">
+                    <div class="header-left-search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="desktop header-left-search header-side-item_desktop">
+                    <input type="text" class="header-left-search-name" id="header-left-search-name">
+                    <button class="header-left-search-button" id="header-left-search-button">
+                        <a href="./search_results.html">
+                            <div class="header-left-search-button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </button>  
+                </div>
+            </div>
+            <div class="header-right header-side">
+                <input type="checkbox" class="header-right-checkbox" id="header-right-checkbox">
+                <div class="header-right-profile">
+                    <img src="./img/img.jpg">
+                </div>
+                <label for="header-right-checkbox">
+                    <div class="header-right-arrow icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </label>
+                <div class="header-right-dropdown">
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_profile.html">
+                            Profile
+                        </a>
+                    </div>  
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_learning.html">
+                            Lessons
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./chat.html">
+                            Chats
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-log_out header-right-dropdown-item">
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="results stack-container">
+                <div class="results-header">
+                    Search results for John Smith
+                </div>
+                <div class="results-list stack-container">
+
+                    <div class="results-list-result results-list-result_desktop box box-main_padded desktop">
+                        <div class="results-list-result_desktop-left">
+                            <img src="../student/img/img.jpg">
+                        </div>
+                        <div class="results-list-result_desktop-middle stack-container">
+                            <div class="results-list-result_desktop-middle-name">
+                                John Smith
+                            </div>
+                            <div class="results-list-result_desktop-middle-description info-bottom">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam odit, laboriosam recusandae officiis quas nemo consectetur illo quasi officia corrupti expedita! Ex tempora natus, mollitia vel animi cum, nulla maiores itaque alias, tempore distinctio quia iste quas fuga qui sunt rem libero magni dolore omnis deleniti suscipit dolor. Facilis consequatur et, quo fugit commodi est maiores ducimus dolorem dolor culpa ullam iure odit autem dolores repellendus porro rem fuga enim vero reprehenderit? Eaque vel maxime odio amet quidem ullam consequuntur animi voluptatibus mollitia id porro voluptatum necessitatibus laborum cumque aliquam ut error beatae alias, eius quam modi dolorem. Itaque, culpa.
+                            </div>
+                        </div>
+                        <div class="results-list-result_desktop-right">
+                            <div class="results-list-result_desktop-right-add_student button_fill_green add_student_btn">
+                                Add student
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="results-list-result results-list-result_mobile box box-main_padded mobile">
+                        <div class="results-list-result_mobile-top adjacent-container">
+                            <div class="results-list-result_mobile-top-left">
+                                <img src="../student/img/img.jpg">
+                            </div>
+                            <div class="results-list-result_mobile-top-right">
+                                <div class="results-list-result_mobile-top-right-add_btn button_fill_green add_student_btn">
+                                    Add
+                                </div>
+                            </div>
+                        </div>
+                        <div class="results-list-result_mobile-bottom stack-container_small">
+                            <div class="results-list-result_mobile-bottom-name">
+                                John Smith
+                            </div>
+                            <div class="results-list-result_mobile-bottom-description info-bottom">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto aspernatur a eveniet, quaerat error molestiae corrupti consequatur ad accusantium, natus perspiciatis labore, eaque vero? Amet praesentium architecto nulla accusamus, sunt placeat dicta tenetur dignissimos maiores, quam nobis natus necessitatibus! Mollitia, amet? Vero adipisci tempora voluptatem pariatur possimus? Molestiae dolore nisi maxime natus. Quis quam cumque ipsam molestiae dolores, sequi eos quisquam officiis doloremque unde repudiandae qui voluptatem recusandae rerum tempora labore! Exercitationem natus, at assumenda, nihil officia blanditiis neque laboriosam eaque ea ratione in enim reprehenderit recusandae provident cumque culpa possimus corporis eius. Quo numquam tempore, excepturi quisquam architecto culpa.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="popup">
+                <div class="popup-main box box-main_padded stack-container_small">
+                    <div class="popup-main-header adjacent-container">
+                        <div class="popup-main-header-text">
+                            Add student
+                        </div>
+                        <div class="popup-main-header-close icon_green">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                            </svg>
+                        </div>
+                        
+                    </div>
+                    <div class="popup-main-form popup-main-form-search_results">
+                        <div class="popup-main-form-service">
+                            <div class="popup-main-form-service-top info-top">
+                                Service
+                            </div>
+                            <div class="popup-main-form-service-bottom info-bottom">
+                                <select class="popup-main-form-service-bottom-select options">
+                                    <option>Physics, 15 lessons</option>
+                                    <option>Physics, 10 lessons</option>
+                                    <option>Physics, 1 lesson</option>
+                                    <option>Math, 15 lessons</option>
+                                    <option>Math, 10 lessons</option>
+                                    <option>Math, 1 lesson</option>
+                                </select>
+                            </div>
+                        </div>                  
+                    </div>
+                    <div class="popup-main-submit">
+                        <div class="popup-main-submit-btn button_fill_green">
+                            <a href="./tutor_learning.html?student=student_id">
+                                Add
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>

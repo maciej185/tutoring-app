@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            TutoringApp, Search results
+        </title>
+        <link rel="stylesheet" href="../base.css">
+        <link rel="stylesheet" href="../generals.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/search_results.css">
+    </head>
+    <body>
+        <header>
+            <div class="header-left header-side">
+                <div class="header-left-logo">
+                    <a href="./home.html">
+                        <h2>
+                            TutorApp
+                        </h2>
+                    </a>
+                    
+                </div>
+                <div class="mobile header-left-search header-side-item_mobile">
+                    <div class="header-left-search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="desktop header-left-search header-side-item_desktop">
+                    <select class="header-left-search-subject" id="header-left-search-subject">
+                        <option value="physics">Physics</option>
+                        <option value="math">Math</option>
+                        <option value="english">English</option>
+                        <option value="french">French</option>
+                        <option value="chemistry">Chemistry</option>
+                    </select>
+                    <select class="header-left-search-city" id="header-left-search-city">
+                        <option value="lodz">Łódź</option>
+                        <option value="warsaw">Warsaw</option>
+                        <option value="wroclaw">Wrocław</option>
+                    </select>
+                    <input type="text" class="header-left-search-name" id="header-left-search-name">
+                    <button class="header-left-search-button" id="header-left-search-button">
+                        <a href="./search_results.html">
+                            <div class="header-left-search-button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </button>  
+                </div>
+            </div>
+            <div class="header-right header-side">
+                <input type="checkbox" class="header-right-checkbox" id="header-right-checkbox">
+                <div class="header-right-profile">
+                    <img src="./img/img.jpg">
+                </div>
+                <label for="header-right-checkbox">
+                    <div class="header-right-arrow icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </label>
+                <div class="header-right-dropdown">
+                    <div class="header-right-dropdown-item">
+                        <a href="./profile.html">
+                            Profile
+                        </a>
+                    </div>  
+                    <div class="header-right-dropdown-item">
+                        <a href="./student_learning.html">
+                            Lessons
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./chat.html">
+                            Chats
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-log_out header-right-dropdown-item">
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="results stack-container">
+                <div class="results-header">
+                    Physics tutors in Łódź
+                </div>
+                <div class="results-list stack-container">
+                    <div class="results-list-result results-list-result_desktop desktop">
+                        <div class="results-list-result-left">
+                            <img src="../tutor/img/img.jpg">
+                        </div>
+                        <div class="results-list-result-middle stack-container_smaller">
+                            <div class="results-list-result-middle-subjects adjacent-container">
+                                <div class="results-list-result-middle-subjects-subject tag">
+                                    Math
+                                </div> 
+                                <div class="results-list-result-middle-subjects-subject tag">
+                                    Physics
+                                </div>
+                            </div>
+                            <div class="results-list-result-middle-header link-container">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                            <div class="results-list-result-middle-experience">
+                                Experience: Over 2 years
+                            </div>
+                            <div class="results-list-result-middle-rating adjacent-container">
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16">
+                                        <path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                                        <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="results-list-result-middle-description">
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate in deserunt ipsam ratione, sint fuga repellendus natus voluptates. Velit, ab. Eos eveniet voluptate aliquid iste nam aperiam magnam quod rerum. Mollitia veniam nihil neque, molestiae odit officia praesentium ab quia eveniet harum. Omnis, maxime nesciunt. Iste fugit dolorum omnis voluptates dicta nulla eius, incidunt quam asperiores eaque, hic modi ipsam! Est eum suscipit, consequuntur minus eos nemo tempora, quae enim reprehenderit numquam distinctio eius veniam doloribus excepturi error? Quos perspiciatis aliquam eos quam natus delectus quibusdam quae. Officiis, odio consequuntur quae iusto molestias sunt, facere excepturi, ut repellendus quis sed!
+                            </div>
+                        </div>
+                        <div class="results-list-result-right">
+                            <div class="results-list-result-right-wrap stack-container_smaller">
+                                <div class="results-list-result-right-wrap-price">
+                                    Average price: 110$/hour
+                                </div>
+                                <div class="results-list-result-right-wrap-contact button_fill_green">
+                                    <a href="./chat.html?receiver=receiver_id">
+                                        Get in touch
+                                    </a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="results-list-result results-list-result_mobile mobile">
+                        <div class="results-list-result_mobile-top">
+                            <div class="results-list-result_mobile-top-left results-list-result-left">
+                                <img src="../tutor/img/img.jpg">
+                            </div>
+                            <div class="results-list-result_mobile-top-right results-list-result-right">
+                                <div class="results-list-result_mobile-top-right-wrap stack-container_smaller">
+                                    <div class="results-list-result_mobile-top-right-wrap-price results-list-result-right-wrap-price">
+                                        Average price: 110$/hour
+                                    </div>
+                                    <div class="results-list-result_mobile-top-right-wrap-contact button_fill_green">
+                                        <a href="./chat.html?receiver=receiver_id">
+                                            Get in touch
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="results-list-result-middle stack-container_smaller">
+                            <div class="results-list-result-middle-subjects adjacent-container">
+                                <div class="results-list-result-middle-subjects-subject tag">
+                                    Math
+                                </div> 
+                                <div class="results-list-result-middle-subjects-subject tag">
+                                    Physics
+                                </div>
+                            </div>
+                            <div class="results-list-result-middle-header link-container">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                            <div class="results-list-result-middle-experience">
+                                Experience: Over 2 years
+                            </div>
+                            <div class="results-list-result-middle-rating adjacent-container">
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16">
+                                        <path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                                        <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="results-list-result-middle-description">
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate in deserunt ipsam ratione, sint fuga repellendus natus voluptates. Velit, ab. Eos eveniet voluptate aliquid iste nam aperiam magnam quod rerum. Mollitia veniam nihil neque, molestiae odit officia praesentium ab quia eveniet harum. Omnis, maxime nesciunt. Iste fugit dolorum omnis voluptates dicta nulla eius, incidunt quam asperiores eaque, hic modi ipsam! Est eum suscipit, consequuntur minus eos nemo tempora, quae enim reprehenderit numquam distinctio eius veniam doloribus excepturi error? Quos perspiciatis aliquam eos quam natus delectus quibusdam quae. Officiis, odio consequuntur quae iusto molestias sunt, facere excepturi, ut repellendus quis sed!
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="results-list-result results-list-result_desktop desktop">
+                        <div class="results-list-result-left">
+                            <img src="../tutor/img/img.jpg">
+                        </div>
+                        <div class="results-list-result-middle stack-container_smaller">
+                            <div class="results-list-result-middle-subjects adjacent-container">
+                                <div class="results-list-result-middle-subjects-subject tag">
+                                    Math
+                                </div> 
+                                <div class="results-list-result-middle-subjects-subject tag">
+                                    Physics
+                                </div>
+                            </div>
+                            <div class="results-list-result-middle-header link-container">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                            <div class="results-list-result-middle-experience">
+                                Experience: Over 2 years
+                            </div>
+                            <div class="results-list-result-middle-rating adjacent-container">
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16">
+                                        <path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                                        <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="results-list-result-middle-description">
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate in deserunt ipsam ratione, sint fuga repellendus natus voluptates. Velit, ab. Eos eveniet voluptate aliquid iste nam aperiam magnam quod rerum. Mollitia veniam nihil neque, molestiae odit officia praesentium ab quia eveniet harum. Omnis, maxime nesciunt. Iste fugit dolorum omnis voluptates dicta nulla eius, incidunt quam asperiores eaque, hic modi ipsam! Est eum suscipit, consequuntur minus eos nemo tempora, quae enim reprehenderit numquam distinctio eius veniam doloribus excepturi error? Quos perspiciatis aliquam eos quam natus delectus quibusdam quae. Officiis, odio consequuntur quae iusto molestias sunt, facere excepturi, ut repellendus quis sed!
+                            </div>
+                        </div>
+                        <div class="results-list-result-right">
+                            <div class="results-list-result-right-wrap stack-container_smaller">
+                                <div class="results-list-result-right-wrap-price">
+                                    Average price: 110$/hour
+                                </div>
+                                <div class="results-list-result-right-wrap-contact button_fill_green">
+                                    <a href="./chat.html?receiver=receiver_id">
+                                        Get in touch
+                                    </a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="results-list-result results-list-result_mobile mobile">
+                        <div class="results-list-result_mobile-top">
+                            <div class="results-list-result_mobile-top-left results-list-result-left">
+                                <img src="../tutor/img/img.jpg">
+                            </div>
+                            <div class="results-list-result_mobile-top-right results-list-result-right">
+                                <div class="results-list-result_mobile-top-right-wrap stack-container_smaller">
+                                    <div class="results-list-result_mobile-top-right-wrap-price results-list-result-right-wrap-price">
+                                        Average price: 110$/hour
+                                    </div>
+                                    <div class="results-list-result_mobile-top-right-wrap-contact button_fill_green">
+                                        <a href="./chat.html?receiver=receiver_id">
+                                            Get in touch
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="results-list-result-middle stack-container_smaller">
+                            <div class="results-list-result-middle-subjects adjacent-container">
+                                <div class="results-list-result-middle-subjects-subject tag">
+                                    Math
+                                </div> 
+                                <div class="results-list-result-middle-subjects-subject tag">
+                                    Physics
+                                </div>
+                            </div>
+                            <div class="results-list-result-middle-header link-container">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                            <div class="results-list-result-middle-experience">
+                                Experience: Over 2 years
+                            </div>
+                            <div class="results-list-result-middle-rating adjacent-container">
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16">
+                                        <path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z"/>
+                                    </svg>
+                                </div>
+                                <div class="results-list-result-middle-rating-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                                        <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="results-list-result-middle-description">
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate in deserunt ipsam ratione, sint fuga repellendus natus voluptates. Velit, ab. Eos eveniet voluptate aliquid iste nam aperiam magnam quod rerum. Mollitia veniam nihil neque, molestiae odit officia praesentium ab quia eveniet harum. Omnis, maxime nesciunt. Iste fugit dolorum omnis voluptates dicta nulla eius, incidunt quam asperiores eaque, hic modi ipsam! Est eum suscipit, consequuntur minus eos nemo tempora, quae enim reprehenderit numquam distinctio eius veniam doloribus excepturi error? Quos perspiciatis aliquam eos quam natus delectus quibusdam quae. Officiis, odio consequuntur quae iusto molestias sunt, facere excepturi, ut repellendus quis sed!
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+                <div class="results-pages">
+                    <div class="results-pages-navigation">
+                        <div class="results-pages-navigation-arrow icon_green">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </div>
+                        <div class="results-pages-navigation-list">
+                            <div class="results-pages-navigation-list-page">
+                                1
+                            </div>
+                            <div class="results-pages-navigation-list-page">
+                                2
+                            </div>
+                            <div class="results-pages-navigation-list-page_more">
+                                ...
+                            </div>
+                            <div class="results-pages-navigation-list-page">
+                                5
+                            </div>
+                        </div>
+                        <div class="results-pages-navigation-arrow icon_green">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>

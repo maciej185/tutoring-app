@@ -1,0 +1,84 @@
+main {
+    width: 100%
+}
+
+div.edit > div {
+    border: 1px dashed var(--gray-bluegreen-extra-dark);
+}
+
+div.edit-left_top-general-main-left {
+    position: relative;
+    padding: 1.25rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--gray-bluegreen-medium);
+    aspect-ratio: 1 / 1;
+}
+
+div.edit-left_top-general-main-left-pic {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+div.edit-left_top-general-main-left-pic > img {
+    height: 100%;
+    width: 100%;
+}
+
+div.edit-left_top-general-main-left-delete {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+}
+
+div.edit-left_top-general-main-right-info > div {
+    color: var(--gray-bluegreen-extra-dark);
+}
+
+div.edit-left_top-general-main-right-info-top {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+div.edit-left_top-languages-main-language {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.edit-left_top-education-main-school {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.edit-left_top-education-main-school-info {
+    flex: 1;
+}
+
+div.edit-right_bottom-education-subjects-main-subject {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.edit-right_bottom-education-subjects-main-subject-info {
+    flex: 1;
+}
+
+div.edit-right_bottom-submit {
+    display: flex;
+    justify-content: center;
+}
+
+@media(min-width: 800px) {
+    main {
+        width: 70%;
+    }
+
+
+    div.edit-left_top-general-main > div {
+        flex: 1
+    }
+
+
+}

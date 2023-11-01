@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            TutoringApp, Edit profile
+        </title>
+        <link rel="stylesheet" href="../base.css">
+        <link rel="stylesheet" href="../generals.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/edit_profile_tutor.css">
+    </head>
+    <body>
+        <header>
+            <div class="header-left header-side">
+                <div class="header-left-logo">
+                    <a href="./home.html">
+                        <h2>
+                            TutorApp
+                        </h2>
+                    </a>
+                    
+                </div>
+                <div class="mobile header-left-search header-side-item_mobile">
+                    <div class="header-left-search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="desktop header-left-search header-side-item_desktop">
+                    <input type="text" class="header-left-search-name" id="header-left-search-name">
+                    <button class="header-left-search-button" id="header-left-search-button">
+                        <a href="./search_results.html">
+                            <div class="header-left-search-button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </button>  
+                </div>
+            </div>
+            <div class="header-right header-side">
+                <input type="checkbox" class="header-right-checkbox" id="header-right-checkbox">
+                <div class="header-right-profile">
+                    <img src="./img/img.jpg">
+                </div>
+                <label for="header-right-checkbox">
+                    <div class="header-right-arrow icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </label>
+                <div class="header-right-dropdown">
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_profile.html">
+                            Profile
+                        </a>
+                    </div>  
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_learning.html">
+                            Lessons
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./chat.html">
+                            Chats
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-log_out header-right-dropdown-item">
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="edit stack-container">
+                <div class="edit-left_top-general box">
+                    <div class="edit-left_top-general-header box-header"> 
+                        General
+                    </div>
+                    <div class="edit-left_top-general-main box-main_padded stack-adjecent-container">
+                        
+                        <div class="edit-left_top-general-main-left stack-container">
+                            <div class="edit-left_top-general-main-left-pic">
+                                <img src="./img/img.jpg">
+                            </div>
+                            <div class="edit-left_top-general-main-left-delete icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+
+                        </div>
+                        <div class="edit-left_top-general-main-right stack-container_small">
+
+                            <div class="edit-left_top-general-main-right-info stack-container_smaller">
+                                <div class="edit-left_top-general-main-right-info-top">
+                                    Name
+                                </div>
+                                <div class="edit-left_top-general-main-right-info-bottom">
+                                    <input type="text" class="text-input">
+                                </div>
+                            </div>
+
+                            <div class="edit-left_top-general-main-right-info stack-container_smaller">
+                                <div class="edit-left_top-general-main-right-info-top">
+                                    Last name 
+                                </div>
+                                <div class="edit-left_top-general-main-right-info-bottom">
+                                    <input type="text" class="text-input">
+                                </div>
+                            </div>
+
+                            <div class="edit-left_top-general-main-right-info stack-container_smaller">
+                                <div class="edit-left_top-general-main-right-info-top">
+                                    City 
+                                </div>
+                                <div class="edit-left_top-general-main-right-info-bottom">
+                                    <input type="text" class="text-input">
+                                </div>
+                            </div>
+
+                            <div class="edit-left_top-general-main-right-info stack-container_smaller">
+                                <div class="edit-left_top-general-main-right-info-top">
+                                    Email
+                                </div>
+                                <div class="edit-left_top-general-main-right-info-bottom">
+                                    <input type="text" class="text-input">
+                                </div>
+                            </div>
+
+                            <div class="edit-left_top-general-main-right-info stack-container_smaller">
+                                <div class="edit-left_top-general-main-right-info-top">
+                                    Teaching since  
+                                </div>
+                                <div class="edit-left_top-general-main-right-info-bottom">
+                                    <input type="date" class="date-input">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="edit-left_top-languages box">
+                    <div class="edit-left_top-languages-header box-header">
+                        Languages
+                    </div>
+                    <div class="edit-left_top-languages-main box-main_padded stack-container_small">
+                        <div class="edit-left_top-languages-main-language box box-main_padded">
+                            <div class="edit-left_top-languages-main-language-info adjacent-container">
+                                <div class="edit-left_top-languages-main-language-info-language stack-container_smaller">
+                                    <div class="edit-left_top-languages-main-language-info-language-top info-top">
+                                        Language
+                                    </div>
+                                    <div class="edit-left_top-languages-main-language-info-language-bottom">
+                                        <select class="edit-left_top-languages-main-language-info-language-bottom-select options">
+                                            <option>English</option>
+                                            <option>Polish</option>
+                                            <option>Spanish</option>
+                                            <option>Japaneese</option>
+                                            <option>Portugeese</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="edit-left_top-languages-main-language-info-level stack-container_smaller">
+                                    <div class="edit-left_top-languages-main-language-info-level-top info-top">
+                                        Level
+                                    </div>
+                                    <div class="edit-left_top-languages-main-language-info-level-bottom">
+                                        <select class="edit-left_top-languages-main-language-info-level-bottom-select options">
+                                            <option>Beginner</option>
+                                            <option>Intermediate</option>
+                                            <option>Advanced</option>
+                                            <option>Native</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="edit-left_top-languages-main-language-delete icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <div class="edit-left_top-languages-main-add add_button">
+                            <div class="edit-left_top-languages-main-add-icon add_button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="edit-left_top-description box">
+                    <div class="edit-left_top-description-header box-header">
+                        Description
+                    </div>
+                    <div class="edit-left_top-description-main box-main_padded">
+                        <textarea class="edit-left_top-description-main-textarea width_fill textarea"></textarea>
+                    </div>
+                </div>
+
+                <div class="edit-left_top-education box">
+                    <div class="edit-left_top-education-header box-header">
+                        Education
+                    </div>
+                    <div class="edit-left_top-education-main box-main_padded">
+                        <div class="edit-left_top-education-main-school box box-main_padded adjacent-container">
+                            <div class="edit-left_top-education-main-school-info stack-container_smaller">
+                                <div class="edit-left_top-education-main-school-info-school stack-container_smaller">
+                                    <div class="edit-left_top-education-main-school-info-school-top info-top">
+                                        School name
+                                    </div>
+                                    <div class="edit-left_top-education-main-school-info-school-bottom">
+                                        <input type="text" class="edit-left_top-education-main-school-info-school-bottom-input text-input">
+                                    </div>
+                                </div>
+
+                                <div class="edit-left_top-education-main-school-info-additional stack-container_smaller">
+                                    <div class="edit-left_top-education-main-school-info-additional-top info-top">
+                                        Additional info
+                                    </div>
+                                    <div class="edit-left_top-education-main-school-info-additional-bottom">
+                                        <input type="text" class="edit-left_top-education-main-school-info-additional-bottom-input text-input">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="edit-left_top-education-main-language-delete icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="edit-left_top-education-main-add add_button">
+                            <div class="edit-left_top-education-main-add-icon add_button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="edit-right_bottom-subjects box">
+                    <div class="edit-right_bottom-education-subjects-header box-header">
+                        Subjects
+                    </div>
+                    <div class="edit-right_bottom-education-subjects-main box-main_padded">
+                        <div class="edit-right_bottom-education-subjects-main-subject box box-main_padded adjacent-container">
+                            <div class="edit-right_bottom-education-subjects-main-subject-info stack-adjecent-container">
+                                <div class="edit-right_bottom-education-subjects-main-subject-info-subject stack-container_smaller">
+                                    <div class="edit-right_bottom-education-subjects-main-subject-info-subject-top info-top">
+                                        Subject
+                                    </div>
+                                    <div class="edit-right_bottom-education-subjects-main-subject-info-subject-bottom">
+                                        <select class="edit-right_bottom-education-subjects-main-subject-info-subject-bottom-select options">
+                                            <option>English</option>
+                                            <option>Math</option>
+                                            <option>Chemistry</option>
+                                            <option>Physics</option>
+                                            <option>Biology</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="edit-right_bottom-education-subjects-main-subject-info-duration stack-container_smaller">
+                                    <div class="edit-right_bottom-education-subjects-main-subject-info-duration-top info-top">
+                                        Duration
+                                    </div>
+                                    <div class="edit-right_bottom-education-subjects-main-subject-info-duration-bottom">
+                                        <select class="edit-right_bottom-education-subjects-main-subject-info-duration-bottom-select options">
+                                            <option>30 min</option>
+                                            <option>45 min</option>
+                                            <option>60 min</option>
+                                            <option>75 min</option>
+                                            <option>90 min</option>
+                                            <option>105 min</option>
+                                            <option>120 min</option>                                            
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="edit-right_bottom-education-subjects-main-subject-info-price stack-container_smaller">
+                                    <div class="edit-right_bottom-education-subjects-main-subject-info-price-top info-top">
+                                        Price per hour
+                                    </div>
+                                    <div class="edit-right_bottom-education-subjects-main-subject-info-price-bottom">
+                                        <input type="number" class="edit-right_bottom-education-subjects-main-subject-info-price-bottom-input number-input">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="edit-right_bottom-education-subjects-main-subject-delete icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="edit-right_bottom-education-subjects-main-add add_button">
+                            <div class="edit-right_bottom-education-subjects-main-add-icon add_button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="edit-right_bottom-submit">
+                    <div class="edit-right-bottom-submit-btn button_fill_green">
+                        <a href="./tutor_profile.html">
+                            Submit
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>

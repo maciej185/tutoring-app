@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            TutoringApp, Lesson1
+        </title>
+        <link rel="stylesheet" href="../base.css">
+        <link rel="stylesheet" href="../generals.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/create_lesson.css">
+    </head>
+    <body>
+        <header>
+            <div class="header-left header-side">
+                <div class="header-left-logo">
+                    <a href="./home.html">
+                        <h2>
+                            TutorApp
+                        </h2>
+                    </a>
+                    
+                </div>
+                <div class="mobile header-left-search header-side-item_mobile">
+                    <div class="header-left-search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="desktop header-left-search header-side-item_desktop">
+                    <input type="text" class="header-left-search-name" id="header-left-search-name">
+                    <button class="header-left-search-button" id="header-left-search-button">
+                        <a href="./search_results.html">
+                            <div class="header-left-search-button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </button>  
+                </div>
+            </div>
+            <div class="header-right header-side">
+                <input type="checkbox" class="header-right-checkbox" id="header-right-checkbox">
+                <div class="header-right-profile">
+                    <img src="./img/img.jpg">
+                </div>
+                <label for="header-right-checkbox">
+                    <div class="header-right-arrow icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </label>
+                <div class="header-right-dropdown">
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_profile.html">
+                            Profile
+                        </a>
+                    </div>  
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_learning.html">
+                            Lessons
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./chat.html">
+                            Chats
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-log_out header-right-dropdown-item">
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="lesson stack-container">   
+                <div class="lesson-header">
+                    Add new lesson
+                </div>
+                <div class="lesson-summary box">
+                    <div class="lesson-summary-header box-header">
+                        Summary
+                    </div>
+                    <div class="lesson-summary-main box-main_padded">
+                        <div class="lesson-summary-main-title stack-container_small">
+                            <div class="lesson-summary-main-title-top info-top">
+                                Title
+                            </div>
+                            <div class="lesson-summary-main-title-top info-bottom">
+                                <input type="text" class="lesson-summary-main-title-input text-input">    
+                            </div>
+                        </div>
+                        <div class="lesson-summary-main-date stack-container_small">
+                            <div class="lesson-summary-main-date-top info-top">
+                                Date
+                            </div>
+                            <div class="lesson-summary-main-date-bottom">
+                                <input type="datetime-local" class="lesson-summary-main-date-bottom-input datetime-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lesson-subject box">
+                    <div class="lesson-subject-header box-header">
+                        Subject
+                    </div>
+                    <div class="lesson-subject-main box-main_padded">
+                        <div class="lesson-subject-main-category stack-container_small">
+                            <div class="lesson-subject-main-category-top info-top">
+                                Category
+                            </div>
+                            <div class="lesson-subject-main-category-bottom">
+                                <input type="text" class="lesson-subject-main-category-bottom-input text-input">
+                            </div>
+                        </div>
+                        <div class="lesson-subject-main-subject stack-container_small">
+                            <div class="lesson-subject-main-subject-top info-top">
+                                Subject
+                            </div>
+                            <div class="lesson-subject-main-subject-bottom">
+                                <input type="text" class="lesson-subject-main-subject-bottom-input text-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-materials box">
+                    <div class="lesson-materials-header box-header">
+                        Materials
+                    </div>
+                    <div class="lesson-materials-main box-main_padded">
+                        <div class="lesson-materials-main-file">
+                            <div class="lesson-materials-main-file-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-filetype-pdf" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z"/>
+                                </svg>
+                            </div>
+                            <div class="lesson-materials-main-file-name">
+                                Differential_equationssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss.pdf
+                            </div>
+                            <div class="lesson-materials-main-file-delete icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="lesson-materials-main-add add_button">
+                            <div class="lesson-materials-main-add-icon add_button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-tasks box">
+                    <div class="lesson-tasks-header box-header">
+                        Tasks
+                    </div> 
+                    <div class="lesson-tasks-main box-main_padded">
+                        <div class="lesson-tasks-main-task stack-container-small">
+                            <div class="lesson-tasks-main-task-header">
+                                <div class="lesson-tasks-main-task-header-text">
+                                    New task
+                                </div>
+                                <div class="lesson-tasks-main-task-header-delete icon_green">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="lesson-tasks-main-task-title stack-container-small">
+                                <div class="lesson-tasks-main-task-title-top info-top">
+                                    Title
+                                </div>
+                                <div class="lesson-tasks-main-task-title-bottom">
+                                    <input type="text" class="lesson-tasks-main-task-title-bottom-input text-input">
+                                </div>
+                            </div>
+
+                            <div class="lesson-tasks-main-task-due_date stack-container-small">
+                                <div class="lesson-tasks-main-task-due_date-top info-top">
+                                    Due date
+                                </div>
+                                <div class="lesson-tasks-main-task-due_date-bottom">
+                                    <input type="datetime-local" class="lesson-tasks-main-task-due_date-bottom-input datetime-input">
+                                </div>
+                            </div>
+
+                            <div class="lesson-tasks-main-task-description stack-container-small">
+                                <div class="lesson-tasks-main-task-description-top info-top">
+                                    Description
+                                </div>
+                                <div class="lesson-tasks-main-task-description-bottom">
+                                    <textarea class="lesson-tasks-main-task-description-bottom-textarea textarea"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="lesson-tasks-main-add add_button">
+                            <div class="lesson-tasks-main-add-icon add_button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lesson-add">
+                    <div class="lesson-add-btn button_fill_green">
+                        <a href="./tutor_learning.html">
+                            Add
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>

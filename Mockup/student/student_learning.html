@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            TutoringApp, Lessons
+        </title>
+        <link rel="stylesheet" href="../base.css">
+        <link rel="stylesheet" href="../generals.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/student_learning.css">
+    </head>
+    <body>
+        <header>
+            <div class="header-left header-side">
+                <div class="header-left-logo">
+                    <a href="./home.html">
+                        <h2>
+                            TutorApp
+                        </h2>
+                    </a>
+                    
+                </div>
+                <div class="mobile header-left-search header-side-item_mobile">
+                    <div class="header-left-search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="desktop header-left-search header-side-item_desktop">
+                    <select class="header-left-search-subject" id="header-left-search-subject">
+                        <option value="physics">Physics</option>
+                        <option value="math">Math</option>
+                        <option value="english">English</option>
+                        <option value="french">French</option>
+                        <option value="chemistry">Chemistry</option>
+                    </select>
+                    <select class="header-left-search-city" id="header-left-search-city">
+                        <option value="lodz">Łódź</option>
+                        <option value="warsaw">Warsaw</option>
+                        <option value="wroclaw">Wrocław</option>
+                    </select>
+                    <input type="text" class="header-left-search-name" id="header-left-search-name">
+                    <button class="header-left-search-button" id="header-left-search-button">
+                        <a href="./search_results.html">
+                            <div class="header-left-search-button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </button>  
+                </div>
+            </div>
+            <div class="header-right header-side">
+                <input type="checkbox" class="header-right-checkbox" id="header-right-checkbox">
+                <div class="header-right-profile">
+                    <img src="./img/img.jpg">
+                </div>
+                <label for="header-right-checkbox">
+                    <div class="header-right-arrow icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </label>
+                <div class="header-right-dropdown">
+                    <div class="header-right-dropdown-item">
+                        <a href="./profile.html">
+                            Profile
+                        </a>
+                    </div>  
+                    <div class="header-right-dropdown-item">
+                        <a href="./student_learning.html">
+                            Lessons
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./chat.html">
+                            Chats
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-log_out header-right-dropdown-item">
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="learning">
+                <div class="learning-left mobile">
+                    <div class="learnign-left-tutors box_dropdown">
+                        <input type="checkbox" class="box_dropdown-header-checkbox" id="box_dropdown-header-checkbox-0">
+                        <div class="learnign-left-tutors-header box_dropdown-header">
+                            
+                            <div class="learnign-left-tutors-header-text box_dropdown-header-text">
+                                Tutors
+                            </div>
+                            <label for="box_dropdown-header-checkbox-0">
+                                <div class="learnign-left-tutors-header-arrow box_dropdown-header-arrow box_dropdown-header-arrow-down">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                      </svg>
+                                </div>
+
+                                <div class="learnign-left-tutors-header-arrow box_dropdown-header-arrow box_dropdown-header-arrow-up">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                                    </svg>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="learnign-left-tutors-main box_dropdown-main">
+                            <div class="learnign-left-tutors-main-tutor">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                            <div class="learnign-left-tutors-main-tutor">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                            <div class="learnign-left-tutors-main-tutor">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="learnign-left-sessions box_dropdown">
+                        <input type="checkbox" class="box_dropdown-header-checkbox" id="box_dropdown-header-checkbox-1">
+                        <div class="learnign-left-sessions-header box_dropdown-header">
+                            
+                            <div class="learnign-left-sessions-header-text box_dropdown-header-text">
+                                Single sessions
+                            </div>
+                            <label for="box_dropdown-header-checkbox-1">
+                                <div class="learnign-left-sessions-header-arrow box_dropdown-header-arrow box_dropdown-header-arrow-down">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                      </svg>
+                                </div>
+                                <div class="learnign-left-sessions-header-arrow box_dropdown-header-arrow box_dropdown-header-arrow-up">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                                    </svg>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="learnign-left-tutors-main box_dropdown-main">
+                            <div class="learnign-left-tutors-main-tutor">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                            <div class="learnign-left-tutors-main-tutor">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                            <div class="learnign-left-tutors-main-tutor">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="learning-left desktop">
+                    <div class="learnign-left-tutors box">
+                        <div class="learnign-left-tutors-header box-header">
+                            Tutors
+                        </div>
+                        <div class="learnign-left-tutors-main box-main">
+                            <div class="learnign-left-tutors-main-tutor">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                            <div class="learnign-left-tutors-main-tutor">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                            <div class="learnign-left-tutors-main-tutor">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="learning-left-sessions box">
+                        <div class="learning-left-sessions-header box-header">
+                            Single sessions
+                        </div>
+                        <div class="learning-left-sessions-main box-main">
+                            <div class="learning-left-sessions-main-tutor">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                            <div class="learning-left-sessions-main-tutor">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                            <div class="learning-left-sessions-main-tutor">
+                                <a href="./tutor_page.html">
+                                    John Smith
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="learning-right">
+                    <div class="learning-right-rate">
+                        <div class="learning-right-rate-btn button_fill_green">
+                            <a href="./rate_tutor.html">
+                                Rate
+                            </a>
+                        </div>
+                    </div>
+                    <div class="learning-right-reminder box">
+                        <div class="learning-right-reminder-header box-header">
+                            Reminder
+                        </div>
+                        <div class="learning-right-reminder-main box-main_padded">
+                            <div class="learning-right-reminder-main-text">
+                                You have an assignemnt due in 1 day.
+                            </div>
+                            <div class="learning-right-reminder-main-button button_fill_red">
+                                <a href="./lesson1.html">
+                                    View lesson
+                                </a>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="learning-right-summary box">
+                        <div class="learning-right-summary-header box-header">
+                            Summary
+                        </div>
+                        <div class="learning-right-summary-main box-main_padded">
+                            <table class="learning-right-summary-main-table">
+                                <tr class="learning-right-summary-main-table-row">
+                                    <td class="learning-right-summary-main-table-cell">
+                                        <div class="learning-right-summary-main-table-cell-top">
+                                            Tutor 
+                                        </div>
+                                        <div class="learning-right-summary-main-table-cell-bottom">
+                                            John Smith
+                                        </div>
+                                    </td>
+                                    <td class="learning-right-summary-main-table-cell">
+                                        <div class="learning-right-summary-main-table-cell-top">
+                                            Subject
+                                        </div>
+                                        <div class="learning-right-summary-main-table-cell-bottom">
+                                            Math
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="learning-right-summary-main-table-row">
+                                    <td class="learning-right-summary-main-table-cell">
+                                        <div class="learning-right-summary-main-table-cell-top">
+                                            Total number of hours
+                                        </div>
+                                        <div class="learning-right-summary-main-table-cell-bottom">
+                                            2 
+                                        </div>
+                                    </td>
+                                    <td class="learning-right-summary-main-table-cell">
+                                        <div class="learning-right-summary-main-table-cell-top">
+                                            Hours left 
+                                        </div>
+                                        <div class="learning-right-summary-main-table-cell-bottom">
+                                            8
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="learning-right-sessions box">
+                        <div class="learning-right-sessions-header box-header">
+                            Sessions / Lessons / Classes
+                        </div>
+                        <div class="learning-right-sessions-main box-main">
+                            <div class="learning-right-sessions-session">
+                                <div class="learning-right-sessions-session-top">
+                                    <div class="learning-right-sessions-session-top-name">
+                                        <a href="./lesson1.html">
+                                            Session 1
+                                        </a>
+                                    </div>
+                                    <div class="learning-right-sessions-session-top-status-warning">
+                                        One assignment due.
+                                    </div>
+                                </div>  
+                                <div class="learning-right-sessions-session-bottom">
+                                    9. September 2023, 13:00-14:00
+                                </div>
+                            </div>
+                            <div class="learning-right-sessions-session">
+                                <div class="learning-right-sessions-session-top">
+                                    <div class="learning-right-sessions-session-top-name">
+                                        <a href="./lesson2.html">
+                                            Session 2
+                                        </a>
+                                    </div>
+                                    <div class="learning-right-sessions-session-top-status">
+                                        
+                                        <div class="learning-right-sessions-session-top-status">
+                                            <div class="learning-right-sessions-session-top-status-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                                <div class="learning-right-sessions-session-bottom">
+                                    13. September 2023, 13:00-14:00
+                                </div>
+                            </div>
+                            <div class="learning-right-sessions-session">
+                                <div class="learning-right-sessions-session-top">
+                                    <div class="learning-right-sessions-session-top-name">
+                                        <a href="./lesson3.html">
+                                            Session 3
+                                        </a>
+                                    </div>
+                                    <div class="learning-right-sessions-session-top-status">
+                                        One assignment pending.
+                                    </div>
+                                </div>  
+                                <div class="learning-right-sessions-session-bottom">
+                                    16. September 2023, 13:00-14:00
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>

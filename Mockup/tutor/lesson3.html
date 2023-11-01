@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            TutoringApp, Lesson3
+        </title>
+        <link rel="stylesheet" href="../base.css">
+        <link rel="stylesheet" href="../generals.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/lesson.css">
+    </head>
+    <body>
+        <header>
+            <div class="header-left header-side">
+                <div class="header-left-logo">
+                    <a href="./home.html">
+                        <h2>
+                            TutorApp
+                        </h2>
+                    </a>
+                    
+                </div>
+                <div class="mobile header-left-search header-side-item_mobile">
+                    <div class="header-left-search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="desktop header-left-search header-side-item_desktop">
+                    <input type="text" class="header-left-search-name" id="header-left-search-name">
+                    <button class="header-left-search-button" id="header-left-search-button">
+                        <a href="./search_results.html">
+                            <div class="header-left-search-button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </button>  
+                </div>
+            </div>
+            <div class="header-right header-side">
+                <input type="checkbox" class="header-right-checkbox" id="header-right-checkbox">
+                <div class="header-right-profile">
+                    <img src="./img/img.jpg">
+                </div>
+                <label for="header-right-checkbox">
+                    <div class="header-right-arrow icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </label>
+                <div class="header-right-dropdown">
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_profile.html">
+                            Profile
+                        </a>
+                    </div>  
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_learning.html">
+                            Lessons
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./chat.html">
+                            Chats
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-log_out header-right-dropdown-item">
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="wrap stack-container_small">
+                <div class="edit adjacent-container">
+                    <div class="edit-btn button_fill_green">
+                        Edit
+                    </div>
+                </div>
+                <div class="lesson">   
+                    <div class="lesson-left">
+                        <div class="lesson-left-summary box">
+                            <div class="lesson-left-summary-header box-header">
+                                Summary
+                            </div>
+                            <div class="lesson-left-summary-main box-main_padded">
+                                <div class="lesson-left-summary-main-title">
+                                    Lesson 3
+                                </div>
+                                <table class="lesson-left-summary-main-table main-table">
+                                    <tr class="lesson-left-summary-main-table-row main-table-row">
+                                        <td class="lesson-left-summary-main-table-cell main-table-cell">
+                                            <div class="lesson-left-summary-main-table-cell-top main-table-cell-top">
+                                                Tutor 
+                                            </div>
+                                            <div class="lesson-left-summary-main-table-cell-bottom main-table-cell-bottom">
+                                                John Smith
+                                            </div>
+                                        </td>
+                                        <td class="lesson-left-summary-main-table-cell main-table-cell">
+                                            <div class="lesson-left-summary-main-table-cell-top main-table-cell-top">
+                                                Subject
+                                            </div>
+                                            <div class="lesson-left-summary-main-table-cell-bottom main-table-cell-bottom">
+                                                Math
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="lesson-left-summary-main-table-row main-table-row">
+                                        <td class="lesson-left-summary-main-table-cell main-table-cell">
+                                            <div class="lesson-left-summary-main-table-cell-top main-table-cell-top">
+                                                Date
+                                            </div>
+                                            <div class="lesson-left-summary-main-table-cell-bottom main-table-cell-bottom">
+                                                16. September 2023,  13:00-14:00 
+                                            </div>
+                                        </td>
+                                        <td class="lesson-left-summary-main-table-cell main-table-cell">
+                                            <div class="lesson-left-summary-main-table-cell-top main-table-cell-top">
+                                                Number 
+                                            </div>
+                                            <div class="lesson-left-summary-main-table-cell-bottom main-table-cell-bottom">
+                                                3
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="lesson-left-status box">
+                            <div class="lesson-left-status-header box-header">
+                                Status
+                            </div>
+                            <div class="lesson-left-status-main box-main_padded">
+                                <table class="lesson-left-status-main-table main-table">
+                                    <tr class="lesson-left-status-main-table-row main-table-row">
+                                        <td class="lesson-left-status-main-table-cell main-table-cell">
+                                            <div class="lesson-left-status-main-table-cell-top main-table-cell-top">
+                                                Status
+                                            </div>
+                                            <div class="lesson-left-status-main-table-cell-bottom main-table-cell-bottom">
+                                                Completed
+                                            </div>
+                                        </td>
+                                        <td class="lesson-left-status-main-table-cell main-table-cell">
+                                            <div class="lesson-left-status-main-table-cell-top main-table-cell-top">
+                                                Tasks
+                                            </div>
+                                            <div class="lesson-left-status-main-table-cell-bottom main-table-cell-bottom_orange">
+                                                One to be checked
+                                            </div>
+                                        </td>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="lesson-left-subject box">
+                            <div class="lesson-left-subject-header box-header">
+                                Subject
+                            </div>
+                            <div class="lesson-left-subject-main box-main_padded">
+                                <div class="lesson-left-subject-main-top main-table-cell-top">
+                                    Calculus    
+                                </div>
+                                <div class="lesson-left-subject-main-bottom main-table-cell-bottom">
+                                    Differential equations, part 2
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="lesson-left-materials box">
+                            <div class="lesson-left-materials-header box-header">
+                                Materials
+                            </div>
+                            <div class="lesson-left-materials-main box-main_padded">
+                                <div class="lesson-left-materials-main-file">
+                                    <div class="lesson-left-materials-main-file-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-filetype-pdf" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="lesson-left-materials-main-file-name">
+                                        Differential_equationssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss.pdf
+                                    </div>
+                                </div>
+                                <div class="lesson-left-materials-main-file">
+                                    <div class="lesson-left-materials-main-file-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-filetype-jpg" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5Zm-4.34 8.132c.076.153.123.317.14.492h-.776a.797.797 0 0 0-.097-.249.689.689 0 0 0-.17-.19.707.707 0 0 0-.237-.126.96.96 0 0 0-.299-.044c-.285 0-.507.1-.665.302-.156.201-.234.484-.234.85v.498c0 .234.032.439.097.615a.881.881 0 0 0 .304.413.87.87 0 0 0 .519.146.967.967 0 0 0 .457-.096.67.67 0 0 0 .272-.264c.06-.11.091-.23.091-.363v-.255H8.24v-.59h1.576v.798c0 .193-.032.377-.097.55a1.29 1.29 0 0 1-.293.458 1.37 1.37 0 0 1-.495.313c-.197.074-.43.111-.697.111a1.98 1.98 0 0 1-.753-.132 1.447 1.447 0 0 1-.533-.377 1.58 1.58 0 0 1-.32-.58 2.482 2.482 0 0 1-.105-.745v-.506c0-.362.066-.678.2-.95.134-.271.328-.482.582-.633.256-.152.565-.228.926-.228.238 0 .45.033.636.1.187.066.347.158.48.275.133.117.238.253.314.407ZM0 14.786c0 .164.027.319.082.465.055.147.136.277.243.39.11.113.245.202.407.267.164.062.354.093.569.093.42 0 .748-.115.984-.345.238-.23.358-.566.358-1.005v-2.725h-.791v2.745c0 .202-.046.357-.138.466-.092.11-.233.164-.422.164a.499.499 0 0 1-.454-.246.577.577 0 0 1-.073-.27H0Zm4.92-2.86H3.322v4h.791v-1.343h.803c.287 0 .531-.057.732-.172.203-.118.358-.276.463-.475.108-.201.161-.427.161-.677 0-.25-.052-.475-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.546 1.333a.795.795 0 0 1-.085.381.574.574 0 0 1-.238.24.794.794 0 0 1-.375.082H4.11v-1.406h.66c.218 0 .389.06.512.182.123.12.185.295.185.521Z"/>
+                                          </svg>
+                                    </div>
+                                    <div class="lesson-left-materials-main-file-name">
+                                        Graph.jpg
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="lesson-left-tasks box">
+                            <div class="lesson-left-tasks-header box-header">
+                                Tasks
+                            </div> 
+                            <div class="lesson-left-tasks-main box-main_padded">
+                                <div class="lesson-left-tasks-main-task">
+                                    <input type="checkbox" class="lesson-left-tasks-main-task-checkbox" id="lesson-left-tasks-main-task-checkbox-0">
+                                    <label for="lesson-left-tasks-main-task-checkbox-0" class="lesson-left-tasks-main-task-label">
+                                        <div class="lesson-left-tasks-main-task-header">
+                                            <div class="lesson-left-tasks-main-task-header-text adjacent-container">
+                                                <div class="lesson-left-tasks-main-task-header-text-main">
+                                                    Task 1
+                                                </div>
+                                                <div class="lesson-left-tasks-main-task-header-text-status_orange info-bottom">
+                                                    To be checked
+                                                </div>
+                                            </div>
+                                            <div class="lesson-left-tasks-main-task-header-icon_down icon_green">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                            </div>
+                                            <div class="lesson-left-tasks-main-task-header-icon_up icon_green">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                                                  </svg>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <div class="lesson-left-tasks-main-task-due_date">
+                                        Due Tomorrow, 18:00 
+                                    </div>
+                                    <div class="lesson-left-tasks-main-task-description">
+                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore aut eos minus enim laudantium? Vero cum aperiam totam dolor quas exercitationem voluptatum vitae eum odio consequatur nesciunt obcaecati, optio eos deleniti pariatur possimus quasi veritatis reiciendis hic, explicabo error soluta neque! Architecto nesciunt unde aliquam accusamus sapiente hic omnis id ex perspiciatis neque? Qui beatae dolore exercitationem quo facere necessitatibus eos, quidem earum aut. Est nemo praesentium aperiam! Sint sed nisi vel reprehenderit unde numquam itaque maiores tenetur. Nisi facere fuga, error sed earum aperiam at iste temporibus provident id consectetur eveniet sit ullam nam quaerat veritatis illo quod dolore.
+                                    </div>
+    
+                                    <div class="lesson-left-tasks-main-task-student_solution">
+                                        <div class="lesson-left-tasks-main-task-student_solution-header">
+                                            Solution
+                                        </div>
+                                        <div class="lesson-left-tasks-main-task-student_solution-file_uploaded">
+                                            <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-left">
+                                                <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-left-file-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-filetype-pdf" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-left-file-name">
+                                                    solution_to_first_task.pdf
+                                                </div>
+                                            </div>
+                                            <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right adjacent-container">
+    
+                                                <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right-icon solution-approve">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                                    </svg>
+                                                </div>
+    
+                                                <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right-icon solution-reject">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                    </svg>
+                                                </div>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="lesson-left-tasks-main-task">
+                                    <input type="checkbox" class="lesson-left-tasks-main-task-checkbox" id="lesson-left-tasks-main-task-checkbox-1">
+                                    <label for="lesson-left-tasks-main-task-checkbox-1" class="lesson-left-tasks-main-task-label">
+                                        <div class="lesson-left-tasks-main-task-header">
+                                            <div class="lesson-left-tasks-main-task-header-text adjacent-container">
+                                                <div class="lesson-left-tasks-main-task-header-text-main">
+                                                    Task 2
+                                                </div>
+                                                <div class="lesson-left-tasks-main-task-header-status info-bottom">
+                                                    Done
+                                                </div>
+                                            </div>
+                                            <div class="lesson-left-tasks-main-task-header-icon_down icon_green">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                            </div>
+                                            <div class="lesson-left-tasks-main-task-header-icon_up icon_green">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                                                  </svg>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <div class="lesson-left-tasks-main-task-due_date">
+                                        Due Tomorrow, 18:00 
+                                    </div>
+                                    <div class="lesson-left-tasks-main-task-description">
+                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore aut eos minus enim laudantium? Vero cum aperiam totam dolor quas exercitationem voluptatum vitae eum odio consequatur nesciunt obcaecati, optio eos deleniti pariatur possimus quasi veritatis reiciendis hic, explicabo error soluta neque! Architecto nesciunt unde aliquam accusamus sapiente hic omnis id ex perspiciatis neque? Qui beatae dolore exercitationem quo facere necessitatibus eos, quidem earum aut. Est nemo praesentium aperiam! Sint sed nisi vel reprehenderit unde numquam itaque maiores tenetur. Nisi facere fuga, error sed earum aperiam at iste temporibus provident id consectetur eveniet sit ullam nam quaerat veritatis illo quod dolore.
+                                    </div>
+                                    <div class="lesson-left-tasks-main-task-student_solution">
+                                        <div class="lesson-left-tasks-main-task-student_solution-header">
+                                            Solution
+                                        </div>
+                                        <div class="lesson-left-tasks-main-task-student_solution-file_uploaded">
+                                            <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-left">
+                                                <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-left-file-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-filetype-pdf" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-left-file-name">
+                                                    solution_to_second_task.pdf
+                                                </div>
+                                            </div>
+                                            <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right adjacent-container">
+                                                
+                                                <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right-icon solution-approve approved">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                                    </svg>
+                                                </div>
+    
+                                                <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right-icon solution-reject">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                    </svg>
+                                                </div>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                            </div>
+                        </div>
+    
+                        <div class="lesson-left-activity box">
+                            <div class="lesson-left-tasks-activity box-header">
+                                Activity
+                            </div>
+                            <div class="lesson-left-tasks-activity box-main_padded">
+                                <div class="lesson-left-tasks-activity-entries">
+                                    <div class="lesson-left-tasks-activity-entries-entry">
+                                        <div class="lesson-left-tasks-activity-entries-entry-left">
+                                            <div class="lesson-left-tasks-activity-entries-entry-left-pic">
+                                                <img src="img/img.jpg">
+                                            </div>
+                                        </div>
+                                        <div class="lesson-left-tasks-activity-entries-entry-right">
+                                            <div class="lesson-left-tasks-activity-entries-entry-right-top">
+                                                John Smith, Today 15:03
+                                            </div>
+                                            <div class="lesson-left-tasks-activity-entries-entry-right-bottom">
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium ab, omnis corporis dolorem maxime dolores doloribus ducimus a sed voluptate. Iusto harum quaerat, tenetur expedita quibusdam quisquam eos? Vero officia tenetur temporibus. Dignissimos veritatis magnam eaque. Earum adipisci similique molestiae quas laboriosam saepe vero eius? Commodi, excepturi saepe. Ducimus qui esse delectus consequuntur repellendus debitis provident nam atque pariatur eos, consequatur corporis. Reiciendis sit explicabo quo! Temporibus, illo deleniti magni, alias labore vero et atque iure, aliquid possimus fugiat voluptatem architecto voluptates eos. Dolorem, deserunt sunt et excepturi voluptate saepe officia, sed consequuntur fuga placeat, aspernatur eum minus? Quasi, consequuntur?
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lesson-left-tasks-activity-form">
+                                    <div class="lesson-left-tasks-activity-form-header">
+                                        Add entry
+                                    </div>
+                                    <div class="lesson-left-tasks-activity-textarea">
+                                        <textarea></textarea>
+                                    </div>
+                                    <div class="lesson-left-tasks-activity-submit">
+                                        <div class="lesson-left-tasks-activity-submit-button button_fill_green">
+                                            Submit
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                    <div class="lesson-right">
+                        <div class="lesson-right-status box">
+                            <div class="lesson-right-status-header box-header">
+                                Status
+                            </div>
+                            <div class="lesson-right-status-main box-main_padded">
+                                <div class="lesson-left-status-main-entry status-entry">
+                                    <div class="lesson-left-status-main-entry-top status-entry-top">
+                                        Status
+                                    </div>
+                                    <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green">
+                                        Completed
+                                    </div>
+                                </div>
+                                <div class="lesson-left-status-main-entry">
+                                    <div class="lesson-left-status-main-entry-top status-entry-top">
+                                        Tasks
+                                    </div>
+                                    <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green main-table-cell-bottom_orange">
+                                        One to be checked
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            TutoringApp, Your Profile
+        </title>
+        <link rel="stylesheet" href="../base.css">
+        <link rel="stylesheet" href="../generals.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/profile.css">
+    </head>
+    <body>
+        <header>
+            <div class="header-left header-side">
+                <div class="header-left-logo">
+                    <a href="./home.html">
+                        <h2>
+                            TutorApp
+                        </h2>
+                    </a>
+                    
+                </div>
+                <div class="mobile header-left-search header-side-item_mobile">
+                    <div class="header-left-search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="desktop header-left-search header-side-item_desktop">
+                    <select class="header-left-search-subject" id="header-left-search-subject">
+                        <option value="physics">Physics</option>
+                        <option value="math">Math</option>
+                        <option value="english">English</option>
+                        <option value="french">French</option>
+                        <option value="chemistry">Chemistry</option>
+                    </select>
+                    <select class="header-left-search-city" id="header-left-search-city">
+                        <option value="lodz">Łódź</option>
+                        <option value="warsaw">Warsaw</option>
+                        <option value="wroclaw">Wrocław</option>
+                    </select>
+                    <input type="text" class="header-left-search-name" id="header-left-search-name">
+                    <button class="header-left-search-button" id="header-left-search-button">
+                        <a href="./search_results.html">
+                            <div class="header-left-search-button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </button>  
+                </div>
+            </div>
+            <div class="header-right header-side">
+                <input type="checkbox" class="header-right-checkbox" id="header-right-checkbox">
+                <div class="header-right-profile">
+                    <img src="./img/img.jpg">
+                </div>
+                <label for="header-right-checkbox">
+                    <div class="header-right-arrow icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </label>
+                <div class="header-right-dropdown">
+                    <div class="header-right-dropdown-item">
+                        <a href="./profile.html">
+                            Profile
+                        </a>
+                    </div>  
+                    <div class="header-right-dropdown-item">
+                        <a href="./student_learning.html">
+                            Lessons
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./chat.html">
+                            Chats
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-log_out header-right-dropdown-item">
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="profile stack-container">
+                <div class="profile-edit adjacent-container">
+                    <div class="profile-edit-edit button_white_green">
+                        <a href="./edit_profile_student.html">
+                            Edit
+                        </a>
+                    </div>
+                    <div class="profile-edit-change_password button_white_green">
+                        <a href="./change_password.html">
+                            Change password
+                        </a>
+                    </div>
+                </div>
+                <div class="profile-info box">
+                    <div class="profile-info-header box-header">
+                        General
+                    </div>
+                    <div class="profile-info-main box-main_padded">
+                        <div class="profile-info-main-left_top">
+                            <div class="profile-info-main-left_top-picture">
+                                <img src="./img/img.jpg">
+                            </div>
+                        </div>
+                        <div class="profile-info-main-right_bottom">
+                            <table class="profile-info-main-right_bottom-main-table main-table">
+                                <tr class="profile-info-main-right_bottom-main-table-row main-table-row">
+                                    <td class="profile-info-main-right_bottom-main-table-cell main-table-cell">
+                                        <div class="profile-info-main-right_bottom-main-table-cell-top main-table-cell-top">
+                                            Name 
+                                        </div>
+                                        <div class="profile-info-main-right_bottom-main-table-cell-bottom main-table-cell-bottom">
+                                            John Smith
+                                        </div>
+                                    </td>
+                                    <td class="profile-info-main-right_bottom-main-table-cell main-table-cell">
+                                        <div class="profile-info-main-right_bottom-main-table-cell-top main-table-cell-top">
+                                            Email address
+                                        </div>
+                                        <div class="profile-info-main-right_bottom-main-table-cell-bottom main-table-cell-bottom">
+                                            john.smith@gmail.com
+                                        </div>
+                                    </td>
+                                </tr>
+    
+                                <tr class="profile-info-main-right_bottom-main-table-row main-table-row">
+                                    <td class="profile-info-main-right_bottom-main-table-cell main-table-cell">
+                                        <div class="profile-info-main-right_bottom-main-table-cell-top main-table-cell-top">
+                                            Date of birth 
+                                        </div>
+                                        <div class="profile-info-main-right_bottom-main-table-cell-bottom main-table-cell-bottom">
+                                            2000.01.01
+                                        </div>
+                                    </td>
+                                    <td class="profile-info-main-right_bottom-main-table-cell main-table-cell">
+                                        <div class="profile-info-main-right_bottom-main-table-cell-top main-table-cell-top">
+                                            City
+                                        </div>
+                                        <div class="profile-info-main-right_bottom-main-table-cell-bottom main-table-cell-bottom">
+                                            Some city
+                                        </div>
+                                    </td>
+                                </tr>
+    
+                            </table>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="profile-description box">
+                    <div class="profile-description-header box-header">
+                        Description
+                    </div>
+                    <div class="profile-description-text box-main_padded">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi, qui est quidem iure officia corporis voluptatem autem dolore deserunt. Nihil, iure tempore laborum cupiditate magni veniam itaque ratione possimus corrupti. Eveniet, architecto atque? Ratione nam, explicabo reiciendis voluptates ea a quia dolorem saepe voluptatibus fuga. Quod aliquam fugiat ad magni minus sequi perferendis natus dolore iusto nisi qui sed, ipsa quo ullam quia pariatur, unde saepe eaque. Accusamus, eveniet tempora in autem commodi est itaque dolorem voluptas incidunt maxime perspiciatis ad nihil quam tenetur ab officia blanditiis voluptatem minus provident sint voluptatum? Ad deserunt reprehenderit doloremque reiciendis deleniti eius alias.
+                    </div>
+                </div>
+                <div class="profile-education box">
+                    <div class="profile-education-header box-header">
+                        Education
+                    </div>
+                    <div class="profile-education-main box-main_padded">
+                        <ul class="profile-education-main-list list">
+                            <li class="profile-education-main-list-element list-element">
+                                <div class="profile-education-main-list-element-top list-element-top">
+                                    Mock High School
+                                </div>
+                                <div class="profile-education-main-list-element-bottom list-element-bottom">
+                                    2015-2018, GPA: 3.5
+                                </div>
+                            </li>
+                            <li class="profile-education-main-list-element list-element">
+                                <div class="profile-education-main-list-element-top list-element-top">
+                                    Mock University
+                                </div>
+                                <div class="profile-education-main-list-element-bottom list-element-bottom">
+                                    2018-Now, Physics
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>
