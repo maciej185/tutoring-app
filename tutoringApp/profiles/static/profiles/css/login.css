@@ -1,0 +1,29 @@
+main {
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main > div {
+    padding: unset;
+}
+
+ul.errorlist {
+    display: none;
+}
+
+div.login-main-form-errors {
+    font-size: 0.8rem;
+    color: var(--gray-red-dark);
+    text-align: center;
+}
+
+div.login-main-form-input {
+    display: flex;
+}
+
+div.login-main-form-input > div {
+    flex: 1
+}

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "simple_history",
     "home.apps.HomeConfig",
     "profiles.apps.ProfilesConfig",
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [

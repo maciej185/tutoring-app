@@ -1,0 +1,23 @@
+{% load widget_tweaks %}
+
+<div class="login-main-form-errors">
+    {% for error in errors %}
+        {{ error }}
+    {% endfor %}
+</div>
+<div class="stack-container">
+    <div class="login-main-form-input">
+        <div>Username:</div>
+        <div>
+            {{ form.username|add_class:'text-input' }}
+        </div>
+        
+    </div>
+    <div class="login-main-form-input">
+        <div>Password:</div>
+        <div>
+            {{ form.password|add_class:'text-input' }}
+        </div>
+    </div>
+    
+</div>
