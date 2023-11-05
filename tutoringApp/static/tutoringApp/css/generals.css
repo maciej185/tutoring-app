@@ -105,7 +105,7 @@ input.box_dropdown-header-checkbox:checked + div > label > div.box_dropdown-head
     /* RED */
 
         /* FILL */
-        div.button_fill_red {
+        div.button_fill_red, button.button_fill_red {
             border-radius: var(--box-border-radius);
             background-color: var(--gray-red-medium);
             color: white;
@@ -114,19 +114,20 @@ input.box_dropdown-header-checkbox:checked + div > label > div.box_dropdown-head
             transition: 0.2s;
             text-align: center;
             text-decoration: unset;
+            border: unset;
         }
 
-        div.button_fill_red:hover {
+        div.button_fill_red:hover, button.button_fill_red:hover {
             background-color: var(--gray-red-dark);
         }
 
-        div.button_fill_red a {
+        div.button_fill_red a, button.button_fill_red a  {
             color: inherit;
             text-decoration: unset;
         }
 
         /* EMPTY */
-        div.button_white_red {
+        div.button_white_red, button.button_white_red {
             border-radius: var(--box-border-radius);
             background-color: white;
             color: var(--gray-red-extra-dark);
@@ -138,7 +139,7 @@ input.box_dropdown-header-checkbox:checked + div > label > div.box_dropdown-head
             text-decoration: unset;
         }
 
-        div.button_white_red:hover {
+        div.button_white_red:hover, button.button_white_red:hover {
             box-shadow: 0 0 0 1px var(--gray-red-extra-dark) inset;
         }
 
@@ -150,7 +151,7 @@ input.box_dropdown-header-checkbox:checked + div > label > div.box_dropdown-head
     /* GREEN */
 
         /* FILL */
-        div.button_fill_green {
+        div.button_fill_green, button.button_fill_green {
             border-radius: var(--box-border-radius);
             background-color: var(--bluegreen-medium);
             color: white;
@@ -159,14 +160,15 @@ input.box_dropdown-header-checkbox:checked + div > label > div.box_dropdown-head
             text-align: center;
             transition: 0.2s;
             text-decoration: unset;
+            border: unset;
         }
 
-        div.button_fill_green:hover {
+        div.button_fill_green:hover, button.button_fill_green:hover {
             background-color: var(--bluegreen-dark);
         }
 
         /* EMPTY */
-        div.button_white_green {
+        div.button_white_green, button.button_white_green {
             border-radius: var(--box-border-radius);
             background-color: white;
             color: var(--gray-bluegreen-dark);
@@ -178,7 +180,7 @@ input.box_dropdown-header-checkbox:checked + div > label > div.box_dropdown-head
             text-decoration: unset;
         }
 
-        div.button_white_green:hover {
+        div.button_white_green:hover, button.button_white_green:hover {
             box-shadow: 0 0 0 1px var(--gray-bluegreen-dark) inset;
         }
 
