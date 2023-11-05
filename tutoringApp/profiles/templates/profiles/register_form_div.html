@@ -1,0 +1,19 @@
+{% load widget_tweaks %}
+
+<div class="form-errors">
+    {% for error in errors %}
+        {{ error }}
+    {% endfor %}
+</div>
+<div class="stack-container">
+    {% for field in form %}
+        <div class="form-input">
+            <div>{{field.label}}:</div>
+            {% if field.label == 'Account type' %}
+                <div>{{ field|add_class:'options' }}</div>
+            {% else %}
+                <div>{{ field|add_class:'text-input' }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
