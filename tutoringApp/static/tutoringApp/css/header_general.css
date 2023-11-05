@@ -134,6 +134,10 @@ div.header-right a {
     text-decoration: unset;
 }
 
+div.header-right-username {
+    display: none;
+}
+
 input.header-right-checkbox {
     display: none;
 }
@@ -253,6 +257,10 @@ div.header-right-log_in-text {
         display: flex;
         align-items: center;
         font-size: 0.85rem;
+    }
+
+    div.header-right-username {
+        display: block;
     }
 
     div.header-left-search {

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {% block title %}
+            {% endblock %}
+        </title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'tutoringApp/css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'tutoringApp/css/generals.css' %}">
+        <link rel="stylesheet" href="{% static 'tutoringApp/css/header_general.css' %}">
+        {% block styles %}
+        {% endblock %}
+
+        {% block script %}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <div class="header-left header-side">
+                <div class="header-left-logo">
+                    <a href="{% url 'home:home' %}">
+                        <h2>
+                            TutorApp
+                        </h2>
+                    </a>
+                </div>    
+            </div>
+            <div class="header-right header-side"></div>
+        </header>
+        
+        <main>
+            {% block main %}
+            {% endblock %}
+        </main>
+
+        <footer>
+        </footer>
+    </body>
+</html>
