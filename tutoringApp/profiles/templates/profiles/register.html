@@ -1,33 +1,32 @@
 {% extends 'tutoringApp/base_header_clean.html' %}
 
 {% block title %}
-    TutoringApp
+    Register to TutoringApp
 {% endblock %}
 
 {% block styles %}
     {% load static %}
-    <link rel="stylesheet" href="{% static 'profiles/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'profiles/css/register.css' %}">
     <link rel="stylesheet" href="{% static 'profiles/css/profiles.css' %}">
 {% endblock %}
 
 {% block main %}
-    <div class="login box">
-        <div class="login-header box-header">
-            Login
+    <div class="register box">
+        <div class="register-header box-header">
+            Register
         </div>
-        <div class="login-main box-main_padded stack_container">
-            <div class="login-main-form stack_container_small">
+        <div class="register-main box-main_padded">
+            <div class="register-main-form stack_container_small">
                 <form method="POST">
                     <div class="stack-container">
                         {% csrf_token %}
                         {{ form.as_div }}
                         <div class="centered_button_container">
-                            <button type="submit" class="button_fill_green">Login</button>
+                            <button type="submit" class="button_fill_green">Register</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 {% endblock %}

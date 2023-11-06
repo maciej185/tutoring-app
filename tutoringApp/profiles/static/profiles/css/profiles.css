@@ -1,0 +1,15 @@
+/* General styles used accross the 'profiles' app */
+
+div.form-errors {
+    font-size: 0.8rem;
+    color: var(--gray-red-dark);
+    text-align: center;
+}
+
+div.form-input {
+    display: flex;
+}
+
+div.form-input > div {
+    flex: 1
+}

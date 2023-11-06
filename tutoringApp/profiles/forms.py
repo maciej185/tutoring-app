@@ -48,4 +48,14 @@ class RegisterForm(UserCreationForm):
             "account_type": "Account type",
         }
 
-        widgets = {"account_type": forms.CheckboxInput()}
+        widgets = {
+            "username": forms.TextInput(attrs={'class': 'text-input'}),
+            "first_name": forms.TextInput(attrs={'class': 'text-input'}),
+            "last_name": forms.TextInput(attrs={'class': 'text-input'}),
+            "email": forms.EmailInput(attrs={'class': 'text-input'}),
+            "password1": forms.PasswordInput(attrs={'class': 'text-input'}),
+            "password2": forms.PasswordInput(attrs={'class': 'text-input'}),
+            "account_type": forms.CheckboxInput(attrs={'class': 'options'}),
+            }
+
+    template_name_div = Path("profiles", "register_form_div.html")
