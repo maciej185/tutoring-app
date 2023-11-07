@@ -16,7 +16,7 @@ def profile_pic_directory_path(instance: "Profile", filename: str) -> Path:
         path (defined in settings.py) to determine the final 
         directory where the image will be saved. 
     """
-    return Path("static", "profiles", "images", f"user_{instance.user.id}", "profile_pic", filename)
+    return Path("media", "profiles", "images", f"user_{instance.user.id}", "profile_pic", filename)
 
 # Create your models here.
 class Profile(models.Model):
@@ -30,7 +30,7 @@ class Profile(models.Model):
     Null/None, the profile is a Student's profile.
     """
 
-    DEFAULT_PROFILE_PIC_PATH = "static/default_main_pic.jpg"
+    DEFAULT_PROFILE_PIC_PATH = "/media/default_profile_pic.jpg"
 
     user = models.OneToOneField(
         User,
