@@ -30,7 +30,7 @@ class Profile(models.Model):
     Null/None, the profile is a Student's profile.
     """
 
-    DEFAULT_PROFILE_PIC_PATH = Path("static", "default_main_pic.jpg")
+    DEFAULT_PROFILE_PIC_PATH = "static/default_main_pic.jpg"
 
     user = models.OneToOneField(
         User,
@@ -38,9 +38,9 @@ class Profile(models.Model):
         primary_key=True,
     )
     profile_pic = models.ImageField(upload_to=profile_pic_directory_path, default=DEFAULT_PROFILE_PIC_PATH, null=False, blank=False)
-    date_of_birth = models.DateField(blank=False)
-    description = models.TextField(blank=False)
-    city = models.CharField(max_length=100, blank=False)
+    date_of_birth = models.DateField(blank=False, default=now)
+    description = models.TextField(blank=False, default="")
+    city = models.CharField(max_length=100, blank=False, default="")
     teaching_since = models.DateField(null=True, blank=True, help_text="If the instance is Student's profile then this field must be Null.")
     create_date = models.DateTimeField(default=now)
     timestamp = models.DateTimeField(auto_now=True)
