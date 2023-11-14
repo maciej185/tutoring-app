@@ -108,6 +108,14 @@ class EducationForm(forms.ModelForm):
         model = Education
         exclude = ["profile"]
 
+        widgets = {
+            "school": forms.Select(attrs={"class": "education-form-school"}),
+            "start_date": forms.DateInput(attrs={"class": "education-form-start_date"}),
+            "end_date": forms.DateInput(attrs={"class": "education-form-end_date"}),
+            "degree": forms.TextInput(attrs={"class": "education-form-degree"}),
+            "additional_info": forms.TextInput(attrs={"class": "education-form-additional_info"})
+        }
+
 
 education_formset = forms.inlineformset_factory(
         parent_model=Profile,
