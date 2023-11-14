@@ -10,6 +10,7 @@
 {% block script %}
 {% load static %}
 <script defer src="{% static 'profiles/js/ProfilePicInputHandler.js' %}"></script>
+<script defer src="{% static 'profiles/js/EducationFormsetHandler.js' %}"></script>
 {% endblock %}
 
 {% block main %}
@@ -110,60 +111,60 @@
                     {{education_formset.management_form}}
                 </div>
                 {% for education_form in education_formset %}
-                    <div class="profile-education-main-school box box-main_padded adjacent-container">
-                        {% for hidden_field in education_form.hidden_fields %}
-                            {{ hidden_field }}
-                        {% endfor %}
-                        <div class="profile-education-main-school-info stack-container_small">
-                            <div class="profile-education-main-school-info-name stack-container_small">
-                                <div class="profile-education-main-school-info-name-top info-top">
-                                    School name
-                                </div>
-                                <div class="profile-education-main-school-info-name-bottom">
-                                    {{ education_form.school|add_class:'options' }}
-                                </div>
-                            </div>
-                            <div class="profile-education-main-school-info-degree stack-container_small">
-                                <div class="profile-education-main-school-info-degree-top info-top">
-                                    Degree
-                                </div>
-                                <div class="profile-education-main-school-info-additional-bottom">
-                                    {{ education_form.degree|add_class:'text-input'}}
-                                </div>
-                            </div>
-                            <div class="profile-education-main-school-info-years_of_attendance stack-container_small">
-                                <div class="profile-education-main-school-info-years_of_attendance-top info-top">
-                                    Years of attendance
-                                </div>
-                                <div class="profile-education-main-school-info-years_of_attendance-bottom adjacent-container">
-                                    <div class="profile-education-main-school-info-years_of_attendance-bottom-start stack-container_smaller">
-                                        <div class="profile-education-main-school-info-years_of_attendance-bottom-start-top info-top">
-                                            Start
-                                        </div>
-                                        <div class="profile-education-main-school-info-years_of_attendance-bottom-start-input">
-                                            {{ education_form.start_date|add_class:'date-input'}}
-                                        </div>
+                    {% if education_form.instance.pk %}
+                        <div class="profile-education-main-school box box-main_padded adjacent-container">
+                            {% for hidden_field in education_form.hidden_fields %}
+                                {{ hidden_field }}
+                            {% endfor %}
+                            <div class="profile-education-main-school-info stack-container_small">
+                                <div class="profile-education-main-school-info-name stack-container_small">
+                                    <div class="profile-education-main-school-info-name-top info-top">
+                                        School name
                                     </div>
-                                    <div class="profile-education-main-school-info-years_of_attendance-bottom-end stack-container_smaller">
-                                        <div class="profile-education-main-school-info-years_of_attendance-bottom-end-top info-top">
-                                            End
-                                        </div>
-                                        <div class="profile-education-main-school-info-years_of_attendance-bottom-end-input">
-                                            {{ education_form.end_date|add_class:'date-input'}}
-                                        </div>    
+                                    <div class="profile-education-main-school-info-name-bottom">
+                                        {{ education_form.school|add_class:'options' }}
                                     </div>
                                 </div>
-                            </div>
-                            <div class="profile-education-main-school-info-additional stack-container_small">
-                                <div class="profile-education-main-school-info-additional-top info-top">
-                                    Additional info
+                                <div class="profile-education-main-school-info-degree stack-container_small">
+                                    <div class="profile-education-main-school-info-degree-top info-top">
+                                        Degree
+                                    </div>
+                                    <div class="profile-education-main-school-info-additional-bottom">
+                                        {{ education_form.degree|add_class:'text-input'}}
+                                    </div>
                                 </div>
-                                <div class="profile-education-main-school-info-additional-bottom">
-                                    {{ education_form.additional_info|add_class:'text-input'}}
+                                <div class="profile-education-main-school-info-years_of_attendance stack-container_small">
+                                    <div class="profile-education-main-school-info-years_of_attendance-top info-top">
+                                        Years of attendance
+                                    </div>
+                                    <div class="profile-education-main-school-info-years_of_attendance-bottom adjacent-container">
+                                        <div class="profile-education-main-school-info-years_of_attendance-bottom-start stack-container_smaller">
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-start-top info-top">
+                                                Start
+                                            </div>
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-start-input">
+                                                {{ education_form.start_date|add_class:'date-input'}}
+                                            </div>
+                                        </div>
+                                        <div class="profile-education-main-school-info-years_of_attendance-bottom-end stack-container_smaller">
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-end-top info-top">
+                                                End
+                                            </div>
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-end-input">
+                                                {{ education_form.end_date|add_class:'date-input'}}
+                                            </div>    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-education-main-school-info-additional stack-container_small">
+                                    <div class="profile-education-main-school-info-additional-top info-top">
+                                        Additional info
+                                    </div>
+                                    <div class="profile-education-main-school-info-additional-bottom">
+                                        {{ education_form.additional_info|add_class:'text-input'}}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {% if education_form.instance.pk %}
                             <div class="profile-education-main-school-delete icon_green link-container">
                                 <a href="{% url 'profiles:education_delete' education_form.instance.pk %}">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
@@ -171,14 +172,68 @@
                                     </svg>
                                 </a>
                             </div>
-                        {% else %}
-                            <div class="profile-education-main-school-delete icon_green link-container">
+                        </div>
+                    {% else %}
+                        <div class="profile-education-main-school box box-main_padded adjacent-container" id="profile-education-main-school_empty-0">
+                            {% for hidden_field in education_form.hidden_fields %}
+                                {{ hidden_field }}
+                            {% endfor %}
+                            <div class="profile-education-main-school-info stack-container_small">
+                                <div class="profile-education-main-school-info-name stack-container_small">
+                                    <div class="profile-education-main-school-info-name-top info-top">
+                                        School name
+                                    </div>
+                                    <div class="profile-education-main-school-info-name-bottom">
+                                        {{ education_form.school|add_class:'options' }}
+                                    </div>
+                                </div>
+                                <div class="profile-education-main-school-info-degree stack-container_small">
+                                    <div class="profile-education-main-school-info-degree-top info-top">
+                                        Degree
+                                    </div>
+                                    <div class="profile-education-main-school-info-additional-bottom">
+                                        {{ education_form.degree|add_class:'text-input'}}
+                                    </div>
+                                </div>
+                                <div class="profile-education-main-school-info-years_of_attendance stack-container_small">
+                                    <div class="profile-education-main-school-info-years_of_attendance-top info-top">
+                                        Years of attendance
+                                    </div>
+                                    <div class="profile-education-main-school-info-years_of_attendance-bottom adjacent-container">
+                                        <div class="profile-education-main-school-info-years_of_attendance-bottom-start stack-container_smaller">
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-start-top info-top">
+                                                Start
+                                            </div>
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-start-input">
+                                                {{ education_form.start_date|add_class:'date-input'}}
+                                            </div>
+                                        </div>
+                                        <div class="profile-education-main-school-info-years_of_attendance-bottom-end stack-container_smaller">
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-end-top info-top">
+                                                End
+                                            </div>
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-end-input">
+                                                {{ education_form.end_date|add_class:'date-input'}}
+                                            </div>    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-education-main-school-info-additional stack-container_small">
+                                    <div class="profile-education-main-school-info-additional-top info-top">
+                                        Additional info
+                                    </div>
+                                    <div class="profile-education-main-school-info-additional-bottom">
+                                        {{ education_form.additional_info|add_class:'text-input'}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-education-main-school-delete icon_green link-container" id="profile-education-main-school_empty-delete-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                                     <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                                 </svg>
                             </div>
-                        {% endif %}
-                    </div>
+                        </div>
+                    {% endif %}
                 {% endfor %}
 
                 <div class="profile-education-main-add add_button">
