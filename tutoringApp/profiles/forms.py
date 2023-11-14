@@ -1,11 +1,26 @@
 """Forms for logging and registering users."""
 
+from enum import Enum, auto
 from pathlib import Path
 
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
+from profiles.models import Education, Profile
+from enum import Enum, auto
+
+
+class AccountType(Enum):
+    """Simple enum class for specifying account's type."""
+
+    STUDENT = auto()
+    TUTOR = auto()
+
+class AccountType(Enum):
+    """Simple enum class for specifying account's type."""
+    STUDENT = auto()
+    TUTOR = auto()
 
 class LoginForm(AuthenticationForm):
     """Subclass already implented login form to change the appearance."""
@@ -22,7 +37,11 @@ class LoginForm(AuthenticationForm):
 
 class RegisterForm(UserCreationForm):
     account_type = forms.ChoiceField(
-        choices=[(0, "Student"), (1, "Tutor")], required=True
+        choices=[
+            (AccountType.STUDENT.value, "Student"),
+            (AccountType.TUTOR.value, "Tutor"),
+        ],
+        required=True,
     )
     username = forms.CharField(min_length=5, max_length=150)
     email = forms.EmailField(required=True)
@@ -49,13 +68,54 @@ class RegisterForm(UserCreationForm):
         }
 
         widgets = {
-            "username": forms.TextInput(attrs={'class': 'text-input'}),
-            "first_name": forms.TextInput(attrs={'class': 'text-input'}),
-            "last_name": forms.TextInput(attrs={'class': 'text-input'}),
-            "email": forms.EmailInput(attrs={'class': 'text-input'}),
-            "password1": forms.PasswordInput(attrs={'class': 'text-input'}),
-            "password2": forms.PasswordInput(attrs={'class': 'text-input'}),
-            "account_type": forms.CheckboxInput(attrs={'class': 'options'}),
-            }
+            "username": forms.TextInput(attrs={"class": "text-input"}),
+            "first_name": forms.TextInput(attrs={"class": "text-input"}),
+            "last_name": forms.TextInput(attrs={"class": "text-input"}),
+            "email": forms.EmailInput(attrs={"class": "text-input"}),
+            "password1": forms.PasswordInput(attrs={"class": "text-input"}),
+            "password2": forms.PasswordInput(attrs={"class": "text-input"}),
+            "account_type": forms.CheckboxInput(attrs={"class": "options"}),
+        }
 
     template_name_div = Path("profiles", "register_form_div.html")
+
+class UpdateUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
+class StudentProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = [
+            "user",
+            "teaching_since",
+            "create_date",
+            "timestamp",
+            "languages",
+            "schools",
+        ]
+
+        widgets = {
+            "profile_pic": forms.FileInput(
+                attrs={"id": "profile-info-main-left_top-picture-input-input"}
+            )
+        }
+
+
+class EducationForm(forms.ModelForm):
+    class Meta:
+        model = Education
+        exclude = ["profile"]
+
+
+education_formset = forms.inlineformset_factory(
+        parent_model=Profile,
+        model=Education,
+        form=EducationForm,
+        extra=1,
+        can_delete=False,
+        can_delete_extra=False,
+        min_num=0,
+        validate_min=False,
+)
