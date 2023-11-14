@@ -10,7 +10,7 @@ from django.views.generic.edit import UpdateView
 
 from profiles.forms import (AccountType, StudentProfileForm, UpdateUserForm,
                             education_formset)
-from profiles.models import Profile
+from profiles.models import Profile, Education
 
 
 @login_required
@@ -129,3 +129,25 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
         """
         user = User.objects.get(pk=self.kwargs["pk"])
         return UpdateUserForm(instance=user)
+
+@login_required
+def  delete_education_object_view(_request, pk: int) -> HttpResponseRedirect:
+    """Delete Education object and redirect back to profile update page.
+    
+    The method deletes the instance of the Education model who's
+    PK has been passed in the URL. The user is then redirected back 
+    to profile update page.
+
+    Args:
+        request: An instance of the HttpRequest class, representing 
+                the actual HTTP request being sent to the server.
+        pk: PK of the Education object that is meant to 
+                        be deleted.
+    Returns:
+        An instance of the HttpResponseRedirect class, redirecting the 
+        user back to the profile update page.
+    """
+    education = get_object_or_404(Education, pk=pk)
+    profile = education.profile
+    education.delete()
+    return HttpResponseRedirect(reverse('profiles:update', kwargs={'pk': profile.pk}))
