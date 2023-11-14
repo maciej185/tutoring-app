@@ -111,9 +111,8 @@ class School(models.Model):
         (0, "Elementary School"),
         (1, "Middle School"),
         (2, "High School"),
-        (3, "Bachelor's Degree"),
-        (4, "Master's Degree"),
-        (5, "PhD")
+        (3, "College"),
+        (4, "University")
     ]
     name = models.CharField(max_length=200, unique=True)
     level = models.IntegerField(choices=SCHOOL_LEVEL_CHOICES, default=0)
@@ -122,6 +121,7 @@ class School(models.Model):
 
     def __str__(self) -> str:
         """Return the school's name as its representation."""
+        return self.name
 
 
 class Education(models.Model):
