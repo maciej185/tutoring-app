@@ -10,12 +10,8 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import UpdateView
 
-from profiles.forms import (
-    AccountType,
-    StudentProfileForm,
-    UpdateUserForm,
-    education_formset,
-)
+from profiles.forms import (AccountType, StudentProfileForm, UpdateUserForm,
+                            education_formset)
 from profiles.models import Education, Profile
 
 
@@ -39,6 +35,7 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
 
     model = Profile
     education_formset_errors = False
+    user_form_errros = False
 
     def get_context_data(self, **kwargs):
         """Add formsets and other necessary info to default context."""
@@ -97,7 +94,7 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
         self._save_education_data()
         self._save_user_data()
 
-        if not self.education_formset_errors:
+        if not self._additional_forms_have_errors():
             return super().form_valid(form)
         return HttpResponseRedirect(
             reverse_lazy("profiles:update", kwargs={"pk": self.kwargs["pk"]})
@@ -138,11 +135,17 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
         currently being updated.
         """
         user = User.objects.get(pk=self.kwargs["pk"])
-        register_form = UpdateUserForm(self.request.POST, instance=user)
-        if register_form.is_valid():
-            register_form.save()
+        update_user_form = UpdateUserForm(self.request.POST, instance=user)
+        if update_user_form.is_valid():
+            update_user_form.save()
         else:
-            print(register_form.errors)
+            self.request.session["user_form_errors"] = update_user_form.errors
+            print("------------------")
+            print(type(update_user_form.errors))
+            print("------------------")
+            print(update_user_form.errors)
+            print("------------------")
+            self.user_form_errros = True
 
     def _remove_info_about_profile_setup_from_sessions(self) -> None:
         """Remove info about whether profile is being set up from session.
@@ -195,6 +198,32 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
             )
             del self.request.session["education_formset_errors"]
             return education_formset_errors
+
+    def _check_for_user_form_error(self) -> Optional[list[dict[str, str]]]:
+        """Check if error messages are present in session info.
+
+        Returns:
+            If error messages are present, the dictionary containing
+            them gets returned and the value is removed from the session.
+            In other case, None is returned.
+        """
+        if self.request.session.get("user_form_errors"):
+            education_formset_errors = self.request.session.get("user_form_errors")
+            del self.request.session["user_form_errors"]
+            return education_formset_errors
+
+    def _additional_forms_have_errors(self) -> bool:
+        """Check if any of the additional forms have errors.
+
+        The method uses the values of the class's attributes
+        that indicate formset and form errors.
+
+        Returns:
+            Boolean info indicating any errors
+            with additional forms added manually to the
+            context.
+        """
+        return any([self.education_formset_errors, self.user_form_errros])
 
 
 @login_required

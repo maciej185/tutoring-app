@@ -51,6 +51,9 @@
                         <div class="profile-info-main-right_bottom-info-top info-top">
                             Name
                         </div>
+                        <div class="profile-info-main-right_bottom-info-bottom-errors form_error">
+                            {% form_error_renderer user_form_errors user_form.first_name.name %}
+                        </div>
                         <div class="profile-info-main-right_bottom-info-bottom">
                             {{ user_form.first_name|add_class:'text-input'  }}
                         </div>
@@ -59,6 +62,9 @@
                     <div class="profile-info-main-right_bottom-info stack-container_smaller">
                         <div class="profile-info-main-right_bottom-info-top info-top">
                             Last name 
+                        </div>
+                        <div class="profile-info-main-right_bottom-info-bottom-errors form_error">
+                            {% form_error_renderer user_form_errors user_form.last_name.name %}
                         </div>
                         <div class="profile-info-main-right_bottom-info-bottom">
                             {{ user_form.last_name|add_class:'text-input'  }}
@@ -77,6 +83,9 @@
                     <div class="profile-info-main-right_bottom-info stack-container_smaller">
                         <div class="profile-info-main-right_bottom-info-top info-top">
                             Email
+                        </div>
+                        <div class="profile-info-main-right_bottom-info-bottom-errors form_error">
+                            {% form_error_renderer user_form_errors user_form.email.name %}
                         </div>
                         <div class="profile-info-main-right_bottom-info-bottom">
                             {{ user_form.email|add_class:'text-input' }}
@@ -122,7 +131,7 @@
                                     <div class="profile-education-main-school-info-name-top info-top">
                                         School name
                                     </div>
-                                    <div class="profile-education-main-school-info-name-bottom-errors education_formset_error">
+                                    <div class="profile-education-main-school-info-name-bottom-errors form_error">
                                         {% formset_error_renderer education_formset_errors forloop.counter0 education_form.school.name %}
                                     </div>
                                     <div class="profile-education-main-school-info-name-bottom">
@@ -133,7 +142,7 @@
                                     <div class="profile-education-main-school-info-degree-top info-top">
                                         Degree
                                     </div>
-                                    <div class="profile-education-main-school-info-additional-bottom-errors education_formset_error">
+                                    <div class="profile-education-main-school-info-additional-bottom-errors form_error">
                                         {% formset_error_renderer education_formset_errors forloop.counter0 education_form.degree.name %}
                                     </div>
                                     <div class="profile-education-main-school-info-additional-bottom">
@@ -149,7 +158,7 @@
                                             <div class="profile-education-main-school-info-years_of_attendance-bottom-start-top info-top">
                                                 Start
                                             </div>
-                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-start-errors education_formset_error">
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-start-errors form_error">
                                                 {% formset_error_renderer education_formset_errors forloop.counter0 education_form.start_date.name %}
                                             </div>
                                             <div class="profile-education-main-school-info-years_of_attendance-bottom-start-input">
@@ -160,7 +169,7 @@
                                             <div class="profile-education-main-school-info-years_of_attendance-bottom-end-top info-top">
                                                 End
                                             </div>
-                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-end-errors education_formset_error">
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-end-errors form_error">
                                                 {% formset_error_renderer education_formset_errors forloop.counter0 education_form.end_date.name %}
                                             </div>
                                             <div class="profile-education-main-school-info-years_of_attendance-bottom-end-input">
@@ -173,7 +182,7 @@
                                     <div class="profile-education-main-school-info-additional-top info-top">
                                         Additional info
                                     </div>
-                                    <div class="profile-education-main-school-info-additional-bottom-errors education_formset_error">
+                                    <div class="profile-education-main-school-info-additional-bottom-errors form_error">
                                         {% formset_error_renderer education_formset_errors forloop.counter0 education_form.additional_info.name %}
                                     </div>
                                     <div class="profile-education-main-school-info-additional-bottom">

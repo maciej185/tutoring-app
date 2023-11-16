@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Optional
 
 from django import template
 
@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.simple_tag
 def formset_error_renderer(
-    error_list: Union[list[dict[str, str]], None], form_index: int, field: str
+    error_list: Optional[list[dict[str, str]]], form_index: int, field: str
 ) -> str:
     """Render correct error message for given field in formset instance.
 
@@ -41,4 +41,27 @@ def formset_error_renderer(
             if error_list[form_index].get(field)
             else ""
         )
+    return ""
+
+
+@register.simple_tag
+def form_error_renderer(error_dict: Optional[dict[str, str]], field: str) -> str:
+    """Render correct error message for given field in form instance.
+
+    Args:
+        error_dict: A dictionary containing
+                    error messages for a given forms
+                    instance. The keys of the dictionary
+                    are field names of the form and the values
+                    are error messages.
+        field: Name of the field for which the error
+                message will be rendered.
+
+        Returns:
+            A string with the error message for the field
+            whose name is passed as the value of the 'field'
+            argument if error occured, empty string otherwise.
+    """
+    if error_dict:
+        return error_dict.get(field)[0] if error_dict.get(field) else ""
     return ""
