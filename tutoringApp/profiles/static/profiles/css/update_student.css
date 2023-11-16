@@ -21,6 +21,7 @@ div.profile-info-main-left_top {
 div.profile-info-main-left_top-picture > img {
     height: 100%;
     width: 100%;
+    object-fit: contain;
 }
 
 div.profile-info-main-left_top-picture {
