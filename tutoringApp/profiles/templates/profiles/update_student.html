@@ -24,7 +24,15 @@
                 General
             </div>
             <div class="profile-info-main box-main_padded stack-adjecent-container ">
+                
                 <div class="profile-info-main-left_top">
+                    <div class="profile-info-main-left_top-picture_errors stack-container_smaller">
+                        {% for error in form.profile_pic.errors %}
+                            <div class="profile-info-main-left_top-picture_errors-error form_error">
+                                {{error}}
+                            </div>
+                        {% endfor %}
+                    </div>
                     <div class="profile-info-main-left_top-picture">
                         <img class="profile-info-main-left_top-picture-img" src="{{ object.profile_pic.url }}">
                         <div class="profile-info-main-left_top-picture-input">
@@ -75,6 +83,13 @@
                         <div class="profile-info-main-right_bottom-info-top info-top">
                             City 
                         </div>
+                        <div class="profile-info-main-right_bottom-info-bottom-errors stack-container_smaller">
+                            {% for error in form.city.errors %}
+                                <div class="profile-info-main-right_bottom-info-bottom-errors-error form_error">
+                                    {{error}}
+                                </div>
+                            {% endfor %}
+                        </div>
                         <div class="profile-info-main-right_bottom-info-bottom">
                             {{ form.city|add_class:'text-input' }}
                         </div>
@@ -96,6 +111,13 @@
                         <div class="profile-info-main-right_bottom-info-top info-top">
                             Date of birth
                         </div>
+                        <div class="profile-info-main-right_bottom-info-bottom-errors stack-container_smaller">
+                            {% for error in form.date_of_birth.errors %}
+                                <div class="profile-info-main-right_bottom-info-bottom-errors-error form_error">
+                                    {{error}}
+                                </div>
+                            {% endfor %}
+                        </div>
                         <div class="profile-info-main-right_bottom-info-bottom">
                             {{ form.date_of_birth|add_class:'text-input' }}
                         </div>
@@ -107,6 +129,13 @@
         <div class="profile-description box">
             <div class="profile-description-header box-header">
                 Description
+            </div>
+            <div class="profile-info-main-right_bottom-info-bottom-errors stack-container_smaller">
+                {% for error in form.description.errors %}
+                    <div class="profile-info-main-right_bottom-info-bottom-errors-error form_error">
+                        {{error}}
+                    </div>
+                {% endfor %}
             </div>
             <div class="profile-description-text box-main_padded">
                 {{ form.description|add_class:'textarea' }}
