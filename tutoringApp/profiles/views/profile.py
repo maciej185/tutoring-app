@@ -1,16 +1,22 @@
 """Views for creating and managing profile objects."""
+from typing import Optional, Union
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import UpdateView
 
-from profiles.forms import (AccountType, StudentProfileForm, UpdateUserForm,
-                            education_formset)
-from profiles.models import Profile, Education
+from profiles.forms import (
+    AccountType,
+    StudentProfileForm,
+    UpdateUserForm,
+    education_formset,
+)
+from profiles.models import Education, Profile
 
 
 @login_required
@@ -32,10 +38,13 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
     """View for updating the profile's information."""
 
     model = Profile
+    education_formset_errors = False
 
     def get_context_data(self, **kwargs):
         """Add formsets and other necessary info to default context."""
         context = super().get_context_data(**kwargs)
+
+        context["education_formset_errors"] = self._check_for_education_formset_error()
 
         context["education_formset"] = education_formset(instance=self.get_object())
 
@@ -63,19 +72,61 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
             else ["profiles/update_tutor.html"]
         )
 
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+    def form_valid(
+        self, form: BaseModelForm
+    ) -> Union[HttpResponse, HttpResponseRedirect]:
+        """Check valididty of the main form and additional formsets.
+
+        The method checks if the main form and
+        any other form rendered on the page is valid.
+        If so, the user gets redirected further to the page
+        whos URL is returned by the self.get_success_url method.
+        In any other case the user is redirected back to the
+        profile update page and the error messages are getting
+        displayed.
+
+        Args:
+            form: An instance of the form class
+                    (the class is specified in the
+                    self.get_form_class method)
+                    with data provided by the user.
+        Returns:
+            HttpResponse if all forms are valid, HttpResponseRedirect
+            otherwise.
+        """
         self._save_education_data()
         self._save_user_data()
 
-        return super().form_valid(form)
+        if not self.education_formset_errors:
+            return super().form_valid(form)
+        return HttpResponseRedirect(
+            reverse_lazy("profiles:update", kwargs={"pk": self.kwargs["pk"]})
+        )
 
-    def _save_education_data(self) -> None:
-        """Save education data provided via formset."""
+    def _save_education_data(self) -> Optional[HttpResponseRedirect]:
+        """Save education data provided via formset.
+
+        The method validates the formset and if there
+        are no issues detected, the data gets saved
+        and the user is taken to the next page whos
+        URL is returned by self.get_success_url method.
+        If any errors are spotted when validating the
+        formset, the list of error messages gets
+        added to session info and the value of
+        'education_formset_errors' flag is set
+        to True to mark that further error
+        'handling' is needed.
+        """
         filled_education_formset = education_formset(
             self.request.POST, instance=self.get_object()
         )
         if filled_education_formset.is_valid():
             filled_education_formset.save()
+        else:
+            self.request.session[
+                "education_formset_errors"
+            ] = filled_education_formset.errors
+            self.education_formset_errors = True
 
     def _save_user_data(self) -> None:
         """Save User's updated data.
@@ -130,24 +181,40 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
         user = User.objects.get(pk=self.kwargs["pk"])
         return UpdateUserForm(instance=user)
 
+    def _check_for_education_formset_error(self) -> Optional[list[dict[str, str]]]:
+        """Check if error messages are present in session info.
+
+        Returns:
+            If error messages are present, the list containing
+            them gets returned and the value is removed from the session.
+            In other case, None is returned.
+        """
+        if self.request.session.get("education_formset_errors"):
+            education_formset_errors = self.request.session.get(
+                "education_formset_errors"
+            )
+            del self.request.session["education_formset_errors"]
+            return education_formset_errors
+
+
 @login_required
-def  delete_education_object_view(_request, pk: int) -> HttpResponseRedirect:
+def delete_education_object_view(_request, pk: int) -> HttpResponseRedirect:
     """Delete Education object and redirect back to profile update page.
-    
+
     The method deletes the instance of the Education model who's
-    PK has been passed in the URL. The user is then redirected back 
+    PK has been passed in the URL. The user is then redirected back
     to profile update page.
 
     Args:
-        request: An instance of the HttpRequest class, representing 
+        request: An instance of the HttpRequest class, representing
                 the actual HTTP request being sent to the server.
-        pk: PK of the Education object that is meant to 
+        pk: PK of the Education object that is meant to
                         be deleted.
     Returns:
-        An instance of the HttpResponseRedirect class, redirecting the 
+        An instance of the HttpResponseRedirect class, redirecting the
         user back to the profile update page.
     """
     education = get_object_or_404(Education, pk=pk)
     profile = education.profile
     education.delete()
-    return HttpResponseRedirect(reverse('profiles:update', kwargs={'pk': profile.pk}))
+    return HttpResponseRedirect(reverse("profiles:update", kwargs={"pk": profile.pk}))

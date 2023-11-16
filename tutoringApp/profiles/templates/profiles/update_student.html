@@ -1,6 +1,7 @@
 {% extends 'tutoringApp/base_student.html' %}
 
 {% load widget_tweaks %}
+{% load profiles_extras %}
 
 {% block styles %}
 {% load static %}
@@ -121,6 +122,9 @@
                                     <div class="profile-education-main-school-info-name-top info-top">
                                         School name
                                     </div>
+                                    <div class="profile-education-main-school-info-name-bottom-errors education_formset_error">
+                                        {% formset_error_renderer education_formset_errors forloop.counter0 education_form.school.name %}
+                                    </div>
                                     <div class="profile-education-main-school-info-name-bottom">
                                         {{ education_form.school|add_class:'options' }}
                                     </div>
@@ -128,6 +132,9 @@
                                 <div class="profile-education-main-school-info-degree stack-container_small">
                                     <div class="profile-education-main-school-info-degree-top info-top">
                                         Degree
+                                    </div>
+                                    <div class="profile-education-main-school-info-additional-bottom-errors education_formset_error">
+                                        {% formset_error_renderer education_formset_errors forloop.counter0 education_form.degree.name %}
                                     </div>
                                     <div class="profile-education-main-school-info-additional-bottom">
                                         {{ education_form.degree|add_class:'text-input'}}
@@ -142,6 +149,9 @@
                                             <div class="profile-education-main-school-info-years_of_attendance-bottom-start-top info-top">
                                                 Start
                                             </div>
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-start-errors education_formset_error">
+                                                {% formset_error_renderer education_formset_errors forloop.counter0 education_form.start_date.name %}
+                                            </div>
                                             <div class="profile-education-main-school-info-years_of_attendance-bottom-start-input">
                                                 {{ education_form.start_date|add_class:'date-input'}}
                                             </div>
@@ -149,6 +159,9 @@
                                         <div class="profile-education-main-school-info-years_of_attendance-bottom-end stack-container_smaller">
                                             <div class="profile-education-main-school-info-years_of_attendance-bottom-end-top info-top">
                                                 End
+                                            </div>
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-end-errors education_formset_error">
+                                                {% formset_error_renderer education_formset_errors forloop.counter0 education_form.end_date.name %}
                                             </div>
                                             <div class="profile-education-main-school-info-years_of_attendance-bottom-end-input">
                                                 {{ education_form.end_date|add_class:'date-input'}}
@@ -159,6 +172,9 @@
                                 <div class="profile-education-main-school-info-additional stack-container_small">
                                     <div class="profile-education-main-school-info-additional-top info-top">
                                         Additional info
+                                    </div>
+                                    <div class="profile-education-main-school-info-additional-bottom-errors education_formset_error">
+                                        {% formset_error_renderer education_formset_errors forloop.counter0 education_form.additional_info.name %}
                                     </div>
                                     <div class="profile-education-main-school-info-additional-bottom">
                                         {{ education_form.additional_info|add_class:'text-input'}}

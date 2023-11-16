@@ -8,7 +8,6 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
 from profiles.models import Education, Profile
-from enum import Enum, auto
 
 
 class AccountType(Enum):
@@ -17,10 +16,13 @@ class AccountType(Enum):
     STUDENT = auto()
     TUTOR = auto()
 
+
 class AccountType(Enum):
     """Simple enum class for specifying account's type."""
+
     STUDENT = auto()
     TUTOR = auto()
+
 
 class LoginForm(AuthenticationForm):
     """Subclass already implented login form to change the appearance."""
@@ -79,10 +81,12 @@ class RegisterForm(UserCreationForm):
 
     template_name_div = Path("profiles", "register_form_div.html")
 
+
 class UpdateUserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ["first_name", "last_name", "email"]
+
 
 class StudentProfileForm(forms.ModelForm):
     class Meta:
@@ -99,7 +103,11 @@ class StudentProfileForm(forms.ModelForm):
         widgets = {
             "profile_pic": forms.FileInput(
                 attrs={"id": "profile-info-main-left_top-picture-input-input"}
-            )
+            ),
+            "date_of_birth": forms.DateInput(
+                format=("%Y-%m-%d"),
+                attrs={"type": "date"},
+            ),
         }
 
 
@@ -110,20 +118,28 @@ class EducationForm(forms.ModelForm):
 
         widgets = {
             "school": forms.Select(attrs={"class": "education-form-school"}),
-            "start_date": forms.DateInput(attrs={"class": "education-form-start_date"}),
-            "end_date": forms.DateInput(attrs={"class": "education-form-end_date"}),
+            "start_date": forms.DateInput(
+                format=("%Y-%m-%d"),
+                attrs={"class": "education-form-start_date", "type": "date"},
+            ),
+            "end_date": forms.DateInput(
+                format=("%Y-%m-%d"),
+                attrs={"class": "education-form-end_date", "type": "date"},
+            ),
             "degree": forms.TextInput(attrs={"class": "education-form-degree"}),
-            "additional_info": forms.TextInput(attrs={"class": "education-form-additional_info"})
+            "additional_info": forms.TextInput(
+                attrs={"class": "education-form-additional_info"}
+            ),
         }
 
 
 education_formset = forms.inlineformset_factory(
-        parent_model=Profile,
-        model=Education,
-        form=EducationForm,
-        extra=1,
-        can_delete=False,
-        can_delete_extra=False,
-        min_num=0,
-        validate_min=False,
+    parent_model=Profile,
+    model=Education,
+    form=EducationForm,
+    extra=1,
+    can_delete=False,
+    can_delete_extra=False,
+    min_num=0,
+    validate_min=False,
 )
