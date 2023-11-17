@@ -65,3 +65,60 @@ def form_error_renderer(error_dict: Optional[dict[str, str]], field: str) -> str
     if error_dict:
         return error_dict.get(field)[0] if error_dict.get(field) else ""
     return ""
+
+
+def find_same_error_in_both_lists(list1: list[str], list2: list[str]) -> Optional[str]:
+    """Check if the same error message is present in both fields.
+
+    The method checks if an error message is present in both
+    arrays. If so, the string representing that message
+    gets returned.
+
+    Args:
+        list1: List containing error messages
+                for the first field.
+        list2: List containing error messages
+                for the second field.
+
+    Returns:
+        String representing error message that was
+        found in both lists, None if such message
+        was not found.
+    """
+    if len([*list1, *list2]) == len([*{*[*list1, *list2]}]):
+        return
+    for error in list1:
+        if error in list2:
+            return error
+
+
+@register.simple_tag
+def education_dates_error_renderer(
+    error_dict: list[Optional[dict[str, str]]], form_index: int
+) -> str:
+    """Renders info about incorrect dates.
+
+    The method checks if the error message for both start_-
+    and end_- date fields is the same and if it refers to the
+    fact that start_date falls after end_date. If so, that error
+    message gets then returned.
+
+    Args:
+        error_dict: A dictionary containing
+                    error messages for a given forms
+                    instance. The keys of the dictionary
+                    are field names of the form and the values
+                    are error messages.
+    Returns:
+            A string with the error message informing
+            the user about incorrect dates if the error
+            did occur, empty string otherwise.
+    """
+    if not error_dict:
+        return ""
+    start_date_list = error_dict[form_index].get("start_date")
+    end_date_list = error_dict[form_index].get("end_date")
+    if not (start_date_list and end_date_list):
+        return ""
+    error = find_same_error_in_both_lists(list1=start_date_list, list2=end_date_list)
+    return error if error else ""

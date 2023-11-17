@@ -185,13 +185,19 @@
                                     <div class="profile-education-main-school-info-years_of_attendance-top info-top">
                                         Years of attendance
                                     </div>
+                                    <div class="profile-education-main-school-info-years_of_attendance-top form_error">
+                                        {% education_dates_error_renderer education_formset_errors forloop.counter0 as dates_error %}
+                                        {{dates_error}}
+                                    </div>
                                     <div class="profile-education-main-school-info-years_of_attendance-bottom adjacent-container">
                                         <div class="profile-education-main-school-info-years_of_attendance-bottom-start stack-container_smaller">
                                             <div class="profile-education-main-school-info-years_of_attendance-bottom-start-top info-top">
                                                 Start
                                             </div>
                                             <div class="profile-education-main-school-info-years_of_attendance-bottom-start-errors form_error">
-                                                {% formset_error_renderer education_formset_errors forloop.counter0 education_form.start_date.name %}
+                                                {% if not dates_error %}
+                                                    {% formset_error_renderer education_formset_errors forloop.counter0 education_form.start_date.name %}
+                                                {% endif %}
                                             </div>
                                             <div class="profile-education-main-school-info-years_of_attendance-bottom-start-input">
                                                 {{ education_form.start_date|add_class:'date-input'}}
@@ -202,7 +208,9 @@
                                                 End
                                             </div>
                                             <div class="profile-education-main-school-info-years_of_attendance-bottom-end-errors form_error">
-                                                {% formset_error_renderer education_formset_errors forloop.counter0 education_form.end_date.name %}
+                                                {% if not dates_error %}
+                                                    {% formset_error_renderer education_formset_errors forloop.counter0 education_form.end_date.name %}
+                                                {% endif %}    
                                             </div>
                                             <div class="profile-education-main-school-info-years_of_attendance-bottom-end-input">
                                                 {{ education_form.end_date|add_class:'date-input'}}
