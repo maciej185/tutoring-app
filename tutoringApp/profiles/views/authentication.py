@@ -44,7 +44,10 @@ class LoginView(FormView):
 def logout_view(request: HttpRequest) -> HttpResponseRedirect:
     """Logs the user out."""
     logout(request)
-    del request.session['account_type']
+    try:
+        del request.session['account_type']
+    except KeyError:
+        pass
     return HttpResponseRedirect(reverse_lazy("profiles:login"))
 
 
