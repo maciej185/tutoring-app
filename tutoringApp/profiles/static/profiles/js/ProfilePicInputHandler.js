@@ -6,6 +6,7 @@ class ProfilePicInputHandler {
     static profilePicImgElement = document.querySelector('img.profile-info-main-left_top-picture-img')
     static profilePicInputLabel = document.querySelector('label.profile-info-main-left_top-picture-input_label')
     static profilePicPreviewDeleteBtn = document.querySelector('div.profile-info-main-left_top-delete')
+    static profilePicErrorsDiv = document.querySelector('div.profile-info-main-left_top-picture-errors')
 
     constructor() {
         ProfilePicInputHandler.profilePicInput.addEventListener('input', this.profilePicInputListener.bind(this))
@@ -24,7 +25,8 @@ class ProfilePicInputHandler {
 
     profilePicPreviewDeletebtnListener(e) {
         ProfilePicInputHandler.profilePicImgElement.setAttribute('src', '')
-        ProfilePicInputHandler.profilePicImgElement.style.display = 'none'
+        ProfilePicInputHandler.profilePicImgElement.style.display = "none"
+        if (ProfilePicInputHandler.profilePicErrorsDiv) ProfilePicInputHandler.profilePicErrorsDiv.style.display = "none"
         ProfilePicInputHandler.profilePicInput.value = null
 
         ProfilePicInputHandler.profilePicPreviewDeleteBtn.style.display = 'none'

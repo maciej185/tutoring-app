@@ -18,23 +18,26 @@
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="profile stack-container">
-        {{ form.errors }}
         <div class="profile-info box">
             <div class="profile-info-header box-header"> 
                 General
             </div>
             <div class="profile-info-main box-main_padded stack-adjecent-container ">
-                
                 <div class="profile-info-main-left_top">
-                    <div class="profile-info-main-left_top-picture_errors stack-container_smaller">
-                        {% for error in form.profile_pic.errors %}
-                            <div class="profile-info-main-left_top-picture_errors-error form_error">
-                                {{error}}
-                            </div>
-                        {% endfor %}
-                    </div>
+                   
                     <div class="profile-info-main-left_top-picture">
-                        <img class="profile-info-main-left_top-picture-img" src="{{ object.profile_pic.url }}">
+                        {% if form.profile_pic.errors %}
+                            <div class="profile-info-main-left_top-picture-errors stack-container_smaller">
+                                {% for error in form.profile_pic.errors %}
+                                    <div class="profile-info-main-left_top-picture-errors-error form_error">
+                                        {{error}}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <img class="profile-info-main-left_top-picture-img" src="" style="display: none;">
+                        {% else %}
+                            <img class="profile-info-main-left_top-picture-img" src="{{ object.profile_pic.url }}">
+                        {% endif %}
                         <div class="profile-info-main-left_top-picture-input">
                             {{ form.profile_pic}}
                         </div>
