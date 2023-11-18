@@ -71,6 +71,11 @@ div.profile-education-main-school-info {
     overflow: scroll;
 }
 
+div.education_formset_error {
+    color: var(--gray-red-dark);
+    font-size: 0.85rem;
+}
+
 div.profile-submit {
     display: flex;
     justify-content: center;
