@@ -10,8 +10,12 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import UpdateView
 
-from profiles.forms import (AccountType, StudentProfileForm, UpdateUserForm,
-                            education_formset)
+from profiles.forms import (
+    AccountType,
+    StudentProfileForm,
+    UpdateUserForm,
+    education_formset,
+)
 from profiles.models import Education, Profile
 
 
@@ -27,6 +31,7 @@ def create_profile_view(request: HttpRequest, user_id: int) -> HttpResponseRedir
     profile = Profile(user=user)
     profile.save()
     request.session["profile_setup"] = True
+    request.session["profile_pic_url"] = profile.profile_pic.url
     return HttpResponseRedirect(reverse("profiles:update", kwargs={"pk": user_id}))
 
 
@@ -60,6 +65,7 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
 
     def get_success_url(self) -> str:
         """Redirect the user back to their profile."""
+        self._update_profile_pic_url()
         return reverse("home:home")
 
     def get_template_names(self) -> list[str]:
@@ -140,11 +146,6 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
             update_user_form.save()
         else:
             self.request.session["user_form_errors"] = update_user_form.errors
-            print("------------------")
-            print(type(update_user_form.errors))
-            print("------------------")
-            print(update_user_form.errors)
-            print("------------------")
             self.user_form_errros = True
 
     def _remove_info_about_profile_setup_from_sessions(self) -> None:
@@ -224,6 +225,15 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
             context.
         """
         return any([self.education_formset_errors, self.user_form_errros])
+
+    def _update_profile_pic_url(self) -> None:
+        """Update current user's profile picture URL in session.
+
+        After the profile (potentially including profile picture)
+        has been successfully updated, the current profile picture
+        URL stored in the session info needs updating as well.
+        """
+        self.request.session["profile_pic_url"] = self.get_object().profile_pic.url
 
 
 @login_required
