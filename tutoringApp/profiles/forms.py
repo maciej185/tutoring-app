@@ -6,6 +6,8 @@ from pathlib import Path
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext as _
 
 from profiles.models import Education, Profile
 
@@ -135,6 +137,27 @@ class EducationForm(forms.ModelForm):
                 attrs={"class": "education-form-additional_info"}
             ),
         }
+
+    def clean(self) -> None:
+        """Additional validation of start_- and end_- date fields.
+
+        The method validates that start_date falls BEFORE
+        end_date. If not, ValidationErrors are added to
+        both fields.
+        """
+        cleaned_data = super().clean()
+        start_date = cleaned_data.get("start_date")
+        end_date = cleaned_data.get("end_date")
+
+        if start_date and end_date:
+            if start_date > end_date:
+                validation_error = ValidationError(
+                    _("Start date: %(start_date)s falls after End date: %(end_date)s"),
+                    code="invalid",
+                    params={"start_date": start_date, "end_date": end_date},
+                )
+                self.add_error("start_date", validation_error)
+                self.add_error("end_date", validation_error)
 
 
 education_formset = forms.inlineformset_factory(
