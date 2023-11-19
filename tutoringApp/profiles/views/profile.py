@@ -1,4 +1,5 @@
 """Views for creating and managing profile objects."""
+from logging import getLogger
 from typing import Optional, Union
 
 from django.contrib.auth.decorators import login_required
@@ -18,6 +19,8 @@ from profiles.forms import (
 )
 from profiles.models import Education, Profile
 
+LOGGER = getLogger(__name__)
+
 
 @login_required
 def create_profile_view(request: HttpRequest, user_id: int) -> HttpResponseRedirect:
@@ -30,6 +33,10 @@ def create_profile_view(request: HttpRequest, user_id: int) -> HttpResponseRedir
     user = get_object_or_404(User, pk=user_id)
     profile = Profile(user=user)
     profile.save()
+    LOGGER.debug(
+        "Profile for %(username)s with id %(id)s created."
+        % {"username": user.username, "id": user.pk}
+    )
     request.session["profile_setup"] = True
     request.session["profile_pic_url"] = profile.profile_pic.url
     return HttpResponseRedirect(reverse("profiles:update", kwargs={"pk": user_id}))
@@ -101,6 +108,10 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
         self._save_user_data()
 
         if not self._additional_forms_have_errors():
+            LOGGER.debug(
+                "Profile of user %(username)s with id %(id)s successfuly updated.",
+                {"username": self.request.user.username, "id": self.request.user.id},
+            )
             return super().form_valid(form)
         return HttpResponseRedirect(
             reverse_lazy("profiles:update", kwargs={"pk": self.kwargs["pk"]})
@@ -130,6 +141,14 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
                 "education_formset_errors"
             ] = filled_education_formset.errors
             self.education_formset_errors = True
+            LOGGER.warning(
+                "Education formset uploaded by %(username)s with id %(id)s contains errors: %(errors)s"
+                % {
+                    "username": self.request.user.username,
+                    "id": self.request.user.id,
+                    "errors": filled_education_formset.errors,
+                }
+            )
 
     def _save_user_data(self) -> None:
         """Save User's updated data.
@@ -147,6 +166,14 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
         else:
             self.request.session["user_form_errors"] = update_user_form.errors
             self.user_form_errros = True
+            LOGGER.warning(
+                "User forms uploaded by %(username)s with id %(id)s contains errors: %(errors)s"
+                % {
+                    "username": self.request.user.username,
+                    "id": self.request.user.id,
+                    "errors": update_user_form.errors,
+                }
+            )
 
     def _remove_info_about_profile_setup_from_sessions(self) -> None:
         """Remove info about whether profile is being set up from session.
@@ -156,8 +183,11 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
         """
         try:
             del self.request.session["profile_setup"]
-        except KeyError:
-            return
+        except KeyError as e:
+            LOGGER.warning(
+                'Error when attempting to remove "profile_setup" key from session: %(error)s'
+                % {"error": e}
+            )
 
     def _check_if_user_is_student(self) -> bool:
         """Checks is the currently logged in user is a Student.
@@ -254,6 +284,10 @@ def delete_education_object_view(_request, pk: int) -> HttpResponseRedirect:
         user back to the profile update page.
     """
     education = get_object_or_404(Education, pk=pk)
+    education_id = education.pk
     profile = education.profile
     education.delete()
+    LOGGER.debug(
+        "Education object with id %(id)s successfuly deleted." % {"id": education_id}
+    )
     return HttpResponseRedirect(reverse("profiles:update", kwargs={"pk": profile.pk}))
