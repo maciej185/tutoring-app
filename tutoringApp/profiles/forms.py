@@ -4,7 +4,11 @@ from enum import Enum, auto
 from pathlib import Path
 
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import (
+    AuthenticationForm,
+    UserCreationForm,
+    UsernameField,
+)
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
@@ -47,11 +51,20 @@ class RegisterForm(UserCreationForm):
         ],
         required=True,
     )
-    username = forms.CharField(min_length=5, max_length=150)
-    email = forms.EmailField(required=True)
+    username = UsernameField(
+        min_length=5,
+        max_length=150,
+        error_messages={"unique": "Username already taken."},
+    )
+    email = forms.EmailField(
+        required=True, error_messages={"unique": "Email already taken."}
+    )
+    first_name = forms.CharField(max_length=150, required=True)
+    last_name = forms.CharField(max_length=150, required=True)
 
     class Meta:
         model = User
+        model._meta.get_field("email")._unique = True
         fields = (
             "username",
             "first_name",

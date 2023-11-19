@@ -1,4 +1,6 @@
 {% load widget_tweaks %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'profiles/css/register_form_div.css' %}">
 
 <div class="form-errors">
     {% for error in errors %}
@@ -9,11 +11,24 @@
     {% for field in form %}
         <div class="form-input">
             <div>{{field.label}}:</div>
-            {% if field.label == 'Account type' %}
-                <div>{{ field|add_class:'options' }}</div>
-            {% else %}
-                <div>{{ field|add_class:'text-input' }}</div>
-            {% endif %}
+            <div class="stack-container_smaller">
+                {% if field.errors %}
+                    <div class="errors">
+                        {% for error in field.errors %}
+                            <div class="error">
+                                {{error}}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="input">
+                    {% if field.label == 'Account type' %}
+                        <div>{{ field|add_class:'options' }}</div>
+                    {% else %}
+                        <div>{{ field|add_class:'text-input' }}</div>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     {% endfor %}
 </div>
