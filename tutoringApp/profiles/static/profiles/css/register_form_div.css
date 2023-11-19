@@ -1,0 +1,10 @@
+div.error {
+    text-align: center;
+    color: var(--gray-red-dark);
+    font-size: 0.85rem;
+}
+
+div.form-input {
+    display: flex;
+    align-items: center;
+}
