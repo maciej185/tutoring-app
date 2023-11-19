@@ -1,13 +1,13 @@
 """Views for creating and managing profile objects."""
 from logging import getLogger
-from typing import Optional, Union
+from typing import Any, Optional, Union
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import UpdateView
 
@@ -116,6 +116,30 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
         return HttpResponseRedirect(
             reverse_lazy("profiles:update", kwargs={"pk": self.kwargs["pk"]})
         )
+
+    def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        """Additional checks to make sure the current user is the profile's owner."""
+        if request.user != self.get_object().user:
+            LOGGER.warning(
+                "User %(username)s with id %(id)s attempting to edit profile of %(profile_owner)s with id %(profile_owner_id)s!",
+                {
+                    "username": self.request.user.username,
+                    "id": self.request.user.id,
+                    "profile_owner": User.objects.get(pk=self.kwargs["pk"]).username,
+                    "profile_owner_id": self.kwargs["pk"],
+                },
+            )
+            return render(
+                request=request,
+                template_name="tutoringApp/forbidden.html",
+                status=403,
+                context={
+                    "warning_message": "You are not allowe to edit other user's profile!",
+                    "redirect_link": reverse("home:home"),
+                    "redirect_destination": "home page",
+                },
+            )
+        return super().get(request, *args, **kwargs)
 
     def _save_education_data(self) -> Optional[HttpResponseRedirect]:
         """Save education data provided via formset.
