@@ -1,12 +1,16 @@
 """Views for registering, loggin in and out."""
+from logging import getLogger
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
 
-from profiles.forms import LoginForm, RegisterForm, AccountType
+from profiles.forms import AccountType, LoginForm, RegisterForm
 from profiles.models import Profile
+
+LOGGER = getLogger(__name__)
 
 
 class LoginView(FormView):
@@ -21,6 +25,10 @@ class LoginView(FormView):
         password = form.cleaned_data.get("password")
         user = authenticate(username=username, password=password)
         if user is not None:
+            LOGGER.debug(
+                "%(username)s with id %(id)s logged in"
+                % {"username": user.username, "id": user.pk}
+            )
             login(self.request, user)
             self._set_account_type_in_sessions(user=user)
             self._add_profile_pic_url_to_session(user=user)
@@ -63,6 +71,7 @@ class LoginView(FormView):
 
 def logout_view(request: HttpRequest) -> HttpResponseRedirect:
     """Logs the user out."""
+    user = request.user
     logout(request)
     session_keys_2b_deleted = ["account_type", "profile_pic_url"]
     for key in session_keys_2b_deleted:
@@ -70,6 +79,10 @@ def logout_view(request: HttpRequest) -> HttpResponseRedirect:
             del request.session[key]
         except KeyError:
             pass
+    LOGGER.debug(
+        "%(username)s with id %(id)s logged out"
+        % {"username": user.username, "id": user.pk}
+    )
     return HttpResponseRedirect(reverse_lazy("profiles:login"))
 
 
@@ -102,6 +115,10 @@ class RegisterView(FormView):
         user = form.save()
         login(self.request, user)
         self._set_account_type_in_sessions(form=form)
+        LOGGER.debug(
+            "%(username)s with id %(id)s registered."
+            % {"username": user.username, "id": user.pk}
+        )
         return HttpResponseRedirect(
             reverse_lazy("profiles:create", kwargs={"user_id": user.pk})
         )
