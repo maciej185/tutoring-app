@@ -1,0 +1,26 @@
+{% extends 'tutoringApp/base_header_clean.html' %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tutoringApp/css/forbidden.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="forbidden box">
+        <div class="forbidden-header box-header">
+            Warning
+        </div>
+        <div class="forbidden-main box-main_padded stack_container">
+            <div class="forbidden-main-warning_message">
+                {{warning_message}}
+            </div>
+            <div class="forbidden-main-redirect-link centered_button_container">
+                <div class="forbidden-main-redirect-link button_fill_red">
+                    <a href="{{redirect_link}}">
+                        Go to {{redirect_destination}}.
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

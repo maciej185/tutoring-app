@@ -1,0 +1,22 @@
+main {
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+div.forbidden {
+    border: 1px solid var(--gray-red-light);
+    padding: unset;
+}
+
+div.forbidden-header {
+    background-color: var(--gray-red-extra-extra-light);
+    border-bottom:  1px solid var(--gray-red-light);
+    color: var(--gray-red-extra-dark)
+}
+
+div.forbidden-main > div {
+    text-align: center;
+}
