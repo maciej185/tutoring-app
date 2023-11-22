@@ -5,6 +5,7 @@ from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from simple_history.models import HistoricalRecords
+from django.conf import settings
 
 from profiles.validators import FileSizeValidator
 
@@ -42,7 +43,7 @@ class Profile(models.Model):
     Null/None, the profile is a Student's profile.
     """
 
-    DEFAULT_PROFILE_PIC_PATH = "/media/default_profile_pic.jpg"
+    DEFAULT_PROFILE_PIC_PATH = Path(settings.BASE_DIR,  "media", "default_profile_pic.jpg")
 
     user = models.OneToOneField(
         User,
@@ -51,7 +52,7 @@ class Profile(models.Model):
     )
     profile_pic = models.ImageField(
         upload_to=profile_pic_directory_path,
-        default=DEFAULT_PROFILE_PIC_PATH,
+        default=str(DEFAULT_PROFILE_PIC_PATH),
         null=False,
         blank=False,
         validators=[FileSizeValidator],
