@@ -23,13 +23,6 @@ class AccountType(Enum):
     TUTOR = auto()
 
 
-class AccountType(Enum):
-    """Simple enum class for specifying account's type."""
-
-    STUDENT = auto()
-    TUTOR = auto()
-
-
 class LoginForm(AuthenticationForm):
     """Subclass already implented login form to change the appearance."""
 
