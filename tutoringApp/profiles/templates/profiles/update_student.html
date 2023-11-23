@@ -264,6 +264,10 @@
                                     <div class="profile-education-main-school-info-years_of_attendance-top info-top">
                                         Years of attendance
                                     </div>
+                                    <div class="profile-education-main-school-info-years_of_attendance-top form_error">
+                                        {% education_dates_error_renderer education_formset_errors 0 as dates_error %}
+                                        {{dates_error}}
+                                    </div>
                                     <div class="profile-education-main-school-info-years_of_attendance-bottom adjacent-container">
                                         <div class="profile-education-main-school-info-years_of_attendance-bottom-start stack-container_smaller">
                                             <div class="profile-education-main-school-info-years_of_attendance-bottom-start-top info-top">
