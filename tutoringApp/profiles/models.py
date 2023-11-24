@@ -1,13 +1,14 @@
 from pathlib import Path
 
+from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from simple_history.models import HistoricalRecords
-from django.conf import settings
 
-from profiles.validators import FileSizeValidator
+from profiles.validators import FileSizeValidator, SessionLengthValidator
 
 
 def profile_pic_directory_path(instance: "Profile", filename: str) -> Path:
@@ -43,7 +44,9 @@ class Profile(models.Model):
     Null/None, the profile is a Student's profile.
     """
 
-    DEFAULT_PROFILE_PIC_PATH = Path(settings.BASE_DIR,  "media", "default_profile_pic.jpg")
+    DEFAULT_PROFILE_PIC_PATH = Path(
+        settings.BASE_DIR, "media", "default_profile_pic.jpg"
+    )
 
     user = models.OneToOneField(
         User,
@@ -167,3 +170,83 @@ class Education(models.Model):
     additional_info = models.CharField(
         max_length=250, help_text="GPA, awards, associations etc."
     )
+
+
+class Subject(models.Model):
+    """Model for storing available Subject.
+
+    Tutors will be able to select a subject
+    from the list of instances of this model
+    to configure the services that they are
+    offering. The instances of this model
+    are not to be created by the users,
+    only by the staff.
+    """
+
+    SUBJECT_CATEGORY_CHOICES = [
+        (0, "Languages"),
+        (1, "Science"),
+        (2, "Maths"),
+        (3, "Arts and humanities"),
+        (4, "Social sciences"),
+    ]
+
+    name = models.CharField(max_length=250)
+    category = models.IntegerField(choices=SUBJECT_CATEGORY_CHOICES)
+
+    def __str__(self) -> str:
+        """String representation fo the model's instance."""
+        return self.name
+
+
+class Service(models.Model):
+    """Model for storing info about services offered by a Tutor.
+
+    Tutors are be able to configure "bundles" of sessions
+    in a so called Service. Service stores information
+    about the subject that is taught in the sessions,
+    the number of sessions offered, price per hour as
+    well as the duration of one session.
+    """
+
+    tutor = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    number_of_hours = models.PositiveIntegerField(
+        default=1,
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(100),
+            SessionLengthValidator,
+        ],
+    )
+    price_per_hour = models.PositiveIntegerField()
+    session_length = models.PositiveIntegerField(
+        default=60,
+        help_text="Duration of one tutoring session in minutes",
+        validators=[MinValueValidator(30), MaxValueValidator(180)],
+    )
+    is_default = models.BooleanField(
+        default=True,
+        help_text="Indicate if its a default, 1 session service that is created when adding the subject when the profile is created.",
+    )
+
+    def __str__(self) -> str:
+        """String representation fo the model's instance."""
+        return f"{self.subject.name} taught by {self.tutor.user.username}"
+
+
+class Availability(models.Model):
+    """Store Tutor's availability for given Service.
+
+    Tutors are able to input their availability for
+    different services by simply providing the start
+    time. The end of the given session is calculated
+    based on the session length.
+    """
+
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    start = models.DateTimeField()
+
+    def __str__(self) -> str:
+        """String representation fo the model's instance."""
+        return f"Availability of {self.service.tutor.user.username} for {self.service.subject.name} sessions."
