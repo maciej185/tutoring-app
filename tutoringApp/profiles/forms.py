@@ -100,12 +100,11 @@ class UpdateUserForm(forms.ModelForm):
         fields = ["first_name", "last_name", "email"]
 
 
-class StudentProfileForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = [
             "user",
-            "teaching_since",
             "create_date",
             "timestamp",
             "languages",
@@ -117,6 +116,10 @@ class StudentProfileForm(forms.ModelForm):
                 attrs={"id": "profile-info-main-left_top-picture-input-input"}
             ),
             "date_of_birth": forms.DateInput(
+                format=("%Y-%m-%d"),
+                attrs={"type": "date"},
+            ),
+            "teaching_since": forms.DateInput(
                 format=("%Y-%m-%d"),
                 attrs={"type": "date"},
             ),
