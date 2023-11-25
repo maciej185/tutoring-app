@@ -14,6 +14,11 @@ urlpatterns = [
         name="student_update",
     ),
     path(
+        "tutor/update/<int:pk>",
+        view=views.UpdateTutorProfileView.as_view(),
+        name="tutor_update",
+    ),
+    path(
         "education/delete/<int:pk>",
         view=views.delete_education_object_view,
         name="education_delete",
