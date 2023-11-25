@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 
-from profiles.models import Education, Profile
+from profiles.models import Education, Profile, ProfileLanguageList, Service
 
 
 class AccountType(Enum):
@@ -178,4 +178,79 @@ education_formset = forms.inlineformset_factory(
     can_delete_extra=False,
     min_num=0,
     validate_min=False,
+)
+
+
+class ProfileLanguageListForm(forms.ModelForm):
+    """Form for inputting language information.
+
+    The form is used on the page for creating/updating Tutor's profile
+    to allow them to state which languages they speak and which of them
+    can be used during a tutoring session. The form is rendered in a
+    formset (profile_language_list_formset) and at least one correct form
+    must be submitted.
+    """
+
+    class Meta:
+        model = ProfileLanguageList
+        exclude = ["profile"]
+
+        widgets = {
+            "language": forms.Select(attrs={"class": "options"}),
+            "level": forms.Select(attrs={"class": "options"}),
+        }
+
+
+profile_language_list_formset = forms.inlineformset_factory(
+    parent_model=Profile,
+    model=ProfileLanguageList,
+    form=ProfileLanguageListForm,
+    extra=1,
+    can_delete=True,
+    can_delete_extra=False,
+    min_num=1,
+    validate_min=True,
+    error_messages={"too_few_forms": "You must input at least one language!"},
+)
+
+
+class SubjectForm(forms.ModelForm):
+    """Form for inputting initial about subject taught by a given Tutor.
+
+    The form is used on the page for creating/updating Tutor's profile
+    which means that only basic information (subject, price per hour and
+    session length) are required. The values of other fields are set
+    to model's default values. In particular the 'is_default' field
+    is set to True  which means that a one-time session for given subject is
+    always available. The form is rendered in a formset (subject_formset)
+    and at least one correct form must be submitted.
+    """
+
+    class Meta:
+        model = Service
+        exclude = ["tutor", "number_of_hours", "is_default"]
+
+        SESSION_LENGTH_CHOICES = [
+            (length, str(length)) for length in range(30, 181, 15)
+        ]
+
+        widgets = {
+            "subject": forms.Select(attrs={"class": "options"}),
+            "price_per_hour": forms.NumberInput(attrs={"class": "number-input"}),
+            "session_length": forms.Select(
+                attrs={"class": "options"}, choices=SESSION_LENGTH_CHOICES
+            ),
+        }
+
+
+subject_formset = forms.inlineformset_factory(
+    parent_model=Profile,
+    model=Service,
+    form=SubjectForm,
+    extra=1,
+    can_delete=True,
+    can_delete_extra=False,
+    min_num=1,
+    validate_min=True,
+    error_messages={"too_few_forms": "You must input at least one subject!"},
 )
