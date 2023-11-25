@@ -1,11 +1,10 @@
 """Views for creating and managing profile objects."""
 from logging import getLogger
-from typing import Any, Optional, Union
+from typing import Any, Optional
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
@@ -58,56 +57,12 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
 
         context["user_form"] = self._get_bound_user_update_form()
 
-        context["is_student"] = self._check_if_user_is_student()
-
         return context
 
     def get_success_url(self) -> str:
         """Redirect the user back to their profile."""
         self._update_profile_pic_url()
         return reverse("home:home")
-
-    def get_template_names(self) -> list[str]:
-        return (
-            ["profiles/update_student.html"]
-            if self._check_if_user_is_student()
-            else ["profiles/update_tutor.html"]
-        )
-
-    def form_valid(
-        self, form: BaseModelForm
-    ) -> Union[HttpResponse, HttpResponseRedirect]:
-        """Check valididty of the main form and additional formsets.
-
-        The method checks if the main form and
-        any other form rendered on the page is valid.
-        If so, the user gets redirected further to the page
-        whos URL is returned by the self.get_success_url method.
-        In any other case the user is redirected back to the
-        profile update page and the error messages are getting
-        displayed.
-
-        Args:
-            form: An instance of the form class
-                    (the class is specified in the
-                    self.get_form_class method)
-                    with data provided by the user.
-        Returns:
-            HttpResponse if all forms are valid, HttpResponseRedirect
-            otherwise.
-        """
-        self._save_education_data()
-        self._save_user_data()
-
-        if not self._additional_forms_have_errors():
-            LOGGER.debug(
-                "Profile of user %(username)s with id %(id)s successfuly updated.",
-                {"username": self.request.user.username, "id": self.request.user.id},
-            )
-            return super().form_valid(form)
-        return HttpResponseRedirect(
-            reverse_lazy("profiles:update", kwargs={"pk": self.kwargs["pk"]})
-        )
 
     def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
         """Additional checks to make sure the current user is the profile's owner."""
@@ -204,22 +159,6 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
                 'Error when attempting to remove "profile_setup" key from session: %(error)s'
                 % {"error": e}
             )
-
-    def _check_if_user_is_student(self) -> bool:
-        """Checks is the currently logged in user is a Student.
-
-        The method uses the value of the 'account_type' key in the
-        self.request.session object to determine whether the user is
-        a Student or not.
-
-        Return:
-            Boolean info about whether the user is a Student.
-        """
-        return (
-            True
-            if self.request.session["account_type"] == AccountType.STUDENT.value
-            else False
-        )
 
     def _get_bound_user_update_form(self) -> UpdateUserForm:
         """Return a form for updating User object's info.

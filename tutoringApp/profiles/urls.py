@@ -8,6 +8,14 @@ urlpatterns = [
     path("logout/", view=views.logout_view, name="logout"),
     path("register/", view=views.RegisterView.as_view(), name="register"),
     path("create/<int:user_id>", view=views.create_profile_view, name="create"),
-    path("update/<int:pk>", view=views.UpdateProfileView.as_view(), name="update"),
-    path("education/delete/<int:pk>", view=views.delete_education_object_view, name="education_delete")
+    path(
+        "student/update/<int:pk>",
+        view=views.UpdateStudentProfileView.as_view(),
+        name="student_update",
+    ),
+    path(
+        "education/delete/<int:pk>",
+        view=views.delete_education_object_view,
+        name="education_delete",
+    ),
 ]
