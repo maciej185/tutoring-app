@@ -36,5 +36,3 @@ class ProfilePicInputHandler {
 
 
 }
-
-const profile_pic_input_handler = new ProfilePicInputHandler()
