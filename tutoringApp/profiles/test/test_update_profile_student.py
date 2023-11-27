@@ -65,7 +65,7 @@ class TestUpdateProfileStudent(TestCaseUserUtils):
         self._register_user("student1")
         user = User.objects.get(pk=1)
         res = self.client.post(
-            reverse("profiles:update", kwargs={"pk": 1}),
+            reverse("profiles:student_update", kwargs={"pk": 1}),
             {
                 "first_name": user.first_name,
                 "last_name": user.last_name,
@@ -84,7 +84,7 @@ class TestUpdateProfileStudent(TestCaseUserUtils):
         self._register_user("student1")
         user = User.objects.get(pk=1)
         res = self.client.post(
-            reverse("profiles:update", kwargs={"pk": 1}),
+            reverse("profiles:student_update", kwargs={"pk": 1}),
             {
                 "first_name": user.first_name,
                 "last_name": user.last_name,
@@ -114,7 +114,7 @@ class TestUpdateProfileStudent(TestCaseUserUtils):
             "rb",
         ) as f:
             res = self.client.post(
-                reverse("profiles:update", kwargs={"pk": 1}),
+                reverse("profiles:student_update", kwargs={"pk": 1}),
                 {
                     "first_name": user.first_name,
                     "last_name": user.last_name,
@@ -143,7 +143,7 @@ class TestUpdateProfileStudent(TestCaseUserUtils):
     def test_correct_update_form_user_object_updated(self):
         self._register_user("student1")
         res = self.client.post(
-            reverse("profiles:update", kwargs={"pk": 1}),
+            reverse("profiles:student_update", kwargs={"pk": 1}),
             {
                 "first_name": "First name updated",
                 "last_name": "Last name updated",
@@ -169,7 +169,7 @@ class TestUpdateProfileStudent(TestCaseUserUtils):
         self._register_user("student1")
         self._create_school_objects()
         res = self.client.post(
-            reverse("profiles:update", kwargs={"pk": 1}),
+            reverse("profiles:student_update", kwargs={"pk": 1}),
             {
                 "first_name": "First name updated",
                 "last_name": "Last name updated",
@@ -202,7 +202,7 @@ class TestUpdateProfileStudent(TestCaseUserUtils):
         self._register_user("student1")
         self._create_school_objects()
         res = self.client.post(
-            reverse("profiles:update", kwargs={"pk": 1}),
+            reverse("profiles:student_update", kwargs={"pk": 1}),
             {
                 "first_name": "First name updated",
                 "last_name": "Last name updated",
@@ -252,7 +252,7 @@ class TestUpdateProfileStudent(TestCaseUserUtils):
 
         education2 = Education.objects.get(pk=2)
         res = self.client.post(
-            reverse("profiles:update", kwargs={"pk": 1}),
+            reverse("profiles:student_update", kwargs={"pk": 1}),
             {
                 "first_name": "First name updated",
                 "last_name": "Last name updated",
@@ -368,7 +368,9 @@ class TestUpdateProfileStudent(TestCaseUserUtils):
         self._register_user("student1")
         user = User.objects.get(pk=1)
         res = self.client.post(
-            reverse("profiles:update", kwargs={"pk": 1}), data=data(user), follow=True
+            reverse("profiles:student_update", kwargs={"pk": 1}),
+            data=data(user),
+            follow=True,
         )
         self.assertContains(res, error_message)
 
@@ -388,7 +390,7 @@ class TestUpdateProfileStudent(TestCaseUserUtils):
             "rb",
         ) as f:
             res = self.client.post(
-                reverse("profiles:update", kwargs={"pk": 1}),
+                reverse("profiles:student_update", kwargs={"pk": 1}),
                 data={
                     "profile_pic": f,
                     "first_name": user.first_name,
@@ -543,7 +545,9 @@ class TestUpdateProfileStudent(TestCaseUserUtils):
         self._create_school_objects()
         user = User.objects.get(pk=1)
         res = self.client.post(
-            reverse("profiles:update", kwargs={"pk": 1}), data=data(user), follow=True
+            reverse("profiles:student_update", kwargs={"pk": 1}),
+            data=data(user),
+            follow=True,
         )
 
         self.assertQuerySetEqual(Education.objects.all(), [])
@@ -555,12 +559,12 @@ class TestUpdateProfileStudent(TestCaseUserUtils):
         self._register_user("student1")
         self._register_user("student2")
         self.client.login(username="student2", password="haslo123")
-        res = self.client.get(reverse("profiles:update", kwargs={"pk": 1}))
+        res = self.client.get(reverse("profiles:student_update", kwargs={"pk": 1}))
 
         self.assertEqual(res.status_code, 403)
         self.assertContains(
             res,
             "You are not allowe to edit other user's profile!",
             status_code=403,
-            html=True
+            html=True,
         )

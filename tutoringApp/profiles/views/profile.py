@@ -33,7 +33,14 @@ def create_profile_view(request: HttpRequest, user_id: int) -> HttpResponseRedir
     )
     request.session["profile_setup"] = True
     request.session["profile_pic_url"] = profile.profile_pic.url
-    return HttpResponseRedirect(reverse("profiles:update", kwargs={"pk": user_id}))
+
+    return (
+        HttpResponseRedirect(reverse("profiles:student_update", kwargs={"pk": user_id}))
+        if request.session["account_type"] == AccountType.STUDENT.value
+        else HttpResponseRedirect(
+            reverse("profiles:student_update", kwargs={"pk": user_id})
+        )
+    )
 
 
 class UpdateProfileView(UpdateView, LoginRequiredMixin):
