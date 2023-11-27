@@ -1,2 +1,3 @@
 const education_formset_handler = new FormsetHandler("profile-education-main-management_form", "profile-education-main", "profile-education-main-school_empty-0", "profile-education-main-school_empty-delete-0", "profile-education-main-add", "profile-education-main-school", "profile-education-main-school-delete")
+const subject_formset_handler = new FormsetHandler("profile-subjects-main-management_form", "profile-subjects-main", "profile-subjects-main-subject_empty-0", "profile-subjects-main-subject_empty-delete-0", "profile-subjects-main-add", "profile-subjects-main-subject", "profile-subjects-main-subject-delete")
 const profile_pic_input_handler = new ProfilePicInputHandler()
