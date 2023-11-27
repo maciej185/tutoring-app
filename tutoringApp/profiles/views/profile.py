@@ -11,12 +11,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import UpdateView
 
-from profiles.forms import (
-    AccountType,
-    StudentProfileForm,
-    UpdateUserForm,
-    education_formset,
-)
+from profiles.forms import AccountType, ProfileForm, UpdateUserForm, education_formset
 from profiles.models import Education, Profile
 
 LOGGER = getLogger(__name__)
@@ -46,6 +41,7 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
     """View for updating the profile's information."""
 
     model = Profile
+    form_class = ProfileForm
     education_formset_errors = False
     user_form_errros = False
 
@@ -65,10 +61,6 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
         context["is_student"] = self._check_if_user_is_student()
 
         return context
-
-    def get_form_class(self) -> type[BaseModelForm]:
-        """Return profile Form corresponding to the account type."""
-        return StudentProfileForm if self._check_if_user_is_student() else None
 
     def get_success_url(self) -> str:
         """Redirect the user back to their profile."""
