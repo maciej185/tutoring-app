@@ -38,7 +38,7 @@ def create_profile_view(request: HttpRequest, user_id: int) -> HttpResponseRedir
         HttpResponseRedirect(reverse("profiles:student_update", kwargs={"pk": user_id}))
         if request.session["account_type"] == AccountType.STUDENT.value
         else HttpResponseRedirect(
-            reverse("profiles:student_update", kwargs={"pk": user_id})
+            reverse("profiles:tutor_update", kwargs={"pk": user_id})
         )
     )
 
