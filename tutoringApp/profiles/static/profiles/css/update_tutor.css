@@ -1,0 +1,104 @@
+main {
+    width: 100%
+}
+
+div.profile-info-main-left_top {
+    margin-bottom: 1rem;
+    position: relative;
+    aspect-ratio: 1 / 1;
+}
+
+div.profile-info-main-left_top-picture {
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--gray-bluegreen-medium);
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.profile-info-main-left_top-picture > img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+div.profile-info-main-left_top-picture-input {
+    display: none;
+}
+
+label.profile-info-main-left_top-picture-input_label {
+    display: none;
+}
+
+div.profile-info-main-left_top-delete {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+}
+
+div.profile-info-main-right-info > div {
+    color: var(--gray-bluegreen-extra-dark);
+}
+
+div.profile-info-main-right-info-top {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+div.profile-languages-main-language {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.profile-education-main-school {
+    align-items: center;
+    justify-content: space-around;
+}
+
+div.profile-education-main-school-info {
+    overflow: scroll;
+}
+
+div.profile-subjects-main-subject {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.profile-subjects-main-subject-info {
+    flex: 1;
+}
+
+div.form_error {
+    color: var(--gray-red-dark);
+    font-size: 0.85rem;
+}
+
+div.profile-submit {
+    display: flex;
+    justify-content: center;
+}
+
+div.formset-field-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div.management_form {
+    display: none;
+}
+
+@media(min-width: 800px) {
+    main {
+        width: 70%;
+    }
+
+    div.profile-info-main > div {
+        flex: 1
+    }
+}

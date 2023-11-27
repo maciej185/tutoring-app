@@ -2,3 +2,555 @@
 
 {% load widget_tweaks %}
 {% load profiles_extras %}
+
+{% block styles %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'profiles/css/update_tutor.css' %}"> 
+{% endblock %}
+
+{% block script %}
+{% load static %}
+    <script defer src="{% static 'profiles/js/ProfilePicInputHandler.js' %}"></script>
+    <script defer src="{% static 'profiles/js/EducationFormsetHandler.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="profile stack-container">
+        <div class="profile-info box">
+            <div class="profile-info-header box-header"> 
+                General
+            </div>
+            <div class="profile-info-main box-main_padded stack-adjecent-container ">
+                <div class="profile-info-main-left_top">
+                   
+                    <div class="profile-info-main-left_top-picture">
+                        {% if form.profile_pic.errors %}
+                            <div class="profile-info-main-left_top-picture-errors stack-container_smaller">
+                                {% for error in form.profile_pic.errors %}
+                                    <div class="profile-info-main-left_top-picture-errors-error form_error">
+                                        {{error}}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <img class="profile-info-main-left_top-picture-img" src="" style="display: none;">
+                        {% else %}
+                            <img class="profile-info-main-left_top-picture-img" src="{{ object.profile_pic.url }}">
+                        {% endif %}
+                        <div class="profile-info-main-left_top-picture-input">
+                            {{ form.profile_pic}}
+                        </div>
+                        <label for="profile-info-main-left_top-picture-input-input" class="profile-info-main-left_top-picture-input_label">
+                            <div class="profile-info-main-left_top-add_button add_button">
+                                <div class="profile-info-main-left_top-add_button-icon add_button-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="profile-info-main-left_top-delete icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="profile-info-main-right_bottom">
+                    <div class="profile-info-main-right_bottom-info stack-container_smaller">
+                        <div class="profile-info-main-right_bottom-info-top info-top">
+                            Name
+                        </div>
+                        <div class="profile-info-main-right_bottom-info-bottom-errors form_error">
+                            {% form_error_renderer user_form_errors user_form.first_name.name %}
+                        </div>
+                        <div class="profile-info-main-right_bottom-info-bottom">
+                            {{ user_form.first_name|add_class:'text-input'  }}
+                        </div>
+                    </div>
+
+                    <div class="profile-info-main-right_bottom-info stack-container_smaller">
+                        <div class="profile-info-main-right_bottom-info-top info-top">
+                            Last name 
+                        </div>
+                        <div class="profile-info-main-right_bottom-info-bottom-errors form_error">
+                            {% form_error_renderer user_form_errors user_form.last_name.name %}
+                        </div>
+                        <div class="profile-info-main-right_bottom-info-bottom">
+                            {{ user_form.last_name|add_class:'text-input'  }}
+                        </div>
+                    </div>
+
+                    <div class="profile-info-main-right_bottom-info stack-container_smaller">
+                        <div class="profile-info-main-right_bottom-info-top info-top">
+                            City 
+                        </div>
+                        <div class="profile-info-main-right_bottom-info-bottom-errors stack-container_smaller">
+                            {% for error in form.city.errors %}
+                                <div class="profile-info-main-right_bottom-info-bottom-errors-error form_error">
+                                    {{error}}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="profile-info-main-right_bottom-info-bottom">
+                            {{ form.city|add_class:'text-input' }}
+                        </div>
+                    </div>
+
+                    <div class="profile-info-main-right_bottom-info stack-container_smaller">
+                        <div class="profile-info-main-right_bottom-info-top info-top">
+                            Email
+                        </div>
+                        <div class="profile-info-main-right_bottom-info-bottom-errors form_error">
+                            {% form_error_renderer user_form_errors user_form.email.name %}
+                        </div>
+                        <div class="profile-info-main-right_bottom-info-bottom">
+                            {{ user_form.email|add_class:'text-input' }}
+                        </div>
+                    </div>
+
+                    <div class="profile-info-main-right_bottom-info stack-container_smaller">
+                        <div class="profile-info-main-right_bottom-info-top info-top">
+                            Date of birth
+                        </div>
+                        <div class="profile-info-main-right_bottom-info-bottom-errors stack-container_smaller">
+                            {% for error in form.date_of_birth.errors %}
+                                <div class="profile-info-main-right_bottom-info-bottom-errors-error form_error">
+                                    {{error}}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="profile-info-main-right_bottom-info-bottom">
+                            {{ form.date_of_birth|add_class:'datetime-input' }}
+                        </div>
+                    </div>
+
+                    <div class="profile-info-main-right_bottom-info stack-container_smaller">
+                        <div class="profile-info-main-right_bottom-info-top info-top">
+                            Teaching since
+                        </div>
+                        <div class="profile-info-main-right_bottom-info-bottom-errors stack-container_smaller">
+                            {% for error in form.teaching_since.errors %}
+                                <div class="profile-info-main-right_bottom-info-bottom-errors-error form_error">
+                                    {{error}}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="profile-info-main-right_bottom-info-bottom">
+                            {{ form.teaching_since|add_class:'datetime-input' }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-description box">
+            <div class="profile-description-header box-header">
+                Description
+            </div>
+            <div class="profile-info-main-right_bottom-info-bottom-errors stack-container_smaller">
+                {% for error in form.description.errors %}
+                    <div class="profile-info-main-right_bottom-info-bottom-errors-error form_error">
+                        {{error}}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="profile-description-text box-main_padded">
+                {{ form.description|add_class:'textarea' }}
+            </div>
+        </div>
+
+        <div class="profile-languages box">
+            <div class="profile-languages-header box-header">
+                Languages
+            </div>
+            <div class="profile-languages-main box-main_padded stack-container_small">
+                <div class="profile-languages-main-management_form management_form">
+                    {{profile_language_list_formset.management_form}}
+                </div>
+                {% for profile_language_list_form in profile_language_list_formset%}
+                    {% if profile_language_list_form.instance.pk %}
+                        <div class="profile-languages-main-language box box-main_padded">
+                            {% for hidden_field in profile_language_list_form.hidden_fields %}
+                                {{ hidden_field }}
+                            {% endfor %}
+                            <div class="profile-languages-main-language-info stack-adjecent-container">
+                                <div class="profile-languages-main-language-info-language stack-container_smaller formset-field-div">
+                                    <div class="profile-languages-main-language-info-language-top info-top">
+                                        Language
+                                    </div>
+                                    <div class="profile-languages-main-language-info-language-bottom-errors form_error">
+                                        {% formset_error_renderer profile_language_formset_errors forloop.counter0 profile_language_list_form.language.name %}
+                                    </div>
+                                    <div class="profile-languages-main-language-info-language-bottom">
+                                        {{profile_language_list_form.language}}
+                                    </div>
+                                </div>
+
+                                <div class="profile-languages-main-language-info-level stack-container_smaller formset-field-div">
+                                    <div class="profile-languages-main-language-info-level-top info-top">
+                                        Level
+                                    </div>
+                                    <div class="profile-languages-main-language-info-level-bottom-errors form_error">
+                                        {% formset_error_renderer profile_language_formset_errors forloop.counter0 profile_language_list_form.level.name %}
+                                    </div>
+                                    <div class="profile-languages-main-language-info-level-bottom">
+                                        {{ profile_language_list_form.level }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile-languages-main-language-delete icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="profile-languages-main-language box box-main_padded" id="profile-languages-main-language_empty-0">
+                            {% for hidden_field in profile_language_list_form.hidden_fields %}
+                                {{ hidden_field }}
+                            {% endfor %}
+                            <div class="profile-languages-main-language-info stack-adjecent-container">
+                                <div class="profile-languages-main-language-info-language stack-container_smaller formset-field-div">
+                                    <div class="profile-languages-main-language-info-language-top info-top">
+                                        Language
+                                    </div>
+                                    <div class="profile-languages-main-language-info-language-bottom-errors form_error">
+                                        {% formset_error_renderer profile_language_formset_errors forloop.counter0 profile_language_list_form.language.name %}
+                                    </div>
+                                    <div class="profile-languages-main-language-info-language-bottom">
+                                        {{profile_language_list_form.language}}
+                                    </div>
+                                </div>
+
+                                <div class="profile-languages-main-language-info-level stack-container_smaller formset-field-div">
+                                    <div class="profile-languages-main-language-info-level-top info-top">
+                                        Level
+                                    </div>
+                                    <div class="profile-languages-main-language-info-level-bottom-errors form_error">
+                                        {% formset_error_renderer profile_language_formset_errors forloop.counter0 profile_language_list_form.level.name %}
+                                    </div>
+                                    <div class="profile-languages-main-language-info-level-bottom">
+                                        {{ profile_language_list_form.level }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile-languages-main-language-delete icon_green" id="profile-languages-main-language_empty-delete-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <div class="profile-languages-main-add add_button">
+                    <div class="profile-languages-main-add-icon add_button-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-subjects box">
+            <div class="profile-subjects-header box-header">
+                Subjects
+            </div>
+            <div class="profile-subjects-main box-main_padded">
+                <div class="profile-subjects-main-management_form management_form">
+                    {{ subject_formset.management_form }}
+                </div>
+                {% for subject_form in subject_formset %}
+                    {% if subject_form.instance.pk %}
+                        <div class="profile-subjects-main-subject box box-main_padded adjacent-container">
+                            {% for hidden_field in subject_form.hidden_fields %}
+                                {{ hidden_field }}
+                            {% endfor %}
+                            <div class="profile-subjects-main-subject-info stack-adjecent-container">
+                                <div class="profile-subjects-main-subject-info-subject stack-container_smaller formset-field-div">
+                                    <div class="profile-subjects-main-subject-info-subject-top info-top">
+                                        Subject
+                                    </div>
+                                    <div class="profile-subjects-main-subject-info-subject-bottom-errors form_error">
+                                        {% formset_error_renderer subject_formset_errors forloop.counter0 subject_form.subject.name %}
+                                    </div>
+                                    <div class="profile-subjects-main-subject-info-subject-bottom">
+                                        {{ subject_form.subject }}
+                                    </div>
+                                </div>
+
+                                <div class="profile-subjects-main-subject-info-duration stack-container_smaller formset-field-div">
+                                    <div class="profile-subjects-main-subject-info-duration-top info-top">
+                                        Duration
+                                    </div>
+                                    <div class="profile-subjects-main-subject-info-duration-bottom-errors form_error">
+                                        {% formset_error_renderer subject_formset_errors forloop.counter0 subject_form.session_length.name %}
+                                    </div>
+                                    <div class="profile-subjects-main-subject-info-duration-bottom">
+                                        {{ subject_form.session_length }}
+                                    </div>
+                                </div>
+
+                                <div class="profile-subjects-main-subject-info-price stack-container_smaller formset-field-div">
+                                    <div class="profile-subjects-main-subject-info-price-top info-top">
+                                        Price per hour
+                                    </div>
+                                    <div class="profile-subjects-main-subject-info-price-bottom-errors form_error">
+                                        {% formset_error_renderer subject_formset_errors forloop.counter0 subject_form.price_per_hour.name %}
+                                    </div>
+                                    <div class="profile-subjects-main-subject-info-price-bottom">
+                                        {{ subject_form.price_per_hour }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile-subjects-main-subject-delete icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="profile-subjects-main-subject box box-main_padded adjacent-container" id="profile-subjects-main-subject_empty-0">
+                            <div class="profile-subjects-main-subject-info stack-adjecent-container">
+                                {% for hidden_field in subject_form.hidden_fields %}
+                                    {{ hidden_field }}
+                                {% endfor %}
+                                <div class="profile-subjects-main-subject-info-subject stack-container_smaller formset-field-div">
+                                    <div class="profile-subjects-main-subject-info-subject-top info-top">
+                                        Subject
+                                    </div>
+                                    <div class="profile-subjects-main-subject-info-subject-bottom-errors form_error">
+                                        {% formset_error_renderer subject_formset_errors forloop.counter0 subject_form.subject.name %}
+                                    </div>
+                                    <div class="profile-subjects-main-subject-info-subject-bottom">
+                                        {{ subject_form.subject }}
+                                    </div>
+                                </div>
+
+                                <div class="profile-subjects-main-subject-info-duration stack-container_smaller formset-field-div">
+                                    <div class="profile-subjects-main-subject-info-duration-top info-top">
+                                        Duration
+                                    </div>
+                                    <div class="profile-subjects-main-subject-info-duration-bottom-errors form_error">
+                                        {% formset_error_renderer subject_formset_errors forloop.counter0 subject_form.session_length.name %}
+                                    </div>
+                                    <div class="profile-subjects-main-subject-info-duration-bottom">
+                                        {{ subject_form.session_length }}
+                                    </div>
+                                </div>
+
+                                <div class="profile-subjects-main-subject-info-price stack-container_smaller formset-field-div">
+                                    <div class="profile-subjects-main-subject-info-price-top info-top">
+                                        Price per hour
+                                    </div>
+                                    <div class="profile-subjects-main-subject-info-price-bottom-errors form_error">
+                                        {% formset_error_renderer subject_formset_errors forloop.counter0 subject_form.price_per_hour.name %}
+                                    </div>
+                                    <div class="profile-subjects-main-subject-info-price-bottom">
+                                        {{ subject_form.price_per_hour }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile-subjects-main-subject-delete icon_green" id="profile-subjects-main-subject_empty-delete-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <div class="profile-subjects-main-add add_button">
+                    <div class="profile-subjects-main-add-icon add_button-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-education box">
+            <div class="profile-education-header box-header">
+                Education
+            </div>
+            <div class="profile-education-main box-main_padded">
+                <div class="profile-education-main-management_form management_form">
+                    {{education_formset.management_form}}
+                </div>
+                {% for education_form in education_formset %}
+                    {% if education_form.instance.pk %}
+                        <div class="profile-education-main-school box box-main_padded adjacent-container">
+                            {% for hidden_field in education_form.hidden_fields %}
+                                {{ hidden_field }}
+                            {% endfor %}
+                            <div class="profile-education-main-school-info stack-container_small">
+                                <div class="profile-education-main-school-info-name stack-container_small">
+                                    <div class="profile-education-main-school-info-name-top info-top">
+                                        School name
+                                    </div>
+                                    <div class="profile-education-main-school-info-name-bottom-errors form_error">
+                                        {% formset_error_renderer education_formset_errors forloop.counter0 education_form.school.name %}
+                                    </div>
+                                    <div class="profile-education-main-school-info-name-bottom">
+                                        {{ education_form.school|add_class:'options' }}
+                                    </div>
+                                </div>
+                                <div class="profile-education-main-school-info-degree stack-container_small">
+                                    <div class="profile-education-main-school-info-degree-top info-top">
+                                        Degree
+                                    </div>
+                                    <div class="profile-education-main-school-info-additional-bottom-errors form_error">
+                                        {% formset_error_renderer education_formset_errors forloop.counter0 education_form.degree.name %}
+                                    </div>
+                                    <div class="profile-education-main-school-info-additional-bottom">
+                                        {{ education_form.degree|add_class:'text-input'}}
+                                    </div>
+                                </div>
+                                <div class="profile-education-main-school-info-years_of_attendance stack-container_small">
+                                    <div class="profile-education-main-school-info-years_of_attendance-top info-top">
+                                        Years of attendance
+                                    </div>
+                                    <div class="profile-education-main-school-info-years_of_attendance-top form_error">
+                                        {% education_dates_error_renderer education_formset_errors forloop.counter0 as dates_error %}
+                                        {{dates_error}}
+                                    </div>
+                                    <div class="profile-education-main-school-info-years_of_attendance-bottom adjacent-container">
+                                        <div class="profile-education-main-school-info-years_of_attendance-bottom-start stack-container_smaller">
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-start-top info-top">
+                                                Start
+                                            </div>
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-start-errors form_error">
+                                                {% if not dates_error %}
+                                                    {% formset_error_renderer education_formset_errors forloop.counter0 education_form.start_date.name %}
+                                                {% endif %}
+                                            </div>
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-start-input">
+                                                {{ education_form.start_date|add_class:'date-input'}}
+                                            </div>
+                                        </div>
+                                        <div class="profile-education-main-school-info-years_of_attendance-bottom-end stack-container_smaller">
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-end-top info-top">
+                                                End
+                                            </div>
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-end-errors form_error">
+                                                {% if not dates_error %}
+                                                    {% formset_error_renderer education_formset_errors forloop.counter0 education_form.end_date.name %}
+                                                {% endif %}    
+                                            </div>
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-end-input">
+                                                {{ education_form.end_date|add_class:'date-input'}}
+                                            </div>    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-education-main-school-info-additional stack-container_small">
+                                    <div class="profile-education-main-school-info-additional-top info-top">
+                                        Additional info
+                                    </div>
+                                    <div class="profile-education-main-school-info-additional-bottom-errors form_error">
+                                        {% formset_error_renderer education_formset_errors forloop.counter0 education_form.additional_info.name %}
+                                    </div>
+                                    <div class="profile-education-main-school-info-additional-bottom">
+                                        {{ education_form.additional_info|add_class:'text-input'}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-education-main-school-delete icon_green link-container">
+                                <a href="{% url 'profiles:education_delete' education_form.instance.pk %}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="profile-education-main-school box box-main_padded adjacent-container" id="profile-education-main-school_empty-0">
+                            {% for hidden_field in education_form.hidden_fields %}
+                                {{ hidden_field }}
+                            {% endfor %}
+                            <div class="profile-education-main-school-info stack-container_small">
+                                <div class="profile-education-main-school-info-name stack-container_small">
+                                    <div class="profile-education-main-school-info-name-top info-top">
+                                        School name
+                                    </div>
+                                    <div class="profile-education-main-school-info-name-bottom">
+                                        {{ education_form.school|add_class:'options' }}
+                                    </div>
+                                </div>
+                                <div class="profile-education-main-school-info-degree stack-container_small">
+                                    <div class="profile-education-main-school-info-degree-top info-top">
+                                        Degree
+                                    </div>
+                                    <div class="profile-education-main-school-info-additional-bottom">
+                                        {{ education_form.degree|add_class:'text-input'}}
+                                    </div>
+                                </div>
+                                <div class="profile-education-main-school-info-years_of_attendance stack-container_small">
+                                    <div class="profile-education-main-school-info-years_of_attendance-top info-top">
+                                        Years of attendance
+                                    </div>
+                                    <div class="profile-education-main-school-info-years_of_attendance-top form_error">
+                                        {% education_dates_error_renderer education_formset_errors 0 as dates_error %}
+                                        {{dates_error}}
+                                    </div>
+                                    <div class="profile-education-main-school-info-years_of_attendance-bottom adjacent-container">
+                                        <div class="profile-education-main-school-info-years_of_attendance-bottom-start stack-container_smaller">
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-start-top info-top">
+                                                Start
+                                            </div>
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-start-input">
+                                                {{ education_form.start_date|add_class:'date-input'}}
+                                            </div>
+                                        </div>
+                                        <div class="profile-education-main-school-info-years_of_attendance-bottom-end stack-container_smaller">
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-end-top info-top">
+                                                End
+                                            </div>
+                                            <div class="profile-education-main-school-info-years_of_attendance-bottom-end-input">
+                                                {{ education_form.end_date|add_class:'date-input'}}
+                                            </div>    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-education-main-school-info-additional stack-container_small">
+                                    <div class="profile-education-main-school-info-additional-top info-top">
+                                        Additional info
+                                    </div>
+                                    <div class="profile-education-main-school-info-additional-bottom">
+                                        {{ education_form.additional_info|add_class:'text-input'}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-education-main-school-delete icon_green link-container" id="profile-education-main-school_empty-delete-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                <div class="profile-education-main-add add_button">
+                    <div class="profile-education-main-add-icon add_button-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-submit">
+            <button type="submit" class="button_fill_green">Submit</button>
+        </div>
+
+    </div>
+</form>
+{% endblock %}
