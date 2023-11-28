@@ -72,6 +72,20 @@ div.profile-education-main-school-info {
     overflow: scroll;
 }
 
+div.profile-education-main-school-delete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.profile-education-main-school-delete-top {
+    color: var(--gray-red-dark)
+}
+
+div.profile-education-main-school-delete-input > input {
+    accent-color: var(--gray-red-dark)
+}
+
 div.form_error {
     color: var(--gray-red-dark);
     font-size: 0.85rem;
