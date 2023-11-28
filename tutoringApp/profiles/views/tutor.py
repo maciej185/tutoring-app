@@ -1,8 +1,8 @@
 from logging import getLogger
-from typing import Optional, Union
+from typing import Any, Optional, Union
 
 from django.forms.models import BaseModelForm
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 
 from profiles.forms import profile_language_list_formset, subject_formset
@@ -186,3 +186,14 @@ class UpdateTutorProfileView(UpdateProfileView):
             )
             del self.request.session["profile_language_formset_errors"]
             return profile_language_formset_errors
+
+    def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        """Ensure correct update page is displayed according to Profile's type."""
+        requested_profile = self.model.objects.get(pk=self.kwargs["pk"])
+        if requested_profile.is_student():
+            return HttpResponseRedirect(
+                reverse_lazy(
+                    "profiles:student_update", kwargs={"pk": self.kwargs["pk"]}
+                )
+            )
+        return super().get(request, *args, **kwargs)
