@@ -1,8 +1,8 @@
 from logging import getLogger
-from typing import Union
+from typing import Any, Union
 
 from django.forms.models import BaseModelForm
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 
 from .profile import UpdateProfileView
@@ -49,3 +49,12 @@ class UpdateStudentProfileView(UpdateProfileView):
         return HttpResponseRedirect(
             reverse_lazy("profiles:student_update", kwargs={"pk": self.kwargs["pk"]})
         )
+
+    def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        """Ensure correct update page is displayed according to Profile's type."""
+        requested_profile = self.model.objects.get(pk=self.kwargs["pk"])
+        if not requested_profile.is_student():
+            return HttpResponseRedirect(
+                reverse_lazy("profiles:tutor_update", kwargs={"pk": self.kwargs["pk"]})
+            )
+        return super().get(request, *args, **kwargs)
