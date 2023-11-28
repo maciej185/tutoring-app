@@ -180,3 +180,5 @@ LOGGING = {
         }
     },
 }
+
+CURRENCY = "$"

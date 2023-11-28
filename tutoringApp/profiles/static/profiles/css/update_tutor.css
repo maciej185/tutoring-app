@@ -87,6 +87,10 @@ div.profile-subjects-main-subject-info {
     flex: 1;
 }
 
+div.profile-subjects-main-subject-info-price-bottom {
+    color: var(--gray-bluegreen-extra-dark)
+}
+
 div.form_error {
     color: var(--gray-red-dark);
     font-size: 0.85rem;
