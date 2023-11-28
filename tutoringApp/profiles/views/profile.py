@@ -10,8 +10,9 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import UpdateView
 
-from profiles.forms import AccountType, ProfileForm, UpdateUserForm, education_formset
-from profiles.models import Education, Profile
+from profiles.forms import (AccountType, ProfileForm, UpdateUserForm,
+                            education_formset)
+from profiles.models import Profile
 
 LOGGER = getLogger(__name__)
 
@@ -226,30 +227,3 @@ class UpdateProfileView(UpdateView, LoginRequiredMixin):
         URL stored in the session info needs updating as well.
         """
         self.request.session["profile_pic_url"] = self.get_object().profile_pic.url
-
-
-@login_required
-def delete_education_object_view(_request, pk: int) -> HttpResponseRedirect:
-    """Delete Education object and redirect back to profile update page.
-
-    The method deletes the instance of the Education model who's
-    PK has been passed in the URL. The user is then redirected back
-    to profile update page.
-
-    Args:
-        request: An instance of the HttpRequest class, representing
-                the actual HTTP request being sent to the server.
-        pk: PK of the Education object that is meant to
-                        be deleted.
-    Returns:
-        An instance of the HttpResponseRedirect class, redirecting the
-        user back to the profile update page.
-    """
-    education = get_object_or_404(Education, pk=pk)
-    education_id = education.pk
-    profile = education.profile
-    education.delete()
-    LOGGER.debug(
-        "Education object with id %(id)s successfuly deleted." % {"id": education_id}
-    )
-    return HttpResponseRedirect(reverse("profiles:update", kwargs={"pk": profile.pk}))
