@@ -1,6 +1,7 @@
 from logging import getLogger
 from typing import Any, Optional, Union
 
+from django.conf import settings
 from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -67,6 +68,8 @@ class UpdateTutorProfileView(UpdateProfileView):
             "profile_language_formset_errors"
         ] = self._check_for_profile_language_formset_error()
         context["subject_formset_errors"] = self._check_for_subject_formset_error()
+
+        context["currency"] = settings.CURRENCY
 
         return context
 
