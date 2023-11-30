@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
+from django.utils.timezone import now
 from django.views.generic.edit import UpdateView
 
 from profiles.forms import (AccountType, ProfileForm, UpdateUserForm,
@@ -27,6 +28,9 @@ def create_profile_view(request: HttpRequest, user_id: int) -> HttpResponseRedir
     """
     user = get_object_or_404(User, pk=user_id)
     profile = Profile(user=user)
+    is_student = request.session["account_type"] == AccountType.STUDENT.value
+    if not is_student:
+        profile.teaching_since = now()
     profile.save()
     LOGGER.debug(
         "Profile for %(username)s with id %(id)s created."
@@ -37,7 +41,7 @@ def create_profile_view(request: HttpRequest, user_id: int) -> HttpResponseRedir
 
     return (
         HttpResponseRedirect(reverse("profiles:student_update", kwargs={"pk": user_id}))
-        if request.session["account_type"] == AccountType.STUDENT.value
+        if is_student
         else HttpResponseRedirect(
             reverse("profiles:tutor_update", kwargs={"pk": user_id})
         )
