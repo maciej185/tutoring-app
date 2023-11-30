@@ -36,6 +36,30 @@ INCORRECT_REGISTRATION_DATA = {
                     "account_type": AccountType.STUDENT.value,
                 },
             },
+            {
+                "follow": True,
+                "data": {
+                    "username": "username",
+                    "first_name": "First name",
+                    "last_name": "Last name",
+                    "email": "email@mail.com",
+                    "password1": "e573MrIR8XfOXma",
+                    "password2": "e573MrIR8XfOXma",
+                    "account_type": AccountType.TUTOR.value,
+                },
+            },
+            {
+                "follow": False,
+                "data": {
+                    "username": "username",
+                    "first_name": "First name1",
+                    "last_name": "Last name1",
+                    "email": "email1@mail.com",
+                    "password1": "e573MrIR8XfOXma",
+                    "password2": "e573MrIR8XfOXma",
+                    "account_type": AccountType.TUTOR.value,
+                },
+            },
         ],
     },
     "email_taken": {
@@ -65,6 +89,30 @@ INCORRECT_REGISTRATION_DATA = {
                     "account_type": AccountType.STUDENT.value,
                 },
             },
+            {
+                "follow": True,
+                "data": {
+                    "username": "username",
+                    "first_name": "First name",
+                    "last_name": "Last name",
+                    "email": "email@mail.com",
+                    "password1": "e573MrIR8XfOXma",
+                    "password2": "e573MrIR8XfOXma",
+                    "account_type": AccountType.TUTOR.value,
+                },
+            },
+            {
+                "follow": False,
+                "data": {
+                    "username": "username1",
+                    "first_name": "First name1",
+                    "last_name": "Last name1",
+                    "email": "email@mail.com",
+                    "password1": "e573MrIR8XfOXma",
+                    "password2": "e573MrIR8XfOXma",
+                    "account_type": AccountType.TUTOR.value,
+                },
+            },
         ],
     },
     "no_first_name": {
@@ -81,7 +129,19 @@ INCORRECT_REGISTRATION_DATA = {
                     "password2": "e573MrIR8XfOXma",
                     "account_type": AccountType.STUDENT.value,
                 },
-            }
+            },
+            {
+                "follow": False,
+                "data": {
+                    "username": "username",
+                    "first_name": "",
+                    "last_name": "Last name",
+                    "email": "email@mail.com",
+                    "password1": "e573MrIR8XfOXma",
+                    "password2": "e573MrIR8XfOXma",
+                    "account_type": AccountType.TUTOR.value,
+                },
+            },
         ],
     },
     "no_last_name": {
@@ -98,7 +158,19 @@ INCORRECT_REGISTRATION_DATA = {
                     "password2": "e573MrIR8XfOXma",
                     "account_type": AccountType.STUDENT.value,
                 },
-            }
+            },
+            {
+                "follow": False,
+                "data": {
+                    "username": "username",
+                    "first_name": "First name",
+                    "last_name": "",
+                    "email": "email@mail.com",
+                    "password1": "e573MrIR8XfOXma",
+                    "password2": "e573MrIR8XfOXma",
+                    "account_type": AccountType.TUTOR.value,
+                },
+            },
         ],
     },
     "password_too_common": {
@@ -115,7 +187,19 @@ INCORRECT_REGISTRATION_DATA = {
                     "password2": "password123",
                     "account_type": AccountType.STUDENT.value,
                 },
-            }
+            },
+            {
+                "follow": False,
+                "data": {
+                    "username": "username",
+                    "first_name": "First name",
+                    "last_name": "Last name",
+                    "email": "email@mail.com",
+                    "password1": "password123",
+                    "password2": "password123",
+                    "account_type": AccountType.TUTOR.value,
+                },
+            },
         ],
     },
     "passwords_dont_match": {
@@ -132,15 +216,27 @@ INCORRECT_REGISTRATION_DATA = {
                     "password2": "e573MrIR8",
                     "account_type": AccountType.STUDENT.value,
                 },
-            }
+            },
+            {
+                "follow": False,
+                "data": {
+                    "username": "username",
+                    "first_name": "First name",
+                    "last_name": "Last name",
+                    "email": "email@mail.com",
+                    "password1": "e573MrIR8XfOXma",
+                    "password2": "e573MrIR8",
+                    "account_type": AccountType.TUTOR.value,
+                },
+            },
         ],
     },
 }
 
 
 class TestAuthentication(TestCase):
-    def test_correct_registration_form_user_created(self):
-        print()
+    @parameterized.expand([AccountType.STUDENT.value, AccountType.TUTOR.value])
+    def test_correct_registration_form_user_created(self, account_type):
         res = self.client.post(
             reverse("profiles:register"),
             {
@@ -150,13 +246,27 @@ class TestAuthentication(TestCase):
                 "email": "email@mail.com",
                 "password1": "e573MrIR8XfOXma",
                 "password2": "e573MrIR8XfOXma",
-                "account_type": AccountType.STUDENT.value,
+                "account_type": account_type,
             },
         )
         self.assertEqual(res.status_code, 302)
         User.objects.get(pk=1)
 
-    def test_correct_registration_form_correctly_redirected(self):
+    @parameterized.expand(
+        [
+            (
+                AccountType.STUDENT.value,
+                [("/profiles/create/1", 302), ("/profiles/student/update/1", 302)],
+            ),
+            (
+                AccountType.TUTOR.value,
+                [("/profiles/create/1", 302), ("/profiles/tutor/update/1", 302)],
+            ),
+        ]
+    )
+    def test_correct_registration_form_correctly_redirected(
+        self, account_type, redirect_chain
+    ):
         res = self.client.post(
             reverse("profiles:register"),
             {
@@ -166,13 +276,15 @@ class TestAuthentication(TestCase):
                 "email": "email@mail.com",
                 "password1": "e573MrIR8XfOXma",
                 "password2": "e573MrIR8XfOXma",
-                "account_type": AccountType.STUDENT.value,
+                "account_type": account_type,
             },
+            follow=True,
         )
-        self.assertEqual(res.status_code, 302)
-        User.objects.get(pk=1)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.redirect_chain, redirect_chain)
 
-    def test_correct_registration_form_user_logged_in(self):
+    @parameterized.expand([AccountType.STUDENT.value, AccountType.TUTOR.value])
+    def test_correct_registration_form_user_logged_in(self, account_type):
         self.client.post(
             reverse("profiles:register"),
             {
@@ -182,7 +294,7 @@ class TestAuthentication(TestCase):
                 "email": "email@mail.com",
                 "password1": "e573MrIR8XfOXma",
                 "password2": "e573MrIR8XfOXma",
-                "account_type": AccountType.STUDENT.value,
+                "account_type": account_type,
             },
             follow=True,
         )
@@ -190,7 +302,8 @@ class TestAuthentication(TestCase):
         created_user = User.objects.get(pk=1)
         self.assertEqual(logged_user, created_user)
 
-    def test_correct_registration_form_profile_created(self):
+    @parameterized.expand([AccountType.STUDENT.value, AccountType.TUTOR.value])
+    def test_correct_registration_form_profile_created(self, account_type):
         self.client.post(
             reverse("profiles:register"),
             {
@@ -200,7 +313,7 @@ class TestAuthentication(TestCase):
                 "email": "email@mail.com",
                 "password1": "e573MrIR8XfOXma",
                 "password2": "e573MrIR8XfOXma",
-                "account_type": AccountType.STUDENT.value,
+                "account_type": account_type,
             },
             follow=True,
         )
