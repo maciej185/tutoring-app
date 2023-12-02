@@ -7,6 +7,7 @@ from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 
 from profiles.forms import profile_language_list_formset, subject_formset
+from profiles.models import ProfileLanguageList, Service
 
 from .profile import UpdateProfileView
 
@@ -74,6 +75,13 @@ class UpdateTutorProfileView(UpdateProfileView):
         )
 
         context["currency"] = settings.CURRENCY
+
+        context["subject_objects_in_db"] = len(
+            Service.objects.filter(tutor=self.get_object())
+        )
+        context["profile_language_list_objects_in_db"] = len(
+            ProfileLanguageList.objects.filter(profile=self.get_object())
+        )
 
         return context
 

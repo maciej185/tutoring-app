@@ -216,7 +216,7 @@
                             </div>
                         </div>
                     {% else %}
-                        <div class="profile-languages-main-language box box-main_padded" id="profile-languages-main-language_empty-0">
+                        <div class="profile-languages-main-language box box-main_padded profile-languages-main-language_empty" id="profile-languages-main-language_empty-{{forloop.counter0|subtract:profile_language_list_objects_in_db}}">
                             {% for hidden_field in profile_language_list_form.hidden_fields %}
                                 {{ hidden_field }}
                             {% endfor %}
@@ -246,7 +246,7 @@
                                 </div>
                             </div>
 
-                            <div class="profile-languages-main-language-delete icon_green" id="profile-languages-main-language_empty-delete-0">
+                            <div class="profile-languages-main-language-delete icon_green profile-languages-main-language_empty-delete" id="profile-languages-main-language_empty-delete-{{forloop.counter0|subtract:profile_language_list_objects_in_db}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                                     <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                                 </svg>
@@ -329,7 +329,7 @@
                             </div>
                         </div>
                     {% else %}
-                        <div class="profile-subjects-main-subject box box-main_padded adjacent-container" id="profile-subjects-main-subject_empty-0">
+                        <div class="profile-subjects-main-subject profile-subjects-main-subject_empty box box-main_padded adjacent-container" id="profile-subjects-main-subject_empty-{{forloop.counter0|subtract:subject_objects_in_db}}">
                             <div class="profile-subjects-main-subject-info stack-adjecent-container">
                                 {% for hidden_field in subject_form.hidden_fields %}
                                     {{ hidden_field }}
@@ -371,7 +371,7 @@
                                 </div>
                             </div>
 
-                            <div class="profile-subjects-main-subject-delete icon_green" id="profile-subjects-main-subject_empty-delete-0">
+                            <div class="profile-subjects-main-subject-delete icon_green profile-subjects-main-subject_empty-delete" id="profile-subjects-main-subject_empty-delete-{{forloop.counter0|subtract:subject_objects_in_db}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                                     <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                                 </svg>
@@ -485,7 +485,7 @@
                             </div>
                         </div>
                     {% else %}
-                        <div class="profile-education-main-school box box-main_padded adjacent-container" id="profile-education-main-school_empty-0">
+                        <div class="profile-education-main-school box box-main_padded adjacent-container profile-education-main-school_empty" id="profile-education-main-school_empty-0">
                             {% for hidden_field in education_form.hidden_fields %}
                                 {{ hidden_field }}
                             {% endfor %}
@@ -557,7 +557,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="profile-education-main-school-delete icon_green link-container" id="profile-education-main-school_empty-delete-0">
+                            <div class="profile-education-main-school-delete icon_green link-container profile-education-main-school_empty-delete" id="profile-education-main-school_empty-delete-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                                     <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                                 </svg>
