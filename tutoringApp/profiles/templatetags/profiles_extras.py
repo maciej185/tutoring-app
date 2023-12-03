@@ -122,3 +122,17 @@ def education_dates_error_renderer(
         return ""
     error = find_same_error_in_both_lists(list1=start_date_list, list2=end_date_list)
     return error if error else ""
+
+
+@register.filter(name="subtract")
+def subtract(value: str, arg: str) -> int:
+    """Subtracts arg from value.
+
+    Args:
+        value: The minuend of the operation.
+        arg: The subtrahend of the operation.
+
+    Returns:
+        Result of the subtraction as an integer.
+    """
+    return int(value) - int(arg)

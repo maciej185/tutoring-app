@@ -5,6 +5,8 @@ class FormsetHandler {
         // of the first empty form its zero
         emptyFormContainersID,
         emptyFormDeleteBtnID,
+        emptyFormContainerClassName,
+        emptyFormContainerDeleteBtnClassName,
         addFormBtnsClassName,
         formContainersClassName,
         deleteFormContainerBtnClassName) {
@@ -33,14 +35,15 @@ class FormsetHandler {
         this.totalFormsValue = Number(this.managementFormTotalFormsInput.value)
         this.minNumFormsValue = Number(this.managementFormMinNumFormsInput.value)
 
-        this.formContainers = [this.emptyFormContainer]
-        this.formDeleteBtns = [this.emptyFormDeleteBtn]
+        this.formContainers = Array.from(document.querySelectorAll(`div.${emptyFormContainerClassName}`))
+        this.formDeleteBtns = Array.from(document.querySelectorAll(`div.${emptyFormContainerDeleteBtnClassName}`))
 
-        this.numberOfEmptyForms = 1
+        this.numberOfEmptyForms = this.formContainers.length
+        this.initialNumberOfEmptyForms = this.formContainers.length
 
         const formContainers = document.querySelectorAll(`div.${formContainersClassName}`)
         this.indexOfEmptyForm = formContainers.length
-        this.numberOfNonEmptyForms = formContainers.length - 1
+        this.numberOfNonEmptyForms = this.initialTotalFormsValue - this.initialNumberOfEmptyForms
 
         this.addFormBtn.addEventListener('click', this.addFormBtnClickListener.bind(this))
         this.emptyFormDeleteBtn.addEventListener('click', this.deleteFormBtnClickListener.bind(this))
@@ -64,14 +67,14 @@ class FormsetHandler {
             const correspondingInitialInput = this.initialFormInputElements[index]
             // empty form is always the last one and so the index of its inputs is the index
             // of the last form on the page from all forms (regardless if they are bound or not bound)
-            inputElement.id = correspondingInitialInput.id.replace(this.initialTotalFormsValue - 1, newIndex)
-            inputElement.name = correspondingInitialInput.name.replace(this.initialTotalFormsValue - 1, newIndex)
+            inputElement.id = correspondingInitialInput.id.replace(this.initialTotalFormsValue - this.initialNumberOfEmptyForms, newIndex)
+            inputElement.name = correspondingInitialInput.name.replace(this.initialTotalFormsValue - this.initialNumberOfEmptyForms, newIndex)
         });
 
         newFormSelectElements.forEach((selectElement, index) => {
             const correspondingInitialInput = this.initialFormSelectElements[index]
-            selectElement.id = correspondingInitialInput.id.replace(this.initialTotalFormsValue - 1, newIndex)
-            selectElement.name = correspondingInitialInput.name.replace(this.initialTotalFormsValue - 1, newIndex)
+            selectElement.id = correspondingInitialInput.id.replace(this.initialTotalFormsValue - this.initialNumberOfEmptyForms, newIndex)
+            selectElement.name = correspondingInitialInput.name.replace(this.initialTotalFormsValue - this.initialNumberOfEmptyForms, newIndex)
         });
     }
 
