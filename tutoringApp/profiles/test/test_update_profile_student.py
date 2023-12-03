@@ -288,6 +288,163 @@ class TestUpdateProfileStudent(TestCaseUserUtils):
         self.assertEqual(education1.end_date, date(2004, 1, 11))
         self.assertEqual(education1.additional_info, "Additional info1 updated")
 
+    def test_education_objects_already_in_db_information_displayed(self):
+        self._register_user("student1")
+        profile = Profile.objects.get(pk=1)
+        self._create_education_objects(profile)
+
+        res = self.client.get(reverse("profiles:student_update", kwargs={"pk": 1}))
+
+        self.assertContains(
+            res,
+            '<input type="hidden" name="education_set-0-id" value="1" id="id_education_set-0-id">',
+            html=True,
+        )
+        self.assertContains(
+            res,
+            '<input type="hidden" name="education_set-1-id" value="2" id="id_education_set-1-id">',
+            html=True,
+        )
+
+    def test_education_objects_already_in_db_form_to_delete_one_removed_from_db(self):
+        self._register_user("tutor1", student=False)
+        profile = Profile.objects.get(pk=1)
+        user = User.objects.get(pk=1)
+        self._create_education_objects(profile)
+
+        self.client.post(
+            reverse("profiles:student_update", kwargs={"pk": 1}),
+            {
+                "first_name": "First name updated",
+                "last_name": "Last name updated",
+                "email": "new_email@mail.com",
+                "city": "City updated",
+                "description": "Description updated",
+                "date_of_birth": "2000-01-11",
+                "education_set-TOTAL_FORMS": 3,
+                "education_set-INITIAL_FORMS": 2,
+                "education_set-MIN_NUM_FORMS": 0,
+                "education_set-0-school": 1,
+                "education_set-0-profile": 1,
+                "education_set-0-id": 1,
+                "education_set-0-degree": "Bachelor",
+                "education_set-0-start_date": "2000-01-11",
+                "education_set-0-end_date": "2003-01-11",
+                "education_set-0-additional_info": "Additional info info about bachelor degree.",
+                "education_set-0-DELETE": "on",
+                "education_set-1-school": 1,
+                "education_set-1-profile": 1,
+                "education_set-1-id": 2,
+                "education_set-1-degree": "Master's",
+                "education_set-1-start_date": "2003-01-12",
+                "education_set-1-end_date": "2005-01-12",
+                "education_set-1-additional_info": "Additional info info about master degree.",
+            },
+            follow=True,
+        )
+
+        self.assertEqual(len(Education.objects.all()), 1)
+        self.assertEqual(Education.objects.all()[0].pk, 2)
+
+    def test_education_objects_already_in_db_form_to_delete_both_removed_from_db(self):
+        self._register_user("tutor1", student=False)
+        profile = Profile.objects.get(pk=1)
+        user = User.objects.get(pk=1)
+        self._create_education_objects(profile)
+
+        self.client.post(
+            reverse("profiles:student_update", kwargs={"pk": 1}),
+            {
+                "first_name": "First name updated",
+                "last_name": "Last name updated",
+                "email": "new_email@mail.com",
+                "city": "City updated",
+                "description": "Description updated",
+                "date_of_birth": "2000-01-11",
+                "education_set-TOTAL_FORMS": 3,
+                "education_set-INITIAL_FORMS": 2,
+                "education_set-MIN_NUM_FORMS": 0,
+                "education_set-0-school": 1,
+                "education_set-0-profile": 1,
+                "education_set-0-id": 1,
+                "education_set-0-degree": "Bachelor",
+                "education_set-0-start_date": "2000-01-11",
+                "education_set-0-end_date": "2003-01-11",
+                "education_set-0-additional_info": "Additional info info about bachelor degree.",
+                "education_set-0-DELETE": "on",
+                "education_set-1-school": 1,
+                "education_set-1-profile": 1,
+                "education_set-1-id": 2,
+                "education_set-1-degree": "Master's",
+                "education_set-1-start_date": "2003-01-12",
+                "education_set-1-end_date": "2005-01-12",
+                "education_set-1-additional_info": "Additional info info about master degree.",
+                "education_set-1-DELETE": "on",
+            },
+            follow=True,
+        )
+
+        self.assertQuerySetEqual(Education.objects.all(), [])
+
+    def test_education_objects_already_in_db_form_to_delete_both_removed_from_db_new_one_added(
+        self,
+    ):
+        self._register_user("tutor1", student=False)
+        profile = Profile.objects.get(pk=1)
+        user = User.objects.get(pk=1)
+        self._create_education_objects(profile)
+
+        self.client.post(
+            reverse("profiles:student_update", kwargs={"pk": 1}),
+            {
+                "first_name": "First name updated",
+                "last_name": "Last name updated",
+                "email": "new_email@mail.com",
+                "city": "City updated",
+                "description": "Description updated",
+                "date_of_birth": "2000-01-11",
+                "education_set-TOTAL_FORMS": 3,
+                "education_set-INITIAL_FORMS": 2,
+                "education_set-MIN_NUM_FORMS": 0,
+                "education_set-0-school": 1,
+                "education_set-0-profile": 1,
+                "education_set-0-id": 1,
+                "education_set-0-degree": "Bachelor",
+                "education_set-0-start_date": "2000-01-11",
+                "education_set-0-end_date": "2003-01-11",
+                "education_set-0-additional_info": "Additional info info about bachelor degree.",
+                "education_set-0-DELETE": "on",
+                "education_set-1-school": 1,
+                "education_set-1-profile": 1,
+                "education_set-1-id": 2,
+                "education_set-1-degree": "Master's",
+                "education_set-1-start_date": "2003-01-12",
+                "education_set-1-end_date": "2005-01-12",
+                "education_set-1-additional_info": "Additional info info about master degree.",
+                "education_set-1-DELETE": "on",
+                "education_set-2-school": 2,
+                "education_set-2-profile": 1,
+                "education_set-2-id": "",
+                "education_set-2-degree": "Postgraduate",
+                "education_set-2-start_date": "2005-01-13",
+                "education_set-2-end_date": "2006-01-13",
+                "education_set-2-additional_info": "Additional info info about postgraduate degree.",
+            },
+            follow=True,
+        )
+
+        self.assertEqual(len(Education.objects.all()), 1)
+        education = Education.objects.all()[0]
+        self.assertEqual(education.pk, 3)
+        self.assertEqual(education.profile, profile)
+        self.assertEqual(education.school, School.objects.get(pk=2))
+        self.assertEqual(education.degree, "Postgraduate")
+        self.assertEqual(education.start_date, date(2005, 1, 13))
+        self.assertEqual(education.end_date, date(2006, 1, 13))
+        self.assertEqual(
+            education.additional_info, "Additional info info about postgraduate degree."
+        )
+
     @parameterized.expand(
         [
             (
