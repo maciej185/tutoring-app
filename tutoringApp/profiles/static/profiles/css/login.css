@@ -27,3 +27,14 @@ div.login-main-form-input {
 div.login-main-form-input > div {
     flex: 1
 }
+
+div.login-main-register_link {
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--gray-bluegreen-light);
+    display: flex;
+    justify-content: center;
+}
+
+div.login-main-register_link > a {
+    color: var(--gray-bluegreen-extra-dark);
+}
