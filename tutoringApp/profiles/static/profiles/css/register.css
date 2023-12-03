@@ -9,3 +9,14 @@ main {
 main > div {
     padding: unset;
 }
+
+div.register-main-login_link {
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--gray-bluegreen-light);
+    display: flex;
+    justify-content: center;
+}
+
+div.register-main-login_link > a {
+    color: var(--gray-bluegreen-extra-dark);
+}
