@@ -1,0 +1,87 @@
+<div class="profile stack-container">
+    <div class="profile-info box">
+        <div class="profile-info-header box-header">
+            General
+        </div>
+        <div class="profile-info-main box-main_padded">
+            <div class="profile-info-main-left_top">
+                <div class="profile-info-main-left_top-picture">
+                    <img src="{{ object.profile_pic.url }}">
+                </div>
+            </div>
+            <div class="profile-info-main-right_bottom">
+                <table class="profile-info-main-right_bottom-main-table main-table">
+                    <tr class="profile-info-main-right_bottom-main-table-row main-table-row">
+                        <td class="profile-info-main-right_bottom-main-table-cell main-table-cell">
+                            <div class="profile-info-main-right_bottom-main-table-cell-top main-table-cell-top">
+                                Name 
+                            </div>
+                            <div class="profile-info-main-right_bottom-main-table-cell-bottom main-table-cell-bottom">
+                                {{ profile_user.first_name }} {{ profile_user.last_name }}
+                            </div>
+                        </td>
+                        <td class="profile-info-main-right_bottom-main-table-cell main-table-cell">
+                            <div class="profile-info-main-right_bottom-main-table-cell-top main-table-cell-top">
+                                Email address
+                            </div>
+                            <div class="profile-info-main-right_bottom-main-table-cell-bottom main-table-cell-bottom">
+                                {{ profile_user.email }}
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr class="profile-info-main-right_bottom-main-table-row main-table-row">
+                        <td class="profile-info-main-right_bottom-main-table-cell main-table-cell">
+                            <div class="profile-info-main-right_bottom-main-table-cell-top main-table-cell-top">
+                                Date of birth 
+                            </div>
+                            <div class="profile-info-main-right_bottom-main-table-cell-bottom main-table-cell-bottom">
+                                {{ object.date_of_birth }}
+                            </div>
+                        </td>
+                        <td class="profile-info-main-right_bottom-main-table-cell main-table-cell">
+                            <div class="profile-info-main-right_bottom-main-table-cell-top main-table-cell-top">
+                                City
+                            </div>
+                            <div class="profile-info-main-right_bottom-main-table-cell-bottom main-table-cell-bottom">
+                                {{ object.city }}
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="profile-description box">
+        <div class="profile-description-header box-header">
+            Description
+        </div>
+        <div class="profile-description-text box-main_padded">
+            {{ object.description }}
+        </div>
+    </div>
+    <div class="profile-education box">
+        <div class="profile-education-header box-header">
+            Education
+        </div>
+        <div class="profile-education-main box-main_padded">
+            <ul class="profile-education-main-list list">
+                {% for education_object in education_data %}
+                    <li class="profile-education-main-list-element list-element">
+                        <div class="profile-education-main-list-element-top list-element-top">
+                            {{education_object.school.name}}
+                        </div>
+                        <div class="profile-education-main-list-element-bottom list-element-bottom">
+                            {{ education_object.start_date }}-{{ education_object.end_date }}, {{ education_object.additional_info }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+

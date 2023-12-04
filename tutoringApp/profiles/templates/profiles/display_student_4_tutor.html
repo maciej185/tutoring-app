@@ -1,0 +1,12 @@
+{% extends 'tutoringApp/base_tutor.html' %}
+
+{% block styles %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'profiles/css/display_student.css' %}"> 
+{% endblock %}
+
+{% block main %}
+    {% include 'profiles/display_student.html' %}
+{% endblock %}
+
+
