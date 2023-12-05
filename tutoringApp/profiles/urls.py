@@ -28,4 +28,9 @@ urlpatterns = [
         view=views.DisplayTutorProfileView.as_view(),
         name="tutor_display",
     ),
+    path(
+        "password_change",
+        view=views.PasswordChangeView.as_view(),
+        name="password_change",
+    ),
 ]
