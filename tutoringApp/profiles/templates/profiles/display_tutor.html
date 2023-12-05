@@ -1,0 +1,383 @@
+{% load profiles_extras %}
+
+<div class="profile stack-container">
+<div class="tutor">
+    <div class="tutor-left tutor-side">
+        <div class="tutor-left-profile tutor-side-section">
+            <div class="tutor-left-profile-main tutor-side-section-main">
+                <div class="tutor-left-profile-main-left">
+                    <div class="tutor-left-profile-main-left-pic">
+                        <img src="{{object.profile_pic.url}}">
+                    </div>
+                </div>
+                <div class="tutor-left-profile-main-right">
+                    <div class="tutor-left-profile-main-right-name">
+                        {{profile_user.first_name}} {{profile_user.last_name}}
+                    </div>
+                    <div class="tutor-left-profile-main-right-rating">
+                        <div class="tutor-left-profile-main-right-rating-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                            </svg>
+                        </div>
+                        <div class="tutor-left-profile-main-right-rating-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                            </svg>
+                        </div>
+                        <div class="tutor-left-profile-main-right-rating-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                            </svg>
+                        </div>
+                        <div class="tutor-left-profile-main-right-rating-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16">
+                                <path d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z"/>
+                            </svg>
+                        </div>
+                        <div class="tutor-left-profile-main-right-rating-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                                <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="tutor-left-profile-main-right-subjects">
+                        {{ subject_list }}
+                    </div>
+                    <div class="tutor-left-profile-main-right-city">
+                        {{object.city}}
+                    </div>
+                    <div class="tutor-left-profile-main-right-experience">
+                        Experience: {% render_experience object.teaching_since %}
+                    </div>
+                    <div class="tutor-left-profile-main-right-email">
+                        {{profile_user.email}}
+                    </div>
+                    <div class="tutor-left-profile-main-right-languages stack-container_small">
+                        {% for profile_language_list_object in language_data %}
+                            <div class="tutor-left-profile-main-right-languages-language adjacent-container">
+                                <div class="tutor-left-profile-main-right-languages-language-text">
+                                    {{ profile_language_list_object.language.name }}
+                                </div>
+                                <div class="tutor-left-profile-main-right-languages-language-level tag">
+                                    {% redner_language_level profile_language_list_object.level %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tutor-left-pricing tutor-side-section">
+            <div class="tutor-left-pricing-header tutor-side-section-header">
+                Pricing
+            </div>
+            <div class="tutor-left-pricing-main tutor-side-section-main">
+                
+                <div class="tutor-left-pricing-main-list tutor-side-section-main-list">
+                    <ul class="tutor-left-pricing-main-list tutor-side-section-main-list">
+                        {% for service_object in service_data %}
+                            <li>
+                                <div class="tutor-left-pricing-main-list-service tutor-side-section-main-list-master">
+                                    {% render_service_name service_object %}
+                                </div>
+                                <div class="tutor-left-pricing-main-list-price tutor-side-section-main-list-minor">
+                                    {% render_service_price service_object %} {{ currency }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% if not is_student %}
+                    <div class="tutor-left-pricing-main-configure centered_button_container">
+                        <div class="tutor-left-pricing-main-configure-btn button_white_green">
+                            Configure
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="tutor-left-description tutor-side-section">
+            <div class="tutor-left-description-header tutor-side-section-header">
+                Description
+            </div>
+            <div class="tutor-left-description-main tutor-side-section-main">
+                {{ object.description }}
+            </div>
+        </div>
+        <div class="tutor-left-education tutor-side-section">
+            <div class="tutor-left-education-header tutor-side-section-header">
+                Education
+            </div>
+            <div class="tutor-left-education-main tutor-side-section-main">
+                <div class="tutor-left-education-main-list tutor-side-section-main-list">
+                    <ul class="tutor-left-education-main-list tutor-side-section-main-list">
+                        {% for education_object in education_data %}
+                            <li>
+                                <div class="tutor-left-education-main-list-school tutor-side-section-main-list-master">
+                                    {{ education_object.school.name }}
+                                </div>
+                                <div class="tutor-left-education-main-list-details tutor-side-section-main-list-minor">
+                                    {{ education_object.start_date }}-{{ education_object.end_date }}, {{ education_object.additional_info }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="tutor-left-reviews tutor-side-section">
+            <div class="tutor-left-reviews-header tutor-side-section-header">
+                Reviews
+            </div>
+            <div class="tutor-left-reviews-main tutor-side-section-main">
+            </div>
+        </div>
+    </div>
+    <div class="tutor-right tutor-side">
+        <div class="tutor-right-availability tutor-side-section">
+            <div class="tutor-right-availability-header tutor-side-section-header">
+                Availability
+            </div>
+            <div class="tutor-right-availability-main tutor-side-section-main">
+                <div class="tutor-right-availability-main-service">
+                    <select class="tutor-right-availability-main-service-select options">
+                        <option>Single session - Math</option>
+                        <option>Single session - Physics</option>
+                    </select>
+                </div>
+                <div class="tutor-right-availability-main-calendar">
+                    <div class="tutor-right-availability-main-calendar-top">
+                        <div class="tutor-right-availability-main-calendar-top-element tutor-right-availability-main-calendar-top-arrow">
+                            <div class="tutor-right-availability-main-calendar-top-arrow-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="tutor-right-availability-main-calendar-top-element">
+                            <div class="tutor-right-availability-main-calendar-top-element-top">
+                                Today
+                            </div>   
+                            <div class="tutor-right-availability-main-calendar-top-element-bottom">
+                                14. Oct
+                            </div>   
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-top-element">
+                            <div class="tutor-right-availability-main-calendar-top-element-top">
+                                Sun
+                            </div>   
+                            <div class="tutor-right-availability-main-calendar-top-element-bottom">
+                                15. Oct
+                            </div>  
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-top-element">
+                            <div class="tutor-right-availability-main-calendar-top-element-top">
+                                Mon
+                            </div>   
+                            <div class="tutor-right-availability-main-calendar-top-element-bottom">
+                                16. Oct
+                            </div>  
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-top-element">
+                            <div class="tutor-right-availability-main-calendar-top-element-top">
+                                Tue
+                            </div>   
+                            <div class="tutor-right-availability-main-calendar-top-element-bottom">
+                                17. Oct
+                            </div>  
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-top-element">
+                            <div class="tutor-right-availability-main-calendar-top-element-top">
+                                Wed
+                            </div>   
+                            <div class="tutor-right-availability-main-calendar-top-element-bottom">
+                                18. Oct
+                            </div>  
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-top-element">
+                            <div class="tutor-right-availability-main-calendar-top-element-top">
+                                Thu
+                            </div>   
+                            <div class="tutor-right-availability-main-calendar-top-element-bottom">
+                                19. Oct
+                            </div>  
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-top-element">
+                            <div class="tutor-right-availability-main-calendar-top-element-top">
+                                Fri
+                            </div>   
+                            <div class="tutor-right-availability-main-calendar-top-element-bottom">
+                                20. Oct
+                            </div>  
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-top-element tutor-right-availability-main-calendar-top-arrow">
+                            <div class="tutor-right-availability-main-calendar-top-arrow-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                </svg>
+                            </div>
+                        </div>      
+                    </div>   
+                    <div class="tutor-right-availability-main-calendar-bottom">
+                        <div class="tutor-right-availability-main-calendar-bottom-column">
+                            
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-bottom-column">
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                08:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                09:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                10:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                11:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-bottom-column">
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                12:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-bottom-column">
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-bottom-column">
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                08:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                09:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                10:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                11:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                12:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                13:00
+                            </div>
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-bottom-column">
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                08:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                12:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                13:00
+                            </div>
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-bottom-column">
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                09:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                10:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                11:00
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-bottom-column">
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                            <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                -
+                            </div>
+                        </div>   
+                        <div class="tutor-right-availability-main-calendar-bottom-column">
+                    
+                        </div>   
+                    </div>   
+                </div>    
+                {% if not is_student %}
+                    <div class="tutor-right-availability-main-configure centered_button_container">
+                        <div class="tutor-right-availability-main-configure-btn button_white_green">
+                            Configure
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+        

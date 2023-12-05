@@ -1,6 +1,9 @@
+from datetime import date, datetime
 from typing import Optional
 
 from django import template
+
+from profiles.models import LanguageLevelChoices, Service
 
 register = template.Library()
 
@@ -136,3 +139,90 @@ def subtract(value: str, arg: str) -> int:
         Result of the subtraction as an integer.
     """
     return int(value) - int(arg)
+
+
+@register.simple_tag
+def render_experience(teaching_since: Optional[date]) -> str:
+    """Calculate given Tutor's experience in years as a string.
+
+    The function calculates the difference between the value
+    of the `teaching_since` field from `Profile` model and the
+    current time to determine the number of years of experience.
+
+    Args:
+        The value of given Tutor's `teaching_since` field,
+        None if there was a mistake and an attempt to render
+        the page for a Student's profile.
+
+    Returns:
+        Given Tutor's experience in years as a string
+    """
+    if not teaching_since:
+        return
+
+    now_date = datetime.now()
+
+    num_months = (now_date.year - teaching_since.year) + (
+        now_date.month - teaching_since.month
+    )
+
+    if num_months < 12:
+        return "Less than one year."
+    elif num_months == 12:
+        return "1 year."
+    elif num_months > 12 and num_months % 12 == 0:
+        return f"{num_months % 12} years."
+    elif num_months > 12 and num_months % 12 != 0:
+        return f"Over { num_months % 12} years."
+
+
+@register.simple_tag
+def redner_language_level(level: int) -> str:
+    """Return verbal representation of language level.
+
+    Args:
+        level: The value of the `level` field from the
+                `ProfileLanguageList` model.
+    Returns:
+        Verbal representation of language level
+    """
+    return LanguageLevelChoices(level).label
+
+
+@register.simple_tag
+def render_service_name(service: Service) -> str:
+    """Return descriptive name of the service.
+
+    The method checks how many hours are included
+    in the given service and based on that information,
+    a descriptive name is returned.
+
+    Args:
+        service: An instance of the Service model.
+
+    Returns:
+        A descriptive name of the given service.
+    """
+    return (
+        f"Single session - {service.subject.name}"
+        if service.number_of_hours == 1
+        else f"{service.number_of_hours} sessions - {service.subject.name} "
+    )
+
+
+@register.simple_tag
+def render_service_price(service: Service) -> int:
+    """Calculate price of the entire service.
+
+    The method calculates the entire price
+    of the service based on the values of
+    `price_per_hour` and `number_of_hours`
+    fields.
+
+    Args:
+        service: An instance of the Service model.
+
+    Returns:
+        Calculated price of the entire service.
+    """
+    return service.price_per_hour * service.number_of_hours

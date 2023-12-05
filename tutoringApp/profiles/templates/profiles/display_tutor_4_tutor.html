@@ -1,1 +1,22 @@
 {% extends 'tutoringApp/base_tutor.html' %}
+
+{% block styles %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'profiles/css/display_tutor.css' %}"> 
+    <link rel="stylesheet" href="{% static 'profiles/css/display_tutor_4_tutor.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="options adjacent-container">
+        <div class="options-btn button_white_green">
+            <a href="{% url 'profiles:tutor_update' profile_user.id %}">
+                Edit
+            </a>
+        </div>
+        <div class="options-btn button_white_green">
+            Change password
+        </div>
+    </div>
+    {% include 'profiles/display_tutor.html' %}
+{% endblock %}
+

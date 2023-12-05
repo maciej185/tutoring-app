@@ -104,6 +104,17 @@ class Language(models.Model):
         return self.name
 
 
+class LanguageLevelChoices(models.IntegerChoices):
+    """Enumerated integer choices for language level"""
+
+    BEGINNER = 0, _("Beginner")
+    ELEMENTARY = 1, _("Elementary")
+    INTERMEDIATE = 2, _("Intermediate")
+    UPPER_INTERMEDIATE = 3, _("Upper intermediate")
+    ADVANCED = 4, _("Advanced")
+    NATIVE = 5, _("Native")
+
+
 class ProfileLanguageList(models.Model):
     """An intermediate table between Profile and Language models.
 
@@ -112,18 +123,9 @@ class ProfileLanguageList(models.Model):
     provide additonal infromation about the user's proficiency
     in that language."""
 
-    LANGUAGE_LEVEL_CHOICES = [
-        (0, "Beginner"),
-        (1, "Elementary"),
-        (2, "Intermediate"),
-        (3, "Upper Intermediate"),
-        (4, "Advanced"),
-        (5, "Native"),
-    ]
-
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    level = models.IntegerField(choices=LANGUAGE_LEVEL_CHOICES, default=0)
+    level = models.IntegerField(choices=LanguageLevelChoices.choices, default=0)
 
 
 class School(models.Model):
