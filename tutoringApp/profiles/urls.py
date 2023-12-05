@@ -23,4 +23,9 @@ urlpatterns = [
         view=views.DisplayStudentProfileView.as_view(),
         name="student_display",
     ),
+    path(
+        "tutor/<int:pk>",
+        view=views.DisplayTutorProfileView.as_view(),
+        name="tutor_display",
+    ),
 ]

@@ -1,5 +1,5 @@
 from .authentication import LoginView, RegisterView, logout_view
-from .display import DisplayStudentProfileView
+from .display import DisplayStudentProfileView, DisplayTutorProfileView
 from .update import (
     UpdateStudentProfileView,
     UpdateTutorProfileView,
@@ -14,4 +14,5 @@ __all__ = [
     "UpdateStudentProfileView",
     "UpdateTutorProfileView",
     "DisplayStudentProfileView",
+    "DisplayTutorProfileView",
 ]
