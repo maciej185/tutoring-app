@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from profiles.forms import profile_language_list_formset, subject_formset
 from profiles.models import ProfileLanguageList, Service
 
-from .profile import UpdateProfileView
+from .update import UpdateProfileView
 
 LOGGER = getLogger(__name__)
 

@@ -5,7 +5,7 @@ from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 
-from .profile import UpdateProfileView
+from .update import UpdateProfileView
 
 LOGGER = getLogger(__name__)
 

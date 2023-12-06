@@ -11,8 +11,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils.timezone import now
 from django.views.generic.edit import UpdateView
 
-from profiles.forms import (AccountType, ProfileForm, UpdateUserForm,
-                            education_formset)
+from profiles.forms import AccountType, ProfileForm, UpdateUserForm, education_formset
 from profiles.models import Profile
 
 LOGGER = getLogger(__name__)
