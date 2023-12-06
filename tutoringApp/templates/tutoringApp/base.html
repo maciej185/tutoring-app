@@ -12,6 +12,9 @@
         {% block styles %}
         {% endblock %}
 
+        {% block styles_additional %}
+        {% endblock %}
+
         {% block script %}
         {% endblock %}
     </head>
@@ -49,21 +52,8 @@
                         </div>
                     </label>
                     <div class="header-right-dropdown">
-                        <div class="header-right-dropdown-item">
-                            <a href="#">
-                                Profile
-                            </a>
-                        </div>  
-                        <div class="header-right-dropdown-item">
-                            <a href="#">
-                                Lessons
-                            </a>
-                        </div>
-                        <div class="header-right-dropdown-item">
-                            <a href="#">
-                                Chats
-                            </a>
-                        </div>
+                        {% block header_links %}
+                        {% endblock %}
                         <div class="header-right-dropdown-log_out header-right-dropdown-item">
                             <a href="{% url 'profiles:logout' %}">
                                 Log out

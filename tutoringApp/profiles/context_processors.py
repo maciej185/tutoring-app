@@ -47,7 +47,7 @@ def add_account_type(request: HttpRequest) -> dict[str, bool]:
             request.session["account_type"] = (
                 AccountType.STUDENT.value if is_student else AccountType.TUTOR.value
             )
-        except TypeError:
+        except (TypeError, Profile.DoesNotExist):
             is_student = None
     else:
         is_student = None
