@@ -61,7 +61,9 @@ class DisplayTutorProfileView(DisplayProfileView):
         )
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
-        """Ensure the user is redirected to correct display page based on the profile type."""
+        """Ensure that the profile exists and correct page is displayed."""
+        if self._pofile_does_not_exist_redirect():
+            return self._pofile_does_not_exist_redirect()
         incorrect_display_type_redirect = self._incorrect_display_page_for_type(
             self.kwargs["pk"], display_type_is_student=False
         )
