@@ -183,3 +183,11 @@ LOGGING = {
 }
 
 CURRENCY = "$"
+
+# Email settings for password reset.
+
+if DEBUG:
+    # saving emails locally in DEV environment.
+    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+    EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+
