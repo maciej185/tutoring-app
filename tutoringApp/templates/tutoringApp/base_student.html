@@ -27,3 +27,21 @@
     </button>  
 </div>
 {% endblock %}
+
+{% block header_links %}
+<div class="header-right-dropdown-item">
+    <a href="{% url 'profiles:student_display' user.id %}">
+        Profile
+    </a>
+</div>  
+<div class="header-right-dropdown-item">
+    <a href="#">
+        Lessons
+    </a>
+</div>
+<div class="header-right-dropdown-item">
+    <a href="#">
+        Chats
+    </a>
+</div>
+{% endblock %}

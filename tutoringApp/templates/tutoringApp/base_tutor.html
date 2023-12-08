@@ -1,4 +1,9 @@
 {% extends 'tutoringApp/base.html' %}
+       
+{% block styles_additional %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tutoringApp/css/base_tutor.css' %}">
+{% endblock %}
 
 {% block search %}
 <div class="mobile header-left-search header-side-item_mobile">
@@ -19,5 +24,23 @@
             </div>
         </a>
     </button>  
+</div>
+{% endblock %}
+
+{% block header_links %}
+<div class="header-right-dropdown-item">
+    <a href="{% url 'profiles:tutor_display' user.id %}">
+        Profile
+    </a>
+</div>  
+<div class="header-right-dropdown-item">
+    <a href="#">
+        Lessons
+    </a>
+</div>
+<div class="header-right-dropdown-item">
+    <a href="#">
+        Chats
+    </a>
 </div>
 {% endblock %}

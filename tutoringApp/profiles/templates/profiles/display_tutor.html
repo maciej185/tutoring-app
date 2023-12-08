@@ -88,7 +88,7 @@
                         {% endfor %}
                     </ul>
                 </div>
-                {% if not is_student %}
+                {% if user == profile_user %}
                     <div class="tutor-left-pricing-main-configure centered_button_container">
                         <div class="tutor-left-pricing-main-configure-btn button_white_green">
                             Configure
@@ -368,7 +368,7 @@
                         </div>   
                     </div>   
                 </div>    
-                {% if not is_student %}
+                {% if user == profile_user %}
                     <div class="tutor-right-availability-main-configure centered_button_container">
                         <div class="tutor-right-availability-main-configure-btn button_white_green">
                             Configure

@@ -7,16 +7,20 @@
 {% endblock %}
 
 {% block main %}
-    <div class="options adjacent-container">
-        <div class="options-btn button_white_green">
-            <a href="{% url 'profiles:student_update' profile_user.id %}">
-                Edit
-            </a>
+    {% if user == profile_user %}
+        <div class="options adjacent-container">
+            <div class="options-btn button_white_green">
+                <a href="{% url 'profiles:student_update' profile_user.id %}">
+                    Edit
+                </a>
+            </div>
+            <div class="options-btn button_white_green">
+                <a href="{% url 'profiles:password_change' %}">
+                    Change password
+                </a>
+            </div>
         </div>
-        <div class="options-btn button_white_green">
-            Change password
-        </div>
-    </div>
+    {% endif %}
     {% include 'profiles/display_student.html' %}
 {% endblock %}
 

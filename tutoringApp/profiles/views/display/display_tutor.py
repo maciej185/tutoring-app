@@ -35,14 +35,18 @@ class DisplayTutorProfileView(DisplayProfileView):
         )
 
         context["subject_list"] = (
-            "".join(
-                [
-                    f"{subject}, "
-                    for ind, subject in enumerate(subjects)
-                    if ind != len(subjects) - 1
-                ]
+            (
+                "".join(
+                    [
+                        f"{subject}, "
+                        for ind, subject in enumerate(subjects)
+                        if ind != len(subjects) - 1
+                    ]
+                )
+                + subjects[-1]
             )
-            + subjects[-1]
+            if subjects
+            else ""
         )
 
         return context
