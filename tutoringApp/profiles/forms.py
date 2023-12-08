@@ -6,6 +6,7 @@ from pathlib import Path
 from django import forms
 from django.contrib.auth.forms import (
     AuthenticationForm,
+    PasswordResetForm,
     UserCreationForm,
     UsernameField,
 )
@@ -254,3 +255,22 @@ subject_formset = forms.inlineformset_factory(
     validate_min=True,
     error_messages={"too_few_forms": "You must input at least one subject!"},
 )
+
+
+class ProfilesPasswordResetForm(PasswordResetForm):
+    """Password reset form with validation."""
+
+    def clean_email(self) -> None:
+        """Check if the email provided in password reset form is associated with an account.
+
+        Args:
+            email: Value input in the password reset form.
+
+        Raises:
+            ValidationError -  raised when provided email is not
+                                associated with any of the accounts.
+        """
+        try:
+            User.objects.get(email=self.cleaned_data["email"])
+        except User.DoesNotExist:
+            raise ValidationError(_("User with provided email not found!"))
