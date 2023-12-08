@@ -1,4 +1,8 @@
 """Views for displaying Students' profile information."""
+from typing import Any
+
+from django.http import HttpRequest, HttpResponse
+
 from profiles.forms import AccountType
 
 from .display import DisplayProfileView
@@ -14,4 +18,15 @@ class DisplayStudentProfileView(DisplayProfileView):
             "profiles/display_student_4_tutor.html"
             if account_type == AccountType.TUTOR.value
             else "profiles/display_student_4_student.html"
+        )
+
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        """Ensure the user is redirected to correct display page based on the profile type."""
+        incorrect_display_type_redirect = self._incorrect_display_page_for_type(
+            self.kwargs["pk"], display_type_is_student=True
+        )
+        return (
+            incorrect_display_type_redirect
+            if incorrect_display_type_redirect
+            else super().get(request, *args, **kwargs)
         )
