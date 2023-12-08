@@ -5,6 +5,7 @@ from typing import Any, Optional
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic.detail import DetailView
 
@@ -59,3 +60,30 @@ class DisplayProfileView(DetailView, LoginRequiredMixin):
                 return HttpResponseRedirect(
                     reverse("profiles:student_display", kwargs={"pk": profile_id})
                 )
+
+    def _pofile_does_not_exist_redirect(self) -> Optional[HttpResponseRedirect]:
+        """Check if the profile exists.
+
+        The method attempts to fetch a Profile object using
+        the provided PK and if fetch is not successful, a
+        redirection link to a page with appropriate message
+        is returned.
+
+        Returns:
+            Instance of the HttpResponseRedirect class
+            if Profile object with provided PK does not
+            exist, None otherwise.
+        """
+        try:
+            Profile.objects.get(pk=self.kwargs["pk"])
+        except Profile.DoesNotExist:
+            return render(
+                request=self.request,
+                template_name="tutoringApp/forbidden.html",
+                status=404,
+                context={
+                    "warning_message": "Profile with provided ID does not exist!",
+                    "redirect_link": reverse("home:home"),
+                    "redirect_destination": "home page",
+                },
+            )
