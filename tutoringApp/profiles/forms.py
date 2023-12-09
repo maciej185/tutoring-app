@@ -14,7 +14,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 
-from profiles.models import Education, Profile, ProfileLanguageList, Service
+from profiles.models import Education, Profile, ProfileLanguageList
+from tutors.models import Service
 
 
 class AccountType(Enum):

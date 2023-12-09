@@ -7,6 +7,9 @@ from profiles.models import (
     Profile,
     ProfileLanguageList,
     School,
+)
+
+from tutors.models import (
     Service,
     Subject,
 )

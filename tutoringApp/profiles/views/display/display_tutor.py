@@ -5,7 +5,8 @@ from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 
 from profiles.forms import AccountType
-from profiles.models import ProfileLanguageList, Service
+from profiles.models import ProfileLanguageList
+from tutors.models import Service
 
 from .display import DisplayProfileView
 

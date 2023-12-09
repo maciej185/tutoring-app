@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "home.apps.HomeConfig",
     "profiles.apps.ProfilesConfig",
     "widget_tweaks",
+    "tutors.apps.TutorsConfig",
 ]
 
 MIDDLEWARE = [
