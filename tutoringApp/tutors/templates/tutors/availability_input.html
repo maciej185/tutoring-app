@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{% static 'tutoringApp/css/popup.css' %}"> 
 {% endblock %}
 
+{% block script %}
+{% load static %}
+    <script defer src="{% static 'tutors/js/AvailabilityPopupHandler.js' %}"></script>
+{% endblock %}
+
 {% block main %}
     <div class="availability box">
         <div class="availability-header box-header">
@@ -183,7 +188,7 @@
                                     {% render_previous_months_day_number key %}
                                 </div>
                             {% else %}
-                                <div class="availability-main-calendar-grid-grid-day-current">
+                                <div class="availability-main-calendar-grid-grid-day-current" id="availability-main-calendar-grid-grid-day-current-{{key}}">
                                     {{ key }}
                                 </div>
                             {% endif %}
@@ -200,7 +205,7 @@
                     <div class="popup-main-header-text">
                         Availability for {{forloop.counter}}. {{month_name}} {{year_index}}
                     </div>
-                    <div class="popup-main-header-close icon_green">
+                    <div class="popup-main-header-close icon_green" id="popup-main-header-close-{{forloop.counter0}}">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                             <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                         </svg>
