@@ -1,0 +1,51 @@
+div.popup {
+    position:absolute;
+    top: calc(var(--header-height) * (-1));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    border-radius: unset;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: unset;
+}
+
+div.popup-main {
+    background-color: white;
+    width: 100%;
+}
+
+div.popup-main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.popup-main-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.375rem;
+}
+
+div.popup-main-form-search_results {
+    display: flex;
+    justify-content: center;
+}
+
+div.popup-main-submit {
+    display: flex;
+    justify-content: center;
+}
+
+@media(min-width: 600px) {
+
+    div.popup-main {
+        width: 600px;
+    }   
+
+}
