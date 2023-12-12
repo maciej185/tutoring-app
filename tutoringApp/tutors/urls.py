@@ -10,7 +10,12 @@ api_endpoints = [
         "availability/delete/<int:pk>",
         view=views.AvailabilityAPIView.as_view(),
         name="availability_delete",
-    )
+    ),
+    path(
+        "availability/create",
+        view=views.AvailabilityAPIView.as_view(),
+        name="availability_create",
+    ),
 ]
 urlpatterns = [
     path(

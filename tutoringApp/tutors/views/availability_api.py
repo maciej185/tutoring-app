@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from tutors.models import Availability
+from tutors.serializers import AvailabilitySerializer
 
 
 class AvailabilityAPIView(APIView):
@@ -33,3 +34,27 @@ class AvailabilityAPIView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
         availability.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def post(self, request: HttpRequest) -> Response:
+        """Create new instance of the `Availability` model.
+
+        The new instance of the model is created based on the
+        data sent in the request.
+
+        Args:
+            request: Instance of the HttpRequest class containing
+                    every information about the request sent to the
+                    server, includign that of new `Availability` object
+                    that is about to be created.
+        Returns:
+            Instance of the `Response` class with an appropraite
+            status code and or data about newly created `Availability`
+            instance.
+        """
+        availability_serializer = AvailabilitySerializer(data=request.data)
+        if availability_serializer.is_valid():
+            availability_serializer.save()
+            return Response(availability_serializer.data)
+        return Response(
+            availability_serializer.errors, status=status.HTTP_400_BAD_REQUEST
+        )
