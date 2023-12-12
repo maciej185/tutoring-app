@@ -16,6 +16,11 @@ api_endpoints = [
         view=views.AvailabilityAPIView.as_view(),
         name="availability_create",
     ),
+    path(
+        "availability/update",
+        view=views.AvailabilityAPIView.as_view(),
+        name="availability_update",
+    ),
 ]
 urlpatterns = [
     path(
