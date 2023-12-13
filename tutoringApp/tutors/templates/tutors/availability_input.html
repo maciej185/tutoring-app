@@ -13,11 +13,15 @@
     <script defer src="{% static 'tutors/js/AvailabilityPopupHandler.js' %}"></script>
     <script defer src="{% static 'tutors/js/getAvailabilityDiv.js' %}"></script>
     <script defer src="{% static 'tutors/js/AvailabilityFormsHandler.js' %}"></script>
+    <script defer src="{% static 'tutors/js/EndTimeSetter.js' %}"></script>
 {% endblock %}
 
 {% block info %}
     <div id="info-service_pk">
         {{object.id}}
+    </div>
+    <div id="info-duration">
+        {{object.session_length}}
     </div>
 {% endblock %}
 
@@ -260,7 +264,7 @@
                                     Start
                                 </div>
                                 <div class="popup-main-form-info-start-bottom info-bottom">
-                                    <input type="time" class="popup-main-form-info-start-bottom-input time-input">
+                                    <input type="time" class="popup-main-form-info-start-bottom-input time-input" id="popup-main-form-info-start-bottom-input-{{forloop.counter0}}">
                                 </div> 
                             </div>
                             <div class="popup-main-form-info-end">
