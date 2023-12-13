@@ -17,6 +17,7 @@ div.popup {
 div.popup-main {
     background-color: white;
     width: 100%;
+    display: none;
 }
 
 div.popup-main-header {
