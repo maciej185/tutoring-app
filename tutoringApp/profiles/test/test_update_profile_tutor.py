@@ -7,15 +7,8 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from parameterized import parameterized
 
-from profiles.models import (
-    Education,
-    Language,
-    Profile,
-    ProfileLanguageList,
-    School,
-    Service,
-    Subject,
-)
+from profiles.models import Education, Language, Profile, ProfileLanguageList, School
+from tutors.models import Service, Subject
 from utils.testing import TestCaseUserUtils
 
 CORRECT_UPDATE_TUTOR_PROFILE_DATA = lambda user: {
@@ -461,7 +454,7 @@ class TestUpdateProfileStudent(TestCaseUserUtils):
             "service_set-0-id": 1,
             "service_set-0-tutor": 1,
             "service_set-0-subject": 1,
-            "service_set-0-session_length": 80,
+            "service_set-0-session_length": 90,
             "service_set-0-price_per_hour": 120,
             "service_set-1-id": 2,
             "service_set-1-tutor": 1,
@@ -481,7 +474,7 @@ class TestUpdateProfileStudent(TestCaseUserUtils):
         )
 
         service1.refresh_from_db()
-        self.assertEqual(service1.session_length, 80)
+        self.assertEqual(service1.session_length, 90)
         self.assertEqual(service1.price_per_hour, 120)
 
     def test_profile_language_object_already_in_db_information_displayed(self):

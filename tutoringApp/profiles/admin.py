@@ -1,15 +1,6 @@
 from django.contrib import admin
 
-from .models import (
-    Availability,
-    Education,
-    Language,
-    Profile,
-    ProfileLanguageList,
-    School,
-    Service,
-    Subject,
-)
+from .models import Education, Language, Profile, ProfileLanguageList, School
 
 # Register your models here.
 
@@ -20,8 +11,5 @@ admin.site.register(
         School,
         Education,
         ProfileLanguageList,
-        Subject,
-        Service,
-        Availability,
     ]
 )

@@ -3,7 +3,8 @@ from typing import Optional
 
 from django import template
 
-from profiles.models import LanguageLevelChoices, Service
+from profiles.models import LanguageLevelChoices
+from tutors.models import Service
 
 register = template.Library()
 

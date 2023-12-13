@@ -7,7 +7,8 @@ from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 
 from profiles.forms import profile_language_list_formset, subject_formset
-from profiles.models import ProfileLanguageList, Service
+from profiles.models import ProfileLanguageList
+from tutors.models import Service
 
 from .update import UpdateProfileView
 
