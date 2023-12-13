@@ -15,6 +15,7 @@
         {% block styles_additional %}
         {% endblock %}
 
+        <script defer src="{% static 'tutoringApp/js/getCookie.js' %}"></script>
         {% block script %}
         {% endblock %}
     </head>
@@ -83,6 +84,11 @@
             {% endblock %}
         </main>
 
+        <div class="info">
+            {% block info %}
+            {% endblock %}
+        </div>
+        
         <footer>
         </footer>
     </body>

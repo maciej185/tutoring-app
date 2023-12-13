@@ -58,3 +58,7 @@ main > div, main > form > div {
     border-radius: 1rem;
     padding: 1rem;
 }
+
+div.info {
+    display: none;
+}
