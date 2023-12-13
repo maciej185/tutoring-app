@@ -58,3 +58,27 @@ class AvailabilityAPIView(APIView):
         return Response(
             availability_serializer.errors, status=status.HTTP_400_BAD_REQUEST
         )
+
+    def put(self, request: HttpRequest) -> Response:
+        """Updates existing instance of the `Availability` model.
+
+        The instance is updated based on the data sent in the
+        request.
+
+        Args:
+            request: Instance of the HttpRequest class containing
+                    every information about the request sent to the
+                    server, includign that of which `Availability`
+                    object should be updated and in what way.
+        Returns:
+            Instance of the `Response` class with an appropraite
+            status code and or data about newly updated `Availability`
+            object.
+        """
+        availability_serializer = AvailabilitySerializer(data=request.data)
+        if availability_serializer.is_valid():
+            availability_serializer.save()
+            return Response(availability_serializer.data)
+        return Response(
+            availability_serializer.errors, status=status.HTTP_400_BAD_REQUEST
+        )
