@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "profiles.apps.ProfilesConfig",
     "widget_tweaks",
     "tutors.apps.TutorsConfig",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
