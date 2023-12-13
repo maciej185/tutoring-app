@@ -1,0 +1,279 @@
+{% extends 'tutoringApp/base_tutor.html' %}
+
+{% load availability_extras %}
+
+{% block styles %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'tutors/css/availability_input.css' %}">
+    <link rel="stylesheet" href="{% static 'tutoringApp/css/popup.css' %}"> 
+{% endblock %}
+
+{% block main %}
+    <div class="availability box">
+        <div class="availability-header box-header">
+            Availability
+        </div>
+        <div class="availability-main box-main_padded stack-container_small">
+            <div class="availability-main-subject stack-container_small">
+                <div class="availability-main-subject-top  info-top adjacent-container_small">
+                    <div class="availability-main-subject-top-text">
+                        Subject
+                    </div>
+                    <div class="availability-main-subject-top-info info">
+                        <div class="availability-main-subject-top-info-icon info-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg>
+                        </div>
+                        <div class="availability-main-subject-top-popup info-popup">
+                            This will be the availability displayed to the users who are viewing your page
+                            and are not your assigned students.
+                        </div>
+                    </div>
+                </div>
+                <div class="availability-main-subject-bottom">
+                    <div class="availability-main-subject-bottom-dropdown box_dropdown">
+                        <input type="checkbox" class="availability-main-subject-bottom-dropdown-checkbox box_dropdown-header-checkbox" id="box_dropdown-header-checkbox-0">
+                        <div class="availability-main-subject-bottom-dropdown-header box_dropdown-header">
+                            <div class="availability-main-subject-bottom-dropdown-header-text box_dropdown-header-text">
+                                Subjects
+                            </div>
+                            <label for="box_dropdown-header-checkbox-0">
+                                <div class="box_dropdown-header-arrow box_dropdown-header-arrow-down">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                      </svg>
+                                </div>
+
+                                <div class="box_dropdown-header-arrow box_dropdown-header-arrow-up">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                                    </svg>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="availability-main-subject-bottom-dropdown-main box_dropdown-main">
+                            {% for service in services %}
+                                {% if service.id != current_service_id %}
+                                    <div class="availability-main-subject-bottom-dropdown-main-element link-container">
+                                        <a href="{% url 'tutors:availability' service.id month_index year_index %}">
+                                            {{service.subject.name}}
+                                        </a>
+                                    </div>
+                                {% else %}
+                                    <div class="availability-main-subject-bottom-dropdown-main-element availability-main-subject-bottom-dropdown-main-element-current">
+                                        {{service.subject.name}}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="availability-main-length stack-container_small">
+                <div class="availability-main-length-top  info-top adjacent-container_small">
+                    <div class="availability-main-length-top-text">
+                        Sessions length
+                    </div>
+                    <div class="availability-main-length-top-info info">
+                        <div class="availability-main-length-top-info-icon info-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg>
+                        </div>
+                        <div class="availability-main-length-top-popup info-popup">
+                            The length of the sessions can be configured in your profile.
+                        </div>
+                    </div>
+                </div>
+                <div class="availability-main-length-bottom info-bottom">
+                    {{object.session_length}} minutes
+                </div>
+            </div>
+
+            <div class="availability-main-calendar stack-container_smaller">
+                <div class="availability-main-calendar-header info-top">
+                    Calendar
+                </div>
+                <div class="availability-main-calendar-info info-bottom">
+                    Input the hours for each day. The form for inputting the availability is displayed after clicking on a given day in the calendar below. 
+                </div>
+                <div class="availability-main-calendar-grid">
+                    <div class="availability-main-calendar-grid-month">
+                        {{ month_name }}
+                    </div>
+                    <div class="availability-main-calendar-grid-days">
+                        <div class="availability-main-calendar-grid-days-arrow">
+                            <div class="availability-main-calendar-grid-days-arrow-icon icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="availability-main-calendar-grid-days-day desktop">
+                            Mon
+                        </div>
+                        <div class="availability-main-calendar-grid-days-day mobile">
+                            M
+                        </div>
+
+                        <div class="availability-main-calendar-grid-days-day desktop">
+                            Tue
+                        </div>
+                        <div class="availability-main-calendar-grid-days-day mobile">
+                            T
+                        </div>
+
+                        <div class="availability-main-calendar-grid-days-day desktop">
+                            Wed
+                        </div>
+                        <div class="availability-main-calendar-grid-days-day mobile">
+                            W
+                        </div>
+
+                        <div class="availability-main-calendar-grid-days-day desktop">
+                            Thu
+                        </div>
+                        <div class="availability-main-calendar-grid-days-day mobile">
+                            Th
+                        </div>
+
+                        <div class="availability-main-calendar-grid-days-day desktop">
+                            Fri
+                        </div>
+                        <div class="availability-main-calendar-grid-days-day mobile">
+                            F
+                        </div>
+
+                        <div class="availability-main-calendar-grid-days-day desktop">
+                            Sat
+                        </div>
+                        <div class="availability-main-calendar-grid-days-day mobile">
+                            S
+                        </div>
+
+                        <div class="availability-main-calendar-grid-days-day desktop">
+                            Sun
+                        </div>
+                        <div class="availability-main-calendar-grid-days-day mobile">
+                            Su
+                        </div>
+
+                        <div class="availability-main-calendar-grid-days-arrow">
+                            <div class="availability-main-calendar-grid-days-arrow-icon icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="availability-main-calendar-grid-grid">
+                        {% for key, value in calendar_grid.items %}
+                            {% if value == 'placeholder' %}
+                                <div class="availability-main-calendar-grid-grid-day-placeholder">
+                                
+                                </div>
+                            {% elif value == 'not_current' %}
+                                <div class="availability-main-calendar-grid-grid-day-not_current">
+                                    {% render_previous_months_day_number key %}
+                                </div>
+                            {% else %}
+                                <div class="availability-main-calendar-grid-grid-day-current">
+                                    {{ key }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup">
+        {% for availability_list in availabilites %}
+            <div class="popup-main box box-main_padded stack-container_smaller" id="popup-main-{{forloop.counter0}}">
+                <div class="popup-main-header adjacent-container">
+                    <div class="popup-main-header-text">
+                        Availability for {{forloop.counter}}. {{month_name}} {{year_index}}
+                    </div>
+                    <div class="popup-main-header-close icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                        </svg>
+                    </div>
+                    
+                </div>
+                <div class="popup-main-info info-bottom">
+                    Input the begginig of each individual timeslot and the end of it will be calculated automatically based on your configuration. 
+                </div>
+                <div class="popup-main-form box box-main adjacent-container">
+                    <div class="popup-main-form-info adjacent-container">
+                        <div class="popup-main-form-info-start">
+                            <div class="popup-main-form-info-start-top info-top">
+                                Start
+                            </div>
+                            <div class="popup-main-form-info-start-bottom info-bottom">
+                                <input type="time" class="popup-main-form-info-start-bottom-input time-input">
+                            </div> 
+                        </div>
+                        <div class="popup-main-form-info-end">
+                            <div class="popup-main-form-info-end-top info-top">
+                                End
+                            </div>
+                            <div class="popup-main-form-info-end-bottom info-bottom">
+                                <input type="time" class="popup-main-form-info-end-bottom-input time-input_readonly" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="popup-main-form-delete icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                        </svg>
+                    </div>
+                </div>
+                {% for availability_object in availability_list %}
+                    <div>
+                        <div class="popup-main-form box box-main adjacent-container">
+                            <div class="popup-main-form-info adjacent-container"> 
+                                <div class="popup-main-form-info-start">
+                                    <div class="popup-main-form-info-start-top info-top">
+                                        Start
+                                    </div>
+                                    <div class="popup-main-form-info-start-bottom info-bottom">
+                                        <input type="time" class="popup-main-form-info-start-bottom-input time-input" id="popup-main-form-info-start-bottom-input-{{availability_object.id}}" value="{% format_start_time availability_object.start %}">
+                                    </div> 
+                                </div>
+                                <div class="popup-main-form-info-end">
+                                    <div class="popup-main-form-info-end-top info-top">
+                                        End
+                                    </div>
+                                    <div class="popup-main-form-info-end-bottom info-bottom">
+                                        <input type="time" class="popup-main-form-info-end-bottom-input time-input_readonly" readonly>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="popup-main-form-delete icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="popup-main-add add_button">
+                    <div class="popup-main-add-icon add_button-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
