@@ -1,5 +1,4 @@
 from datetime import date, datetime
-from typing import Optional
 
 from django import template
 
@@ -35,3 +34,19 @@ def render_previous_months_day_number(day_number: str) -> str:
         previous month.
     """
     return day_number.split("_")[-1]
+
+
+@register.simple_tag
+def render_date(year: int, month: int, day: int) -> str:
+    """Render given date in a correct format.
+
+    Args:
+        year: Year from the given date.
+        month: Month from the given date.
+        day: Day from the given date.
+
+    Returns:
+         String representing the date in the format
+         of %Y-%m-%d.
+    """
+    return date(year, month, day).strftime(r"%Y-%m-%d")

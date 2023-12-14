@@ -20,6 +20,10 @@ div.popup-main {
     display: none;
 }
 
+div.popup-main-date {
+    display: none;
+}
+
 div.popup-main-header {
     display: flex;
     justify-content: space-between;

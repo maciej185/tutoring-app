@@ -11,6 +11,14 @@
 {% block script %}
 {% load static %}
     <script defer src="{% static 'tutors/js/AvailabilityPopupHandler.js' %}"></script>
+    <script defer src="{% static 'tutors/js/getAvailabilityDiv.js' %}"></script>
+    <script defer src="{% static 'tutors/js/AvailabilityFormsHandler.js' %}"></script>
+{% endblock %}
+
+{% block info %}
+    <div id="info-service_pk">
+        {{object.id}}
+    </div>
 {% endblock %}
 
 {% block main %}
@@ -201,6 +209,7 @@
     <div class="popup">
         {% for availability_list in availabilites %}
             <div class="popup-main box box-main_padded stack-container_smaller" id="popup-main-{{forloop.counter0}}">
+                <div class="popup-main-date">{% render_date year_index month_index forloop.counter %}</div>
                 <div class="popup-main-header adjacent-container">
                     <div class="popup-main-header-text">
                         Availability for {{forloop.counter}}. {{month_name}} {{year_index}}
@@ -215,35 +224,9 @@
                 <div class="popup-main-info info-bottom">
                     Input the begginig of each individual timeslot and the end of it will be calculated automatically based on your configuration. 
                 </div>
-                <div class="popup-main-form box box-main adjacent-container">
-                    <div class="popup-main-form-info adjacent-container">
-                        <div class="popup-main-form-info-start">
-                            <div class="popup-main-form-info-start-top info-top">
-                                Start
-                            </div>
-                            <div class="popup-main-form-info-start-bottom info-bottom">
-                                <input type="time" class="popup-main-form-info-start-bottom-input time-input">
-                            </div> 
-                        </div>
-                        <div class="popup-main-form-info-end">
-                            <div class="popup-main-form-info-end-top info-top">
-                                End
-                            </div>
-                            <div class="popup-main-form-info-end-bottom info-bottom">
-                                <input type="time" class="popup-main-form-info-end-bottom-input time-input_readonly" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="popup-main-form-delete icon_green">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                        </svg>
-                    </div>
-                </div>
-                {% for availability_object in availability_list %}
-                    <div>
-                        <div class="popup-main-form box box-main adjacent-container">
+                <div class="popup-main-availabilites stack-container_smaller">
+                    {% for availability_object in availability_list %}
+                        <div class="popup-main-availabilites-availability popup-main-form box box-main adjacent-container">
                             <div class="popup-main-form-info adjacent-container"> 
                                 <div class="popup-main-form-info-start">
                                     <div class="popup-main-form-info-start-top info-top">
@@ -269,9 +252,29 @@
                                 </svg>
                             </div>
                         </div>
+                    {% endfor %}
+                    <div class="popup-main-availabilites-availability_form popup-main-form box box-main adjacent-container">
+                        <div class="popup-main-form-info adjacent-container">
+                            <div class="popup-main-form-info-start">
+                                <div class="popup-main-form-info-start-top info-top">
+                                    Start
+                                </div>
+                                <div class="popup-main-form-info-start-bottom info-bottom">
+                                    <input type="time" class="popup-main-form-info-start-bottom-input time-input">
+                                </div> 
+                            </div>
+                            <div class="popup-main-form-info-end">
+                                <div class="popup-main-form-info-end-top info-top">
+                                    End
+                                </div>
+                                <div class="popup-main-form-info-end-bottom info-bottom">
+                                    <input type="time" class="popup-main-form-info-end-bottom-input time-input_readonly" readonly>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                {% endfor %}
-                <div class="popup-main-add add_button">
+                </div>
+                <div class="popup-main-add add_button" id="popup-main-add-{{forloop.counter0}}">
                     <div class="popup-main-add-icon add_button-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
