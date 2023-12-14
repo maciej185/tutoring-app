@@ -2,6 +2,7 @@ class AvailabilityFormsHandler {
 
     static baseURL = "http://127.0.0.1:8000"
     static createAvailabilityEndpointURL = "/tutors/availability/create"
+    static deleteAvailabilityEndpointURL = "/tutors/availability/delete/"
 
     constructor() {
         this.servicePK = document.querySelector("div#info-service_pk").innerHTML
@@ -15,6 +16,9 @@ class AvailabilityFormsHandler {
         this.addAvailabilityBtns.forEach(addAvailabilityBtn => addAvailabilityBtn.addEventListener("click", this.addBtnClickListener.bind(this)))
 
         this.dates = this.popupMainDivs.map(popupMainDiv => popupMainDiv.querySelector("div.popup-main-date").innerHTML)
+
+        this.availiabilityDivsDeleteBtns = this.popupMainDivs.map(popupMainDiv => popupMainDiv.querySelectorAll("div.popup-main-form-delete"))
+        this.availiabilityDivsDeleteBtns.forEach(availiabilityDivsDeleteBtnsSet => availiabilityDivsDeleteBtnsSet.forEach(availiabilityDivsDeleteBtn => availiabilityDivsDeleteBtn.addEventListener("click", this.deleteAvailabilityBtnClickListener.bind(this))))
     }
 
     addBtnClickListener(e) {
@@ -39,16 +43,34 @@ class AvailabilityFormsHandler {
             )
             if (createAvailabilityObjectResponse.status == 200) {
                 const responseData = await createAvailabilityObjectResponse.json()
-                const availabilityDiv = getAvailabilityDiv(timeValue, responseData.id)
+                const availabilityDiv = getAvailabilityDiv(timeValue, responseData.id, this.deleteAvailabilityBtnClickListener.bind(this))
                 this.popupMainDivsAvailabilitesContainers[btnsIndex].insertBefore(availabilityDiv, this.addAvailabilityForms[btnsIndex])
                 this.addAvailabilityInputs[btnsIndex].value = null
-                
             } else {
-                console.log("FAIL")
-                const resData = await createAvailabilityObjectResponse.json() 
-                console.log(resData)
             }
         }).bind(this)()
+    }
+
+    deleteAvailabilityBtnClickListener(e) {
+        (async function() {
+            const parentDiv = e.currentTarget.parentNode
+            const availabilityObjectPK = e.currentTarget.id.split("-").at(-1)
+            const finalURL = AvailabilityFormsHandler.baseURL + AvailabilityFormsHandler.deleteAvailabilityEndpointURL + availabilityObjectPK
+            const deleteAvailabilityObjectResponse = await fetch(
+                finalURL,
+                {
+                    method: "DELETE",
+                    headers:{
+                        'Content-Type':'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                }
+            )
+            if (deleteAvailabilityObjectResponse.status == 204) {
+                parentDiv.remove()
+            }
+        }).bind(this)()
+        
     }
 }
 
