@@ -37,6 +37,14 @@ div.popup-main-form {
     padding: 0.375rem;
 }
 
+div.popup-main-availabilites-availability_form {
+    padding: 0.375rem;
+}
+
+div.popup-main-availabilites-availability_form-warning {
+    display: none;
+}
+
 div.popup-main-form-search_results {
     display: flex;
     justify-content: center;
@@ -45,6 +53,11 @@ div.popup-main-form-search_results {
 div.popup-main-submit {
     display: flex;
     justify-content: center;
+}
+
+div.form_error {
+    font-size: 0.85rem;
+    color: var(--gray-red-dark)
 }
 
 @media(min-width: 600px) {
