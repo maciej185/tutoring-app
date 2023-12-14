@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
@@ -84,6 +86,17 @@ class Availability(models.Model):
 
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     start = models.DateTimeField()
+
+    @property
+    def end(self) -> datetime:
+        """Return end time of an available session.
+
+        Returns:
+            End time of a session calcualted based on
+            `start` field and the value of `session_length`
+            fields from the related `Service` object.
+        """
+        return self.start + timedelta(minutes=self.service.session_length)
 
     def __str__(self) -> str:
         """String representation fo the model's instance."""
