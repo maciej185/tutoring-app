@@ -1,4 +1,4 @@
-function getAvailabilityDiv(time, object_id, deleteListener) {
+function getAvailabilityDiv(startTime, endTime, object_id, deleteListener) {
     const availabilityDiv = document.createElement("div")
     availabilityDiv.classList.add("popup-main-availabilites-availability", "popup-main-form", "box", "box-main" ,"adjacent-container")
 
@@ -12,7 +12,7 @@ function getAvailabilityDiv(time, object_id, deleteListener) {
                                         Start
                                     </div>
                                     <div class="popup-main-form-info-start-bottom info-bottom">
-                                        <input type="time" class="popup-main-form-info-start-bottom-input time-input" id="popup-main-form-info-start-bottom-input-${object_id}" value="${time}">
+                                        <input type="time" class="popup-main-form-info-start-bottom-input time-input" id="popup-main-form-info-start-bottom-input-${object_id}" value="${startTime}">
                                     </div> 
     `
 
@@ -23,7 +23,7 @@ function getAvailabilityDiv(time, object_id, deleteListener) {
                                         End
                                     </div>
                                     <div class="popup-main-form-info-end-bottom info-bottom">
-                                        <input type="time" class="popup-main-form-info-end-bottom-input time-input_readonly" readonly>
+                                        <input type="time" class="popup-main-form-info-end-bottom-input time-input_readonly" value="${endTime}"  readonly>
                                     </div>
     `
 

@@ -11,19 +11,25 @@ class EndTimeSetter {
 
     }
 
+    static calculateEndTime(startTime, sessionsDuration) {
+        const date = new Date(`1970-01-01 ${startTime}`)
+        const newDate = new Date(date.getTime() + sessionsDuration*60000)
+
+        return new Intl.DateTimeFormat(undefined, {
+            hour: '2-digit',
+            minute: '2-digit',
+            hourCycle: "h24"
+          }).format(newDate)
+
+        
+    }
+
     startInputInputListener(e) {
         if (e.currentTarget.value == "") return
 
         const inputIndex = e.currentTarget.id.split("-").at(-1)
 
-        const date = new Date(`1970-01-01 ${e.currentTarget.value}`)
-        const newDate = new Date(date.getTime() + this.sessionsDuration*60000)
-
-        const newTime = new Intl.DateTimeFormat(undefined, {
-            hour: '2-digit',
-            minute: '2-digit',
-            hourCycle: "h24"
-          }).format(newDate)
+        const newTime = EndTimeSetter.calculateEndTime(e.currentTarget.value, this.sessionsDuration)
 
         this.addAvailabilityEndInputs[inputIndex].value = newTime
     }

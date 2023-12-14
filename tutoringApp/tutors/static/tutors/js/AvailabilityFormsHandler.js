@@ -22,6 +22,8 @@ class AvailabilityFormsHandler {
         this.availiabilityDivsDeleteBtns.forEach(availiabilityDivsDeleteBtnsSet => availiabilityDivsDeleteBtnsSet.forEach(availiabilityDivsDeleteBtn => availiabilityDivsDeleteBtn.addEventListener("click", this.deleteAvailabilityBtnClickListener.bind(this))))
 
         this.warningDivs = this.addAvailabilityForms.map(addAvailabilityForm => addAvailabilityForm.querySelector("div.popup-main-availabilites-availability_form-warning"))
+    
+        this.sessionsDuration = Number(document.querySelector("div#info-duration").innerHTML)
     }
 
     addBtnClickListener(e) {
@@ -47,7 +49,8 @@ class AvailabilityFormsHandler {
             )
             if (createAvailabilityObjectResponse.status == 200) {
                 const responseData = await createAvailabilityObjectResponse.json()
-                const availabilityDiv = getAvailabilityDiv(timeValue, responseData.id, this.deleteAvailabilityBtnClickListener.bind(this))
+                const endTime = EndTimeSetter.calculateEndTime(timeValue, this.sessionsDuration)
+                const availabilityDiv = getAvailabilityDiv(timeValue, endTime, responseData.id, this.deleteAvailabilityBtnClickListener.bind(this))
                 this.popupMainDivsAvailabilitesContainers[btnsIndex].insertBefore(availabilityDiv, this.addAvailabilityForms[btnsIndex])
                 this.addAvailabilityInputs[btnsIndex].value = null
                 this.addAvailabilityEndInputs[btnsIndex].value = null
