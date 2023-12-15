@@ -1,6 +1,7 @@
 """Views for displaying Tutors' profile information."""
+from collections import OrderedDict
 from datetime import datetime
-from typing import Any
+from typing import Any, Literal
 
 from django.conf import settings
 from django.db.models.query import QuerySet
@@ -55,7 +56,11 @@ class DisplayTutorProfileView(DisplayProfileView):
 
         context["availabilites"] = self._get_availabilites()
 
-        context["current_week"] = self._get_current_dates()
+        context["current_week"] = self._get_dates_for_week(
+            self._get_week_days("current")
+        )
+
+        context["week_days_dates"] = self._get_week_days_dates()
 
         context["default_services"] = Service.objects.filter(
             tutor=self.get_object()
@@ -86,17 +91,23 @@ class DisplayTutorProfileView(DisplayProfileView):
         )
 
     @staticmethod
-    def _get_current_week() -> list[Timestamp]:
-        """Get days of current week.
+    def _get_week_days(week: Literal["previous", "current", "next"]) -> list[Timestamp]:
+        """Get days of past, next or current week.
+
+        Args:
+            week: String flag indicating the week
+                for which dates of days should be
+                returned.
 
         Returns:
             A list containing pandas's Timestamp,
             each representing different day of
-            the current week.
+            the past, previous or next week.
         """
+        week_offset_mapping = {"previous": -1, "current": 0, "next": 1}
         date_now = datetime.now()
-        date_start = f"{date_now.year}-W{date_now.isocalendar().week}-1"
-        date_end = f"{date_now.year}-W{date_now.isocalendar().week}-0"
+        date_start = f"{date_now.year}-W{date_now.isocalendar().week + week_offset_mapping[week]}-1"
+        date_end = f"{date_now.year}-W{date_now.isocalendar().week + week_offset_mapping[week]}-0"
         return date_range(
             start=datetime.strptime(date_start, "%Y-W%W-%w"),
             end=datetime.strptime(date_end, "%Y-W%W-%w"),
@@ -119,21 +130,23 @@ class DisplayTutorProfileView(DisplayProfileView):
         services = Service.objects.filter(tutor=self.get_object()).filter(
             is_default=True
         )
-        current_week = self._get_current_week()
         availabilites = {}
         for service in services:
-            availabilites.update(
-                {
-                    service: [
-                        Availability.objects.filter(service=service).filter(
-                            start__year=date.year,
-                            start__month=date.month,
-                            start__day=date.day,
-                        )
-                        for date in current_week
-                    ]
-                }
-            )
+            availabilites_service = {}
+            for week in ["previous", "current", "next"]:
+                availabilites_service.update(
+                    {
+                        week: [
+                            Availability.objects.filter(service=service).filter(
+                                start__year=date.year,
+                                start__month=date.month,
+                                start__day=date.day,
+                            )
+                            for date in self._get_week_days(week)
+                        ]
+                    }
+                )
+            availabilites.update({service: availabilites_service})
         return availabilites
 
     def _get_current_dates(self) -> dict[str,]:
@@ -144,7 +157,44 @@ class DisplayTutorProfileView(DisplayProfileView):
             and values being th actual dates of these days.
         """
         week = {}
-        current_week = self._get_current_week()
+        current_week = self._get_week_days("current")
         for day in current_week:
             week.update({day.date().strftime("%a"): day.date().strftime("%d. %b")})
         return week
+
+    @staticmethod
+    def _get_dates_for_week(week_range: list[Timestamp]) -> dict[str, str]:
+        """Return dates to be rendered in the template.
+
+        Args:
+            week_range: A list with Timestaps representing
+                        dates of days in a given week.
+
+        Returns:
+            A dictionary with keys being names of days of week
+            and values being th actual dates of these days from
+            a given week.
+        """
+        week = {}
+        for day in week_range:
+            week.update({day.date().strftime("%a"): day.date().strftime("%d. %b")})
+        return week
+
+    def _get_week_days_dates(self) -> dict[str, dict[str, str]]:
+        """Return dates of days from previous, current and next week.
+
+        The values contained in the dictionary will be
+        rendered in the template.
+
+        Returns:
+            A dictionary where keys are string indicating the week
+            (previous, current or next) and values are dictionaries
+            with keys being names of days of week and values being the actual
+            dates of these days from a given week.
+        """
+        week_days_dates = OrderedDict()
+        for week in ["previous", "current", "next"]:
+            week_days_dates.update(
+                {week: self._get_dates_for_week(self._get_week_days(week))}
+            )
+        return week_days_dates
