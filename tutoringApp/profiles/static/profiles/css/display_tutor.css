@@ -192,6 +192,10 @@ div.tutor-right-availability-main-disclaimer-popup {
 }
 
 /* CALENDAR */
+div.tutor-right-availability-main-calendar {
+    flex: 1;
+}
+
 div.tutor-right-availability-main-calendar > div:not(div:last-of-type) {
     margin-bottom: 0.5rem;
 }

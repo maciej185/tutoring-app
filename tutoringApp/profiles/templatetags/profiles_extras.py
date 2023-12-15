@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from typing import Optional
+from typing import Any, Optional
 
 from django import template
 
@@ -227,3 +227,24 @@ def render_service_price(service: Service) -> int:
         Calculated price of the entire service.
     """
     return service.price_per_hour * service.number_of_hours
+
+
+@register.filter
+def dictionary_lookup(
+    dictionary: dict[Any, dict[Any, Any]], key: Any
+) -> list[tuple[Any]]:
+    """Lookup a dictionary value.
+
+    The filter allows to extract items (list of tuples with keys and values) from
+    a dictionary that itself is a value of another dict by key of that outer dictionary.
+
+    Args:
+        dictionary: Contains another dictionaries as values.
+        key: Key of the initial dictionary used to select
+            a correct `sub-dicrionary`.
+
+    Returns:
+        Result of calling `.items()` method on a `sub-dicrionary` selected
+        from the provided, `outer` dicttionary using given key.
+    """
+    return dictionary.get(key).items()
