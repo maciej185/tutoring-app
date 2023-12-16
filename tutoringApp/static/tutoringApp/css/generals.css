@@ -191,22 +191,43 @@ input.box_dropdown-header-checkbox:checked + div > label > div.box_dropdown-head
 
 /* ICON */
 
-div.icon_green {
-    height: 1rem;
-    width: 1rem;
-    color: var(--gray-bluegreen-extra-dark);
-    cursor: pointer;
-    transition: 0.3s;
-}
+    /* GREEN */
 
-div.icon_green:hover {
-    color: var(--gray-bluegreen-medium)
-}
+    div.icon_green {
+        height: 1rem;
+        width: 1rem;
+        color: var(--gray-bluegreen-extra-dark);
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
-div.icon_green > svg {
-    height: inherit;
-    width: inherit;
-}
+    div.icon_green:hover {
+        color: var(--gray-bluegreen-medium)
+    }
+
+    div.icon_green > svg {
+        height: inherit;
+        width: inherit;
+    }
+
+    /* RED */
+
+    div.icon_red {
+        height: 1rem;
+        width: 1rem;
+        color: var(--gray-red-dark);
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    div.icon_red:hover {
+        color: var(--gray-red-medium)
+    }
+    
+    div.icon_red > svg {
+        height: inherit;
+        width: inherit;
+    }
 
 /* MARGIN BETWEEN STACKED DIVS  */ 
 div.stack-container > div:not(div:last-of-type) {

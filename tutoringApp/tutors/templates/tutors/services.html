@@ -1,1 +1,179 @@
 {% extends 'tutoringApp/base_tutor.html' %}
+
+{% load profiles_extras %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tutors\css\services.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="stack-container">
+    <div class="navigation link-container">
+        <div class="navigation-link info-top">
+            <a href="{% url 'profiles:tutor_display' object.pk %}">
+                Go back to profile
+            </a>
+        </div>
+    </div>
+    <div class="services box">
+        <div class="services-header box-header">
+            Your services
+        </div>
+        <div class="services-main box-main_padded">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="services-main-list box-main_padded">
+                    <div class="services-main-list-management_form hidden">
+                        {{ service_formset.management_form }}
+                    </div>
+                    {% for service_form in service_formset %}
+                        {% if service_form.instance.pk %}
+                            <div class="services-main-list-service box box-main_padded">
+                                {% for hidden_field in service_form.hidden_fields %}
+                                    {{ hidden_field }}
+                                {% endfor %}
+                                <div class="services-main-list-service-info stack-adjecent-container">
+                                    <div class="services-main-list-service-info-subject stack-container_smaller">
+                                        <div class="services-main-list-service-info-subject-top info-top">
+                                            Subject
+                                        </div>
+                                        <div class="services-main-list-service-info-subject-bottom_errors info-bottom">
+                                            {% formset_error_renderer service_formset_errors forloop.counter0 service_form.subject.name %}
+                                        </div>
+                                        <div class="services-main-list-service-info-subject-bottom info-bottom">
+                                            {{ service_form.subject }}
+                                        </div>
+                                    </div>
+
+                                    <div class="services-main-list-service-info-duration stack-container_smaller">
+                                        <div class="services-main-list-service-info-duration-top info-top">
+                                            Duration
+                                        </div>
+                                        <div class="services-main-list-service-info-duration-bottom_errors info-bottom">
+                                            {% formset_error_renderer service_formset_errors forloop.counter0 service_form.session_length.name %}
+                                        </div>
+                                        <div class="services-main-list-service-info-duration-bottom info-bottom">
+                                            {{ service_form.session_length }}
+                                        </div>
+                                    </div>
+
+                                    <div class="services-main-list-service-info-hours stack-container_smaller">
+                                        <div class="services-main-list-service-info-hours-top info-top">
+                                            No. of hours
+                                        </div>
+                                        <div class="services-main-list-service-info-hours-bottom_errors info-bottom">
+                                            {% formset_error_renderer service_formset_errors forloop.counter0 service_form.number_of_hours.name %}
+                                        </div>
+                                        <div class="services-main-list-service-info-hours-bottom info-bottom">
+                                            {{ service_form.number_of_hours }}
+                                        </div>
+                                    </div>
+
+                                    <div class="services-main-list-service-info-price stack-container_smaller">
+                                        <div class="services-main-list-service-info-price-top info-top">
+                                            Price per hour
+                                        </div>
+                                        <div class="services-main-list-service-info-price-bottom info-bottom">
+                                            {% formset_error_renderer service_formset_errors forloop.counter0 service_form.price_per_hour.name %}
+                                        </div>
+                                        <div class="services-main-list-service-info-price-bottom info-bottom">
+                                            {{ service_form.price_per_hour }} {{currency}}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                {% if not service_form.instance.is_default %}
+                                <a href="{% url 'tutors:service_delete' service_form.instance.id %}">
+                                    <div class="services-main-list-service-delete icon_green">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                        </svg>
+                                    </div>
+                                </a>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="services-main-list-service services-main-list-service_empty box box-main_padded" id="services-main-list-service_empty-0">
+                                {% for hidden_field in service_form.hidden_fields %}
+                                    {{ hidden_field }}
+                                {% endfor %}
+                                <div class="services-main-list-service-info stack-adjecent-container">
+                                    <div class="services-main-list-service-info-subject stack-container_smaller">
+                                        <div class="services-main-list-service-info-subject-top info-top">
+                                            Subject
+                                        </div>
+                                        <div class="services-main-list-service-info-subject-bottom_errors info-bottom">
+                                            {% formset_error_renderer service_formset_errors forloop.counter0 service_form.subject.name %}
+                                        </div>
+                                        <div class="services-main-list-service-info-subject-bottom info-bottom">
+                                            {{ service_form.subject }}
+                                        </div>
+                                    </div>
+
+                                    <div class="services-main-list-service-info-duration stack-container_smaller">
+                                        <div class="services-main-list-service-info-duration-top info-top">
+                                            Duration
+                                        </div>
+                                        <div class="services-main-list-service-info-duration-bottom_errors info-bottom">
+                                            {% formset_error_renderer service_formset_errors forloop.counter0 service_form.session_length.name %}
+                                        </div>
+                                        <div class="services-main-list-service-info-duration-bottom info-bottom">
+                                            {{ service_form.session_length }}
+                                        </div>
+                                    </div>
+
+                                    <div class="services-main-list-service-info-hours stack-container_smaller">
+                                        <div class="services-main-list-service-info-hours-top info-top">
+                                            No. of hours
+                                        </div>
+                                        <div class="services-main-list-service-info-hours-bottom_errors info-bottom">
+                                            {% formset_error_renderer service_formset_errors forloop.counter0 service_form.number_of_hours.name %}
+                                        </div>
+                                        <div class="services-main-list-service-info-hours-bottom info-bottom">
+                                            {{ service_form.number_of_hours }}
+                                        </div>
+                                    </div>
+
+                                    <div class="services-main-list-service-info-price stack-container_smaller">
+                                        <div class="services-main-list-service-info-price-top info-top">
+                                            Price per hour
+                                        </div>
+                                        <div class="services-main-list-service-info-price-bottom info-bottom">
+                                            {% formset_error_renderer service_formset_errors forloop.counter0 service_form.price_per_hour.name %}
+                                        </div>
+                                        <div class="services-main-list-service-info-price-bottom info-bottom">
+                                            {{ service_form.price_per_hour }} {{currency}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="services-main-list-service-delete services-main-list-service_empty-delete icon_green" id="services-main-list-service-delete-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    <div class="services-main-list-add add_button">
+                        <div class="services-main-list-add-icon add_button-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="services-main-submit centered_button_container">
+                    <button class="services-main-submit-btn button_fill_green" type="submit">
+                        Submit
+                    </button>
+                </div>
+            </form>        
+        </div>
+    </div>
+</div>
+{% endblock %}
