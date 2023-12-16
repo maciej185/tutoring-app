@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="{% static 'tutors\css\services.css' %}">
 {% endblock %}
 
+{% block script %}
+{% load static %}
+    <script defer src="{% static 'profiles/js/FormsetHandler.js' %}"></script>
+    <script defer src="{% static 'tutors/js/ServiceConfigurationHandler.js' %}"></script>
+{% endblock %}
+
 {% block main %}
 <div class="stack-container">
     <div class="navigation link-container">
