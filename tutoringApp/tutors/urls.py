@@ -28,4 +28,14 @@ urlpatterns = [
         view=views.AvailabilityInputView.as_view(),
         name="availability",
     ),
+    path(
+        "services/<int:pk>",
+        view=views.ServiceConfigurationView.as_view(),
+        name="services",
+    ),
+    path(
+        "service/delete/<int:service_id>",
+        view=views.service_delete_view,
+        name="service_delete",
+    ),
 ] + api_endpoints
