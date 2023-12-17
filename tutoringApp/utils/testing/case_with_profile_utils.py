@@ -1,18 +1,9 @@
 """Extenstion of default TestCase with registration of new users."""
+from profiles.models import Education, Language, Profile, ProfileLanguageList, School
+from tutors.models import Service, Subject
+
 from .case_with_user_utils import TestCaseUserUtils
 
-from profiles.models import (
-    Education,
-    Language,
-    Profile,
-    ProfileLanguageList,
-    School,
-)
-
-from tutors.models import (
-    Service,
-    Subject,
-)
 
 def create_school_objects() -> None:
     """Create sample instances of the School object.
@@ -26,6 +17,7 @@ def create_school_objects() -> None:
     school2 = School(name="School2", country="Country", city="City")
     school2.save()
 
+
 def create_language_objects() -> None:
     """Create sample instances of the Language object.
 
@@ -38,6 +30,7 @@ def create_language_objects() -> None:
     language2 = Language(name="German")
     language2.save()
 
+
 def create_subject_objects() -> None:
     """Create sample instances of the Subject object.
 
@@ -49,12 +42,16 @@ def create_subject_objects() -> None:
     subject1.save()
     subject2 = Subject(name="English", category=0)
     subject2.save()
+    subject3 = Subject(name="Physics", category=1)
+    subject3.save()
+    subject4 = Subject(name="History", category=3)
+    subject4.save()
 
 
 class TestCaseProfileUtils(TestCaseUserUtils):
     """Extension of TestCaseUserUtils class to add method for creating Profile-related objects.
 
-    The extension allows for registering users, creating Profile 
+    The extension allows for registering users, creating Profile
     objects and instances of other related models.
     """
 
@@ -172,17 +169,17 @@ class TestCaseProfileUtils(TestCaseUserUtils):
 
     def create_profile(self, username: str, student: bool) -> None:
         """Register user and create instances of Profile-related models.
-        
-        The method registers a new user which at the same time 
+
+        The method registers a new user which at the same time
         creates a corresponding instance of the Profile object.
-        Depending on the type of profile created, additional 
+        Depending on the type of profile created, additional
         objects related to that profile are instantiated (Education,
         ProfileLanguageList and Service)
 
         Args:
             username: Username for the User object that will be created.
-            student: Boolean flag indicating whether the profile should be 
-                    created for a student. 
+            student: Boolean flag indicating whether the profile should be
+                    created for a student.
         """
         self._register_user(username=username, student=student)
 
