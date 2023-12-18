@@ -522,3 +522,10 @@ div.centered_button_container {
 div.hidden {
     display: none;
 }
+
+/* FORM ERRORS */
+
+div.form_error {
+    font-size: 0.85rem;
+    color: var(--gray-red-dark);
+}
