@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.db import IntegrityError
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -22,6 +23,7 @@ LOGGER = getLogger(__name__)
 class ServiceConfigurationView(DetailView, ProcessFormView, LoginRequiredMixin):
     model = Profile
     service_formset_errors = False
+    service_formset_unique_error = False
     template_name = "tutors/services.html"
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
@@ -31,6 +33,10 @@ class ServiceConfigurationView(DetailView, ProcessFormView, LoginRequiredMixin):
         context["service_formset"] = service_formset(instance=self.get_object())
 
         context["service_formset_errors"] = self._check_for_service_formset_errors()
+
+        context[
+            "service_formset_unique_error"
+        ] = self._check_for_service_formset_unique_error()
 
         context["currency"] = settings.CURRENCY
 
@@ -86,24 +92,30 @@ class ServiceConfigurationView(DetailView, ProcessFormView, LoginRequiredMixin):
             self.request.POST, instance=self.get_object()
         )
         if filled_service_formset.is_valid():
-            instances = filled_service_formset.save()
-            for instance in instances:
-                instance.is_default = False
-                instance.save()
-        else:
-            self.request.session[
-                "service_formset_errors"
-            ] = filled_service_formset.errors
-            self.service_formset_errors = True
-            LOGGER.warning(
-                "Serivce formset uploaded by %(username)s with id %(id)s contains errors: %(errors)s, %(non_form_errors)s"
-                % {
-                    "username": self.request.user.username,
-                    "id": self.request.user.id,
-                    "errors": filled_service_formset.errors,
-                    "non_form_errors": filled_service_formset.non_form_errors(),
-                }
-            )
+            try:
+                instances = filled_service_formset.save()
+            except IntegrityError:
+                self.request.session[
+                    "service_formset_unique_error"
+                ] = "There are already default Services with 1 session defined."
+                self.service_formset_unique_error = True
+                return
+            if instances:
+                for instance in instances:
+                    instance.is_default = False
+                    instance.save()
+                return
+        self.request.session["service_formset_errors"] = filled_service_formset.errors
+        self.service_formset_errors = True
+        LOGGER.warning(
+            "Serivce formset uploaded by %(username)s with id %(id)s contains errors: %(errors)s, %(non_form_errors)s"
+            % {
+                "username": self.request.user.username,
+                "id": self.request.user.id,
+                "errors": filled_service_formset.errors,
+                "non_form_errors": filled_service_formset.non_form_errors(),
+            }
+        )
 
     def _check_for_service_formset_errors(self) -> Optional[list[dict[str, str]]]:
         """Check if error messages are present in session info.
@@ -117,6 +129,22 @@ class ServiceConfigurationView(DetailView, ProcessFormView, LoginRequiredMixin):
             service_formset_errors = self.request.session.get("service_formset_errors")
             del self.request.session["service_formset_errors"]
             return service_formset_errors
+
+    def _check_for_service_formset_unique_error(self) -> Optional[str]:
+        """Check if errors about unique constraint violation are present in session info.
+
+        Returns:
+            Error message informing that the unique contrainst
+            (only one Service with 1 as the value of `number_of_hours`)
+            has been violated if form with such info has been submitted,
+            None otherwise.
+        """
+        if self.request.session.get("service_formset_unique_error"):
+            service_formset_unique_error = self.request.session.get(
+                "service_formset_unique_error"
+            )
+            del self.request.session["service_formset_unique_error"]
+            return service_formset_unique_error
 
 
 @login_required

@@ -2,7 +2,7 @@
 from django import forms
 
 from profiles.models import Profile
-from tutors.models import Service
+from tutors.models import Service, Subject
 
 
 class ServiceForm(forms.ModelForm):
@@ -26,10 +26,24 @@ class ServiceForm(forms.ModelForm):
         }
 
 
+class ServiceInlineFormset(forms.BaseInlineFormSet):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.pk:
+            for form in self.forms:
+                form.fields["subject"].queryset = (
+                    Subject.objects.filter(service__tutor=self.instance.pk)
+                    .filter(service__is_default=True)
+                    .filter(service__number_of_hours=1)
+                    .distinct()
+                )
+
+
 service_formset = forms.inlineformset_factory(
     parent_model=Profile,
     model=Service,
     form=ServiceForm,
+    formset=ServiceInlineFormset,
     extra=1,
     can_delete=True,
     can_delete_extra=False,

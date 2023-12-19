@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.db.models import Q
 
 from profiles.models import Profile
 from tutors.validators import SessionLengthValidator
@@ -69,6 +70,17 @@ class Service(models.Model):
         default=True,
         help_text="Indicate if its a default, 1 session service that is created when adding the subject when the profile is created.",
     )
+
+    class Meta:
+        constraints = [
+            # models.UniqueConstraint(fields=["subject", "tutor"], condition=Q(is_default=True), name="one_default", violation_error_message="One default"),
+            models.UniqueConstraint(
+                fields=["subject", "tutor"],
+                condition=Q(number_of_hours=1),
+                name="only_default_services_with_1_session",
+                violation_error_message="One service with one sessions",
+            ),
+        ]
 
     def __str__(self) -> str:
         """String representation fo the model's instance."""

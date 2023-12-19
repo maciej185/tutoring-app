@@ -33,6 +33,11 @@
                     <div class="services-main-list-management_form hidden">
                         {{ service_formset.management_form }}
                     </div>
+                    {% if service_formset_unique_error %}
+                        <div class="services-main-list-errors form_error">
+                            {{service_formset_unique_error}}
+                        </div>
+                        {% endif %}
                     {% for service_form in service_formset %}
                         {% if service_form.instance.pk %}
                             <div class="services-main-list-service box box-main_padded">
