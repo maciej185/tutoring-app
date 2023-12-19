@@ -1,10 +1,12 @@
 from datetime import datetime, timedelta
 
+from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Q
 
 from profiles.models import Profile
+from tutors.time_range import TimeRange
 from tutors.validators import SessionLengthValidator
 
 # Create your models here.
@@ -109,6 +111,36 @@ class Availability(models.Model):
             fields from the related `Service` object.
         """
         return self.start + timedelta(minutes=self.service.session_length)
+
+    @property
+    def time_range(self) -> TimeRange:
+        """Display the Availability object as TimeRange instance.
+
+        Returns:
+            TimeRange instance created based on the start time
+            and session duration defined in the related `Service`
+            model instance.
+        """
+        return TimeRange.from_start_and_duration(
+            self.start, timedelta(minutes=self.service.session_length)
+        )
+
+    def clean(self) -> None:
+        """Ensure no new Availability objects can be created in an already taken time slot."""
+        availabilites = Availability.objects.filter(service__tutor=self.service.tutor)
+        start_time_range = TimeRange.from_start_and_duration(
+            self.start, timedelta(minutes=self.service.session_length)
+        )
+        if any(
+            [
+                (start_time_range in availability.time_range)
+                for availability in availabilites
+            ]
+        ):
+            raise ValidationError(
+                "There is an Availability object with a conflicting time slot already in the database."
+            )
+        return super().clean()
 
     def __str__(self) -> str:
         """String representation fo the model's instance."""

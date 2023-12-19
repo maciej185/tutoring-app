@@ -56,7 +56,9 @@ class AvailabilityFormsHandler {
                 this.addAvailabilityEndInputs[btnsIndex].value = null
                 this.hideWarning(btnsIndex)
             } else {
-                this.displayWarning(btnsIndex, "Server issue, try again!")
+                const resData = await createAvailabilityObjectResponse.json()
+                const warningMessage = "non_field_errors" in resData ? resData["non_field_errors"] : "Server issue, try again!"
+                this.displayWarning(btnsIndex, warningMessage)
             }
         }).bind(this)()
     }
