@@ -13,6 +13,11 @@ div.status-entry-bottom_green {
     font-size: 0.7rem;
 }
 
+div.status-entry-bottom_orange {
+    color: orange;
+    font-size: 0.7rem;
+}
+
 div.status-entry-bottom_red {
     color: var(--gray-red-medium);
     font-size: 0.7rem;
@@ -27,11 +32,6 @@ div.lesson-left-summary-main-title {
     font-size: 1.25rem;
     font-weight: 500;
     color: var(--gray-bluegreen-extra-dark)
-}
-
-div.lesson-left-status-main {
-    display: flex;
-    justify-content: space-between;
 }
 
 div.lesson-right {

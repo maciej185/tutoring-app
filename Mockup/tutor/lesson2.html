@@ -60,7 +60,12 @@
                     </div>  
                     <div class="header-right-dropdown-item">
                         <a href="./tutor_learning.html">
-                            Lessons
+                            Learning
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./booked_sessions.html">
+                            Bookings
                         </a>
                     </div>
                     <div class="header-right-dropdown-item">
@@ -76,11 +81,6 @@
         </header>
         <main>
             <div class="wrap stack-container_small">
-                <div class="edit adjacent-container">
-                    <div class="edit-btn button_fill_green">
-                        Edit
-                    </div>
-                </div>
                 <div class="lesson">   
                     <div class="lesson-left">
                         <div class="lesson-left-summary box">
@@ -135,28 +135,32 @@
                             <div class="lesson-left-status-header box-header">
                                 Status
                             </div>
-                            <div class="lesson-left-status-main box-main_padded">
-                                <table class="lesson-left-status-main-table main-table">
-                                    <tr class="lesson-left-status-main-table-row main-table-row">
-                                        <td class="lesson-left-status-main-table-cell main-table-cell">
-                                            <div class="lesson-left-status-main-table-cell-top main-table-cell-top">
-                                                Status
-                                            </div>
-                                            <div class="lesson-left-status-main-table-cell-bottom main-table-cell-bottom">
-                                                Completed
-                                            </div>
-                                        </td>
-                                        <td class="lesson-left-status-main-table-cell main-table-cell">
-                                            <div class="lesson-left-status-main-table-cell-top main-table-cell-top">
-                                                Tasks
-                                            </div>
-                                            <div class="lesson-left-status-main-table-cell-bottom main-table-cell-bottom">
-                                                Done
-                                            </div>
-                                        </td>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <div class="lesson-left-status-main box-main_padded stack-container">
+                                <div class="lesson-left-status-main-entry status-entry">
+                                    <div class="lesson-left-status-main-entry-top status-entry-top">
+                                        Status
+                                    </div>
+                                    <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green">
+                                        <select class="lesson-left-status-main-table-cell-bottom-select options">
+                                            <option>Have not taken place yet</option>
+                                            <option>In progress</option>
+                                            <option>Over</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="lesson-left-status-main-entry">
+                                    <div class="lesson-left-status-main-entry-top status-entry-top">
+                                        Tasks
+                                    </div>
+                                    <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green">
+                                        Done
+                                    </div>
+                                </div>
+                                <div class="lesson-left-status-main-entry">
+                                    <div class="lesson-left-status-main-entry-absence button_fill_red">
+                                        Student was not present
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="lesson-left-subject box">
@@ -382,13 +386,17 @@
                             <div class="lesson-right-status-header box-header">
                                 Status
                             </div>
-                            <div class="lesson-right-status-main box-main_padded">
+                            <div class="lesson-left-status-main box-main_padded stack-container">
                                 <div class="lesson-left-status-main-entry status-entry">
                                     <div class="lesson-left-status-main-entry-top status-entry-top">
                                         Status
                                     </div>
                                     <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green">
-                                        Completed
+                                        <select class="lesson-left-status-main-table-cell-bottom-select options">
+                                            <option>Have not taken place yet</option>
+                                            <option>In progress</option>
+                                            <option>Over</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="lesson-left-status-main-entry">
@@ -397,6 +405,11 @@
                                     </div>
                                     <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green">
                                         Done
+                                    </div>
+                                </div>
+                                <div class="lesson-left-status-main-entry">
+                                    <div class="lesson-left-status-main-entry-absence button_fill_red">
+                                        Student was not present
                                     </div>
                                 </div>
                             </div>

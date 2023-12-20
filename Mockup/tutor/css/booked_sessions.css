@@ -1,0 +1,33 @@
+main > div {
+    padding-left: unset;
+    padding-right: unset;
+}
+
+div.sessions-filters {
+    padding: 1rem;
+    align-items: center;
+}
+
+div.sessions-list-main-session-left_top-tutor {
+    font-size: 1.125rem;
+    color:var(--gray-bluegreen-extra-dark)
+}
+
+@media(min-width: 800px) {
+    main {
+        width: 60%;
+    }
+
+    main > div {
+        padding: 1rem;
+    }
+
+    div.sessions-filters {
+        padding: unset;
+    }
+
+    div.sessions-list-main-session {
+        justify-content: space-between;
+        align-items: center;
+    }
+}
