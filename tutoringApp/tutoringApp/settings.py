@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "tutors.apps.TutorsConfig",
     "rest_framework",
+    "lessons.apps.LessonsConfig",
 ]
 
 MIDDLEWARE = [
