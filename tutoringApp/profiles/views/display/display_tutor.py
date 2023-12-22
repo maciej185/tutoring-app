@@ -141,6 +141,7 @@ class DisplayTutorProfileView(DisplayProfileView):
                                 start__year=date.year,
                                 start__month=date.month,
                                 start__day=date.day,
+                                booking__pk=None,
                             )
                             for date in self._get_week_days(week)
                         ]
