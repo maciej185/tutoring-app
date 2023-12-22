@@ -22,8 +22,11 @@ def create_booking_view(request: HttpRequest, availability_id: int) -> HttpRespo
     In case of GET there is a check made to ensure the requestor
     is a Student and if so, a confirmation page is rendered. In
     other case, the requesting Tutor is warned and redirected to
-    the home page. The view also checks if the related Availavility
-    object does exist. If not, a page with a warning message is displayed.
+    the home page. Another check is made to ensure that a related
+    Availability object does exist. If not, a page with a warning
+    message is displayed. Finally, the view checks if a Booking
+    object related to an Availability with provided primary key
+    already exists.
 
     Args:
         request: An instance of the HttpRequest class, containing
@@ -36,7 +39,9 @@ def create_booking_view(request: HttpRequest, availability_id: int) -> HttpRespo
         profile after successful booking or Tutors to a page with a warning
         message in case of POST request. In case of GET, a booking confirmation
         page is displayed if the related Availability object does exist. In other case,
-        a page with a warning message is displayed.
+        a page with a warning message is displayed. Response with redirection to a
+        warning page is also displayed if a Booking object related to provided
+        Availability already exists.
     """
     if request.method == "GET":
         profile = Profile.objects.get(user=request.user)
@@ -59,6 +64,7 @@ def create_booking_view(request: HttpRequest, availability_id: int) -> HttpRespo
                     "redirect_destination": "home page",
                 },
             )
+
         try:
             Availability.objects.get(pk=availability_id)
         except Availability.DoesNotExist:
@@ -72,18 +78,35 @@ def create_booking_view(request: HttpRequest, availability_id: int) -> HttpRespo
                     "redirect_destination": "home page",
                 },
             )
+
         availability = Availability.objects.get(pk=availability_id)
-        return render(
-            request,
-            "booking/create.html",
-            context={
-                "availability": availability,
-                "tutor_profile": reverse(
-                    "profiles:tutor_display",
-                    kwargs={"pk": availability.service.tutor.pk},
-                ),
-            },
-        )
+        try:
+            Booking.objects.get(availability=availability)
+            return render(
+                request=request,
+                template_name="tutoringApp/forbidden.html",
+                status=404,
+                context={
+                    "warning_message": "Booking related to Availability with provided ID already exists.",
+                    "redirect_link": reverse(
+                        "profiles:tutor_display",
+                        kwargs={"pk": availability.service.tutor.pk},
+                    ),
+                    "redirect_destination": "tutor's profile",
+                },
+            )
+        except Booking.DoesNotExist:
+            return render(
+                request,
+                "booking/create.html",
+                context={
+                    "availability": availability,
+                    "tutor_profile": reverse(
+                        "profiles:tutor_display",
+                        kwargs={"pk": availability.service.tutor.pk},
+                    ),
+                },
+            )
     elif request.method == "POST":
         lesson = Lesson()
         lesson.save()
