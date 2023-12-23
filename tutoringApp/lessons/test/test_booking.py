@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 
 from django.urls import reverse
 from freezegun import freeze_time
+from parameterized import parameterized
 
 from lessons.models import Booking, Lesson
 from profiles.models import Profile
@@ -34,13 +35,14 @@ class TestBooking(TestCaseServiceUtils):
 
         self.assertEqual(res.status_code, 200)
 
+    @freeze_time(NOW)
     def test_availability_object_exists_post_request_sent_booking_object_created(self):
         self._register_user("tutor1", student=False)
         tutor = Profile.objects.get(user__username="tutor1")
         self._create_service_objects(profile=tutor)
         service1 = Service.objects.get(pk=1)
         self._create_availiability_object(
-            service=service1, start=datetime(2023, 12, 12, 8, 0, tzinfo=timezone.utc)
+            service=service1, start=datetime(2023, 12, 20, 8, 0, tzinfo=timezone.utc)
         )
         self._register_user("student1")
         self.client.logout()
@@ -55,13 +57,14 @@ class TestBooking(TestCaseServiceUtils):
         self.assertEqual(res.status_code, 302)
         self.assertEqual(len(Booking.objects.all()), 1)
 
+    @freeze_time(NOW)
     def test_availability_object_exists_post_request_sent_lesson_object_created(self):
         self._register_user("tutor1", student=False)
         tutor = Profile.objects.get(user__username="tutor1")
         self._create_service_objects(profile=tutor)
         service1 = Service.objects.get(pk=1)
         self._create_availiability_object(
-            service=service1, start=datetime(2023, 12, 12, 8, 0, tzinfo=timezone.utc)
+            service=service1, start=datetime(2023, 12, 20, 8, 0, tzinfo=timezone.utc)
         )
         self._register_user("student1")
         self.client.logout()
@@ -76,7 +79,9 @@ class TestBooking(TestCaseServiceUtils):
         self.assertEqual(res.status_code, 302)
         self.assertEqual(len(Lesson.objects.all()), 1)
 
-    def test_user_is_tutor_warning_page_displayed(self):
+    @parameterized.expand(["GET", "POST"])
+    @freeze_time(NOW)
+    def test_user_is_tutor_warning_page_displayed(self, request_type):
         self._register_user("tutor1", student=False)
         tutor = Profile.objects.get(user__username="tutor1")
         self._create_service_objects(profile=tutor)
@@ -88,9 +93,14 @@ class TestBooking(TestCaseServiceUtils):
         self.client.logout()
         self.client.login(username="tutor2", password="haslo123")
 
-        res = self.client.get(
-            reverse("lessons:booking_create", kwargs={"availability_id": 1})
-        )
+        if request_type == "GET":
+            res = self.client.get(
+                reverse("lessons:booking_create", kwargs={"availability_id": 1})
+            )
+        elif request_type == "POST":
+            res = self.client.get(
+                reverse("lessons:booking_create", kwargs={"availability_id": 1})
+            )
 
         self.assertEqual(res.status_code, 403)
         self.assertContains(
@@ -99,12 +109,20 @@ class TestBooking(TestCaseServiceUtils):
             status_code=403,
         )
 
-    def test_availability_object_does_not_exist_warning_page_displayed(self):
+    @parameterized.expand(["GET", "POST"])
+    def test_availability_object_does_not_exist_warning_page_displayed(
+        self, request_type
+    ):
         self._register_user("student1")
 
-        res = self.client.get(
-            reverse("lessons:booking_create", kwargs={"availability_id": 1})
-        )
+        if request_type == "GET":
+            res = self.client.get(
+                reverse("lessons:booking_create", kwargs={"availability_id": 1})
+            )
+        elif request_type == "POST":
+            res = self.client.get(
+                reverse("lessons:booking_create", kwargs={"availability_id": 1})
+            )
 
         self.assertEqual(res.status_code, 404)
         self.assertContains(
@@ -113,13 +131,17 @@ class TestBooking(TestCaseServiceUtils):
             status_code=404,
         )
 
-    def test_booking_relating_to_given_availability_exists_warning_page_displayed(self):
+    @parameterized.expand(["GET", "POST"])
+    @freeze_time(NOW)
+    def test_booking_relating_to_given_availability_exists_warning_page_displayed(
+        self, request_type
+    ):
         self._register_user("tutor1", student=False)
         tutor = Profile.objects.get(user__username="tutor1")
         self._create_service_objects(profile=tutor)
         service1 = Service.objects.get(pk=1)
         self._create_availiability_object(
-            service=service1, start=datetime(2023, 12, 12, 8, 0, tzinfo=timezone.utc)
+            service=service1, start=datetime(2023, 12, 20, 8, 0, tzinfo=timezone.utc)
         )
         self._register_user("student1")
         self.client.logout()
@@ -133,19 +155,25 @@ class TestBooking(TestCaseServiceUtils):
 
         self.assertEqual(res_post.status_code, 302)
 
-        res_get = self.client.get(
-            reverse("lessons:booking_create", kwargs={"availability_id": 1})
-        )
+        if request_type == "GET":
+            res = self.client.get(
+                reverse("lessons:booking_create", kwargs={"availability_id": 1})
+            )
+        elif request_type == "POST":
+            res = self.client.get(
+                reverse("lessons:booking_create", kwargs={"availability_id": 1})
+            )
 
-        self.assertEqual(res_get.status_code, 404)
+        self.assertEqual(res.status_code, 404)
         self.assertContains(
-            res_get,
+            res,
             "Booking related to Availability with provided ID already exists.",
             status_code=404,
         )
 
+    @parameterized.expand(["GET", "POST"])
     @freeze_time(NOW)
-    def test_availability_object_outdated_warning_displayed(self):
+    def test_availability_object_outdated_warning_displayed(self, request_type):
         self._register_user("tutor1", student=False)
         tutor = Profile.objects.get(user__username="tutor1")
         self._create_service_objects(profile=tutor)
@@ -157,9 +185,14 @@ class TestBooking(TestCaseServiceUtils):
         self.client.logout()
         self.client.login(username="student1", password="haslo123")
 
-        res = self.client.get(
-            reverse("lessons:booking_create", kwargs={"availability_id": 1})
-        )
+        if request_type == "GET":
+            res = self.client.get(
+                reverse("lessons:booking_create", kwargs={"availability_id": 1})
+            )
+        elif request_type == "POST":
+            res = self.client.get(
+                reverse("lessons:booking_create", kwargs={"availability_id": 1})
+            )
 
         self.assertEqual(res.status_code, 403)
         self.assertContains(
