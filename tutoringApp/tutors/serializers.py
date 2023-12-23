@@ -1,5 +1,5 @@
 """Serializers for models from the `Tutors` app."""
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 from rest_framework import serializers
@@ -34,14 +34,17 @@ class AvailabilitySerializer(serializers.ModelSerializer):
         The method fetches all Availability objects for a tutor
         related to Service whose PK has been sent in the request
         and checks if the provided time does not conflict with any
-        of the already existing Availability objects.
+        of the already existing Availability objects. An additional
+        check to ensure the entire session lies in the future is also
+        made.
 
         Args:
             data: Dictionary of field values.
 
         Raises:
             serializers.ValidationError when an Availability object with a conflicting
-            time is already present in the database.
+            time is already present in the database or when the end of the tutoring
+            session falls in the past.
 
         Returns:
             Initial dictionary of field values if no error was raised.
@@ -61,4 +64,11 @@ class AvailabilitySerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 "There is an Availability object with a conflicting time slot already in the database."
             )
+        if (
+            data["start"] + timedelta(minutes=data["service"].session_length)
+        ) < datetime.now(tz=timezone.utc):
+            raise serializers.ValidationError(
+                "Given time slot falls in the past. Please input valid start time."
+            )
+
         return data
