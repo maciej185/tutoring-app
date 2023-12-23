@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            TutoringApp, Bookings
+        </title>
+        <link rel="stylesheet" href="../base.css">
+        <link rel="stylesheet" href="../generals.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/booked_sessions.css">
+    </head>
+    <body>
+        <header>
+            <div class="header-left header-side">
+                <div class="header-left-logo">
+                    <a href="./home.html">
+                        <h2>
+                            TutorApp
+                        </h2>
+                    </a>
+                    
+                </div>
+                <div class="mobile header-left-search header-side-item_mobile">
+                    <div class="header-left-search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="desktop header-left-search header-side-item_desktop">
+                    <input type="text" class="header-left-search-name" id="header-left-search-name">
+                    <button class="header-left-search-button" id="header-left-search-button">
+                        <a href="./search_results.html">
+                            <div class="header-left-search-button-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </button>  
+                </div>
+            </div>
+            <div class="header-right header-side">
+                <input type="checkbox" class="header-right-checkbox" id="header-right-checkbox">
+                <div class="header-right-profile">
+                    <img src="./img/img.jpg">
+                </div>
+                <label for="header-right-checkbox">
+                    <div class="header-right-arrow icon_green">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </label>
+                <div class="header-right-dropdown">
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_profile.html">
+                            Profile
+                        </a>
+                    </div>  
+                    <div class="header-right-dropdown-item">
+                        <a href="./tutor_learning.html">
+                            Learning
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./booked_sessions.html">
+                            Bookings
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-item">
+                        <a href="./chat.html">
+                            Chats
+                        </a>
+                    </div>
+                    <div class="header-right-dropdown-log_out header-right-dropdown-item">
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="sessions stack-container">
+                <div class="sessions-filters stack-adjecent-container">
+                    <div class="sessions-filters-filter">
+                        <select class="sessions-filter-student options">
+                            <option>Student number 1</option>
+                            <option>Student number 2</option>
+                        </select>
+                    </div>
+                    <div class="sessions-filters-filter">
+                        <input class="sessions-filter-from date-input" type="date">
+                    </div>
+                    <div class="sessions-filters-filter">
+                        <input class="sessions-filter-to date-input" type="date">
+                    </div>
+                    <div class="sessions-filters-btn_filter button_fill_green">
+                        Filter
+                    </div>
+                    <div class="sessions-filters-btn_clear button_fill_green">
+                        Clear filter
+                    </div>
+                </div>
+                <div class="sessions-list box">
+                    <div class="sessions-list-header box-header">
+                        Sessions
+                    </div>
+                    <div class="sessions-list-main box-main_padded">
+                        <div class="sessions-list-main-session box box-main_padded stack-adjecent-container">
+                            <div class="sessions-list-main-session-left_top">
+                                <div class="sessions-list-main-session-left_top-tutor link-container">
+                                    <a href="./lesson1.html">
+                                        Student number1
+                                    </a>
+                                </div>
+                                <div class="sessions-list-main-session-left_top-time info-bottom">
+                                    18. Dec 2023, 13:00-14:00
+                                </div>
+                                <div class="sessions-list-main-session-left_top-subject info-top">
+                                    Math
+                                </div>
+                            </div>
+                            <div class="sessions-list-main-session-right_bottom">
+                                <div class="sessions-list-main-session-right_bottom-cancel button_fill_red">
+                                    Cancel
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sessions-list-main-session">
+                            <div class="sessions-list-main-session box box-main_padded stack-adjecent-container">
+                                <div class="sessions-list-main-session-left_top">
+                                    <div class="sessions-list-main-session-left_top-tutor link-container">
+                                        <a href="./lesson1.html">
+                                            Student number1
+                                        </a>
+                                    </div>
+                                    <div class="sessions-list-main-session-left_top-time info-bottom">
+                                        01. Dec 2023, 13:00-14:00
+                                    </div>
+                                    <div class="sessions-list-main-session-left_top-subject info-top">
+                                        Math
+                                    </div>
+                                </div>
+                                <div class="sessions-list-main-session-right_bottom">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sessions-list-main-session">
+                        
+                        </div>
+                        <div class="sessions-list-main-pagination adjacent-container_small centered_button_container">
+                            <div class="sessions-list-main-pagination-arrow_left icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="sessions-list-main-pagination-start icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                    <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </div>
+                            <div class="sessions-list-main-pagination-pages info-top">
+                                2 of 3
+                            </div>
+                            <div class="sessions-list-main-pagination-arrow_end icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                    <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                </svg>
+                            </div>
+                            <div class="sessions-list-main-pagination-arrow_right icon_green">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>
