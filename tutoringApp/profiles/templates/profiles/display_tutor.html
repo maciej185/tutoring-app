@@ -196,11 +196,18 @@
                                         {% for days_availabilites_lists in availabilites_lists %}
                                             <div class="tutor-right-availability-main-calendar-bottom-column">
                                                 {% for availability_object in days_availabilites_lists %}
-                                                    <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open link-container">
-                                                        <a href="{% url 'lessons:booking_create' availability_object.id %}">
-                                                            {% format_start_time availability_object.start %}
-                                                        </a>
+                                                    {% if not availability_object.is_outdated %}
+                                                        <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open link-container">
+                                                            <a href="{% url 'lessons:booking_create' availability_object.id %}">
+                                                                {% format_start_time availability_object.start %}
+                                                            </a>
+                                                        </div>
+                                                    {% else %}
+                                                    <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                                        {% format_start_time availability_object.start %}
                                                     </div>
+                                                    {% endif %}
+
                                                 {% endfor %}
                                             </div>   
                                         {% endfor %} 
@@ -210,9 +217,15 @@
                                         {% for days_availabilites_lists in availabilites_lists %}
                                             <div class="tutor-right-availability-main-calendar-bottom-column">
                                                 {% for availability_object in days_availabilites_lists %}
-                                                    <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
-                                                        {% format_start_time availability_object.start %}
-                                                    </div>
+                                                    {% if not availability_object.is_outdated %}
+                                                        <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                                            {% format_start_time availability_object.start %}
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                                            {% format_start_time availability_object.start %}
+                                                        </div>
+                                                    {% endif %}
                                                 {% endfor %}
                                             </div>   
                                         {% endfor %} 

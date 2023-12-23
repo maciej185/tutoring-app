@@ -19,14 +19,22 @@ def create_booking_view(request: HttpRequest, availability_id: int) -> HttpRespo
 
     The view checks if the request sent is a POST or GET request.
     In case of POST, new Booking and Lesson objects are created.
-    In case of GET there is a check made to ensure the requestor
-    is a Student and if so, a confirmation page is rendered. In
-    other case, the requesting Tutor is warned and redirected to
-    the home page. Another check is made to ensure that a related
-    Availability object does exist. If not, a page with a warning
-    message is displayed. Finally, the view checks if a Booking
-    object related to an Availability with provided primary key
-    already exists.
+    In case of GET there are several checks made:
+        - Checking if currently logged in user is a Student
+            - If yes, confirmation page is rendered.
+            - If not, a page with a warning message and link
+                to home page is returned.
+        - Checking if the related Availability object does exist.
+            - If not, a page with a warning message and link to
+            Tutor's profile is displayed.
+        - Checking if Booking object related to an Availability
+          with provided ID already exists.
+            - If yes, a page with a warning message and link to
+            Tutor's profile is displayed.
+        - Checking if the Availavility object with provided ID
+        is outdated.
+            - If yes, a page with a warning message and link to
+            Tutor's profile is displayed.
 
     Args:
         request: An instance of the HttpRequest class, containing
@@ -41,7 +49,7 @@ def create_booking_view(request: HttpRequest, availability_id: int) -> HttpRespo
         page is displayed if the related Availability object does exist. In other case,
         a page with a warning message is displayed. Response with redirection to a
         warning page is also displayed if a Booking object related to provided
-        Availability already exists.
+        Availability already exists or if the Availability object is outdated.
     """
     if request.method == "GET":
         profile = Profile.objects.get(user=request.user)
@@ -96,17 +104,32 @@ def create_booking_view(request: HttpRequest, availability_id: int) -> HttpRespo
                 },
             )
         except Booking.DoesNotExist:
+            pass
+        if availability.is_outdated:
             return render(
-                request,
-                "booking/create.html",
+                request=request,
+                template_name="tutoringApp/forbidden.html",
+                status=403,
                 context={
-                    "availability": availability,
-                    "tutor_profile": reverse(
+                    "warning_message": "Availability is outdated. Please choose another available time slot.",
+                    "redirect_link": reverse(
                         "profiles:tutor_display",
                         kwargs={"pk": availability.service.tutor.pk},
                     ),
+                    "redirect_destination": "tutor's profile",
                 },
             )
+        return render(
+            request,
+            "booking/create.html",
+            context={
+                "availability": availability,
+                "tutor_profile": reverse(
+                    "profiles:tutor_display",
+                    kwargs={"pk": availability.service.tutor.pk},
+                ),
+            },
+        )
     elif request.method == "POST":
         lesson = Lesson()
         lesson.save()
