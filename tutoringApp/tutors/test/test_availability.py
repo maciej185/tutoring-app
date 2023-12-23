@@ -2,10 +2,13 @@
 from datetime import datetime, timezone
 
 from django.urls import reverse
+from freezegun import freeze_time
 
 from profiles.models import Profile
 from tutors.models import Availability, Service
 from utils.testing import TestCaseServiceUtils
+
+NOW = "2023-12-13 07:59:00"
 
 
 class TestAvailabilityInputView(TestCaseServiceUtils):
@@ -325,7 +328,8 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
             html=True,
         )
 
-    def test_request_sent_availability_object_created(self):
+    @freeze_time(NOW)
+    def test_post_request_sent_availability_object_created(self):
         self._register_user("tutor1", student=False)
         tutor = Profile.objects.get(pk=1)
         self._create_service_objects(profile=tutor)
@@ -348,7 +352,8 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
             availability.start, datetime(2023, 12, 20, 7, 0, tzinfo=timezone.utc)
         )
 
-    def test_request_sent_availability_object_displayed_on_page(self):
+    @freeze_time(NOW)
+    def test_post_request_sent_availability_object_displayed_on_page(self):
         self._register_user("tutor1", student=False)
         tutor = Profile.objects.get(pk=1)
         self._create_service_objects(profile=tutor)
@@ -396,7 +401,7 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
             html=True,
         )
 
-    def test_request_sent_availability_object_deleted(self):
+    def test_delete_request_sent_availability_object_deleted(self):
         self._register_user("tutor1", student=False)
         tutor = Profile.objects.get(pk=1)
         self._create_service_objects(profile=tutor)
@@ -412,7 +417,7 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
 
         self.assertEqual(len(Availability.objects.all()), 1)
 
-    def test_request_sent_availability_object_not_displayed_on_page(self):
+    def test_delete_request_sent_availability_object_not_displayed_on_page(self):
         self._register_user("tutor1", student=False)
         tutor = Profile.objects.get(pk=1)
         self._create_service_objects(profile=tutor)
@@ -459,4 +464,58 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
                             </div>
                         </div>""",
             html=True,
+        )
+
+    @freeze_time(NOW)
+    def test_post_request_sent_conflicting_availability_exists_error_message_returned(
+        self,
+    ):
+        self._register_user("tutor1", student=False)
+        tutor = Profile.objects.get(pk=1)
+        self._create_service_objects(profile=tutor)
+
+        service = Service.objects.get(pk=1)
+        self._create_availiability_object(
+            service=service, start=datetime(2023, 12, 20, 6, 30)
+        )
+
+        res_post = self.client.post(
+            reverse("tutors:availability_create"),
+            data={
+                "service": 1,
+                "start": "2023-12-20 07:00",
+            },
+        )
+
+        self.assertEqual(res_post.status_code, 400)
+        self.assertContains(
+            res_post,
+            "There is an Availability object with a conflicting time slot already in the database.",
+            status_code=400,
+        )
+
+    @freeze_time(NOW)
+    def test_post_request_sent_time_slot_falls_in_the_past_error_message_returned(self):
+        self._register_user("tutor1", student=False)
+        tutor = Profile.objects.get(pk=1)
+        self._create_service_objects(profile=tutor)
+
+        service = Service.objects.get(pk=1)
+        self._create_availiability_object(
+            service=service, start=datetime(2023, 12, 20, 6, 30)
+        )
+
+        res_post = self.client.post(
+            reverse("tutors:availability_create"),
+            data={
+                "service": 1,
+                "start": "2023-12-10 07:00",
+            },
+        )
+
+        self.assertEqual(res_post.status_code, 400)
+        self.assertContains(
+            res_post,
+            "Given time slot falls in the past. Please input valid start time.",
+            status_code=400,
         )
