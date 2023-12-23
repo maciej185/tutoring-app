@@ -1,1 +1,33 @@
 {% extends 'tutoringApp/base_student.html' %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'booking/create.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="confirm box">
+        <div class="confirm-header box-header">
+            Confirmation
+        </div>
+        <div class="confirm-main box-main_padded stack_container">
+            <div class="confirm-main-message">
+                Do you want to confirm the booking?
+            </div>
+            <div class="confirm-main-btns centered_button_container adjacent-container">
+                <form method="post" class="confirm-main-btns-form">
+                    {% csrf_token %}
+                    <button type="submit" class="confirm-main-btns-form-btn button_fill_green">
+                        Confirm
+                    </button>
+                </form>
+                <form action="{{ tutor_profile }}">
+                    {% csrf_token %}
+                    <button type="submit" class="confirm-main-btns-btn button_fill_red">
+                        Cancel
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
