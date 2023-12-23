@@ -163,7 +163,7 @@ class TestCaseProfileUtils(TestCaseUserUtils):
             number_of_hours=10,
             price_per_hour=80,
             session_length=60,
-            is_default=True,
+            is_default=False,
         )
         service3.save()
 
