@@ -10,7 +10,7 @@ from profiles.models import Profile
 from tutors.models import Availability, Service
 from utils.testing import TestCaseServiceUtils
 
-NOW = "2023-12-13"
+NOW = "2023-12-13 07:59:00"
 
 
 class TestDisplayTutorProfile(TestCaseServiceUtils):
@@ -160,13 +160,57 @@ class TestDisplayTutorProfile(TestCaseServiceUtils):
         )
 
     @freeze_time(NOW)
-    def test_user_is_tutor_availability_for_default_service_in_current_period_displayed(
+    def test_user_is_tutor_not_outdated_availability_for_default_service_in_current_period_correctly_displayed(
         self,
     ):
         self._register_user("tutor1", student=False)
         tutor = Profile.objects.get(pk=1)
         self._create_service_objects(profile=tutor)
         service = Service.objects.get(pk=1)
+        self._create_availiability_object(
+            service=service, start=datetime(2023, 12, 12, 6, 0, tzinfo=timezone.utc)
+        )
+        self._create_availiability_object(
+            service=service, start=datetime(2023, 12, 12, 7, 0, tzinfo=timezone.utc)
+        )
+        self._create_availiability_object(
+            service=service, start=datetime(2023, 12, 8, 8, 0, tzinfo=timezone.utc)
+        )
+        self._create_availiability_object(
+            service=service, start=datetime(2023, 12, 22, 9, 0, tzinfo=timezone.utc)
+        )
+        self._create_availiability_object(
+            service=service, start=datetime(2023, 12, 22, 10, 0, tzinfo=timezone.utc)
+        )
+
+        res = self.client.get(reverse("profiles:tutor_display", kwargs={"pk": 1}))
+
+        self.assertContains(
+            res,
+            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                                    09:00
+                                                </div>""",
+            html=True,
+        )
+        self.assertContains(
+            res,
+            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+                                                    10:00
+                                                </div>""",
+            html=True,
+        )
+
+    @freeze_time(NOW)
+    def test_user_is_tutor_outdated_availability_for_default_service_in_current_period__correctly_displayed(
+        self,
+    ):
+        self._register_user("tutor1", student=False)
+        tutor = Profile.objects.get(pk=1)
+        self._create_service_objects(profile=tutor)
+        service = Service.objects.get(pk=1)
+        self._create_availiability_object(
+            service=service, start=datetime(2023, 12, 12, 6, 0, tzinfo=timezone.utc)
+        )
         self._create_availiability_object(
             service=service, start=datetime(2023, 12, 12, 7, 0, tzinfo=timezone.utc)
         )
@@ -181,34 +225,77 @@ class TestDisplayTutorProfile(TestCaseServiceUtils):
 
         self.assertContains(
             res,
-            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                                    06:00
+                                                </div>""",
+            html=True,
+        )
+        self.assertContains(
+            res,
+            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
                                                     07:00
-                                                </div>""",
-            html=True,
-        )
-        self.assertContains(
-            res,
-            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
-                                                    08:00
-                                                </div>""",
-            html=True,
-        )
-        self.assertContains(
-            res,
-            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
-                                                    09:00
                                                 </div>""",
             html=True,
         )
 
     @freeze_time(NOW)
-    def test_user_is_student_availability_for_default_service_in_current_period_displayed(
+    def test_user_is_student_not_outdated_availability_for_default_service_in_current_period_correctly_displayed(
         self,
     ):
         self._register_user("tutor1", student=False)
         tutor = Profile.objects.get(pk=1)
         self._create_service_objects(profile=tutor)
         service = Service.objects.get(pk=1)
+        self._create_availiability_object(
+            service=service, start=datetime(2023, 12, 12, 6, 0, tzinfo=timezone.utc)
+        )
+        self._create_availiability_object(
+            service=service, start=datetime(2023, 12, 12, 7, 0, tzinfo=timezone.utc)
+        )
+        self._create_availiability_object(
+            service=service, start=datetime(2023, 12, 8, 8, 0, tzinfo=timezone.utc)
+        )
+        self._create_availiability_object(
+            service=service, start=datetime(2023, 12, 22, 9, 0, tzinfo=timezone.utc)
+        )
+        self._create_availiability_object(
+            service=service, start=datetime(2023, 12, 22, 10, 0, tzinfo=timezone.utc)
+        )
+        self._register_user("student1")
+        self.client.login(username="student1", password="haslo123")
+
+        res = self.client.get(reverse("profiles:tutor_display", kwargs={"pk": 1}))
+
+        self.assertContains(
+            res,
+            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open link-container">
+                                                        <a href="/lessons/booking/create/4">
+                                                            09:00
+                                                        </a>
+                                                    </div>""",
+            html=True,
+        )
+        self.assertContains(
+            res,
+            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open link-container">
+                                                        <a href="/lessons/booking/create/5">
+                                                            10:00
+                                                        </a>
+                                                    </div>""",
+            html=True,
+        )
+
+    @freeze_time(NOW)
+    def test_user_is_student_outdated_availability_for_default_service_in_current_period_correctly_displayed(
+        self,
+    ):
+        self._register_user("tutor1", student=False)
+        tutor = Profile.objects.get(pk=1)
+        self._create_service_objects(profile=tutor)
+        service = Service.objects.get(pk=1)
+        self._create_availiability_object(
+            service=service, start=datetime(2023, 12, 12, 6, 0, tzinfo=timezone.utc)
+        )
         self._create_availiability_object(
             service=service, start=datetime(2023, 12, 12, 7, 0, tzinfo=timezone.utc)
         )
@@ -225,28 +312,15 @@ class TestDisplayTutorProfile(TestCaseServiceUtils):
 
         self.assertContains(
             res,
-            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open link-container">
-                                                        <a href="/lessons/booking/create/1">
-                                                            07:00
-                                                        </a>
+            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                                        06:00
                                                     </div>""",
             html=True,
         )
         self.assertContains(
             res,
-            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open link-container">
-                                                        <a href="/lessons/booking/create/2">
-                                                            08:00
-                                                        </a>
-                                                    </div>""",
-            html=True,
-        )
-        self.assertContains(
-            res,
-            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open link-container">
-                                                        <a href="/lessons/booking/create/3">
-                                                            09:00
-                                                        </a>
+            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                                        07:00
                                                     </div>""",
             html=True,
         )
@@ -419,7 +493,7 @@ class TestDisplayTutorProfile(TestCaseServiceUtils):
 
         self.assertContains(
             res,
-            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open">
+            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
                                                     07:00
                                                 </div>""",
             html=True,
@@ -475,10 +549,8 @@ class TestDisplayTutorProfile(TestCaseServiceUtils):
 
         self.assertContains(
             res,
-            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_open link-container">
-                                                        <a href="/lessons/booking/create/1">
-                                                            07:00
-                                                        </a>
+            """<div class="tutor-right-availability-main-calendar-bottom-column-item tutor-right-availability-main-calendar-bottom-column-item_closed">
+                                                        07:00
                                                     </div>""",
             html=True,
         )

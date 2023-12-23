@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -141,6 +141,17 @@ class Availability(models.Model):
                 "There is an Availability object with a conflicting time slot already in the database."
             )
         return super().clean()
+
+    @property
+    def is_outdated(self) -> bool:
+        """Ensure Availability is not outdated.
+
+        Returns:
+            Information about whether the value of `start` field
+            does not lie before the current time, with duration
+            of the tutoring session included.
+        """
+        return self.end < datetime.now(tz=timezone.utc)
 
     def __str__(self) -> str:
         """String representation fo the model's instance."""
