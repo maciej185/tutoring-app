@@ -13,6 +13,10 @@ div.sessions-list-main-session-left_top-tutor {
     color:var(--gray-bluegreen-extra-dark)
 }
 
+div#sessions-filters-btn_filter, div#sessions-filters-btn_clear {
+    display: none;
+}
+
 @media(min-width: 800px) {
     main {
         width: 60%;
