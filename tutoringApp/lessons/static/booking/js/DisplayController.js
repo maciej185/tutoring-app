@@ -26,7 +26,11 @@ class DisplayController {
 
     profileSelectSelectEventListener(e) {
         const profile = e.currentTarget.value
-        this.urlQueryParams.set("profile", profile)
+        if (profile) {
+            this.urlQueryParams.set("profile", profile)
+        } else {
+            this.urlQueryParams.delete("profile")
+        }
         this.filterLink.setAttribute("href", `?${this.urlQueryParams.toString()}`)
 
         this.setFilterBtnDisplay()
@@ -34,7 +38,11 @@ class DisplayController {
 
     dateInputFromInputEventListener(e) {
         const from = e.currentTarget.value
-        this.urlQueryParams.set("from", from)
+        if (from) {
+            this.urlQueryParams.set("from", from)
+        } else {
+            this.urlQueryParams.delete("from")
+        }
         this.filterLink.setAttribute("href", `?${this.urlQueryParams.toString()}`)
 
         this.setFilterBtnDisplay()
@@ -42,7 +50,11 @@ class DisplayController {
 
     dateInputToInputEventListener(e) {
         const to = e.currentTarget.value
-        this.urlQueryParams.set("to", to)
+        if (to) {
+            this.urlQueryParams.set("to", to)
+        } else {
+            this.urlQueryParams.delete("to")
+        }
         this.filterLink.setAttribute("href", `?${this.urlQueryParams.toString()}`)
 
         this.setFilterBtnDisplay()

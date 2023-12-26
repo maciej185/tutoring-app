@@ -9,7 +9,7 @@
     <div class="sessions-filters stack-adjecent-container">
         <div class="sessions-filters-filter">
             <div class="sessions-filters-filter-label info-top">
-                {% if is_student%}
+                {% if is_student %}
                     Tutor
                 {% else %}
                     Student
@@ -51,7 +51,7 @@
                     Clear filter
                 </a>
             {% else %}
-                <a href="#">
+                <a href="{% url 'lessons:booking_display_tutor' %}">
                     Clear filter
                 </a>
             {% endif %}
