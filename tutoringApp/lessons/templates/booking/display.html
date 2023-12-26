@@ -1,26 +1,60 @@
 {% load booking_extras %}
 
+{% block script %}
+    {% load static %}
+    <script defer src="{% static 'booking/js/DisplayController.js' %}"></script>
+{% endblock %}
+
 <div class="sessions stack-container">
     <div class="sessions-filters stack-adjecent-container">
         <div class="sessions-filters-filter">
-            <select class="sessions-filter-tutor options" id="sessions-filter-tutor">
-                <option></option>
-                {% for profile_filter in profile_filter_list %}
-                    <option value="{{profile_filter.id}}">{{profile_filter.user.username}}</option>
-                {% endfor %}
-            </select>
+            <div class="sessions-filters-filter-label info-top">
+                {% if is_student%}
+                    Tutor
+                {% else %}
+                    Student
+                {% endif %}
+            </div>
+            <div class="sessions-filters-filter-input">
+                <select class="sessions-filter-tutor options" id="sessions-filter-profile">
+                    <option></option>
+                    {% for profile_filter in profile_filter_list %}
+                        <option value="{{profile_filter.user.id}}">{{profile_filter.user.username}}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
         <div class="sessions-filters-filter">
-            <input class="sessions-filter-from date-input" type="date" id="sessions-filter-from">
+            <div class="sessions-filters-filter-label info-top">
+                From
+            </div>
+            <div class="sessions-filters-filter-input">
+                <input class="sessions-filter-from date-input" type="date" id="sessions-filter-from">
+            </div>
         </div>
         <div class="sessions-filters-filter">
-            <input class="sessions-filter-to date-input" type="date" id="sessions-filter-to">
+            <div class="sessions-filters-filter-label info-top">
+                To
+            </div>
+            <div class="sessions-filters-filter-input">
+                <input class="sessions-filter-to date-input" type="date" id="sessions-filter-to">
+            </div>            
         </div>
-        <div class="sessions-filters-btn_filter button_fill_green">
-            Filter
+        <div class="sessions-filters-btn_filter button_fill_green" id="sessions-filters-btn_filter">
+            <a href="#" class="sessions-filters-btn_filter-link" id="sessions-filters-btn_filter-link">
+                Filter
+            </a>
         </div>
-        <div class="sessions-filters-btn_clear button_fill_green">
-            Clear filter
+        <div class="sessions-filters-btn_clear button_fill_green" id="sessions-filters-btn_clear">
+            {% if is_student %}
+                <a href="{% url 'lessons:booking_display_student' %}">
+                    Clear filter
+                </a>
+            {% else %}
+                <a href="#">
+                    Clear filter
+                </a>
+            {% endif %}
         </div>
     </div>
     <div class="sessions-list box">
