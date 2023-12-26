@@ -14,4 +14,9 @@ urlpatterns = [
         view=views.BookingsDisplay4Student.as_view(),
         name="booking_display_student",
     ),
+    path(
+        "booking/display/tutor",
+        view=views.BookingsDisplay4Tutor.as_view(),
+        name="booking_display_tutor",
+    ),
 ]
