@@ -1,0 +1,96 @@
+{% load booking_extras %}
+
+<div class="sessions stack-container">
+    <div class="sessions-filters stack-adjecent-container">
+        <div class="sessions-filters-filter">
+            <select class="sessions-filter-tutor options" id="sessions-filter-tutor">
+                <option></option>
+                {% for profile_filter in profile_filter_list %}
+                    <option value="{{profile_filter.id}}">{{profile_filter.user.username}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="sessions-filters-filter">
+            <input class="sessions-filter-from date-input" type="date" id="sessions-filter-from">
+        </div>
+        <div class="sessions-filters-filter">
+            <input class="sessions-filter-to date-input" type="date" id="sessions-filter-to">
+        </div>
+        <div class="sessions-filters-btn_filter button_fill_green">
+            Filter
+        </div>
+        <div class="sessions-filters-btn_clear button_fill_green">
+            Clear filter
+        </div>
+    </div>
+    <div class="sessions-list box">
+        <div class="sessions-list-header box-header">
+            Sessions
+        </div>
+        <div class="sessions-list-main box-main_padded">
+            {% for booking in page_obj %}
+                <div class="sessions-list-main-session box box-main_padded stack-adjecent-container">
+                    <div class="sessions-list-main-session-left_top">
+                        <div class="sessions-list-main-session-left_top-tutor link-container">
+                            {% render_booking_title booking is_student %}
+                        </div>
+                        <div class="sessions-list-main-session-left_top-time info-bottom">
+                            {% render_availability_time_slot booking.availability %}
+                        </div>
+                        <div class="sessions-list-main-session-left_top-subject info-top">
+                            {{ booking.availability.service.subject }}
+                        </div>
+                    </div>
+                    <div class="sessions-list-main-session-right_bottom">
+                        {% if is_student and not booking.availability.is_outdated %}
+                            <div class="sessions-list-main-session-right_bottom-cancel button_fill_red">
+                                <a href="#">
+                                    Cancel
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="sessions-list-main-pagination adjacent-container_small centered_button_container">
+                {% if page_obj.has_previous %}
+                    <div class="sessions-list-main-pagination-arrow_left icon_green">
+                        <a href="?page=1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="sessions-list-main-pagination-start icon_green">
+                        <a href="?page={{ page_obj.previous_page_number }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </a>
+                    </div>
+                {% endif %}
+                <div class="sessions-list-main-pagination-pages info-top">
+                    {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </div>
+                {% if page_obj.has_next %}
+                    <div class="sessions-list-main-pagination-arrow_end icon_green">
+                        <a href="?page={{ page_obj.next_page_number }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="sessions-list-main-pagination-arrow_right icon_green">
+                        <a href="?page={{ page_obj.paginator.num_pages }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
