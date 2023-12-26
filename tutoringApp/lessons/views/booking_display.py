@@ -4,6 +4,8 @@ from typing import Any
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.db.models.query import QuerySet
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic.list import ListView
 
 from lessons.models import Booking
@@ -78,6 +80,13 @@ class BookingsDisplay4Student(BookingsDisplay):
             student=Profile.objects.get(user=self.request.user), *filters
         ).order_by("-availability__start")
 
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        """Ensure the user is redirected to correect Booking display page based on account type."""
+        profile = Profile.objects.get(user=request.user)
+        if not profile.is_student():
+            return HttpResponseRedirect(reverse("lessons:booking_display_tutor"))
+        return super().get(request, *args, **kwargs)
+
 
 class BookingsDisplay4Tutor(BookingsDisplay):
     """Display booking objects for a Tutor."""
@@ -118,3 +127,10 @@ class BookingsDisplay4Tutor(BookingsDisplay):
             availability__service__tutor=Profile.objects.get(user=self.request.user),
             *filters
         ).order_by("-availability__start")
+
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        """Ensure the user is redirected to correect Booking display page based on account type."""
+        profile = Profile.objects.get(user=request.user)
+        if profile.is_student():
+            return HttpResponseRedirect(reverse("lessons:booking_display_student"))
+        return super().get(request, *args, **kwargs)
