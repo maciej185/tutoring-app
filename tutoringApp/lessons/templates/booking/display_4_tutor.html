@@ -1,0 +1,14 @@
+{% extends 'tutoringApp/base_tutor.html' %}
+
+{% block title %}
+    Booked sessions
+{% endblock %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'booking/css/display.css' %}">
+{% endblock %}
+
+{% block main %}
+    {% include 'booking/display.html' %}
+{% endblock %}
