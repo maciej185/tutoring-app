@@ -78,7 +78,7 @@
                     <div class="sessions-list-main-session-right_bottom">
                         {% if is_student and not booking.availability.is_outdated %}
                             <div class="sessions-list-main-session-right_bottom-cancel button_fill_red">
-                                <a href="#">
+                                <a href="{% url 'lessons:booking_delete' booking.id %}">
                                     Cancel
                                 </a>
                             </div>

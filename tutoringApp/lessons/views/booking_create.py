@@ -210,6 +210,4 @@ def create_booking_view(request: HttpRequest, availability_id: int) -> HttpRespo
             availability=Availability.objects.get(pk=availability_id),
         )
         booking.save()
-        return HttpResponseRedirect(
-            reverse("lessons:booking_display_student")
-        )
+        return HttpResponseRedirect(reverse("lessons:booking_display_student"))

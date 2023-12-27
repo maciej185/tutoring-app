@@ -55,7 +55,7 @@ class BookingDeleteView(DeleteView, LoginRequiredMixin):
                 template_name="tutoringApp/forbidden.html",
                 status=403,
                 context={
-                    "warning_message": "You are not allowe to delete another Student's Booking.",
+                    "warning_message": "You are not allowed to delete another Student's Booking.",
                     "redirect_link": reverse("home:home"),
                     "redirect_destination": "home page",
                 },
@@ -78,6 +78,6 @@ class BookingDeleteView(DeleteView, LoginRequiredMixin):
                 context={
                     "warning_message": "The Availability object related to the current Booking is outdated.",
                     "redirect_link": reverse("lessons:booking_display_student"),
-                    "redirect_destination": "your Bookings.",
+                    "redirect_destination": "your Bookings",
                 },
             )
