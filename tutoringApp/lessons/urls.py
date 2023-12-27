@@ -19,4 +19,9 @@ urlpatterns = [
         view=views.BookingsDisplay4Tutor.as_view(),
         name="booking_display_tutor",
     ),
+    path(
+        "booking/delete/<int:pk>",
+        view=views.BookingDeleteView.as_view(),
+        name="booking_delete",
+    ),
 ]
