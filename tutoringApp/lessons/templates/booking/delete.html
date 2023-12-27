@@ -1,0 +1,38 @@
+{% extends 'tutoringApp/base_student.html' %}
+
+{% block title %}
+    Delete Booking
+{% endblock %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'booking/css/delete.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="confirm box">
+        <div class="confirm-header box-header">
+            Confirmation
+        </div>
+        <div class="confirm-main box-main_padded stack_container">
+            <div class="confirm-main-message">
+                Do you want to delete the booking?
+            </div>
+            <div class="confirm-main-btns centered_button_container adjacent-container">
+                <form method="post" class="confirm-main-btns-form">
+                    {% csrf_token %}
+                    {{form}}
+                    <button type="submit" class="confirm-main-btns-form-btn button_fill_green">
+                        Confirm
+                    </button>
+                </form>
+                <form action="{% url 'lessons:booking_display_student' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="confirm-main-btns-btn button_fill_red">
+                        Cancel
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
