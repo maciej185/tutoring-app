@@ -36,7 +36,7 @@ class TestBookingDisplayTutor(TestCaseBookingeUtils):
         res = self.client.get(reverse("lessons:booking_display_tutor"))
 
         self.assertEqual(res.status_code, 200)
-        self.assertNotContains(res, "Cancel")
+        self.assertNotContains(res, reverse("lessons:booking_delete", kwargs={"pk": 1}))
 
     @freeze_time(NOW)
     def test_session_in_past_cancel_button_not_displayed(self):
@@ -49,7 +49,7 @@ class TestBookingDisplayTutor(TestCaseBookingeUtils):
         res = self.client.get(reverse("lessons:booking_display_tutor"))
 
         self.assertEqual(res.status_code, 200)
-        self.assertNotContains(res, "Cancel")
+        self.assertNotContains(res, reverse("lessons:booking_delete", kwargs={"pk": 1}))
 
     def test_booking_objects_created_correct_student_filter_options_displayed(self):
         self._register_user("student1")
