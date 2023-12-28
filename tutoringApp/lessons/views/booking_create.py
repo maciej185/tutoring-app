@@ -211,5 +211,5 @@ def create_booking_view(request: HttpRequest, availability_id: int) -> HttpRespo
         )
         booking.save()
         return HttpResponseRedirect(
-            reverse("profiles:student_display", kwargs={"pk": request.user.pk})
+            reverse("lessons:booking_display_student")
         )
