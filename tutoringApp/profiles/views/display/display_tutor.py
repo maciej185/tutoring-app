@@ -66,6 +66,10 @@ class DisplayTutorProfileView(DisplayProfileView):
             tutor=self.get_object()
         ).filter(is_default=True)
 
+        context["first_service"] = context["default_services"][0]
+        context["current_month"] = datetime.now().month
+        context["current_year"] = datetime.now().year
+
         return context
 
     def get_template_names(self) -> str:

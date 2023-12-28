@@ -12,6 +12,16 @@ class DisplayAvailabilityHandler {
         this.arrows.forEach(arrow => arrow.addEventListener("click", this.arrowClickEventListener.bind(this)))
 
         this.week = "current" 
+
+        this.configureAvailabilityBtn = document.querySelector("div.tutor-right-availability-main-configure-btn")
+        if (this.configureAvailabilityBtn) this.configureAvailabilityBtnLink = this.configureAvailabilityBtn.querySelector("a")
+    }
+
+    updateConfigureAvailabilityBtn(serviceID) {
+        const currentURL = this.configureAvailabilityBtnLink.getAttribute("href")
+        let currentURLsplit = currentURL.split("/")
+        currentURLsplit[3] = serviceID
+        this.configureAvailabilityBtnLink.setAttribute("href", currentURLsplit.join("/"))
     }
 
     getServiceCalendarMapping() {
@@ -47,6 +57,8 @@ class DisplayAvailabilityHandler {
         this.currentlyDisplayed = this.serviceCalendarMapping[this.currentService]["current"]
         this.week = "current"
         this.currentlyDisplayed.style.display = "block"
+
+        if (this.configureAvailabilityBtn) this.updateConfigureAvailabilityBtn(e.currentTarget.value)
     }
 
     arrowClickEventListener(e) {
