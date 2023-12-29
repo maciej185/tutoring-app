@@ -24,4 +24,19 @@ urlpatterns = [
         view=views.BookingDeleteView.as_view(),
         name="booking_delete",
     ),
+    path(
+        "update/<int:pk>",
+        view=views.UpdateLessonView.as_view(),
+        name="lesson_update",
+    ),
+    path(
+        "task/delete/<int:task_id>",
+        view=views.delete_task_view,
+        name="task_delete",
+    ),
+    path(
+        "material/delete/<int:material_id>",
+        view=views.delete_material_view,
+        name="material_delete",
+    ),
 ]
