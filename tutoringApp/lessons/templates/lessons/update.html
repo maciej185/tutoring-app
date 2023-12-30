@@ -1,0 +1,340 @@
+{% extends 'tutoringApp/base_tutor.html' %}
+
+{% load widget_tweaks %}
+{% load profiles_extras %}
+{% load lesson_extras %}
+
+{% block title %}
+    Update lesson
+{% endblock %}
+
+{% block styles %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'lessons/css/update.css' %}"> 
+{% endblock %}
+
+{% block main %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="lesson stack-container">   
+        <div class="lesson-header">
+            Update lesson
+        </div>
+        {{ form.errors }}
+        {{ form.non_field_errors }}
+        <div class="lesson-summary box">
+            <div class="lesson-summary-header box-header">
+                Summary
+            </div>
+            <div class="lesson-summary-main box-main_padded">
+                <div class="lesson-summary-main-title stack-container_small">
+                    <div class="lesson-summary-main-title-top info-top">
+                        Title
+                    </div>
+                    <div class="lesson-summary-main-title-top-errors stack-container_smaller">
+                        {% for error in form.title.errors %}
+                                <div class="lesson-summary-main-title-top-errors-error form_error">
+                                    {{error}}
+                                </div>
+                            {% endfor %}
+                    </div>
+                    <div class="lesson-summary-main-title-top info-bottom">
+                        {{ form.title|add_class:"lesson-summary-main-title-input text-input"}} 
+                    </div>
+                </div>
+                <div class="lesson-summary-main-date stack-container_small">
+                    <div class="lesson-summary-main-date-top info-top">
+                        Date
+                    </div>
+                    {% if not related_booking %}
+                        <div class="lesson-summary-main-date-top-errors stack-container_smaller">
+                            {% for error in form.date.errors %}
+                                <div class="lesson-summary-main-date-top-errors-error form_error">
+                                    {{error}}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="lesson-summary-main-date-bottom info-bottom">
+                        {% if not related_booking %}
+                            {{ form.date|add_class:"lesson-summary-main-date-bottom-input datetime-input" }}
+                        {% else %}
+                            {{ object.date }}
+                            <div class="lesson-summary-main-date-bottom-input hidden">
+                                {{form.date|set_datetime:object.date}}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="lesson-subject box">
+            <div class="lesson-subject-header box-header">
+                Subject
+            </div>
+            <div class="lesson-subject-main box-main_padded">
+                <div class="lesson-subject-main-category stack-container_small">
+                    <div class="lesson-subject-main-subject-top info-top">
+                        Subject
+                    </div>
+                    <div class="lesson-subject-main-subject-errors stack-container_smaller">
+                        {% for error in form.subject.errors %}
+                            <div class="lesson-subject-main-subject-errors-error form_error">
+                                {{error}}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="lesson-subject-main-subject-bottom">
+                        {{ form.subject|add_class:"lesson-subject-main-subject-bottom-input text-input" }}
+                    </div>
+                </div>
+                <div class="lesson-subject-main-subject_details stack-container_small">
+                    <div class="lesson-subject-main-subject_details-top info-top">
+                        Subject details
+                    </div>
+                    <div class="lesson-subject-main-subject_details-errors stack-container_smaller">
+                        {% for error in form.subject_details.errors %}
+                            <div class="lesson-subject-main-subject_details-errors-error form_error">
+                                {{error}}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="lesson-subject-main-subject_details-bottom">
+                        {{ form.subject_details|add_class:"lesson-subject-main-subject_details-bottom-input text-input" }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson-materials box">
+            <div class="lesson-materials-management_form hidden">
+                {{ material_formset.management_form }}
+            </div>
+            <div class="lesson-materials-header box-header">
+                Materials
+            </div>
+            <div class="lesson-materials-main stack-container box-main_padded">
+                {% for material_form in material_formset %}
+                    {% if material_form.instance.pk %}
+                        <div class="lesson-materials-main-form box stack-container-small">
+                            {% for hidden_field in material_form.hidden_fields %}
+                                {{ hidden_field }}
+                            {% endfor %}
+                            <div class="lesson-materials-main-form-errors stack-container-small">
+                                <div class="lesson-materials-main-form-errors-error form_error">
+                                    {% formset_error_renderer material_form_errors forloop.counter0 material_form.name.name %}
+                                </div>
+                            </div>
+                            <div class="lesson-materials-main-form-wrap adjacent-container">
+                                <div class="lesson-materials-main-form-file">
+                                    <div class="lesson-materials-main-form-file-icon">
+                                        {% autoescape off %}
+                                            {% render_file_icon material_form.instance.file %}
+                                        {% endautoescape %}
+                                    </div>
+                                    <div class="lesson-materials-main-form-file-filename info-bottom">
+                                        {{ material_form.instance.file.name }}
+                                    </div>
+                                    <div class="lesson-materials-main-form-file-name">
+                                        {{ material_form.name|add_class:"text-input" }}
+                                    </div>
+                                </div>
+                                <div class="lesson-materials-main-form-delete icon_green link-container">
+                                    <a href="{% url 'lessons:material_delete' material_form.instance.pk %}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="lesson-materials-main-form box lesson-materials-main-form_empty stack-container-small" id="lesson-materials-main-form_empty-{{forloop.counter0|subtract:material_objects_in_db}}">
+                            {% for hidden_field in material_form.hidden_fields %}
+                                {{ hidden_field }}
+                            {% endfor %}
+                            <div class="lesson-materials-main-form-errors stack-container-small">
+                                <div class="lesson-materials-main-form-errors-error form_error">
+                                    {% formset_error_renderer material_form_errors forloop.counter0 material_form.name.name %}
+                                </div>
+                                <div class="lesson-materials-main-form-errors-error form_error">
+                                    {% formset_error_renderer material_form_errors forloop.counter0 material_form.file.name %}
+                                </div>
+                            </div>
+                            <div class="lesson-materials-main-form-wrap adjacent-container">
+                                <div class="lesson-materials-main-form-file ">
+                                    <div class="lesson-materials-main-form-file-input">
+                                        <label class="lesson-materials-main-form-file-input-label" for="{{ material_form.file.id_for_label }}" id="lesson-materials-main-form-file-input-label-{{forloop.counter0|subtract:material_objects_in_db}}">
+                                            <div class="lesson-materials-main-form-file-input-label-button add_button">
+                                                <div class="lesson-materials-main-form-file-input-label-button-icon add_button-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <div class="lesson-materials-main-form-file-input-element hidden">
+                                            {{ material_form.file }}
+                                        </div>
+                                    </div>
+                                    <div class="lesson-materials-main-form-file-name">
+                                        {{ material_form.name|add_class:"text-input" }}
+                                    </div>
+                                </div>
+                                <div class="lesson-materials-main-form-delete lesson-materials-main-form_empty-delete icon_green" id="lesson-materials-main-form_empty-delete-{{forloop.counter0|subtract:material_objects_in_db}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <div class="lesson-materials-main-add add_button">
+                    <div class="lesson-materials-main-add-icon add_button-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lesson-tasks box">
+            <div class="lesson-tasks-management_form hidden">
+                {{ task_formset.management_form}}
+            </div>
+            <div class="lesson-tasks-header box-header">
+                Tasks
+            </div> 
+            
+            <div class="lesson-tasks-main box-main_padded">
+                {% for task_form in task_formset %}
+                    {% if task_form.instance.pk %}
+                        <div class="lesson-tasks-main-task stack-container-small">
+                            {% for hidden_field in task_form.hidden_fields %}
+                                {{ hidden_field }}
+                            {% endfor %}
+                            <div class="lesson-tasks-main-task-header">
+                                <div class="lesson-tasks-main-task-header-text">
+                                    New task
+                                </div>
+                                <div class="lesson-tasks-main-task-header-delete icon_green link-container">
+                                    <a href="{% url 'lessons:task_delete' task_form.instance.pk %}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="lesson-tasks-main-task-title stack-container-small">
+                                <div class="lesson-tasks-main-task-title-top info-top">
+                                    Title
+                                </div>
+                                <div class="lesson-tasks-main-task-title-errors form_error">
+                                    {% formset_error_renderer task_formset_errors forloop.counter0 task_form.title.name %}
+                                </div>
+                                <div class="lesson-tasks-main-task-title-bottom">
+                                    {{ task_form.title|add_class:"lesson-tasks-main-task-title-bottom-input text-input" }}
+                                </div>
+                            </div>
+
+                            <div class="lesson-tasks-main-task-due_date stack-container-small">
+                                <div class="lesson-tasks-main-task-due_date-top info-top">
+                                    Due date
+                                </div>
+                                <div class="lesson-tasks-main-task-due_date-errors form_error">
+                                    {% formset_error_renderer task_formset_errors forloop.counter0 task_form.due_date.name %}
+                                </div>
+                                <div class="lesson-tasks-main-task-due_date-bottom">
+                                    {{ task_form.due_date|add_class:"lesson-tasks-main-task-due_date-bottom-input datetime-input"|attr:"type:datetime-local" }}
+                                </div>
+                            </div>
+
+                            <div class="lesson-tasks-main-task-description stack-container-small">
+                                <div class="lesson-tasks-main-task-description-top info-top">
+                                    Description
+                                </div>
+                                <div class="lesson-tasks-main-task-description-errors form_error">
+                                    {% formset_error_renderer task_formset_errors forloop.counter0 task_form.description.name %}
+                                </div>
+                                <div class="lesson-tasks-main-task-description-bottom">
+                                    {{ task_form.description|add_class:"lesson-tasks-main-task-description-bottom-textarea textarea" }}
+                                </div>
+                            </div>
+
+                        </div>
+                    {% else %}
+                        <div class="lesson-tasks-main-task lesson-tasks-main-task_empty stack-container-small" id="lesson-tasks-main-task_empty-{{forloop.counter0|subtract:task_objects_in_db}}">
+                            {% for hidden_field in task_form.hidden_fields %}
+                                {{ hidden_field }}
+                            {% endfor %}
+                            <div class="lesson-tasks-main-task-header">
+                                <div class="lesson-tasks-main-task-header-text">
+                                    New task
+                                </div>
+                                <div class="lesson-tasks-main-task-header-delete lesson-tasks-main-task_empty-header-delete icon_green" id="lesson-tasks-main-task_empty-header-delete-{{forloop.counter0|subtract:task_objects_in_db}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="lesson-tasks-main-task-title stack-container-small">
+                                <div class="lesson-tasks-main-task-title-top info-top">
+                                    Title
+                                </div>
+                                <div class="lesson-tasks-main-task-title-errors stack-container-small">
+                                    {% formset_error_renderer task_formset_errors forloop.counter0 task_form.title.name %}
+                                </div>
+                                <div class="lesson-tasks-main-task-title-bottom">
+                                    {{ task_form.title|add_class:"lesson-tasks-main-task-title-bottom-input text-input" }}
+                                </div>
+                            </div>
+
+                            <div class="lesson-tasks-main-task-due_date stack-container-small">
+                                <div class="lesson-tasks-main-task-due_date-top info-top">
+                                    Due date
+                                </div>
+                                <div class="lesson-tasks-main-task-due_date-errors form_error">
+                                    {% formset_error_renderer task_formset_errors forloop.counter0 task_form.due_date.name %}
+                                </div>
+                                <div class="lesson-tasks-main-task-due_date-bottom">
+                                    {{ task_form.due_date|add_class:"lesson-tasks-main-task-due_date-bottom-input datetime-input"|attr:"type:datetime-local" }}
+                                </div>
+                            </div>
+
+                            <div class="lesson-tasks-main-task-description stack-container-small">
+                                <div class="lesson-tasks-main-task-description-top info-top">
+                                    Description
+                                </div>
+                                <div class="lesson-tasks-main-task-description-errors form_error">
+                                    {% formset_error_renderer task_formset_errors forloop.counter0 task_form.description.name %}
+                                </div>
+                                <div class="lesson-tasks-main-task-description-bottom">
+                                    {{ task_form.description|add_class:"lesson-tasks-main-task-description-bottom-textarea textarea" }}
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <div class="lesson-tasks-main-add add_button">
+                    <div class="lesson-tasks-main-add-icon add_button-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lesson-update centered_button_container">
+            <button class="lesson-update-btn button_fill_green" type="submit">
+                Submit
+            </button>
+        </div>
+    </div>
+</form>
+{% endblock %}
