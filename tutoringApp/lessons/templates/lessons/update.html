@@ -185,7 +185,11 @@
                                             </div>
                                         </label>
                                         <div class="lesson-materials-main-form-file-input-element hidden">
-                                            {{ material_form.file }}
+                                            {{ material_form.file|add_class:"lesson-materials-main-form-wrap-input-input" }}
+                                            
+                                        </div>
+                                        <div class="lesson-materials-main-form-file-input-element-preview info-bottom">
+                                                
                                         </div>
                                     </div>
                                     <div class="lesson-materials-main-form-file-name">
