@@ -13,6 +13,13 @@
     <link rel="stylesheet" href="{% static 'lessons/css/update.css' %}"> 
 {% endblock %}
 
+{% block script %}
+{% load static %}
+    <script defer src="{% static 'profiles/js/FormsetHandler.js' %}"></script>
+    <script defer src="{% static 'lessons/js/MaterialFormsetHandler.js' %}"></script>
+    <script defer src="{% static 'lessons/js/TaskFormsetHandler.js' %}"></script>
+{% endblock %}
+
 {% block main %}
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
@@ -127,6 +134,9 @@
                                 </div>
                             </div>
                             <div class="lesson-materials-main-form-wrap adjacent-container">
+                                <div class="lesson-materials-main-form-wrap-input hidden">
+                                    {{ material_form.file }}
+                                </div>
                                 <div class="lesson-materials-main-form-file">
                                     <div class="lesson-materials-main-form-file-icon">
                                         {% autoescape off %}

@@ -152,7 +152,9 @@ class UpdateLessonView(UpdateView, LoginRequiredMixin):
                                 decide which flag (class's attribute)
                                 will be set to True in case of errors.
         """
-        filled_formset = formset_class(self.request.POST, instance=self.get_object())
+        filled_formset = formset_class(
+            self.request.POST, self.request.FILES, instance=self.get_object()
+        )
         if filled_formset.is_valid():
             filled_formset.save()
         else:
