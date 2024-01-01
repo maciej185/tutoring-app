@@ -97,7 +97,9 @@
                 {% if user == profile_user %}
                     <div class="tutor-left-pricing-main-configure centered_button_container">
                         <div class="tutor-left-pricing-main-configure-btn button_white_green">
-                            Configure
+                            <a href="{% url 'tutors:services' user.id %}">
+                                Configure
+                            </a>
                         </div>
                     </div>
                 {% endif %}
@@ -245,7 +247,9 @@
                 {% if user == profile_user %}
                     <div class="tutor-right-availability-main-configure centered_button_container">
                         <div class="tutor-right-availability-main-configure-btn button_white_green">
-                            Configure
+                            <a href="{% url 'tutors:availability' default_services.0.pk current_month current_year %}">
+                                Configure
+                            </a>
                         </div>
                     </div>
                 {% endif %}

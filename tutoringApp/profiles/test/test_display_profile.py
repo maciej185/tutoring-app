@@ -1,7 +1,10 @@
 from django.urls import reverse
+from freezegun import freeze_time
 from parameterized import parameterized
 
 from utils.testing import TestCaseProfileUtils
+
+NOW = "2023-12-12"
 
 
 class TestDisplayProfile(TestCaseProfileUtils):
@@ -519,6 +522,7 @@ class TestDisplayProfile(TestCaseProfileUtils):
             html=True,
         )
 
+    @freeze_time(NOW)
     def test_tutor_profile_displayed_by_owner_edit_btns_displayed(self):
         username = "tutor1"
         self.create_profile(username, student=False)
@@ -544,7 +548,29 @@ class TestDisplayProfile(TestCaseProfileUtils):
                                     </div>""",
             html=True,
         )
+        self.assertContains(
+            res,
+            """<div class="tutor-left-pricing-main-configure centered_button_container">
+                        <div class="tutor-left-pricing-main-configure-btn button_white_green">
+                            <a href="/tutors/services/1">
+                                Configure
+                            </a>
+                        </div>
+                    </div>""",
+            html=True,
+        )
+        self.assertContains(
+            res,
+            """<div class="tutor-right-availability-main-configure centered_button_container">
+                        <div class="tutor-right-availability-main-configure-btn button_white_green">
+                            <a href="/tutors/availability/1/12/2023">
+                                Configure
+                            </a>
+                        </div>
+                    </div>""",
+        )
 
+    @freeze_time(NOW)
     def test_tutor_profile_displayed_by_another_tutor_edit_btns_not_displayed(self):
         username = "tutor1"
         self.create_profile(username, student=False)
@@ -574,7 +600,29 @@ class TestDisplayProfile(TestCaseProfileUtils):
                                     </div>""",
             html=True,
         )
+        self.assertNotContains(
+            res,
+            """<div class="tutor-left-pricing-main-configure centered_button_container">
+                        <div class="tutor-left-pricing-main-configure-btn button_white_green">
+                            <a href="/tutors/services/1">
+                                Configure
+                            </a>
+                        </div>
+                    </div>""",
+            html=True,
+        )
+        self.assertNotContains(
+            res,
+            """<div class="tutor-right-availability-main-configure centered_button_container">
+                        <div class="tutor-right-availability-main-configure-btn button_white_green">
+                            <a href="/tutors/availability/1/12/2023">
+                                Configure
+                            </a>
+                        </div>
+                    </div>""",
+        )
 
+    @freeze_time(NOW)
     def test_tutor_profile_displayed_by_student_edit_btns_not_displayed(self):
         username = "tutor1"
         self.create_profile(username, student=False)
@@ -603,6 +651,27 @@ class TestDisplayProfile(TestCaseProfileUtils):
                                         </a>
                                     </div>""",
             html=True,
+        )
+        self.assertNotContains(
+            res,
+            """<div class="tutor-left-pricing-main-configure centered_button_container">
+                        <div class="tutor-left-pricing-main-configure-btn button_white_green">
+                            <a href="/tutors/services/1">
+                                Configure
+                            </a>
+                        </div>
+                    </div>""",
+            html=True,
+        )
+        self.assertNotContains(
+            res,
+            """<div class="tutor-right-availability-main-configure centered_button_container">
+                        <div class="tutor-right-availability-main-configure-btn button_white_green">
+                            <a href="/tutors/availability/1/12/2023">
+                                Configure
+                            </a>
+                        </div>
+                    </div>""",
         )
 
     def test_student_profile_link_to_display_tutor_owner_correctly_redirected(self):
