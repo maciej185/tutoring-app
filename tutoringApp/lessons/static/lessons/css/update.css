@@ -80,9 +80,14 @@ div.lesson-materials-main-form-file-icon {
     color: var(--gray-bluegreen-extra-dark)
 }
 
-div.lesson-materials-main-form-file-input {
+div.lesson-materials-main-form-file-input > label {
     width: 2.5rem;
     height: 2.5rem;
+}
+
+div.lesson-materials-main-form-file-input-element-preview {
+    text-align: center;
+    display: none;
 }
 
 div.lesson-materials-main-form-file-icon > svg {
