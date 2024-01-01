@@ -202,7 +202,7 @@ def create_booking_view(request: HttpRequest, availability_id: int) -> HttpRespo
             error_res = error_checking_function(request, availability_id)
             if error_res:
                 return error_res
-        lesson = Lesson()
+        lesson = Lesson(date=Availability.objects.get(pk=availability_id).start)
         lesson.save()
         booking = Booking(
             lesson_info=lesson,
