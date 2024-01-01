@@ -23,6 +23,8 @@ class FormsetHandler {
         // needed to later on update the `name` and `value` attribute of inputs when a form is deleted or added
         this.initialFormInputElements = this.emptyFormContainerTemplate.querySelectorAll('input')
         this.initialFormSelectElements = this.emptyFormContainerTemplate.querySelectorAll('select')
+        this.initialFormTextareaElements = this.emptyFormContainerTemplate.querySelectorAll('textarea')
+        this.initialLabelElements = this.emptyFormContainer.querySelectorAll("label[for]")
 
         this.emptyFormDeleteBtn = this.emptyFormContainer.querySelector(`div#${emptyFormDeleteBtnID}`)
 
@@ -59,9 +61,20 @@ class FormsetHandler {
         this.managementFormMinNumFormsInput.setAttribute('value', this.minNumFormsValue)
     }
 
+    updateInputLabels(formContainer, newIndex) {
+        const newLabelElements = formContainer.querySelectorAll("label[for]")
+        
+        newLabelElements.forEach((labelElement, index) => {
+            const correspondingInitialLabel = this.initialLabelElements[index]
+            labelElement.setAttribute("for", correspondingInitialLabel.getAttribute("for").replace(this.initialTotalFormsValue - this.initialNumberOfEmptyForms, newIndex))
+            labelElement.id = correspondingInitialLabel.id.replace(this.initialTotalFormsValue, newIndex)
+        });
+    }
+
     updateInputIdsAndNames(formContainer, newIndex) {
         const newFormInputElements = formContainer.querySelectorAll('input')
         const newFormSelectElements = formContainer.querySelectorAll('select')
+        const newFormTextareaElements = formContainer.querySelectorAll('textarea')
 
         newFormInputElements.forEach((inputElement, index) => {
             const correspondingInitialInput = this.initialFormInputElements[index]
@@ -76,6 +89,12 @@ class FormsetHandler {
             selectElement.id = correspondingInitialInput.id.replace(this.initialTotalFormsValue - this.initialNumberOfEmptyForms, newIndex)
             selectElement.name = correspondingInitialInput.name.replace(this.initialTotalFormsValue - this.initialNumberOfEmptyForms, newIndex)
         });
+
+        newFormTextareaElements.forEach((textareaElement, index) => {
+            const correspondingInitialInput = this.initialFormTextareaElements[index]
+            textareaElement.id = correspondingInitialInput.id.replace(this.initialTotalFormsValue - this.initialNumberOfEmptyForms, newIndex)
+            textareaElement.name = correspondingInitialInput.name.replace(this.initialTotalFormsValue - this.initialNumberOfEmptyForms, newIndex)
+        })
     }
 
     addFormBtnClickListener(e) {
@@ -87,6 +106,7 @@ class FormsetHandler {
         newFormDeleteBtn.addEventListener('click', this.deleteFormBtnClickListener.bind(this))
 
         this.updateInputIdsAndNames(newFormContainer, this.indexOfEmptyForm)
+        this.updateInputLabels(newFormContainer, this.indexOfEmptyForm)
 
         this.numberOfEmptyForms++
         this.indexOfEmptyForm++
@@ -110,6 +130,10 @@ class FormsetHandler {
         this.formContainers.forEach((formContainer, index) => this.updateInputIdsAndNames(formContainer, index + this.numberOfNonEmptyForms))
     }
 
+    updateFormLabels() {
+        this.formContainers.forEach((formContainer, index) => this.updateInputLabels(formContainer, index + this.numberOfNonEmptyForms))
+    }
+
     deleteFormBtnClickListener(e) {
         if (this.numberOfEmptyForms == 1) return
 
@@ -123,6 +147,7 @@ class FormsetHandler {
         this.updateDeleteBtnIndices()
         this.updateFormContainerIndices()
         this.updateFormInputIdsAndNames()
+        this.updateFormLabels()
         this.updateManagementForm(false)
 
         this.numberOfEmptyForms--
