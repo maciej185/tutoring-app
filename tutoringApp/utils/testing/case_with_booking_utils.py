@@ -10,7 +10,7 @@ from tutors.models import Availability, Service
 
 from .case_with_service_utils import TestCaseServiceUtils
 
-NOW = "2023-12-13 07:59:00"
+NOW = "2023-12-13 07:59:00+00:00"
 
 
 class TestCaseBookingeUtils(TestCaseServiceUtils):
@@ -80,7 +80,7 @@ class TestCaseBookingeUtils(TestCaseServiceUtils):
         Returns:
             Newly created instance of the Booking model.
         """
-        lesson = Lesson()
+        lesson = Lesson(date=availability.start)
         lesson.save()
 
         booking = Booking(
