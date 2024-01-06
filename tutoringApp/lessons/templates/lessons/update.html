@@ -122,6 +122,9 @@
                 Materials
             </div>
             <div class="lesson-materials-main stack-container box-main_padded">
+                <div class="lesson-materials-main-error form_error">
+                    {{ material_formset_errors|render_material_formset_file_error }}
+                </div>
                 {% for material_form in material_formset %}
                     {% if material_form.instance.pk %}
                         <div class="lesson-materials-main-form box stack-container-small">
@@ -144,7 +147,7 @@
                                         {% endautoescape %}
                                     </div>
                                     <div class="lesson-materials-main-form-file-filename info-bottom">
-                                        {{ material_form.instance.file.name }}
+                                        {{ material_form.instance.file.name|render_material_file_name }}
                                     </div>
                                     <div class="lesson-materials-main-form-file-name">
                                         {{ material_form.name|add_class:"text-input" }}
@@ -166,10 +169,7 @@
                             {% endfor %}
                             <div class="lesson-materials-main-form-errors stack-container-small">
                                 <div class="lesson-materials-main-form-errors-error form_error">
-                                    {% formset_error_renderer material_form_errors forloop.counter0 material_form.name.name %}
-                                </div>
-                                <div class="lesson-materials-main-form-errors-error form_error">
-                                    {% formset_error_renderer material_form_errors forloop.counter0 material_form.file.name %}
+                                    {% formset_error_renderer material_formset_errors forloop.counter0 material_form.name.name %}
                                 </div>
                             </div>
                             <div class="lesson-materials-main-form-wrap adjacent-container">

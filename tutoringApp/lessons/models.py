@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
+from lessons.validators import MaterialFileExtensionValidator
 from profiles.models import Profile
 from tutors.models import Availability
 
@@ -143,7 +144,11 @@ class Material(models.Model):
 
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
-    file = models.FileField(upload_to=material_file_path, max_length=250)
+    file = models.FileField(
+        upload_to=material_file_path,
+        max_length=250,
+        validators=[MaterialFileExtensionValidator],
+    )
     upload_date = models.DateTimeField(default=now)
 
     def __str__(self) -> str:

@@ -420,6 +420,50 @@ class TestLessonBookingRelatedUpdate(TestCaseLessonsUtils):
 
         self.assertEqual(len(Material.objects.all()), number)
 
+    @parameterized.expand(range(1, 6))
+    @override_settings(MEDIA_ROOT=tempfile.gettempdir())
+    def test_incorrect_material_formset_wrong_file_extensions_message_displayed(
+        self, number
+    ):
+        lesson = Lesson.objects.get(pk=1)
+        data = {
+            "title": "Lesson's title",
+            "subject": "Lesson's subject",
+            "subject_details": "Lesson's subject details",
+            "date": lesson.date,
+            "initial-date": lesson.date,
+            "material_set-TOTAL_FORMS": number,
+            "material_set-INITIAL_FORMS": 0,
+            "material_set-MIN_NUM_FORMS": number - 1,
+            "task_set-TOTAL_FORMS": 1,
+            "task_set-INITIAL_FORMS": 0,
+            "task_set-MIN_NUM_FORMS": 0,
+        }
+
+        files = []
+
+        for i in range(1, number + 1):
+            f = open(
+                Path(__file__).parent / Path(r"./test_data/material_file.toml"), "rb"
+            )
+            files.append(f)
+            data.update(
+                {
+                    f"material_set-{i - 1}-file": File(file=f),
+                    f"material_set-{i - 1}-name": f"File name number {i}",
+                }
+            )
+        res = self.client.post(
+            reverse("lessons:lesson_update", kwargs={"pk": 1}), data=data, follow=True
+        )
+
+        [f.close() for f in files]
+
+        self.assertContains(
+            res,
+            "Incorrect file extensions. Allowed extensions are: .pdf, .jpg, .png, .gif, .txt, .doc, .docx, .xlsx, .xls, .csv",
+        )
+
     @parameterized.expand(zip([1, 2, 3, 5], [[1], [1, 2], [2, 3], [2, 4, 5]]))
     @override_settings(MEDIA_ROOT=tempfile.gettempdir())
     def test_material_object_already_in_db_correct_material_formset_material_formset_updated(

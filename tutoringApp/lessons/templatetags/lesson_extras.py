@@ -1,10 +1,10 @@
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 
 from django import template
 from django.db.models.fields.files import FieldFile
 from django.forms.boundfield import BoundField
-from django.forms.widgets import DateTimeInput
 
 register = template.Library()
 
@@ -87,3 +87,45 @@ def set_datetime(datetime_input_tag: BoundField, date: datetime) -> BoundField:
         "value": date.strftime(r"%Y-%m-%dT%H:%M:%S"),
     }
     return datetime_input_tag
+
+
+@register.filter
+def render_material_formset_file_error(
+    error_list: Optional[list[dict[str, str]]]
+) -> str:
+    """Render error message when an incorrect file is uploaded.
+
+    Args:
+        error_list: A list of dictionaries containing
+                    error messages for a given material_formset
+                    instance. The length of the list is
+                    equal to the number of forms in a given
+                    formset. The keys of these dictionaries
+                    are field names of the form and the values
+                    are error messages.
+        Returns:
+            A string with the error message informing
+            the user that at least one file from the
+            previously uploaded formset has incorrect
+            extention.
+    """
+    if error_list:
+        for dic in error_list:
+            if dic.get("file"):
+                return dic.get("file")[0]
+    return ""
+
+
+@register.filter
+def render_material_file_name(file_path: str) -> str:
+    """Render material file name.
+
+    Args:
+        Path of the file which is also the value
+        of Material.file.name field.
+
+    Returns:
+        Actual name of the file itself instead of
+        a full path.
+    """
+    return Path(file_path).name
