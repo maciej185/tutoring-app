@@ -1,7 +1,7 @@
 """Forms for the lessons app."""
 from django import forms
 
-from lessons.models import Booking, Lesson, Material, Task
+from lessons.models import Booking, Entry, Lesson, Material, Task
 
 
 class LessonForm(forms.ModelForm):
@@ -62,3 +62,11 @@ material_formset = forms.inlineformset_factory(
     can_delete_extra=False,
     min_num=0,
 )
+
+
+class EntryForm(forms.ModelForm):
+    """Form for creating Entry objects."""
+
+    class Meta:
+        model = Entry
+        exclude = ["publish_date", "lesson"]
