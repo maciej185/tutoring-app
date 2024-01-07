@@ -1,10 +1,11 @@
-from lessons.views.booking import (
+from .booking import (
     BookingDeleteView,
     BookingsDisplay4Student,
     BookingsDisplay4Tutor,
     create_booking_view,
 )
-from lessons.views.lessons import (
+from .lessons import (
+    DisplayLessonStudentView,
     UpdateLessonView,
     delete_material_view,
     delete_task_view,
@@ -18,4 +19,5 @@ __all__ = [
     "UpdateLessonView",
     "delete_task_view",
     "delete_material_view",
+    "DisplayLessonStudentView",
 ]
