@@ -1,0 +1,21 @@
+{% load lesson_extras %}
+
+<div class="lesson-left-materials box">
+    <div class="lesson-left-materials-header box-header">
+        Materials
+    </div>
+    <div class="lesson-left-materials-main box-main_padded">
+        {% for material in materials %}
+            <div class="lesson-left-materials-main-file">
+                <div class="lesson-left-materials-main-file-icon">
+                    {% autoescape off %}
+                        {% render_file_icon material.file %}
+                    {% endautoescape %}
+                </div>
+                <div class="lesson-left-materials-main-file-name">
+                    {{ material.file.name|render_file_name }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,10 +1,20 @@
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 from django import template
 from django.db.models.fields.files import FieldFile
 from django.forms.boundfield import BoundField
+
+from lessons.models import (
+    Booking,
+    Entry,
+    Lesson,
+    LessonStatusChoices,
+    Task,
+    TaskStatusChoices,
+)
+from profiles.models import Profile
 
 register = template.Library()
 
@@ -117,7 +127,7 @@ def render_material_formset_file_error(
 
 
 @register.filter
-def render_material_file_name(file_path: str) -> str:
+def render_file_name(file_path: str) -> str:
     """Render material file name.
 
     Args:
@@ -129,3 +139,148 @@ def render_material_file_name(file_path: str) -> str:
         a full path.
     """
     return Path(file_path).name
+
+
+@register.simple_tag
+def render_tutor_name(lesson: Lesson) -> str:
+    """Render Tutor's name based on provided Lesson.
+
+    The name of the Tutor is fetched differently depending
+    on whether the provided Lesson object is related to a
+    Booking or an Appointment.
+
+    Args:
+        lesson: Instance of the Lesson model for which the
+                Tutor's name will be fetched.
+
+    Returns:
+        String containing first and last names of the Tutor
+        related to the provided Lesson object.
+    """
+    try:
+        booking = Booking.objects.get(lesson_info=lesson)
+        tutor_user = booking.availability.service.tutor.user
+        return f"{tutor_user.first_name} {tutor_user.last_name}"
+    except Booking.DoesNotExist:
+        return ""
+
+
+@register.simple_tag
+def tasks_with_status(tasks: list[Task], status: int) -> int:
+    """Render number of Tasks containing provided status.
+
+    Args:
+        tasks: A list with instances of the Task model
+                for which the status will be rendered.
+
+        status: An integer value representing a Task's status
+                defined in the lessons.models.TaskStatusChoices
+                class.
+    Return:
+        A number of Tasks from the provided list
+        with the given status if that number is
+        >= 1, None otherwise.
+    """
+    filtered_tasks = [task for task in tasks if task.status == status]
+    return len(filtered_tasks) if len(filtered_tasks) >= 1 else None
+
+
+@register.simple_tag
+def render_lesson_status(status: int) -> str:
+    """Render lesson status as a human-readable string.
+
+    Args:
+        status: Integer representing the Lesson's
+                status.
+    Returns:
+        Lesson's status in a human-readable string
+        form rendered using the LessonStatusChoices
+        class.
+    """
+    return LessonStatusChoices.labels[status]
+
+
+@register.simple_tag
+def render_task_status(status: int) -> str:
+    """Render Task's status as a human-readable string.
+
+    Args:
+        status: Integer representing Task's status.
+
+    Returns:
+        Task's status in a human-readable string
+        form rendered using the TaskStatusChoices
+        class.
+    """
+    return TaskStatusChoices.labels[status]
+
+
+@register.simple_tag
+def get_css_class_for_task_status(status: int) -> str:
+    """Return CSS class name corrsponding to a given status.
+
+    There are several CSS classes defined in the stylesheets
+    allowing to render Task statuses in different ways (Pending
+    being rendered in red for example).
+
+    Args:
+        status: Integer representing Task's status.
+
+    Returns:
+        CSS class's name for which styles have been
+        defined to render a Task's status in
+        an appropriate way.
+    """
+    if status == TaskStatusChoices.SOLUTION_APPROVED.value:
+        return "status_green"
+    if status == TaskStatusChoices.SOLUTION_UPLOADED.value:
+        return "status_orange"
+    return "status_red"
+
+
+@register.filter
+def get_by_index(arr: list, ind: int) -> Any:
+    """Return array element at the given index.
+
+    Args:
+        arr: An array of elements.
+        ind: An index of an element from the
+                array.
+
+    Returns:
+        An element from the provided array at the
+        specificed index if IndexError is not
+        raised, None otherwise.
+    """
+    try:
+        return arr[ind]
+    except IndexError:
+        return
+
+
+@register.filter
+def get_entry_author(entry: Entry) -> Profile:
+    """Get User object representing entry's author.
+
+    The filter checks value of `Entry.from_student` field
+    as well as whether the related Lessons object is itself
+    related to a Booking or an Appointment.
+
+    Args:
+        entry: An instance of the Entry model.
+
+    Returns:
+        Author of the provided Entry model instance.
+    """
+    lesson = Lesson.objects.get(entry=entry)
+    try:
+        booking = Booking.objects.get(lesson_info=lesson)
+        appointment = None
+    except Booking.DoesNotExist:
+        booking = None
+    if entry.from_student:
+        if booking:
+            return booking.student
+    else:
+        if booking:
+            return booking.availability.service.tutor
