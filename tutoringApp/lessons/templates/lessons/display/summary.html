@@ -1,0 +1,46 @@
+{% load lesson_extras %}
+
+<div class="lesson-left-summary box">
+    <div class="lesson-left-summary-header box-header">
+        Summary
+    </div>
+    <div class="lesson-left-summary-main box-main_padded">
+        <div class="lesson-left-summary-main-title">
+            {{ object.title }}
+        </div>
+        <table class="lesson-left-summary-main-table main-table">
+            <tr class="lesson-left-summary-main-table-row main-table-row">
+                <td class="lesson-left-summary-main-table-cell main-table-cell">
+                    <div class="lesson-left-summary-main-table-cell-top main-table-cell-top">
+                        Tutor 
+                    </div>
+                    <div class="lesson-left-summary-main-table-cell-bottom main-table-cell-bottom">
+                        {% render_tutor_name object %}
+                    </div>
+                </td>
+                <td class="lesson-left-summary-main-table-cell main-table-cell">
+                    <div class="lesson-left-summary-main-table-cell-top main-table-cell-top">
+                        Subject
+                    </div>
+                    <div class="lesson-left-summary-main-table-cell-bottom main-table-cell-bottom">
+                        {{ object.subject }}
+                    </div>
+                </td>
+            </tr>
+            <tr class="lesson-left-summary-main-table-row main-table-row">
+                <td class="lesson-left-summary-main-table-cell main-table-cell">
+                    <div class="lesson-left-summary-main-table-cell-top main-table-cell-top">
+                        Date
+                    </div>
+                    <div class="lesson-left-summary-main-table-cell-bottom main-table-cell-bottom">
+                        {{ object.date }}
+                    </div>
+                </td>
+                <td class="lesson-left-summary-main-table-cell main-table-cell">
+                    <div class="lesson-left-summary-main-table-cell-top main-table-cell-top"></div>
+                    <div class="lesson-left-summary-main-table-cell-bottom main-table-cell-bottom"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

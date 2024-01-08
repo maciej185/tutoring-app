@@ -104,7 +104,7 @@ class Solution(models.Model):
     assigned to the given tutoring session.
     """
 
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    task = models.OneToOneField(Task, on_delete=models.CASCADE)
     solution = models.FileField()
     upload_date = models.DateTimeField(default=now)
 
