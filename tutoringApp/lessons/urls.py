@@ -3,6 +3,18 @@ from django.urls import path
 from lessons import views
 
 app_name = "lessons"
+api_endpoints = [
+    path(
+        "solution/create",
+        view=views.SolutionAPIView.as_view(),
+        name="solution_create",
+    ),
+    path(
+        "solution/delete/<int:pk>",
+        view=views.SolutionAPIView.as_view(),
+        name="solution_delete",
+    ),
+]
 urlpatterns = [
     path(
         "booking/create/<int:availability_id>",
@@ -44,4 +56,4 @@ urlpatterns = [
         view=views.DisplayLessonStudentView.as_view(),
         name="lesson_display_student",
     ),
-]
+] + api_endpoints
