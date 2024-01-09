@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
@@ -112,6 +114,25 @@ class Solution(models.Model):
         )
 
 
+def material_file_path(instance: "Material", filename: str) -> Path:
+    """Returns directory where the uploaded file will be stored.
+
+    Args:
+        instance: An instance of the model where the FileField is defined.
+                    More specifically, this is the particular instance
+                    where the current file is being attached.
+        filename: The filename that was originally given to the file.
+
+    Returns:
+        Path to the destination where the file will be saved
+        that is relative to the MEDIA_ROOT directory from
+        settings.py file.
+    """
+    return Path(
+        "files", "lessons", "materials", f"lesson_{instance.lesson.pk}", filename
+    )
+
+
 class Material(models.Model):
     """Model for storing information about sessions's materials.
 
@@ -122,7 +143,7 @@ class Material(models.Model):
 
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
-    file = models.FileField()
+    file = models.FileField(upload_to=material_file_path, max_length=250)
     upload_date = models.DateTimeField(default=now)
 
     def __str__(self) -> str:

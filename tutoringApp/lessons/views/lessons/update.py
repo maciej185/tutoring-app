@@ -96,10 +96,35 @@ class UpdateLessonView(UpdateView, LoginRequiredMixin):
 
     def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
         """Ensure that current user is the Tutor assigned to the Lesson."""
+        user_is_not_related_tutor_res = self._user_is_not_related_tutor()
+        if user_is_not_related_tutor_res:
+            return user_is_not_related_tutor_res
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        """Ensure that current user is the Tutor assigned to the Lesson."""
+        user_is_not_related_tutor_res = self._user_is_not_related_tutor()
+        if user_is_not_related_tutor_res:
+            return user_is_not_related_tutor_res
+        return super().post(request, *args, **kwargs)
+
+    def _user_is_not_related_tutor(self) -> Optional[HttpResponse]:
+        """Ensure that currently logged in user is the related Tutor.
+
+        The method additionaly checks if the Lesson object is
+        related to a Booking or Appointment. Depending on the
+        relation, fetching of the Tutor instance looks different.
+
+        Returns:
+            An instance of the HttpResponse class rendering a
+            warning page with redirection link if the currently
+            logged in user is no the Tutor related to currently
+            updated Lesson object, None otherwise.
+        """
         related_booking = self._get_related_booking()
         if related_booking:
             tutor = related_booking.availability.service.tutor.user
-            if request.user != tutor:
+            if self.request.user != tutor:
                 return render(
                     request=self.request,
                     template_name="tutoringApp/forbidden.html",
@@ -110,7 +135,6 @@ class UpdateLessonView(UpdateView, LoginRequiredMixin):
                         "redirect_destination": "home page",
                     },
                 )
-        return super().get(request, *args, **kwargs)
 
     def _get_related_booking(self) -> Optional[Booking]:
         """Fetch a related Booking object if it exists.
@@ -171,12 +195,13 @@ class UpdateLessonView(UpdateView, LoginRequiredMixin):
                 self.material_formset_errors = True
 
             LOGGER.warning(
-                "%(formset)s uploaded by %(username)s with id %(id)s contains errors: %(errors)s"
+                "%(formset)s uploaded by %(username)s with id %(id)s contains errors: %(errors)s, %(non_form_errors)s"
                 % {
                     "formset": formset_class.__name__,
                     "username": self.request.user.username,
                     "id": self.request.user.id,
                     "errors": filled_formset.errors,
+                    "non_form_errors": filled_formset.non_form_errors(),
                 }
             )
 
