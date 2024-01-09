@@ -1,0 +1,51 @@
+{% load lesson_extras %}
+{% load widget_tweaks %}
+
+<div class="lesson-left-activity box">
+    <div class="lesson-left-tasks-activity box-header">
+        Activity
+    </div>
+    <div class="lesson-left-tasks-activity box-main_padded">
+        
+        <div class="lesson-left-tasks-activity-entries">
+            {% for entry in entries %}
+                {% with entry|get_entry_author as author %}
+                    <div class="lesson-left-tasks-activity-entries-entry">
+                        <div class="lesson-left-tasks-activity-entries-entry-left">
+                            <div class="lesson-left-tasks-activity-entries-entry-left-pic">
+                                <img src="{{author.profile_pic.url}}">
+                            </div>
+                        </div>
+                        <div class="lesson-left-tasks-activity-entries-entry-right">
+                            <div class="lesson-left-tasks-activity-entries-entry-right-top">
+                                {{ author.user.first_name }} {{ author.user.last_name }}, {{ entry.publish_date }}
+                            </div>
+                            <div class="lesson-left-tasks-activity-entries-entry-right-bottom">
+                                {{ entry.text }}
+                            </div>
+                        </div>
+                    </div>
+                {% endwith %}
+            {% endfor %}
+        </div>
+        <div class="lesson-left-tasks-activity-form-wrap">
+            {{ entry_form.errors }}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="lesson-left-tasks-activity-form">
+                    <div class="lesson-left-tasks-activity-form-header">
+                        Add entry
+                    </div>
+                    <div class="lesson-left-tasks-activity-textarea">
+                        {{entry_form.text|add_class:"textarea"}}
+                    </div>
+                    <div class="lesson-left-tasks-activity-submit">
+                        <button type="submit" class="lesson-left-tasks-activity-submit-button button_fill_green">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
