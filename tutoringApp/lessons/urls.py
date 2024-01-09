@@ -39,4 +39,9 @@ urlpatterns = [
         view=views.delete_material_view,
         name="material_delete",
     ),
+    path(
+        "student/<int:pk>",
+        view=views.DisplayLessonStudentView.as_view(),
+        name="lesson_display_student",
+    ),
 ]
