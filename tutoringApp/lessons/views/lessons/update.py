@@ -23,6 +23,8 @@ class UpdateLessonView(UpdateView, LoginRequiredMixin):
 
     task_formset_errors = False
     material_formset_errors = False
+    erroneous_post_formset_data = None
+    erroneous_files_formset_data = None
 
     model = Lesson
     form_class = LessonForm
@@ -36,8 +38,8 @@ class UpdateLessonView(UpdateView, LoginRequiredMixin):
         """Include additional formsets and information in the default context."""
         context = super().get_context_data(**kwargs)
 
-        context["task_formset"] = task_formset(instance=self.get_object())
-        context["material_formset"] = material_formset(instance=self.get_object())
+        context["task_formset"] = self._instantiate_formset(task_formset)
+        context["material_formset"] = self._instantiate_formset(material_formset)
 
         context["task_formset_errors"] = self._check_for_formset_error(
             "task_formset_errors"
@@ -160,6 +162,9 @@ class UpdateLessonView(UpdateView, LoginRequiredMixin):
         else:
             self.request.session[error_session_key] = filled_formset.errors
 
+            self.erroneous_post_formset_data = self.request.POST
+            self.erroneous_files_formset_data = self.request.FILES
+
             if error_session_key == "task_formset_errors":
                 self.task_formset_errors = True
             elif error_session_key == "material_formset_errors":
@@ -208,6 +213,40 @@ class UpdateLessonView(UpdateView, LoginRequiredMixin):
             context.
         """
         return any([self.task_formset_errors, self.material_formset_errors])
+
+    def _instantiate_formset(
+        self, formset_class: type[BaseInlineFormSet]
+    ) -> BaseInlineFormSet:
+        """Return an instance of the formset_class with appropriate data.
+
+        The method checks if there are erroneous values stored
+        as class's attributes and if such values are found, they
+        are passed to the formset constructor. Additionally,
+        the currently updated `Lesson` object is passed as the
+        value of the `instance` argument to render data that
+        is alreasy present in the database for updating.
+        After instantiating the formset with values of
+        class's attributes, these attributes are then set to
+        None.
+
+        Args:
+            formset_class: Class inheriting from the BaseInlineFormSet
+                class that is meant to be instantiated with the values of
+                class's attributes.
+
+        Returns:
+            An instance of the provided formset class with
+            appropriate values.
+        """
+        args = []
+        if self.erroneous_files_formset_data:
+            args.append(self.erroneous_files_formset_data.copy())
+            self.erroneous_files_formset_data = None
+        if self.erroneous_post_formset_data:
+            args.append(self.erroneous_post_formset_data.copy())
+            self.erroneous_post_formset_data = None
+
+        return formset_class(*args, instance=self.get_object())
 
 
 def user_is_not_tutor(request: HttpRequest, tutor: Profile) -> Optional[HttpResponse]:

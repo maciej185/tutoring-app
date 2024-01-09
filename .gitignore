@@ -163,3 +163,5 @@ cython_debug/
 images/
 logs/
 *.pdf
+test_data/
+files/
