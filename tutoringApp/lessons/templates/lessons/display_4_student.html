@@ -6,6 +6,12 @@
     {{ object.title }}
 {% endblock %}
 
+{% block script %}
+{% load static %}
+    <script defer src="{% static 'tutoringApp/js/getCookie.js' %}"></script>
+    <script defer src="{% static 'lessons/js/SolutionAPIHandler.js' %}"></script>    
+{% endblock %}
+
 {% block styles %}
 {% load static %}
     <link rel="stylesheet" href="{% static 'lessons/css/display_4_student.css' %}"> 
@@ -97,6 +103,7 @@
                                 Solution
                             </div>
                             {% with solutions|get_by_index:forloop.counter0 as solution %}
+                                <div class="lesson-left-tasks-main-task-student_solution-error hidden form-error"></div>
                                 {% if solution %}
                                     <div class="lesson-left-tasks-main-task-student_solution-file_uploaded">
                                         <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-left">
@@ -110,7 +117,7 @@
                                             </div>
                                         </div>
                                         <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right">
-                                            <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right-delete icon_green">
+                                            <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right-delete icon_green" data-pk="{{solution.id}}" data-index="{{forloop.counter0}}" data-task="{{task.id}}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                                                     <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                                                 </svg>
@@ -119,10 +126,15 @@
                                     </div>
                                 {% else %}
                                     <div class="lesson-left-tasks-main-task-student_solution-button">
-                                        <div class="lesson-left-tasks-main-task-student_solution-button-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                                            </svg>
+                                        <label for="lesson-left-tasks-main-task-student_solution-button-input-input-{{forloop.counter0}}">
+                                            <div class="lesson-left-tasks-main-task-student_solution-button-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                                </svg>
+                                            </div>
+                                        </label>
+                                        <div class="lesson-left-tasks-main-task-student_solution-button-input hidden">
+                                            <input type="file" class="lesson-left-tasks-main-task-student_solution-button-input-input" id="lesson-left-tasks-main-task-student_solution-button-input-input-{{forloop.counter0}}" data-index="{{forloop.counter0}}" data-task="{{task.id}}">
                                         </div>
                                     </div>
                                 {% endif %}
