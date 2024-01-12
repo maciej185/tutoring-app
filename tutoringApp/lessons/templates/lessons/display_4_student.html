@@ -112,8 +112,10 @@
                                                     {% render_file_icon solution.solution %}
                                                 {% endautoescape %}
                                             </div>
-                                            <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-left-file-name">
-                                                {{ solution.solution.name|render_file_name }}
+                                            <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-left-file-name link-container">
+                                                <a href="{{solution.solution.url}}" download>
+                                                    {{ solution.solution.name|render_file_name }}
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right">
