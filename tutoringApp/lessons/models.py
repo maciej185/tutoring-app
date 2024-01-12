@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Union
 
 from django.db import models
 from django.utils.timezone import now
@@ -96,26 +97,7 @@ class Task(models.Model):
         return f"Task under lesson with ID {self.lesson.pk} due on {self.due_date}"
 
 
-class Solution(models.Model):
-    """Model for storing information about task's solutuion.
-
-    Instances of the model store information about a
-    single solution to a task uploaded by a Student
-    assigned to the given tutoring session.
-    """
-
-    task = models.OneToOneField(Task, on_delete=models.CASCADE)
-    solution = models.FileField()
-    upload_date = models.DateTimeField(default=now)
-
-    def __str__(self) -> str:
-        """String representation of a Task's solution."""
-        return (
-            f"Solution to a task with ID {self.task.pk} uploaded on {self.upload_date}"
-        )
-
-
-def material_file_path(instance: "Material", filename: str) -> Path:
+def get_file_path(instance: Union["Material", "Solution"], filename: str) -> Path:
     """Returns directory where the uploaded file will be stored.
 
     Args:
@@ -129,9 +111,41 @@ def material_file_path(instance: "Material", filename: str) -> Path:
         that is relative to the MEDIA_ROOT directory from
         settings.py file.
     """
-    return Path(
-        "files", "lessons", "materials", f"lesson_{instance.lesson.pk}", filename
+    if isinstance(instance, Material):
+        return Path(
+            "files", "lessons", "materials", f"lesson_{instance.lesson.pk}", filename
+        )
+    elif isinstance(instance, Solution):
+        return Path(
+            "files",
+            "lessons",
+            "tasks",
+            f"task_{instance.task.pk}",
+            "solution",
+            filename,
+        )
+
+
+class Solution(models.Model):
+    """Model for storing information about task's solutuion.
+
+    Instances of the model store information about a
+    single solution to a task uploaded by a Student
+    assigned to the given tutoring session.
+    """
+
+    task = models.OneToOneField(Task, on_delete=models.CASCADE)
+    solution = models.FileField(
+        upload_to=get_file_path,
+        max_length=250,
     )
+    upload_date = models.DateTimeField(default=now)
+
+    def __str__(self) -> str:
+        """String representation of a Task's solution."""
+        return (
+            f"Solution to a task with ID {self.task.pk} uploaded on {self.upload_date}"
+        )
 
 
 class Material(models.Model):
@@ -145,7 +159,7 @@ class Material(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     file = models.FileField(
-        upload_to=material_file_path,
+        upload_to=get_file_path,
         max_length=250,
         validators=[MaterialFileExtensionValidator],
     )

@@ -12,8 +12,10 @@
                         {% render_file_icon material.file %}
                     {% endautoescape %}
                 </div>
-                <div class="lesson-left-materials-main-file-name">
-                    {{ material.file.name|render_file_name }}
+                <div class="lesson-left-materials-main-file-name link-container">
+                    <a href="{{material.file.url}}" download>
+                        {{ material.file.name|render_file_name }}
+                    </a>
                 </div>
             </div>
         {% endfor %}
