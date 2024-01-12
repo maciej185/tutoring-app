@@ -27,8 +27,10 @@ class SolutionAPIView(APIView):
         """
         solution_serializer = SolutionSerializer(data=request.data)
         if solution_serializer.is_valid():
-            solution_serializer.save()
-            return Response(solution_serializer.data)
+            solution_instance = solution_serializer.save()
+            return_data = solution_serializer.data
+            return_data.update({"solution_pk": solution_instance.pk})
+            return Response(return_data)
         return Response(solution_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, _request: HttpRequest, pk: int) -> Response:
