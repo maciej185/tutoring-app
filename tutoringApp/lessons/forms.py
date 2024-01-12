@@ -18,6 +18,22 @@ class LessonForm(forms.ModelForm):
         }
 
 
+class LessonStatusForm(forms.ModelForm):
+    """Form for updating Lesson's status."""
+
+    class Meta:
+        model = Lesson
+        fields = ["status"]
+
+        widgets = {
+            "status": forms.Select(
+                attrs={
+                    "class": "lesson-left-status-main-table-cell-bottom-select options"
+                },
+            )
+        }
+
+
 class BookingForm(forms.ModelForm):
     """Form for creating Booking objects."""
 

@@ -1,6 +1,7 @@
 """Views for displaying a single Lesson object."""
 from abc import ABC, abstractmethod
-from typing import Any, Optional
+from datetime import datetime, timezone
+from typing import Any, Literal, Optional
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Model, Q
@@ -10,8 +11,17 @@ from django.urls import reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import ProcessFormView
 
-from lessons.forms import EntryForm
-from lessons.models import Booking, Entry, Lesson, Material, Solution, Task
+from lessons.forms import EntryForm, LessonStatusForm
+from lessons.models import (
+    Booking,
+    Entry,
+    Lesson,
+    Material,
+    Solution,
+    Task,
+    TaskStatusChoices,
+)
+from profiles.forms import AccountType
 
 
 class DisplayLessonViewInterface(ABC):
@@ -46,7 +56,12 @@ class DisplayLessonView(
         """Processing the data passed in EntryForm"""
         form = EntryForm(request.POST)
         if form.is_valid():
-            entry = Entry(text=form.cleaned_data["text"], lesson=self.get_object())
+            entry = Entry(
+                text=form.cleaned_data["text"],
+                lesson=self.get_object(),
+                from_student=request.session["account_type"]
+                == AccountType.STUDENT.value,
+            )
             entry.save()
         return HttpResponseRedirect(self._get_redirect_url())
 
@@ -132,3 +147,69 @@ class DisplayLessonStudentView(
         return reverse(
             "lessons:lesson_display_student", kwargs={"pk": self.kwargs["pk"]}
         )
+
+
+class DisplayLessonTutorView(
+    DisplayLessonView,
+):
+    """View for displaying Lesson objects from Tutor's perspective."""
+
+    template_name = "lessons/display_4_tutor.html"
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        """Include Tutor-specific content."""
+        context = super().get_context_data(**kwargs)
+
+        context["lesson_status_form"] = LessonStatusForm(
+            data={"status": self.get_object().status}
+        )
+
+        context["lesson_pk"] = self.kwargs["pk"]
+
+        context["lesson_happened"] = self.get_object().date < datetime.now(
+            tz=timezone.utc
+        )
+
+        context["task_statuses"] = self._get_task_statuses()
+
+        return context
+
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        """Ensure the user is the Tutor related to the lesson."""
+        related_booking = self._get_related_booking()
+        if related_booking:
+            if request.user != related_booking.availability.service.tutor.user:
+                return render(
+                    request=self.request,
+                    template_name="tutoringApp/forbidden.html",
+                    status=403,
+                    context={
+                        "warning_message": "You are not allowed to view Lesson objects assigned to other Tutors.",
+                        "redirect_link": reverse("home:home"),
+                        "redirect_destination": "home page",
+                    },
+                )
+        return super().get(request, *args, **kwargs)
+
+    def _get_redirect_url(self) -> str:
+        """Redirect Student back to Lesson display page."""
+        return reverse("lessons:lesson_display_tutor", kwargs={"pk": self.kwargs["pk"]})
+
+    def _get_task_statuses(self) -> list[Optional[Literal["approved", "rejected", ""]]]:
+        """Return statuses of Tasks.
+
+        Returns:
+            A list with Task's statuses
+            repesented as strings that will be used as class
+            names in the template.
+        """
+        tasks = Task.objects.filter(lesson=self.get_object())
+        statuses = []
+        for task in tasks:
+            if task.status == TaskStatusChoices.SOLUTION_APPROVED.value:
+                statuses.append("approved")
+            elif task.status == TaskStatusChoices.SOLUTION_DISMISSED.value:
+                statuses.append("rejected")
+            else:
+                statuses.append("")
+        return statuses
