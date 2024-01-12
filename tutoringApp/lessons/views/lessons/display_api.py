@@ -5,7 +5,7 @@ from rest_framework.request import HttpRequest
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from lessons.models import Solution
+from lessons.models import Solution, Task, TaskStatusChoices
 from lessons.serializers import SolutionSerializer
 
 
@@ -30,10 +30,14 @@ class SolutionAPIView(APIView):
             solution_instance = solution_serializer.save()
             return_data = solution_serializer.data
             return_data.update({"solution_pk": solution_instance.pk})
+
+            task = Task.objects.get(pk=return_data["task"])
+            task.status = TaskStatusChoices.SOLUTION_UPLOADED.value
+            task.save()
             return Response(return_data)
         return Response(solution_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, _request: HttpRequest, pk: int) -> Response:
+    def delete(self, request: HttpRequest, pk: int) -> Response:
         """Delete a Solution object with the provided PK.
 
         The endpoint checks if an object with provided primary key
@@ -54,5 +58,8 @@ class SolutionAPIView(APIView):
             solution = Solution.objects.get(pk=pk)
         except Solution.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+        task = Task.objects.get(solution=solution)
+        task.status = TaskStatusChoices.SOLUTION_PENDING.value
+        task.save()
         solution.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
