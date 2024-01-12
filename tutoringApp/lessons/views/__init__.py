@@ -6,6 +6,7 @@ from .booking import (
 )
 from .lessons import (
     DisplayLessonStudentView,
+    SolutionAPIView,
     UpdateLessonView,
     delete_material_view,
     delete_task_view,
@@ -20,4 +21,5 @@ __all__ = [
     "delete_task_view",
     "delete_material_view",
     "DisplayLessonStudentView",
+    "SolutionAPIView",
 ]
