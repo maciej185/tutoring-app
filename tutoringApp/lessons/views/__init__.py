@@ -8,6 +8,7 @@ from .lessons import (
     DisplayLessonStudentView,
     DisplayLessonTutorView,
     SolutionAPIView,
+    TaskAPIView,
     UpdateLessonView,
     delete_material_view,
     delete_task_view,
@@ -24,4 +25,5 @@ __all__ = [
     "DisplayLessonStudentView",
     "DisplayLessonTutorView",
     "SolutionAPIView",
+    "TaskAPIView",
 ]
