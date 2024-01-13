@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="{% static 'lessons/css/display_4_tutor.css' %}"> 
 {% endblock %}
 
+{% block script %}
+{% load static %}
+    <script defer src="{% static 'tutoringApp/js/getCookie.js' %}"></script>
+    <script defer src="{% static 'lessons/js/TaskAPIHandler.js' %}"></script>    
+{% endblock %}
+
 {% block main %}
 <div class="wrap stack-container_small">
     <div class="edit adjacent-container">
@@ -107,8 +113,8 @@
                                     Solution
                                 </div>
                                 {% with solutions|get_by_index:forloop.counter0 as solution %}
-                                    <div class="lesson-left-tasks-main-task-student_solution-error hidden form-error"></div>
                                     {% if solution %}
+                                        <div class="lesson-left-tasks-main-task-student_solution-errors"></div>
                                         <div class="lesson-left-tasks-main-task-student_solution-file_uploaded">
                                             <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-left">
                                                 <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-left-file-icon">
@@ -122,7 +128,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right adjacent-container {{ task_statuses|get_by_index:forloop.counter0 }}">
+                                            <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right adjacent-container {{ task_statuses|get_by_index:forloop.counter0 }}" data-solution="{{solution.id}}">
                                                 <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right-icon solution-approve">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                                                         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
