@@ -15,15 +15,15 @@
                         Tutor 
                     </div>
                     <div class="lesson-left-summary-main-table-cell-bottom main-table-cell-bottom">
-                        {% render_tutor_name object %}
+                        {% render_participants_name object 0 %}
                     </div>
                 </td>
                 <td class="lesson-left-summary-main-table-cell main-table-cell">
                     <div class="lesson-left-summary-main-table-cell-top main-table-cell-top">
-                        Subject
+                        Student
                     </div>
                     <div class="lesson-left-summary-main-table-cell-bottom main-table-cell-bottom">
-                        {{ object.subject }}
+                        {% render_participants_name object 1 %}
                     </div>
                 </td>
             </tr>
@@ -37,8 +37,12 @@
                     </div>
                 </td>
                 <td class="lesson-left-summary-main-table-cell main-table-cell">
-                    <div class="lesson-left-summary-main-table-cell-top main-table-cell-top"></div>
-                    <div class="lesson-left-summary-main-table-cell-bottom main-table-cell-bottom"></div>
+                    <div class="lesson-left-summary-main-table-cell-top main-table-cell-top">
+                        Subject
+                    </div>
+                    <div class="lesson-left-summary-main-table-cell-bottom main-table-cell-bottom">
+                        {% render_subject object %}
+                    </div>
                 </td>
             </tr>
         </table>

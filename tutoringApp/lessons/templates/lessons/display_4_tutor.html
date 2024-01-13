@@ -5,3 +5,198 @@
 {% block title %}
     {{ object.title }}
 {% endblock %}
+
+{% block styles %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'lessons/css/display_4_student.css' %}">
+    <link rel="stylesheet" href="{% static 'lessons/css/display_4_tutor.css' %}"> 
+{% endblock %}
+
+{% block main %}
+<div class="wrap stack-container_small">
+    <div class="edit adjacent-container">
+        <div class="edit-btn button_fill_green">
+            <a href="{% url 'lessons:lesson_update' lesson_pk %}">
+                Edit
+            </a>
+        </div>
+    </div>
+    <div class="lesson">   
+        <div class="lesson-left">
+            {% include 'lessons/display/summary.html' %}
+            <div class="lesson-left-status box">
+                <div class="lesson-left-status-header box-header">
+                    Status
+                </div>
+                <div class="lesson-left-status-main box-main_padded stack-container">
+                    <div class="lesson-left-status-main-entry status-entry">
+                        <div class="lesson-left-status-main-entry-top status-entry-top">
+                            Status
+                        </div>
+                        <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green">
+                            {{lesson_status_form.status}}
+                        </div>
+                    </div>
+                    <div class="lesson-left-status-main-entry">
+                        <div class="lesson-left-status-main-entry-top status-entry-top">
+                            Tasks
+                        </div>
+                        <div class="lesson-left-status-main-table-cell-bottom main-table-cell-bottom_red">
+                            {% tasks_with_status tasks 0 %} outstanding.
+                        </div>
+                        <div class="lesson-left-status-main-table-cell-bottom main-table-cell-bottom_red">
+                            {% tasks_with_status tasks 3 %} with rejected solution.
+                        </div>
+                        <div class="lesson-left-status-main-table-cell-bottom main-table-cell-bottom_orange">
+                            {% tasks_with_status tasks 1 %} to be checked.
+                        </div>
+                        <div class="lesson-left-status-main-table-cell-bottom status-entry-bottom_green">
+                            {% tasks_with_status tasks 2 %} finished.
+                        </div>
+                    </div>
+                    <div class="lesson-left-status-main-entry">
+                        <div class="lesson-left-status-main-entry-absence button_fill_red">
+                            Student was not present
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% include 'lessons/display/subject.html' %}
+
+            {% include 'lessons/display/materials.html' %}
+
+            <div class="lesson-left-tasks box">
+                <div class="lesson-left-tasks-header box-header">
+                    Tasks
+                </div> 
+                <div class="lesson-left-tasks-main box-main_padded">
+                    {% for task in tasks %}
+                        <div class="lesson-left-tasks-main-task">
+                            <input type="checkbox" class="lesson-left-tasks-main-task-checkbox" id="lesson-left-tasks-main-task-checkbox-{{forloop.counter}}">
+                            <label for="lesson-left-tasks-main-task-checkbox-{{forloop.counter}}" class="lesson-left-tasks-main-task-label">
+                                <div class="lesson-left-tasks-main-task-header">
+                                    <div class="lesson-left-tasks-main-task-header-text adjacent-container">
+                                        <div class="lesson-left-tasks-main-task-header-text-main">
+                                            {{ task.title }} 
+                                        </div>
+                                        <div class="lesson-left-tasks-main-task-header-text-status {% get_css_class_for_task_status task.status %}">
+                                            {% render_task_status task.status %}
+                                        </div>
+                                    </div>
+                                    <div class="lesson-left-tasks-main-task-header-icon_down icon_green">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="lesson-left-tasks-main-task-header-icon_up icon_green">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </label>
+                            <div class="lesson-left-tasks-main-task-due_date">
+                                Due {{ task.due_date }}
+                            </div>
+                            <div class="lesson-left-tasks-main-task-description">
+                                {{ task.description }}
+                            </div>
+                            <div class="lesson-left-tasks-main-task-student_solution">
+                                <div class="lesson-left-tasks-main-task-student_solution-header">
+                                    Solution
+                                </div>
+                                {% with solutions|get_by_index:forloop.counter0 as solution %}
+                                    <div class="lesson-left-tasks-main-task-student_solution-error hidden form-error"></div>
+                                    {% if solution %}
+                                        <div class="lesson-left-tasks-main-task-student_solution-file_uploaded">
+                                            <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-left">
+                                                <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-left-file-icon">
+                                                    {% autoescape off %}
+                                                        {% render_file_icon solution.solution %}
+                                                    {% endautoescape %}
+                                                </div>
+                                                <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-left-file-name link-container">
+                                                    <a href="{{solution.solution.url}}" download>
+                                                        {{ solution.solution.name|render_file_name }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right adjacent-container {{ task_statuses|get_by_index:forloop.counter0 }}">
+                                                <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right-icon solution-approve">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="lesson-left-tasks-main-task-student_solution-file_uploaded-right-icon solution-reject">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="lesson-left-tasks-main-task-student_solution-info">
+                                            No solution uploaded
+                                        </div>
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% include 'lessons/display/activity.html' %}
+
+        </div>
+        <div class="lesson-right">
+            <div class="lesson-right-status box">
+                <div class="lesson-right-status-header box-header">
+                    Status
+                </div>
+                <div class="lesson-right-status-main box-main_padded">
+                    <div class="lesson-left-status-main-entry status-entry">
+                        <div class="lesson-left-status-main-entry-top status-entry-top">
+                            Status
+                        </div>
+                        <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green">
+                            {{lesson_status_form.status}}
+                        </div>
+                    </div>
+                    <div class="lesson-left-status-main-entry">
+                        <div class="lesson-left-status-main-entry-top status-entry-top">
+                            Tasks
+                        </div>
+                        <div class="lesson-left-status-main-table-cell-bottom main-table-cell-bottom_red">
+                            {% tasks_with_status tasks 0 %} outstanding.
+                        </div>
+                        <div class="lesson-left-status-main-table-cell-bottom main-table-cell-bottom_red">
+                            {% tasks_with_status tasks 3 %} with rejected solution.
+                        </div>
+                        <div class="lesson-left-status-main-table-cell-bottom main-table-cell-bottom_orange">
+                            {% tasks_with_status tasks 1 %} to be checked.
+                        </div>
+                        <div class="lesson-left-status-main-table-cell-bottom status-entry-bottom_green">
+                            {% tasks_with_status tasks 2 %} finished.
+                        </div>
+                    </div>
+                    <div class="lesson-left-status-main-entry">
+                        {% if lesson_happened %}
+                            {% if not object.absence %}
+                                <div class="lesson-left-status-main-entry-absence button_fill_red">
+                                    Student was not present
+                                </div>
+                            {% else %}
+                                <div class="lesson-left-status-main-entry-attendance button_fill_green">
+                                    Student was present
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Literal, Optional
 
 from django import template
 from django.db.models.fields.files import FieldFile
@@ -142,16 +142,20 @@ def render_file_name(file_path: str) -> str:
 
 
 @register.simple_tag
-def render_tutor_name(lesson: Lesson) -> str:
-    """Render Tutor's name based on provided Lesson.
+def render_participants_name(lesson: Lesson, student: Literal[0, 1]) -> str:
+    """Render Lesson's partcipants name based on provided Lesson.
 
-    The name of the Tutor is fetched differently depending
+    Names of Tutors and Students are fetched differently depending
     on whether the provided Lesson object is related to a
     Booking or an Appointment.
 
     Args:
         lesson: Instance of the Lesson model for which the
-                Tutor's name will be fetched.
+                participant's name will be fetched.
+        student: `Boolean` flag informing whether the Student's
+                    ot Tutor's name should be fetched. Integers
+                    are used beacues booleans are not available
+                    in default django templates.
 
     Returns:
         String containing first and last names of the Tutor
@@ -159,8 +163,30 @@ def render_tutor_name(lesson: Lesson) -> str:
     """
     try:
         booking = Booking.objects.get(lesson_info=lesson)
-        tutor_user = booking.availability.service.tutor.user
-        return f"{tutor_user.first_name} {tutor_user.last_name}"
+        if bool(student):
+            participant_user = booking.student.user
+        else:
+            participant_user = booking.availability.service.tutor.user
+        return f"{participant_user.first_name} {participant_user.last_name}"
+    except Booking.DoesNotExist:
+        return ""
+
+
+@register.simple_tag
+def render_subject(lesson: Lesson):
+    """Render subject's name based on provided Lesson.
+
+    Args:
+        lesson: Instance of the Lesson model for which the
+                subject name will be fetched.
+
+    Subject name is fetched differently depending
+    on whether the provided Lesson object is related to a
+    Booking or an Appointment.
+    """
+    try:
+        booking = Booking.objects.get(lesson_info=lesson)
+        return booking.availability.service.subject.name
     except Booking.DoesNotExist:
         return ""
 
