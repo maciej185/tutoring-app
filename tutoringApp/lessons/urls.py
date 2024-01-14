@@ -19,6 +19,16 @@ api_endpoints = [
         view=views.TaskAPIView.as_view(),
         name="task_update",
     ),
+    path(
+        "absence/update/<int:pk>",
+        view=views.update_lesson_absence_view,
+        name="lesson_update_absence",
+    ),
+    path(
+        "status/update/<int:pk>",
+        view=views.update_lesson_status_view,
+        name="lesson_update_status",
+    ),
 ]
 urlpatterns = [
     path(

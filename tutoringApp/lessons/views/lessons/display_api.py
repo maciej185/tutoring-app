@@ -1,11 +1,20 @@
 """API endpoints for managinig `Solution` objects."""
 
+from datetime import datetime, timezone
+
 from rest_framework import status
-from rest_framework.request import HttpRequest
+from rest_framework.decorators import api_view
+from rest_framework.request import HttpRequest, Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from lessons.models import Solution, Task, TaskStatusChoices
+from lessons.models import (
+    Lesson,
+    LessonStatusChoices,
+    Solution,
+    Task,
+    TaskStatusChoices,
+)
 from lessons.serializers import SolutionSerializer
 
 
@@ -97,3 +106,53 @@ class TaskAPIView(APIView):
         )
         task.save()
         return Response(status=status.HTTP_200_OK)
+
+
+@api_view(http_method_names=["PUT"])
+def update_lesson_status_view(request: Request, pk: int) -> Response:
+    """Update Lesson's status.
+
+    Args:
+        request: Instance of the HttpRequest class containing
+                every information about the request sent to the
+                server.
+        pk: Primary key of the Lesson objects that is about to
+            be updated.
+    Returns:
+        Instance of the `Response` class with an appropraite
+        status code.
+    """
+    try:
+        lesson = Lesson.objects.get(pk=pk)
+    except Lesson.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.data["status"] not in LessonStatusChoices.values:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    lesson.status = request.data["status"]
+    lesson.save()
+    return Response(status=status.HTTP_200_OK)
+
+
+@api_view(http_method_names=["PUT"])
+def update_lesson_absence_view(request: Request, pk: int) -> Response:
+    """Update value of Lesson's `absence` field.
+
+    Args:
+        request: Instance of the HttpRequest class containing
+                every information about the request sent to the
+                server.
+        pk: Primary key of the Lesson objects that is about to
+            be updated.
+    Returns:
+        Instance of the `Response` class with an appropraite
+        status code.
+    """
+    try:
+        lesson = Lesson.objects.get(pk=pk)
+    except Lesson.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if lesson.date > datetime.now(tz=timezone.utc):
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    lesson.absence = request.data["absence"]
+    lesson.save()
+    return Response(status=status.HTTP_200_OK)
