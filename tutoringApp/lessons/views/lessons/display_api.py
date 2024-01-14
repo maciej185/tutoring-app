@@ -126,7 +126,7 @@ def update_lesson_status_view(request: Request, pk: int) -> Response:
         lesson = Lesson.objects.get(pk=pk)
     except Lesson.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    if request.data["status"] not in LessonStatusChoices.values:
+    if not int(request.data["status"]) in LessonStatusChoices.values:
         return Response(status=status.HTTP_400_BAD_REQUEST)
     lesson.status = request.data["status"]
     lesson.save()

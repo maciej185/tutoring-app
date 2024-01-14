@@ -15,7 +15,8 @@
 {% block script %}
 {% load static %}
     <script defer src="{% static 'tutoringApp/js/getCookie.js' %}"></script>
-    <script defer src="{% static 'lessons/js/TaskAPIHandler.js' %}"></script>    
+    <script defer src="{% static 'lessons/js/TaskAPIHandler.js' %}"></script>
+    <script defer src="{% static 'lessons/js/LessonAPIHandler.js' %}"></script>        
 {% endblock %}
 
 {% block main %}
@@ -35,11 +36,12 @@
                     Status
                 </div>
                 <div class="lesson-left-status-main box-main_padded stack-container">
-                    <div class="lesson-left-status-main-entry status-entry">
+                    <div class="lesson-left-status-main-entry status-entry stack-container_small">
                         <div class="lesson-left-status-main-entry-top status-entry-top">
                             Status
                         </div>
-                        <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green">
+                        <div class="lesson-left-status-main-entry-errors status-entry-errors hidden form_error"></div>
+                        <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green" data-lesson="{{object.id}}">
                             {{lesson_status_form.status}}
                         </div>
                     </div>
@@ -61,9 +63,24 @@
                         </div>
                     </div>
                     <div class="lesson-left-status-main-entry">
-                        <div class="lesson-left-status-main-entry-absence button_fill_red">
-                            Student was not present
-                        </div>
+                        <div class="lesson-left-status-main-entry-errors form-error hidden"></div>
+                        {% if lesson_happened %}
+                            {% if not object.absence %}
+                                <div class="lesson-left-status-main-entry-absence button_fill_red absence-btn" data-lesson="{{object.id}}">
+                                    Student was not present
+                                </div>
+                                <div class="lesson-left-status-main-entry-attendance button_fill_green presence-btn hidden" data-lesson="{{object.id}}">
+                                    Student was present
+                                </div>
+                            {% else %}
+                                <div class="lesson-left-status-main-entry-absence button_fill_red absence-btn hidden" data-lesson="{{object.id}}">
+                                    Student was not present
+                                </div>
+                                <div class="lesson-left-status-main-entry-attendance button_fill_green presence-btn" data-lesson="{{object.id}}">
+                                    Student was present
+                                </div>
+                            {% endif %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -162,11 +179,12 @@
                     Status
                 </div>
                 <div class="lesson-right-status-main box-main_padded">
-                    <div class="lesson-left-status-main-entry status-entry">
+                    <div class="lesson-left-status-main-entry status-entry stack-container_small">
                         <div class="lesson-left-status-main-entry-top status-entry-top">
                             Status
                         </div>
-                        <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green">
+                        <div class="lesson-left-status-main-entry-errors status-entry-errors hidden form_error"></div>
+                        <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green" data-lesson="{{object.id}}">
                             {{lesson_status_form.status}}
                         </div>
                     </div>
@@ -188,13 +206,20 @@
                         </div>
                     </div>
                     <div class="lesson-left-status-main-entry">
+                        <div class="lesson-left-status-main-entry-errors form-error hidden"></div>
                         {% if lesson_happened %}
                             {% if not object.absence %}
-                                <div class="lesson-left-status-main-entry-absence button_fill_red">
+                                <div class="lesson-left-status-main-entry-absence button_fill_red absence-btn" data-lesson="{{object.id}}">
                                     Student was not present
                                 </div>
+                                <div class="lesson-left-status-main-entry-attendance button_fill_green presence-btn hidden" data-lesson="{{object.id}}">
+                                    Student was present
+                                </div>
                             {% else %}
-                                <div class="lesson-left-status-main-entry-attendance button_fill_green">
+                                <div class="lesson-left-status-main-entry-absence button_fill_red absence-btn hidden" data-lesson="{{object.id}}">
+                                    Student was not present
+                                </div>
+                                <div class="lesson-left-status-main-entry-attendance button_fill_green presence-btn" data-lesson="{{object.id}}">
                                     Student was present
                                 </div>
                             {% endif %}
