@@ -14,6 +14,11 @@ api_endpoints = [
         view=views.SolutionAPIView.as_view(),
         name="solution_delete",
     ),
+    path(
+        "task/update/<int:pk>",
+        view=views.TaskAPIView.as_view(),
+        name="task_update",
+    ),
 ]
 urlpatterns = [
     path(

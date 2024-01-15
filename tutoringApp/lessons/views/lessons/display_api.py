@@ -63,3 +63,37 @@ class SolutionAPIView(APIView):
         task.save()
         solution.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class TaskAPIView(APIView):
+    """Endpoints for managing `Task` objects."""
+
+    def put(self, request: HttpRequest, pk: int) -> Response:
+        """Change Tasks's status.
+
+        The endpoint checks if an object with provided primary key
+        exists before attempting to fetch and update it's status.
+        If it does not exist, an appropriate message is returned.
+
+        Args:
+            request: Instance of the HttpRequest class containing
+                    every information about the request sent to the
+                    server.
+            pk: Primary key of the `Solution` object that is related
+                            to a Task which is meant to be updated.
+        Returns:
+            Instance of the `Response` class with an appropraite
+            status code.
+        """
+        try:
+            solution = Solution.objects.get(pk=pk)
+        except Solution.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        task = Task.objects.get(solution=solution)
+        task.status = (
+            TaskStatusChoices.SOLUTION_DISMISSED.value
+            if request.data["status"] == -1
+            else TaskStatusChoices.SOLUTION_APPROVED.value
+        )
+        task.save()
+        return Response(status=status.HTTP_200_OK)
