@@ -40,9 +40,8 @@
                         <div class="lesson-left-status-main-entry-top status-entry-top">
                             Status
                         </div>
-                        <div class="lesson-left-status-main-entry-errors status-entry-errors hidden form_error"></div>
-                        <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green" data-lesson="{{object.id}}">
-                            {{lesson_status_form.status}}
+                        <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green">
+                            {{ object.status }}
                         </div>
                     </div>
                     <div class="lesson-left-status-main-entry">
@@ -183,9 +182,8 @@
                         <div class="lesson-left-status-main-entry-top status-entry-top">
                             Status
                         </div>
-                        <div class="lesson-left-status-main-entry-errors status-entry-errors hidden form_error"></div>
-                        <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green" data-lesson="{{object.id}}">
-                            {{lesson_status_form.status}}
+                        <div class="lesson-left-status-main-entry-bottom status-entry-bottom_green">
+                            {% render_lesson_status object.status %}
                         </div>
                     </div>
                     <div class="lesson-left-status-main-entry">

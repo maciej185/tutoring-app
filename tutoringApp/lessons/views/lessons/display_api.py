@@ -109,31 +109,6 @@ class TaskAPIView(APIView):
 
 
 @api_view(http_method_names=["PUT"])
-def update_lesson_status_view(request: Request, pk: int) -> Response:
-    """Update Lesson's status.
-
-    Args:
-        request: Instance of the HttpRequest class containing
-                every information about the request sent to the
-                server.
-        pk: Primary key of the Lesson objects that is about to
-            be updated.
-    Returns:
-        Instance of the `Response` class with an appropraite
-        status code.
-    """
-    try:
-        lesson = Lesson.objects.get(pk=pk)
-    except Lesson.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    if not int(request.data["status"]) in LessonStatusChoices.values:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
-    lesson.status = request.data["status"]
-    lesson.save()
-    return Response(status=status.HTTP_200_OK)
-
-
-@api_view(http_method_names=["PUT"])
 def update_lesson_absence_view(request: Request, pk: int) -> Response:
     """Update value of Lesson's `absence` field.
 

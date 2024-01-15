@@ -11,7 +11,7 @@ from django.urls import reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import ProcessFormView
 
-from lessons.forms import EntryForm, LessonStatusForm
+from lessons.forms import EntryForm
 from lessons.models import (
     Booking,
     Entry,
@@ -159,10 +159,6 @@ class DisplayLessonTutorView(
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         """Include Tutor-specific content."""
         context = super().get_context_data(**kwargs)
-
-        context["lesson_status_form"] = LessonStatusForm(
-            data={"status": self.get_object().status}
-        )
 
         context["lesson_pk"] = self.kwargs["pk"]
 

@@ -13,7 +13,6 @@ from .lessons import (
     delete_material_view,
     delete_task_view,
     update_lesson_absence_view,
-    update_lesson_status_view,
 )
 
 __all__ = [
@@ -28,6 +27,5 @@ __all__ = [
     "DisplayLessonTutorView",
     "SolutionAPIView",
     "TaskAPIView",
-    "update_lesson_status_view",
     "update_lesson_absence_view",
 ]
