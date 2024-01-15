@@ -9,27 +9,11 @@ class LessonForm(forms.ModelForm):
 
     class Meta:
         model = Lesson
-        exclude = ["status"]
+        fields = "__all__"
 
         widgets = {
             "date": forms.DateTimeInput(
                 attrs={"type": "datetime-local"},
-            )
-        }
-
-
-class LessonStatusForm(forms.ModelForm):
-    """Form for updating Lesson's status."""
-
-    class Meta:
-        model = Lesson
-        fields = ["status"]
-
-        widgets = {
-            "status": forms.Select(
-                attrs={
-                    "class": "lesson-left-status-main-table-cell-bottom-select options"
-                },
             )
         }
 

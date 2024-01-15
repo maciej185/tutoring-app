@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 from typing import Union
 
@@ -7,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 from lessons.validators import MaterialFileExtensionValidator
 from profiles.models import Profile
-from tutors.models import Availability
+from tutors.models import Availability, Service
 
 # Create your models here.
 
@@ -36,15 +37,53 @@ class Lesson(models.Model):
     subject = models.CharField(max_length=250, default="")
     subject_details = models.CharField(max_length=250, default="")
     title = models.CharField(max_length=250, default="")
-    status = models.IntegerField(choices=LessonStatusChoices.choices, default=0)
+    # status = models.IntegerField(choices=LessonStatusChoices.choices, default=0)
     absence = models.BooleanField(
         default=False,
         help_text="Indiciates whether Student showed up for the session or not.",
     )
 
+    @property
+    def status(self) -> int:
+        """Represent Lesson's status.
+
+        The property informs whether the Lessons
+        has already took place, will take place
+        or is currently taking place. The status
+        is calculated based on current time and
+        the value of the `date` field.
+
+        Returns:
+            An appropriate integer value representing
+            the Lesson's status taken from the
+            LessonStatusChoices enumerated string class.
+        """
+        service = self._get_related_service()
+        end_date = self.date + timedelta(minutes=service.session_length)
+        if now() < self.date < end_date:
+            return LessonStatusChoices.HAVE_NOT_TAKEN_PLACE.value
+        elif self.date < now() < end_date:
+            return LessonStatusChoices.CURRENTLY_TAKING_PLACE.value
+        if self.date < end_date < now():
+            return LessonStatusChoices.TOOK_PLACE.value
+
     def __str__(self) -> str:
         """String representation of the Lesson object."""
         return f"Lesson on {self.date} with subject: {self.subject}"
+
+    def _get_related_service(self) -> Service:
+        """Fetch related Service object.
+
+        Returns:
+            Related Service object, fetched differently
+            depending on whether the current Lesson instance
+            is related to a Booking or an Appointment.
+        """
+        try:
+            booking = Booking.objects.get(lesson_info=self)
+            return booking.availability.service
+        except Booking.DoesNotExist:
+            return
 
 
 class Booking(models.Model):
