@@ -56,4 +56,9 @@ urlpatterns = [
         view=views.DisplayLessonStudentView.as_view(),
         name="lesson_display_student",
     ),
+    path(
+        "tutor/<int:pk>",
+        view=views.DisplayLessonTutorView.as_view(),
+        name="lesson_display_tutor",
+    ),
 ] + api_endpoints
