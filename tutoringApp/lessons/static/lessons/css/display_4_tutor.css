@@ -1,0 +1,28 @@
+div.lesson-left-tasks-main-task-student_solution-file_uploaded-right-icon {
+    height: 1rem;
+    width: 1rem;
+    color: gray;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+div.lesson-left-tasks-main-task-student_solution-file_uploaded-right-icon > svg {
+    height: inherit;
+    width: inherit;
+}
+
+div.approved > div.solution-approve {
+    color: var(--bluegreen-medium);
+}
+
+div.rejected > div.solution-reject {
+    color: var(--gray-red-medium);
+}
+
+div.solution-approve:hover {
+    color: var(--bluegreen-medium);
+}
+
+div.solution-reject:hover {
+    color: var(--gray-red-medium);
+}
