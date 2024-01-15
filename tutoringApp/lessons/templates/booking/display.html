@@ -66,7 +66,15 @@
                 <div class="sessions-list-main-session box box-main_padded stack-adjecent-container">
                     <div class="sessions-list-main-session-left_top">
                         <div class="sessions-list-main-session-left_top-tutor link-container">
-                            {% render_booking_title booking is_student %}
+                            {% if is_student %}
+                                <a href="{% url 'lessons:lesson_display_student' booking.lesson_info.id %}">
+                                    {% render_booking_title booking is_student %}
+                                </a>
+                            {% else %}
+                                <a href="{% url 'lessons:lesson_display_tutor' booking.lesson_info.id %}">
+                                    {% render_booking_title booking is_student %}
+                                </a>
+                            {% endif %}
                         </div>
                         <div class="sessions-list-main-session-left_top-time info-bottom">
                             {% render_availability_time_slot booking.availability %}

@@ -127,6 +127,12 @@ class DisplayLessonStudentView(
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         """Ensure the user is the Student related to the lesson."""
+        if request.session["account_type"] == AccountType.TUTOR.value:
+            return HttpResponseRedirect(
+                reverse(
+                    "lessons:lesson_display_tutor", kwargs={"pk": self.kwargs["pk"]}
+                )
+            )
         related_booking = self._get_related_booking()
         if related_booking:
             if request.user != related_booking.student.user:
@@ -172,6 +178,12 @@ class DisplayLessonTutorView(
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         """Ensure the user is the Tutor related to the lesson."""
+        if request.session["account_type"] == AccountType.STUDENT.value:
+            return HttpResponseRedirect(
+                reverse(
+                    "lessons:lesson_display_student", kwargs={"pk": self.kwargs["pk"]}
+                )
+            )
         related_booking = self._get_related_booking()
         if related_booking:
             if request.user != related_booking.availability.service.tutor.user:
