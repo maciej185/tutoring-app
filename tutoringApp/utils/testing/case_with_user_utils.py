@@ -42,3 +42,28 @@ class TestCaseUserUtils(TestCase):
             },
             follow=True,
         )
+
+    def _login_user(self, username: str, password: str = "haslo123") -> None:
+        """Log the user in.
+
+        The method logs the user in by sending a
+        request to the `profiles:login` page.
+        The method could be used instead of default
+        'self.client.login' in cases where the value of
+        the 'account_type' session must be set. The
+        setting of that value is done in the login
+        view.
+
+        Args:
+            username: Username of the user is meant to be
+                        logged in.
+            password: Password of the user that is meant to
+                        be logged in.
+        """
+        self.client.post(
+            reverse("profiles:login"),
+            {
+                "username": username,
+                "password": password,
+            },
+        )
