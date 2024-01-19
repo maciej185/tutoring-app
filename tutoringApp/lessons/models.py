@@ -37,7 +37,6 @@ class Lesson(models.Model):
     subject = models.CharField(max_length=250, default="")
     subject_details = models.CharField(max_length=250, default="")
     title = models.CharField(max_length=250, default="")
-    # status = models.IntegerField(choices=LessonStatusChoices.choices, default=0)
     absence = models.BooleanField(
         default=False,
         help_text="Indiciates whether Student showed up for the session or not.",
