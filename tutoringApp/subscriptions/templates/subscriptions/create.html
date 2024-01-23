@@ -1,1 +1,46 @@
 {% extends 'tutoringApp/base_tutor.html' %}
+
+{% load widget_tweaks %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'subscriptions/css/create.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="form box">
+        <div class="form-header box-header">
+            Create subscription
+        </div>
+        <div class="form-main box-main_padded">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-main-form_wrap stack-container">
+                    <div class="form-main-form_wrap-form stack-adjecent-container">
+                        <div class="form-main-form_wrap-form-field form-main-form_wrap-form-student stack-container_smaller">
+                            <div class="form-main-form_wrap-form-field-label form-main-form_wrap-form-student-label info-top">
+                                Student
+                            </div>
+                            <div class="form-main-form_wrap-form-field-input form-main-form_wrap-form-student-input">
+                                {{ form.student|add_class:'options' }}
+                            </div>
+                        </div>
+                        <div class="form-main-form_wrap-form-field form-main-form_wrap-form-subject stack-container_smaller">
+                            <div class="form-main-form_wrap-form-field-label form-main-form_wrap-form-subject-label info-top">
+                                Subject
+                            </div>
+                            <div class="form-main-form_wrap-form-field-input form-main-form_wrap-form-subject-input">
+                                {{ form.subject|add_class:'options' }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-main-form_wrap-submit centered_button_container">
+                        <button class="form-main-form_wrap-submit-btn button_fill_green" type="submit">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
