@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "tutors.apps.TutorsConfig",
     "rest_framework",
     "lessons.apps.LessonsConfig",
+    "subscriptions.apps.SubscriptionsConfig",
 ]
 
 MIDDLEWARE = [
