@@ -73,6 +73,11 @@ class Profile(models.Model):
     schools = models.ManyToManyField("School", through="Education")
     history = HistoricalRecords()
 
+    @property
+    def full_name(self) -> str:
+        """Return user's full name."""
+        return f"{self.user.first_name.capitalize()} {self.user.last_name.capitalize()}"
+
     def is_student(self) -> bool:
         """Returns boolean info whether given profile is a Student's profile.
 

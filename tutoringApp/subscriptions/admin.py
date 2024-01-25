@@ -19,9 +19,12 @@ class SubscriptionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["subject"].queryset = Subject.objects.filter(
-            service__tutor=self.instance.tutor, service__is_default=True
-        )
+        try:
+            self.fields["subject"].queryset = Subject.objects.filter(
+                service__tutor=self.instance.tutor, service__is_default=True
+            )
+        except Subscription.tutor.RelatedObjectDoesNotExist:
+            pass
 
     class Meta:
         model = Subscription

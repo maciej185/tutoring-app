@@ -68,7 +68,7 @@ class Appointment(models.Model):
     subscription_service = models.ForeignKey(
         ServiceSubscriptionList, on_delete=models.CASCADE
     )
-    lesson_info = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    lesson_info = models.OneToOneField(Lesson, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         """String representation of the class."""

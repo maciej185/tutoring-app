@@ -86,7 +86,7 @@ class Service(models.Model):
 
     def __str__(self) -> str:
         """String representation fo the model's instance."""
-        return f"{self.subject.name} taught by {self.tutor.user.username}"
+        return f"{self.subject.name}, {self.number_of_hours} {'hour' if self.number_of_hours == 1 else 'hours'}"
 
 
 class Availability(models.Model):

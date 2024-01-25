@@ -42,9 +42,10 @@ class ServiceSubscriptionListForm(forms.ModelForm):
 
         Limit the choices only to Services offered by the Tutor.
         """
-        super().__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields["service"].queryset = Service.objects.filter(
-            servicesubscriptionlist__subscription=self.initial["subscription"]
+            tutor=self.initial["subscription"].tutor,
+            subject=self.initial["subscription"].subject,
         )
 
     class Meta:
