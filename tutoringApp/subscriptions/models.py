@@ -65,7 +65,7 @@ class Appointment(models.Model):
     count in the given Subscription.
     """
 
-    subscription = models.ForeignKey(Subscription, on_delete=models.CASCADE)
+    subscription_service = models.ForeignKey(ServiceSubscriptionList, on_delete=models.CASCADE)
     lesson_info = models.ForeignKey(Lesson, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
