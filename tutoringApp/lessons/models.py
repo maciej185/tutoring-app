@@ -68,7 +68,7 @@ class Lesson(models.Model):
 
     def __str__(self) -> str:
         """String representation of the Lesson object."""
-        return f"Lesson on {self.date} with subject: {self.subject}"
+        return f"Lesson on {self.date.strftime('%d. %b %Y, %H:%M')} with subject: {self.subject}"
 
     def _get_related_service(self) -> Service:
         """Fetch related Service object.

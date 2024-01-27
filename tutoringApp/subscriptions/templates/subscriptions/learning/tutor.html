@@ -178,7 +178,11 @@
                             <div class="learning-right-sessions-session-top">
                                 <div class="learning-right-sessions-session-top-name">
                                     <a href="{% url 'lessons:lesson_display_tutor' lesson.id %}">
-                                        {{ lesson.title }}
+                                        {% if not lesson.title %}
+                                            {{ lesson }}
+                                        {% else %}
+                                            {{ lesson.title }}
+                                        {% endif %}
                                     </a>
                                 </div>
                                 <div class="learning-right-sessions-session-top-status-warning"></div>
@@ -190,15 +194,19 @@
                     {% endfor %}
                     {% if hours_left > 0 %}
                         <div class="learning-right-sessions-session-add box-main_padded">
-                            <a href="#">
-                                <div class="learning-right-sessions-session-add-btn add_button">
-                                    <div class="learning-right-sessions-session-add-btn-icon add_button-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                                        </svg>
+                            <form action="{% url 'subscriptions:appointment_create' current_subscription.id %}" method="post">
+                                {% csrf_token %}
+                                <label for="learning-right-sessions-session-add-input">
+                                    <div class="learning-right-sessions-session-add-btn add_button">
+                                        <div class="learning-right-sessions-session-add-btn-icon add_button-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                            </svg>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </label>
+                                <input type="submit" id="learning-right-sessions-session-add-input">   
+                            </form>
                         </div>
                     {% endif %}
                     <div class="learning-right-sessions-session-pagination">
