@@ -65,12 +65,14 @@ class Appointment(models.Model):
     count in the given Subscription.
     """
 
-    subscription_service = models.ForeignKey(ServiceSubscriptionList, on_delete=models.CASCADE)
+    subscription_service = models.ForeignKey(
+        ServiceSubscriptionList, on_delete=models.CASCADE
+    )
     lesson_info = models.ForeignKey(Lesson, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         """String representation of the class."""
-        return f"Appointment as part of a Subscriptio with ID {self.subscription.pk} at {self.lesson_info.date}"
+        return f"Appointment as part of a Subscriptio with ID {self.subscription_service.pk} at {self.lesson_info.date}"
 
 
 class Review(models.Model):

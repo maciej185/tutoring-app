@@ -9,4 +9,15 @@ urlpatterns = [
         view=views.CreateSubscriptionView.as_view(),
         name="subscription_create",
     ),
+    
+    path(
+        "learning/tutor/<int:subscription_id>",
+        view=views.LearningTutorView.as_view(),
+        name="learning_tutor",
+    ),
+    path(
+        "appointment/create/<int:subscription_id>",
+        view=views.create_appointment_view,
+        name="appointment_create",
+    ),
 ]
