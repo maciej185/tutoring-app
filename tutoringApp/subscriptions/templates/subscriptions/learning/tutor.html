@@ -1,0 +1,251 @@
+{% extends 'tutoringApp/base_tutor.html' %}
+
+{% load widget_tweaks %}
+{% load learning_extras %}
+
+{% block styles %}
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'subscriptions\css\learning\tutor.css' %}">
+{% endblock %}
+
+{% block main %}
+
+    <div class="learning">
+        <div class="learning-left mobile">
+            <div class="learnign-left-assigned box_dropdown">
+                <input type="checkbox" class="box_dropdown-header-checkbox" id="box_dropdown-header-checkbox-0">
+                <div class="learnign-left-assigned-header box_dropdown-header">
+                    
+                    <div class="learnign-left-assigned-header-text box_dropdown-header-text">
+                        Your students
+                    </div>
+                    <label for="box_dropdown-header-checkbox-0">
+                        <div class="learnign-left-assigned-header-arrow box_dropdown-header-arrow box_dropdown-header-arrow-down">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </div>
+
+                        <div class="learnign-left-assigned-header-arrow box_dropdown-header-arrow box_dropdown-header-arrow-up">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                            </svg>
+                        </div>
+                    </label>
+                </div>
+                <div class="learnign-left-assigned-main box_dropdown-main">
+                    <div class="learnign-left-assigned-main-student">
+                        <div class="learnign-left-assigned-main-student-add button_fill_green">
+                            <a href="{% url 'subscriptions:subscription_create' %}">
+                                Add student
+                            </a>
+                        </div>
+                    </div>
+                    {% for subscription in subscriptions %}
+                        <div class="learnign-left-assigned-main-student adjacent-container">
+                            {% if subscription.id == current_subscription.id %}
+                                <div class="learnign-left-assigned-main-student-name bolded">
+                                    {{subscription.student.full_name}}                        
+                                </div>
+                            {% else %}
+                                <div class="learnign-left-assigned-main-student-name link-container">
+                                    <a href="{% url 'subscriptions:learning_tutor' subscription.id %}">
+                                        {{subscription.student.full_name}}
+                                    </a>
+                                </div>
+                            {% endif %}
+                            <div class="learnign-left-assigned-main-student-subject info-bottom">
+                                {{subscription.subject.name}}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="learning-left desktop">
+            <div class="learnign-left-assigned box">
+                <div class="learnign-left-assigned-header box-header">
+                    Your students
+                </div>
+                <div class="learnign-left-assigned-main box-main">
+                    <div class="learnign-left-assigned-main-student">
+                        <div class="learnign-left-assigned-main-student-add button_fill_green">
+                            <a href="{% url 'subscriptions:subscription_create' %}">
+                                Add student
+                            </a>
+                        </div>
+                    </div>
+                    {% for subscription in subscriptions %}
+                        <div class="learnign-left-assigned-main-student adjacent-container">
+                            {% if subscription.id == current_subscription.id %}
+                                <div class="learnign-left-assigned-main-student-name bolded">
+                                    {{subscription.student.full_name}}                        
+                                </div>
+                            {% else %}
+                                <div class="learnign-left-assigned-main-student-name link-container">
+                                    <a href="{% url 'subscriptions:learning_tutor' subscription.id %}">
+                                        {{subscription.student.full_name}}
+                                    </a>
+                                </div>
+                            {% endif %}
+                            <div class="learnign-left-assigned-main-student-subject info-bottom">
+                                {{subscription.subject.name}}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="learning-right">
+            <div class="learning-right-summary box">
+                <div class="learning-right-summary-header box-header">
+                    Summary
+                </div>
+                <div class="learning-right-summary-main box-main_padded">
+                    <table class="learning-right-summary-main-table">
+                        <tr class="learning-right-summary-main-table-row">
+                            <td class="learning-right-summary-main-table-cell">
+                                <div class="learning-right-summary-main-table-cell-top">
+                                    Student 
+                                </div>
+                                <div class="learning-right-summary-main-table-cell-bottom">
+                                    {{ current_subscription.student.full_name }}
+                                </div>
+                            </td>
+                            <td class="learning-right-summary-main-table-cell">
+                                <div class="learning-right-summary-main-table-cell-top">
+                                    Subject
+                                </div>
+                                <div class="learning-right-summary-main-table-cell-bottom">
+                                    {{ current_subscription.subject.name }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="learning-right-summary-main-table-row">
+                            <td class="learning-right-summary-main-table-cell">
+                                <div class="learning-right-summary-main-table-cell-top">
+                                    Total number of hours
+                                </div>
+                                <div class="learning-right-summary-main-table-cell-bottom">
+                                    {{ hours_used }}
+                                </div>
+                            </td>
+                            <td class="learning-right-summary-main-table-cell">
+                                <div class="learning-right-summary-main-table-cell-top">
+                                    Hours left 
+                                </div>
+                                <div class="learning-right-summary-main-table-cell-bottom">
+                                    {{ hours_left }}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="learning-right-add_service box">
+                <div class="learning-right-add_service-header box-header">
+                    Add hours 
+                </div>
+                <div class="learning-right-add_service-main box-main_padded stack-container_small">
+                    <div class="learning-right-add_service-main-info info-bottom">
+                        Choose the type of service your student would like to purchase.
+                    </div>
+                    <div class="learning-right-add_service-main-form">
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="learning-right-add_service-main-form-wrap stack-container_small">
+                                <div class="learning-right-add_service-main-form-wrap-input">
+                                    {{ service_subscription_list_form.service|add_class:"options" }}
+                                </div>
+                                <div class="learning-right-add_service-main-form-wrap-submit centered_button_container">
+                                    <button type="submit" class="learning-right-add_service-main-form-wrap-submit button_fill_green">
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="learning-right-sessions box">
+                <div class="learning-right-sessions-header box-header">
+                    Lessons
+                </div>
+                <div class="learning-right-sessions-main box-main">
+                    {% for lesson in page_obj %}
+                        <div class="learning-right-sessions-session">
+                            <div class="learning-right-sessions-session-top">
+                                <div class="learning-right-sessions-session-top-name">
+                                    <a href="{% url 'lessons:lesson_display_tutor' lesson.id %}">
+                                        {{ lesson.title }}
+                                    </a>
+                                </div>
+                                <div class="learning-right-sessions-session-top-status-warning"></div>
+                            </div>  
+                            <div class="learning-right-sessions-session-bottom">
+                                {% render_lessons_timeslot lesson %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% if hours_left > 0 %}
+                        <div class="learning-right-sessions-session-add box-main_padded">
+                            <a href="#">
+                                <div class="learning-right-sessions-session-add-btn add_button">
+                                    <div class="learning-right-sessions-session-add-btn-icon add_button-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endif %}
+                    <div class="learning-right-sessions-session-pagination">
+                        {% if page_obj.has_previous %}
+                            <div class="learning-right-sessions-session-pagination-arrow_left icon_green link-container">
+                                <a href="?page={{ page_obj.previous_page_number }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                    </svg>
+                                </a>
+                            </div>
+
+                            <div class="learning-right-sessions-session-pagination-start icon_green link-container">
+                                <a href="?page=1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                        <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        {% endif %}
+
+                        <div class="learning-right-sessions-session-pagination-pages info-top">
+                            {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                        </div>
+
+                        {% if page_obj.has_next %}
+                            <div class="learning-right-sessions-session-pagination-arrow_end icon_green link-container">
+                                <a href="?page={{ page_obj.paginator.num_pages }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                        <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="learning-right-sessions-session-pagination-arrow_right icon_green link-container">
+                                <a href="?page={{ page_obj.next_page_number }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

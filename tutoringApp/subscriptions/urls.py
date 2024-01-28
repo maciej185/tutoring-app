@@ -9,7 +9,6 @@ urlpatterns = [
         view=views.CreateSubscriptionView.as_view(),
         name="subscription_create",
     ),
-    
     path(
         "learning/tutor/<int:subscription_id>",
         view=views.LearningTutorView.as_view(),
