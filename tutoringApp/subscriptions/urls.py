@@ -19,4 +19,9 @@ urlpatterns = [
         view=views.create_appointment_view,
         name="appointment_create",
     ),
+    path(
+        "appointment/delete/<int:pk>",
+        view=views.DeleteAppointmentView.as_view(),
+        name="appointment_delete",
+    ),
 ]

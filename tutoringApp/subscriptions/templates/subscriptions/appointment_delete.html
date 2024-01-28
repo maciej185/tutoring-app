@@ -1,0 +1,29 @@
+{% extends 'tutoringApp/base_tutor.html' %}
+
+{% block styles %}
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'subscriptions\css\appointment_delete.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="confirm box">
+    <div class="confirm-header box-header">
+        Confirmation
+    </div>
+    <div class="confirm-main box-main_padded stack_container">
+        <div class="confirm-main-message">
+            Do you want to cancel the Appointment?
+        </div>
+        <div class="confirm-main-btns centered_button_container adjacent-container">
+            <form method="post" class="confirm-main-btns-form">
+                {% csrf_token %}
+                {{form}}
+                <button type="submit" class="confirm-main-btns-form-btn button_fill_green">
+                    Confirm
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
