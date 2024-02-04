@@ -1,6 +1,7 @@
 """Extenstion of TestCaseServiceUtils allowing to create mock Subscription and Appointment objects."""
+from lessons.models import Lesson
 from profiles.models import Profile
-from subscriptions.models import ServiceSubscriptionList, Subscription
+from subscriptions.models import Appointment, ServiceSubscriptionList, Subscription
 from tutors.models import Service, Subject
 
 from .case_with_service_utils import TestCaseServiceUtils
@@ -59,4 +60,27 @@ class TestCaseSubscriptionUtils(TestCaseServiceUtils):
         return ServiceSubscriptionList.objects.create(
             subscription=subscription,
             service=service,
+        )
+
+    def _create_appointment_object(
+        self, service_subscription_list: ServiceSubscriptionList
+    ) -> Appointment:
+        """Create a mock Appointment object.
+
+        The method creates an Appointment object
+        related to the provided ServiceSubscriptionList
+        and an empty Lesson object that is instantiated
+        right before assignment.
+
+        Args:
+            service_subscription_list: An instance of the ServiceSubscriptionList
+                                        model that the newly created Appointment
+                                        will be related to.
+        Returns:
+            A new instance of the Appointment model.
+        """
+        lesson = Lesson.objects.create()
+        return Appointment.objects.create(
+            subscription_service=service_subscription_list,
+            lesson_info=lesson,
         )
