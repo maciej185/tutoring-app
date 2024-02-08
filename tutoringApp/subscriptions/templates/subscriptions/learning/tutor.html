@@ -173,22 +173,30 @@
                     Lessons
                 </div>
                 <div class="learning-right-sessions-main box-main">
-                    {% for lesson in page_obj %}
+                    {% for appointment in page_obj %}
                         <div class="learning-right-sessions-session">
                             <div class="learning-right-sessions-session-top">
                                 <div class="learning-right-sessions-session-top-name">
-                                    <a href="{% url 'lessons:lesson_display_tutor' lesson.id %}">
-                                        {% if not lesson.title %}
-                                            {{ lesson }}
+                                    <a href="{% url 'lessons:lesson_display_tutor' appointment.lesson_info.id %}">
+                                        {% if not appointment.lesson_info.title %}
+                                            {{ appointment.lesson_info }}
                                         {% else %}
-                                            {{ lesson.title }}
+                                            {{ appointment.lesson_info.title }}
                                         {% endif %}
                                     </a>
                                 </div>
-                                <div class="learning-right-sessions-session-top-status-warning"></div>
+                                {% if appointment.lesson_info.date > now %}
+                                    <div class="learning-right-sessions-session-top-delete icon_green link-container">
+                                        <a href="{% url 'subscriptions:appointment_delete' appointment.id  %}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                {% endif %}
                             </div>  
                             <div class="learning-right-sessions-session-bottom">
-                                {% render_lessons_timeslot lesson %}
+                                {% render_lessons_timeslot appointment.lesson_info %}
                             </div>
                         </div>
                     {% endfor %}

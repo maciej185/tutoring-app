@@ -9,13 +9,14 @@ from django.http.request import HttpRequest
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.utils.timezone import now
 from django.views.generic.edit import ProcessFormView
 from django.views.generic.list import ListView
 
 from lessons.models import Lesson
 from profiles.models import Profile
 from subscriptions.forms import ServiceSubscriptionListForm
-from subscriptions.models import ServiceSubscriptionList, Subscription
+from subscriptions.models import Appointment, ServiceSubscriptionList, Subscription
 
 LOGGER = getLogger(__name__)
 
@@ -30,7 +31,7 @@ class LearningTutorView(ListView, ProcessFormView, LoginRequiredMixin):
     with other other Students by rendering an appropriate form.
     """
 
-    model = Lesson
+    model = Appointment
     paginate_by = 5
     template_name = "subscriptions/learning/tutor.html"
 
@@ -53,6 +54,7 @@ class LearningTutorView(ListView, ProcessFormView, LoginRequiredMixin):
         context["service_subscription_list_form"] = ServiceSubscriptionListForm(
             initial={"subscription": self.subscription}
         )
+        context["now"] = now()
 
         return context
 
@@ -107,7 +109,7 @@ class LearningTutorView(ListView, ProcessFormView, LoginRequiredMixin):
         appointments = []
         for service_subscription_list in service_subscription_lists:
             appointments.extend(service_subscription_list.appointment_set.all())
-        return [appointment.lesson_info for appointment in appointments]
+        return appointments
 
     def _calculate_hours_total(self) -> int:
         """Calculate total hour count.
