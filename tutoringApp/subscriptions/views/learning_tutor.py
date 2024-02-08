@@ -1,6 +1,6 @@
 """Views for the `learning_tutor` page."""
 from logging import getLogger
-from typing import Any
+from typing import Any, Optional
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query import QuerySet
@@ -60,6 +60,9 @@ class LearningTutorView(ListView, ProcessFormView, LoginRequiredMixin):
 
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
         """Process data sent via ServiceSubscriptionListForm."""
+        user_not_tutor_warning_response = self._user_not_tutor_warning_response()
+        if user_not_tutor_warning_response:
+            return user_not_tutor_warning_response
         service_subscription_list_form = ServiceSubscriptionListForm(
             request.POST, initial={"subscription": self.subscription}
         )
@@ -79,26 +82,12 @@ class LearningTutorView(ListView, ProcessFormView, LoginRequiredMixin):
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         """Ensure the user is the Tutor related to given Subscription."""
-        if request.user != self.subscription.tutor.user:
-            LOGGER.warning(
-                "User %(username)s with ID %(id)s attempting to display learining page of Tutor with ID %(tutor_id)s.",
-                {
-                    "username": self.request.user.username,
-                    "id": self.request.user.id,
-                    "tutor_id": self.subscription.tutor.pk,
-                },
-            )
-            return render(
-                request=request,
-                template_name="tutoringApp/forbidden.html",
-                status=403,
-                context={
-                    "warning_message": "You are not allowed to view this page.",
-                    "redirect_link": reverse("home:home"),
-                    "redirect_destination": "home page",
-                },
-            )
-        return super().get(request, *args, **kwargs)
+        user_not_tutor_warning_response = self._user_not_tutor_warning_response()
+        return (
+            user_not_tutor_warning_response
+            if user_not_tutor_warning_response
+            else super().get(request, *args, **kwargs)
+        )
 
     def get_queryset(self) -> QuerySet[Lesson]:
         """Get only Lessons related to given Subscription."""
@@ -148,3 +137,32 @@ class LearningTutorView(ListView, ProcessFormView, LoginRequiredMixin):
             related to the currently logged in Tutor.
         """
         return Subscription.objects.filter(tutor__user=self.request.user)
+
+    def _user_not_tutor_warning_response(self) -> Optional[HttpResponse]:
+        """Check if the currently logged in user is the Tutor related to the Subscription.
+
+        Returns:
+            An instance of the HttpResponse which renders a
+            page with a warning message if the currently
+            logged in user is not the Tutor related to the
+            the Subscription object that is meant to be displayed.
+        """
+        if self.request.user != self.subscription.tutor.user:
+            LOGGER.warning(
+                "User %(username)s with ID %(id)s attempting to display learining page of Tutor with ID %(tutor_id)s.",
+                {
+                    "username": self.request.user.username,
+                    "id": self.request.user.id,
+                    "tutor_id": self.subscription.tutor.pk,
+                },
+            )
+            return render(
+                request=self.request,
+                template_name="tutoringApp/forbidden.html",
+                status=403,
+                context={
+                    "warning_message": "You are not allowed to access this page.",
+                    "redirect_link": reverse("home:home"),
+                    "redirect_destination": "home page",
+                },
+            )

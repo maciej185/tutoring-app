@@ -167,6 +167,16 @@ class TestCaseProfileUtils(TestCaseUserUtils):
         )
         service3.save()
 
+        service4 = Service(
+            tutor=profile,
+            subject=Subject.objects.get(pk=2),
+            number_of_hours=10,
+            price_per_hour=100,
+            session_length=60,
+            is_default=True,
+        )
+        service4.save()
+
     def create_profile(self, username: str, student: bool) -> None:
         """Register user and create instances of Profile-related models.
 
