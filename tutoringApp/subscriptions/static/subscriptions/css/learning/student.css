@@ -1,0 +1,180 @@
+.desktop {
+    display: none;
+}
+
+/* LEARNING GENERAL */
+div.learning > div:not(div:last-of-type) {
+    margin-right: 1rem;
+}
+
+div.learning > div > div:not(div:last-of-type) {
+    margin-bottom: 1rem;
+}
+
+/* LEARNING LEFT */
+div.learning-left {
+    margin-bottom: 1rem;
+}
+
+div.learnign-left-tutors-main > div:not(div:last-of-type), div.learnign-left-tutors-main > div:not(div:last-of-type) {
+    border-bottom: 1px solid var(--gray-bluegreen-light);
+}
+
+div.learnign-left-tutors-main-tutor, div.learning-left-students-main-student {
+    padding: 0.25rem 0.5rem;
+    color: var(--gray-bluegreen-extra-dark);
+    font-size: 0.85rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bolded {
+    font-weight: 600;
+}
+
+
+/* LEARNING RIGHT */
+div.learning-right-rate {
+    padding-top: 0.375rem
+}
+
+div.learning-right-rate-btn {
+    display: inline;
+}
+
+div.learning-right-reminder {
+    border: 1px solid var(--gray-red-light);
+}
+
+div.learning-right-reminder-header {
+    background-color: var(--gray-red-extra-extra-light);
+    border-bottom:  1px solid var(--gray-red-light);
+    color: var(--gray-red-extra-dark)
+}
+
+div.learning-right-reminder-main > div:not(div:last-of-type) {
+    margin-bottom: 1rem;
+}
+
+table.learning-right-summary-main-table {
+    width: 100%;
+}
+
+td.learning-right-summary-main-table-cell > div:not(div:last-of-type) {
+    margin-bottom: 0.25rem;
+}
+
+div.learning-right-summary-main-table-cell-top {
+    color: var(--gray-bluegreen-extra-dark);
+    font-size: 0.85rem;
+}
+
+div.learning-right-summary-main-table-cell-bottom {
+    color: var(--gray-bluegreen-medium);
+    font-size: 0.7rem;
+}
+
+div.learning-right-sessions-main > div:not(div:last-of-type) {
+    border-bottom: 1px solid var(--gray-bluegreen-light);
+}
+
+div.learning-right-sessions-session {
+    padding: 1rem;
+
+}
+
+div.learning-right-sessions-session-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+div.learning-right-sessions-session-top-name {
+    color: var(--gray-bluegreen-extra-dark);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+div.learning-right-sessions-session-top-name:hover {
+    color: var(--gray-bluegreen-medium);
+}
+
+div.learning-right-sessions-session-top-name a {
+    color: inherit;
+    text-decoration: unset;
+}
+
+div.learning-right-sessions-session-top-status {
+    color: var(--gray-bluegreen-medium);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+div.learning-right-sessions-session-top-status-icon {
+    height: 1rem;
+    width: 1rem;
+    color: var(--bluegreen-medium)
+}
+
+div.learning-right-sessions-session-top-status-icon > svg {
+    height: inherit;
+    width: inherit;
+}
+
+div.learning-right-sessions-session-top-status-warning {
+    color: var(--gray-red-medium);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+div.learning-right-sessions-session-top-status-reminder {
+    color: orange;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+div.learning-right-sessions-session-bottom {
+    color: var(--gray-bluegreen-medium);
+    font-size: 0.7rem;
+}
+
+div.learning-right-sessions-session-pagination {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.learning-right-sessions-session-pagination-pages {
+    margin-right: 0.625rem;
+    margin-left: 0.625rem;
+}
+
+@media(min-width: 800px) {    
+
+    .mobile {
+        display: none;
+    }
+
+    .desktop {
+        display: block;
+    }
+
+    main {
+        width: 70%;
+    }
+
+    div.learning {
+        display: flex;
+    }
+
+
+    div.learning-left {
+        flex: 4
+    }
+
+    div.learning-right {
+        flex: 8
+    }
+
+}
+
