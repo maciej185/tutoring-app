@@ -17,6 +17,7 @@ class TestCaseSubscriptionUtils(TestCaseServiceUtils):
         self._create_service_objects(profile=tutor1)
         self._register_user("student1")
         self._register_user("student2")
+        self._register_user("tutor2", student=False)
 
     def _create_subscription_object(
         self, tutor: Profile, student: Profile, subject: Subject
