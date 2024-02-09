@@ -15,6 +15,11 @@ urlpatterns = [
         name="learning_tutor",
     ),
     path(
+        "learning/student/<int:subscription_id>",
+        view=views.LearningStudentView.as_view(),
+        name="learning_student",
+    ),
+    path(
         "appointment/create/<int:subscription_id>",
         view=views.create_appointment_view,
         name="appointment_create",
