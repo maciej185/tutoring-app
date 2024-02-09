@@ -16,7 +16,27 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="form-main-form_wrap stack-container">
+                    {% if form.non_field_errors %}
+                        <div class="form-main-form_wrap-form-errors stack-container_smaller">
+                            {% for error in form.non_field_errors %}
+                                <div class="form-main-form_wrap-form-errors-error form_error">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                     <div class="form-main-form_wrap-form stack-adjecent-container">
+                        <div class="form-main-form_wrap-form-field form-main-form_wrap-form-tutor hidden">
+                            <select name="{{form.tutor.name}}" id="{{form.tutor.id_for_label}}">
+                                {% for val, lab in form.fields.tutor.choices %}
+                                    {% if val == user.id %}
+                                        <option value="{{val}}" selected >{{lab}}</option>
+                                    {% else %}
+                                        <option value="{{val}}">{{lab}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
                         <div class="form-main-form_wrap-form-field form-main-form_wrap-form-student stack-container_smaller">
                             <div class="form-main-form_wrap-form-field-label form-main-form_wrap-form-student-label info-top">
                                 Student

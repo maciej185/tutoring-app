@@ -15,7 +15,7 @@ from tutors.models import Service, Subject
 from utils.testing import NOW, TestCaseSubscriptionUtils
 
 
-class LearningTutorView(TestCaseSubscriptionUtils):
+class TestLearningTutorView(TestCaseSubscriptionUtils):
     """Tests for the functionality of displaying and/or adding Subscription, ServiceSubscriptionList and Appointment objects."""
 
     def setUp(self):

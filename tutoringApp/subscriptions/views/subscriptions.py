@@ -1,5 +1,5 @@
 """Views for managing Subscriptions objects."""
-from typing import Any
+from typing import Any, Optional
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms.models import BaseModelForm
@@ -26,20 +26,21 @@ class CreateSubscriptionView(CreateView, LoginRequiredMixin):
 
     def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
         """Check if current user is a Tutor."""
-        initial_return = super().get(request, *args, **kwargs)
-        if Profile.objects.get(user=request.user).is_student():
-            return render(
-                request=request,
-                template_name="tutoringApp/forbidden.html",
-                status=403,
-                context={
-                    "warning_message": "Students are not allowed to create Subscriptions.",
-                    "redirect_link": reverse("home:home"),
-                    "redirect_destination": "home page",
-                },
-            )
+        user_is_not_tutor_response = self._user_is_not_tutor_response()
+        return (
+            user_is_not_tutor_response
+            if user_is_not_tutor_response
+            else super().get(request, *args, **kwargs)
+        )
 
-        return initial_return
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        """Check if current user is a Tutor."""
+        user_is_not_tutor_response = self._user_is_not_tutor_response()
+        return (
+            user_is_not_tutor_response
+            if user_is_not_tutor_response
+            else super().post(request, *args, **kwargs)
+        )
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         subscription = Subscription(
@@ -49,3 +50,27 @@ class CreateSubscriptionView(CreateView, LoginRequiredMixin):
         )
         subscription.save()
         return HttpResponseRedirect(reverse("home:home"))
+
+    def _user_is_not_tutor_response(self) -> Optional[HttpResponse]:
+        """Check if current user is a Tutor.
+
+        The method checks if the currently logged in user
+        is a Tutor.
+
+        Returns:
+            An instance of the HttpResponse class which
+            renders a warning page with redirection link
+            if the currently logged in user is not a Tutor,
+            None otherwise.
+        """
+        if Profile.objects.get(user=self.request.user).is_student():
+            return render(
+                request=self.request,
+                template_name="tutoringApp/forbidden.html",
+                status=403,
+                context={
+                    "warning_message": "Students are not allowed to create Subscriptions.",
+                    "redirect_link": reverse("home:home"),
+                    "redirect_destination": "home page",
+                },
+            )
