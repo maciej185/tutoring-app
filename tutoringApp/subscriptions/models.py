@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
@@ -30,6 +31,36 @@ class Subscription(models.Model):
     def __str__(self) -> str:
         """String representation of the class."""
         return f"Student {self.student.user.first_name} {self.student.user.last_name} assigned to {self.tutor.user.first_name} {self.tutor.user.last_name} in {self.subject.name}."
+
+    def clean(self) -> None:
+        """Check correctness of input values.
+
+        Subscriptions objects can only be created if the selected
+        Tutor teaches the provided Subject so only when there
+        is a Service object created related to that Tutor and
+        Subject with the `is_defualt` field's value set to True.
+        Another constraint is that there must must have been
+        at least one sessions booked by the Student outside
+        of any Subscription.
+
+        Raises:
+            ValidationError: raised when the input Subject is not taught
+                            by the given Tutor or if there was no booked
+                            sessions between Tutor and Student.
+        """
+        try:
+            Service.objects.get(tutor=self.tutor, subject=self.subject, is_default=True)
+        except Service.DoesNotExist:
+            raise ValidationError(_("The subject is not taught by the Tutor."))
+
+        students_who_booked = Profile.objects.filter(
+            booking__availability__service__tutor=self.tutor
+        ).distinct()
+        if not self.student in students_who_booked:
+            raise ValidationError(
+                _("The Student must book at least one session before subscribing.")
+            )
+        return super().clean()
 
     class Meta:
         constraints = [
