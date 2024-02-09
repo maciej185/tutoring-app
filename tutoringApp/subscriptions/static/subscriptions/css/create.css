@@ -14,3 +14,7 @@ div.form-main > div {
     text-align: center;
 }
 
+div.form-main-form_wrap-form {
+    width: 100%;
+    justify-content: space-between;
+}

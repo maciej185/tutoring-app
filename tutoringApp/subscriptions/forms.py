@@ -31,7 +31,7 @@ class SubscriptionForm(forms.ModelForm):
 
     class Meta:
         model = Subscription
-        fields = ["student", "subject"]
+        fields = ["student", "subject", "tutor"]
 
 
 class ServiceSubscriptionListForm(forms.ModelForm):
