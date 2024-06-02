@@ -1,0 +1,86 @@
+{% extends 'tutoringApp/base_student.html' %}
+
+{% load widget_tweaks %}
+{% load learning_extras %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'subscriptions/css/learning/student.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="learning">
+    <div class="learning-left mobile">
+        <div class="learnign-left-tutors box_dropdown">
+            <input type="checkbox" class="box_dropdown-header-checkbox" id="box_dropdown-header-checkbox-0">
+            <div class="learnign-left-tutors-header box_dropdown-header">
+                
+                <div class="learnign-left-tutors-header-text box_dropdown-header-text">
+                    Tutors
+                </div>
+                <label for="box_dropdown-header-checkbox-0">
+                    <div class="learnign-left-tutors-header-arrow box_dropdown-header-arrow box_dropdown-header-arrow-down">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                          </svg>
+                    </div>
+                    <div class="learnign-left-tutors-header-arrow box_dropdown-header-arrow box_dropdown-header-arrow-up">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                        </svg>
+                    </div>
+                </label>
+            </div>
+            <div class="learnign-left-tutors-main box_dropdown-main">
+                {% for subscription in subscriptions %}
+                    <div class="learnign-left-tutors-main-tutor adjacent-container">
+                        <div class="learnign-left-tutors-main-tutor-name link-container">
+                            <a href="{% url 'subscriptions:learning_student' subscription.id %}">
+                                {{subscription.tutor.full_name}}
+                            </a>
+                        </div>
+                        <div class="learnign-left-tutors-main-tutor-subject info-bottom">
+                            {{subscription.subject.name}}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="learning-left desktop">
+        <div class="learnign-left-tutors box">
+            <div class="learnign-left-tutors-header box-header">
+                Tutors
+            </div>
+            <div class="learnign-left-tutors-main box-main">
+                {% for subscription in subscriptions %}
+                    <div class="learnign-left-tutors-main-tutor adjacent-container">
+                        <div class="learnign-left-tutors-main-tutor-name link-container">
+                            <a href="{% url 'subscriptions:learning_student' subscription.id %}">
+                                {{subscription.tutor.full_name}}
+                            </a>
+                        </div>
+                        <div class="learnign-left-tutors-main-tutor-subject info-bottom">
+                            {{subscription.subject.name}}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="learning-right">
+        <div class="learning-right-summary box">
+            <div class="learning-right-summary-header box-header">
+                Summary
+            </div>
+            <div class="learning-right-summary-main box-main_padded">
+                {% if subscriptions|length == 0 %}
+                    You are not subscribed to any Tutors.
+                {% else %}
+                    Select one of the tutors to see lessons within that Subscription!
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
