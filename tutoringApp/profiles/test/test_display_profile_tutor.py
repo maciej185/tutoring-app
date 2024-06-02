@@ -384,14 +384,14 @@ class TestDisplayTutorProfile(TestCaseServiceUtils):
 
     @parameterized.expand([True, False])
     @freeze_time(NOW)
-    def test_availability_for_non_default_service_not_displayed(self, is_student):
+    def test_availability_for_non_default_service_not_displayed(self, is_student): 
         self._register_user("tutor1", student=False)
         tutor = Profile.objects.get(pk=1)
         self._create_service_objects(profile=tutor)
         self._create_service_object(
             profile=tutor, subject_pk=3, number_of_hours=10, is_default=False
         )
-        service = Service.objects.get(pk=4)
+        service = Service.objects.get(pk=3)
         self._create_availiability_object(
             service=service, start=datetime(2023, 12, 12, 7, 0, tzinfo=timezone.utc)
         )

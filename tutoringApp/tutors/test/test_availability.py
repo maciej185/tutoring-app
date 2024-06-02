@@ -59,7 +59,7 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
         self.assertContains(res, "60 minutes")
 
         res = self.client.get(
-            reverse("tutors:availability", kwargs={"pk": 4, "month": 12, "year": 2023})
+            reverse("tutors:availability", kwargs={"pk": 5, "month": 12, "year": 2023})
         )
         self.assertContains(res, "75 minutes")
 
@@ -476,7 +476,7 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
 
         service = Service.objects.get(pk=1)
         self._create_availiability_object(
-            service=service, start=datetime(2023, 12, 20, 6, 30)
+            service=service, start=datetime(2023, 12, 20, 6, 30, tzinfo=timezone.utc)
         )
 
         res_post = self.client.post(
@@ -502,7 +502,7 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
 
         service = Service.objects.get(pk=1)
         self._create_availiability_object(
-            service=service, start=datetime(2023, 12, 20, 6, 30)
+            service=service, start=datetime(2023, 12, 20, 6, 30, tzinfo=timezone.utc)
         )
 
         res_post = self.client.post(

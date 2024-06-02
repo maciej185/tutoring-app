@@ -6,7 +6,7 @@ from tutors.models import Service, Subject
 from utils.testing import TestCaseServiceUtils
 
 
-class TestAvailabilityInputView(TestCaseServiceUtils):
+class TestServiceConfigurationView(TestCaseServiceUtils):
     """Tests for the service configuration page."""
 
     def test_service_objects_in_db_correctly_displayed(self):
@@ -117,7 +117,7 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
             profile=tutor, subject_pk=2, number_of_hours=10, is_default=False
         )
 
-        self.assertEqual(len(Service.objects.all()), 5)
+        self.assertEqual(len(Service.objects.all()), 6)
         self.client.post(
             reverse("tutors:services", kwargs={"pk": 1}),
             {
@@ -162,8 +162,8 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
                 "service_set-5-price_per_hour": 75,
             },
         )
-        self.assertEqual(len(Service.objects.all()), 6)
-        service = Service.objects.get(pk=6)
+        self.assertEqual(len(Service.objects.all()), 7)
+        service = Service.objects.get(pk=7)
         self.assertEqual(service.subject, Subject.objects.get(pk=2))
         self.assertEqual(service.session_length, 90)
         self.assertEqual(service.number_of_hours, 15)
@@ -182,7 +182,7 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
             profile=tutor, subject_pk=2, number_of_hours=10, is_default=False
         )
 
-        self.assertEqual(len(Service.objects.all()), 5)
+        self.assertEqual(len(Service.objects.all()), 6)
         service3 = Service.objects.get(pk=3)
         self.assertEqual(service3.number_of_hours, 10)
 
@@ -230,8 +230,8 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
                 "service_set-5-price_per_hour": 75,
             },
         )
-        self.assertEqual(len(Service.objects.all()), 6)
-        service = Service.objects.get(pk=6)
+        self.assertEqual(len(Service.objects.all()), 7)
+        service = Service.objects.get(pk=7)
         self.assertEqual(service.subject, Subject.objects.get(pk=2))
         self.assertEqual(service.session_length, 90)
         self.assertEqual(service.number_of_hours, 15)
@@ -251,7 +251,7 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
             profile=tutor, subject_pk=2, number_of_hours=10, is_default=False
         )
 
-        self.assertEqual(len(Service.objects.all()), 5)
+        self.assertEqual(len(Service.objects.all()), 6)
 
         self.client.post(
             reverse("tutors:services", kwargs={"pk": 1}),
@@ -297,7 +297,7 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
                 "service_set-5-price_per_hour": "",
             },
         )
-        self.assertEqual(len(Service.objects.all()), 5)
+        self.assertEqual(len(Service.objects.all()), 6)
 
     def test_incorrect_form_data_message_displayed(self):
         self._register_user("tutor1", student=False)
@@ -365,13 +365,13 @@ class TestAvailabilityInputView(TestCaseServiceUtils):
         tutor = Profile.objects.get(pk=1)
         self._create_service_objects(profile=tutor)
 
-        self.assertEqual(len(Service.objects.all()), 3)
+        self.assertEqual(len(Service.objects.all()), 4)
 
         self.client.get(
             reverse("tutors:service_delete", kwargs={"service_id": 1}), follow=True
         )
 
-        self.assertEqual(len(Service.objects.all()), 2)
+        self.assertEqual(len(Service.objects.all()), 3)
 
     def test_attempt_to_delete_service_user_is_related_tutor_object_not_displayed_on_page(
         self,
