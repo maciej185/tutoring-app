@@ -45,7 +45,7 @@ class TestCaseBookingeUtils(TestCaseServiceUtils):
         cls._register_user("tutor2", student=False)
         tutor2 = Profile.objects.get(user__username="tutor2")
         cls._create_service_objects(profile=tutor2)
-        service2 = Service.objects.get(pk=4)
+        service2 = Service.objects.get(pk=5)
         cls._create_availiability_object(
             service=service2, start=datetime(2023, 12, 10, 8, 0, tzinfo=timezone.utc)
         )

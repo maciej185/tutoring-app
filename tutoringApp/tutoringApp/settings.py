@@ -138,53 +138,53 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_ROOT = BASE_DIR
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "default": {
-            "format": "{levelname} {asctime} {module} {message}",
-            "style": "{",
-        },
-    },
-    "handlers": {
-        "file_debug": {
-            "level": "DEBUG",
-            "class": "logging.FileHandler",
-            "filename": Path("logs", 'debug.txt'),
-            "formatter": "default",
-        },
-        "file_warning": {
-            "level": "WARNING",
-            "class": "logging.FileHandler",
-            "filename": Path("logs", 'warning.txt'),
-            "formatter": "default",
-        },
-        "file_error": {
-            "level": "ERROR",
-            "class": "logging.FileHandler",
-            "filename": Path("logs", 'error.txt'),
-            "formatter": "default",
-        },
-        "console": {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            "formatter": "default",
-        }
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["console"],
-            "level": "INFO",
-            "propagate": False,
-        },
-        "": {
-            "handlers": ["file_debug", "file_warning", "file_error"],
-            "level": "DEBUG",
-            "propagate": True,
-        }
-    },
-}
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "formatters": {
+#         "default": {
+#             "format": "{levelname} {asctime} {module} {message}",
+#             "style": "{",
+#         },
+#     },
+#     "handlers": {
+#         "file_debug": {
+#             "level": "DEBUG",
+#             "class": "logging.FileHandler",
+#             "filename": Path("logs", 'debug.txt'),
+#             "formatter": "default",
+#         },
+#         "file_warning": {
+#             "level": "WARNING",
+#             "class": "logging.FileHandler",
+#             "filename": Path("logs", 'warning.txt'),
+#             "formatter": "default",
+#         },
+#         "file_error": {
+#             "level": "ERROR",
+#             "class": "logging.FileHandler",
+#             "filename": Path("logs", 'error.txt'),
+#             "formatter": "default",
+#         },
+#         "console": {
+#             'level': 'INFO',
+#             'class': 'logging.StreamHandler',
+#             "formatter": "default",
+#         }
+#     },
+#     "loggers": {
+#         "django": {
+#             "handlers": ["console"],
+#             "level": "INFO",
+#             "propagate": False,
+#         },
+#         "": {
+#             "handlers": ["file_debug", "file_warning", "file_error"],
+#             "level": "DEBUG",
+#             "propagate": True,
+#         }
+#     },
+# }
 
 CURRENCY = "$"
 

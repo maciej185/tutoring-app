@@ -1,6 +1,6 @@
 """Tests for the `learning_student` page."""
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -231,7 +231,7 @@ class LearningStudentView(TestCaseSubscriptionUtils):
         appointment.lesson_info.title = lesson_title
         tomorrow = now() + timedelta(days=1)
         appointment.lesson_info.date = datetime(
-            year=tomorrow.year, month=tomorrow.month, day=tomorrow.day, hour=12
+            year=tomorrow.year, month=tomorrow.month, day=tomorrow.day, hour=12, tzinfo=timezone.utc
         )
         appointment.lesson_info.save()
 

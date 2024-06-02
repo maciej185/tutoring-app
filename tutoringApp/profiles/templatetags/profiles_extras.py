@@ -40,11 +40,14 @@ def formset_error_renderer(
             argument.
     """
     if error_list:
-        return (
-            error_list[form_index].get(field)[0]
-            if error_list[form_index].get(field)
-            else ""
-        )
+        try:
+            return (
+                error_list[form_index].get(field)[0]
+                if error_list[form_index].get(field)
+                else ""
+            )
+        except IndexError:
+            return ""
     return ""
 
 
