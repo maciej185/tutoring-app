@@ -10,9 +10,19 @@ urlpatterns = [
         name="subscription_create",
     ),
     path(
+        "learning/tutor",
+        view=views.ListSubscriptionsTutorView.as_view(),
+        name="learning_tutor_list",
+    ),
+    path(
         "learning/tutor/<int:subscription_id>",
         view=views.LearningTutorView.as_view(),
         name="learning_tutor",
+    ),
+    path(
+        "learning/student",
+        view=views.ListSubscriptionsStudentView.as_view(),
+        name="learning_student_list",
     ),
     path(
         "learning/student/<int:subscription_id>",
