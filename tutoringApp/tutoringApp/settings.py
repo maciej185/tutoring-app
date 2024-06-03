@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "lessons.apps.LessonsConfig",
     "subscriptions.apps.SubscriptionsConfig",
+    "search.apps.SearchConfig",
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "simple_history.middleware.HistoryRequestMiddleware"
+    "simple_history.middleware.HistoryRequestMiddleware",
 ]
 
 ROOT_URLCONF = "tutoringApp.urls"
@@ -63,7 +64,7 @@ ROOT_URLCONF = "tutoringApp.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates'],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -128,7 +129,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / "static",
 ]
 
 # Default primary key field type
@@ -151,26 +152,26 @@ LOGGING = {
         "file_debug": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": Path("logs", 'debug.txt'),
+            "filename": Path("logs", "debug.txt"),
             "formatter": "default",
         },
         "file_warning": {
             "level": "WARNING",
             "class": "logging.FileHandler",
-            "filename": Path("logs", 'warning.txt'),
+            "filename": Path("logs", "warning.txt"),
             "formatter": "default",
         },
         "file_error": {
             "level": "ERROR",
             "class": "logging.FileHandler",
-            "filename": Path("logs", 'error.txt'),
+            "filename": Path("logs", "error.txt"),
             "formatter": "default",
         },
         "console": {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
+            "level": "INFO",
+            "class": "logging.StreamHandler",
             "formatter": "default",
-        }
+        },
     },
     "loggers": {
         "django": {
@@ -182,7 +183,7 @@ LOGGING = {
             "handlers": ["file_debug", "file_warning", "file_error"],
             "level": "DEBUG",
             "propagate": True,
-        }
+        },
     },
 }
 
@@ -194,4 +195,3 @@ if DEBUG:
     # saving emails locally in DEV environment.
     EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
     EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
-
