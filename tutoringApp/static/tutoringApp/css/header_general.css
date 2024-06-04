@@ -86,7 +86,7 @@ select.header-left-search-subject > option:hover, select.header-left-search-city
 
 
 
-input.header-left-search-name {
+input.header-left-search-first_name, input.header-left-search-last_name {
     outline: none;
     border-radius: unset;
     border: unset;
@@ -95,6 +95,10 @@ input.header-left-search-name {
     background-color: var(--bluegreen-dark);
     color: var(--bluegreen-extra-extra-light);
     padding: 0.25rem;
+}
+
+input.header-left-search-first_name::placeholder, input.header-left-search-last_name::placeholder {
+    color: var(--bluegreen-extra-extra-light);
 }
 
 button.header-left-search-button {
