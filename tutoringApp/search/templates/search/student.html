@@ -1,0 +1,152 @@
+{% extends 'tutoringApp/base_student.html' %}
+
+{% load profiles_extras %}
+{% load lesson_extras %}
+
+{% block title %}
+    Search results
+{% endblock %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'search/css/student.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="results stack-container">
+    {% if search_subject %}
+        <div class="results-header">
+            {{search_subject}} tutors
+        </div>
+    {% endif %}
+    <div class="results-list stack-container">
+        {% if page_obj|length > 0 %}
+            {% for profile in page_obj %}
+                <div class="results-list-result results-list-result_desktop desktop">
+                    <div class="results-list-result-left">
+                        <img src="{{ profile.profile_pic.url }}">
+                    </div>
+                    <div class="results-list-result-middle stack-container_smaller">
+                        <div class="results-list-result-middle-subjects adjacent-container">
+                            {% with subjects|get_by_index:forloop.counter0 as current_tutors_subjects %}
+                                {% for subject in current_tutors_subjects %}
+                                <div class="results-list-result-middle-subjects-subject tag">
+                                    {{ subject }}
+                                </div>
+                                {% endfor %}
+                            {% endwith %}
+                        </div>
+                        <div class="results-list-result-middle-header link-container">
+                            <a href="{% url 'profiles:tutor_display' profile.pk %}">
+                                {{ profile.full_name }}
+                            </a>
+                        </div>
+                        <div class="results-list-result-middle-experience">
+                            Experience: {% render_experience profile.teaching_since %}
+                        </div>
+                        <div class="results-list-result-middle-rating adjacent-container"></div>
+                        <div class="results-list-result-middle-description">
+                            {{ profile.description }}
+                        </div>
+                    </div>
+                    <div class="results-list-result-right">
+                        <div class="results-list-result-right-wrap stack-container_smaller">
+                            <div class="results-list-result-right-wrap-price">
+                                Average price: {{ average_prices|get_by_index:forloop.counter0 }} {{currency}}/hour
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% for profile in page_obj %}
+                <div class="results-list-result results-list-result_mobile mobile">
+                    <div class="results-list-result_mobile-top">
+                        <div class="results-list-result_mobile-top-left results-list-result-left">
+                            <img src="{{ profile.profile_pic.url }}">
+                        </div>
+                        <div class="results-list-result_mobile-top-right results-list-result-right">
+                            <div class="results-list-result_mobile-top-right-wrap stack-container_smaller">
+                                <div class="results-list-result_mobile-top-right-wrap-price results-list-result-right-wrap-price">
+                                    Average price: {{ average_prices|get_by_index:forloop.counter0 }} {{currency}}/hour
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="results-list-result-middle stack-container_smaller">
+                        <div class="results-list-result-middle-subjects adjacent-container">
+                            {% with subjects|get_by_index:forloop.counter0 as current_tutors_subjects %}
+                                {% for subject in current_tutors_subjects %}
+                                <div class="results-list-result-middle-subjects-subject tag">
+                                    {{ subject }}
+                                </div>
+                                {% endfor %}
+                            {% endwith %}
+                        </div>
+                        <div class="results-list-result-middle-header link-container">
+                            <a href="{% url 'profiles:tutor_display' profile.pk %}">
+                                {{ profile.full_name }}
+                            </a>
+                        </div>
+                        <div class="results-list-result-middle-experience">
+                            Experience: {% render_experience profile.teaching_since %}
+                        </div>
+                        <div class="results-list-result-middle-rating adjacent-container"></div>
+                        <div class="results-list-result-middle-description">
+                            {{ profile.description }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="results-list-empty centered_button_container">
+                There are no profiles that match the search crtieria.
+            </div>
+        {% endif %}
+    </div>
+    {% if page_obj|length > 0 %}
+        <div class="results-pages">
+            <div class="results-pages-navigation">
+                {% if page_obj.has_previous %}
+                    <div class="learning-right-sessions-session-pagination-arrow_left icon_green link-container">
+                        <a href="?page={{ page_obj.previous_page_number }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="learning-right-sessions-session-pagination-start icon_green link-container">
+                        <a href="?page=1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </a>
+                    </div>
+                {% endif %}
+                <div class="learning-right-sessions-session-pagination-pages info-top">
+                    {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </div>
+                {% if page_obj.has_next %}
+                    <div class="learning-right-sessions-session-pagination-arrow_end icon_green link-container">
+                        <a href="?page={{ page_obj.paginator.num_pages }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="learning-right-sessions-session-pagination-arrow_right icon_green link-container">
+                        <a href="?page={{ page_obj.next_page_number }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
