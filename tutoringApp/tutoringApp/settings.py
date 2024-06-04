@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from os import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -74,10 +75,19 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "profiles.context_processors.add_profile_pic_url_processor",
                 "profiles.context_processors.add_account_type",
+                "profiles.context_processors.add_subjects",
             ],
         },
     },
 ]
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": environ.get("CACHE_LOCATION"),
+        "TIMEOUT": 1 * 60 * 60,
+    }
+}
 
 WSGI_APPLICATION = "tutoringApp.wsgi.application"
 
