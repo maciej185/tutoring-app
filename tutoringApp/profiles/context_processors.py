@@ -1,8 +1,10 @@
 """Custom context processors for profile app."""
+from django.core.cache import cache
 from django.http import HttpRequest
 
 from profiles.forms import AccountType
 from profiles.models import Profile
+from tutors.models import Subject
 
 
 def add_profile_pic_url_processor(request: HttpRequest) -> dict[str, str]:
@@ -52,3 +54,33 @@ def add_account_type(request: HttpRequest) -> dict[str, bool]:
     else:
         is_student = None
     return {"is_student": is_student}
+
+
+def add_subjects(request: HttpRequest) -> dict[str, list[str]]:
+    """Add all the available subjects to the context.
+
+    The processor first checks if the currently logged in user is a
+    Student and if so, it retrieves all the available Subjects
+    from the database so that they could be used as a search criteria
+    in the search bar at the top of the page. The processor uses
+    caching to avoid making calls to the database on every request.
+
+    Args:
+        request: An instance of the HttpRequest, containing
+                    information about the request sent by the user.
+
+    Returns:
+       A dictionary with the list of all available Subjects.
+    """
+    account_type_dict = add_account_type(request=request)
+    if not account_type_dict:
+        return {"subjects": None}
+    if not account_type_dict["is_student"]:
+        return {"subjects": None}
+
+    cached_subjects = cache.get("subjects")
+    if not cached_subjects:
+        subjects = Subject.objects.all()
+        cache.set("subjects", subjects, 1 * 24 * 60 * 60)
+        return {"subjects": subjects}
+    return {"subjects": cached_subjects}
