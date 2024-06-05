@@ -5,6 +5,11 @@
     <link rel="stylesheet" href="{% static 'tutoringApp/css/base_tutor.css' %}">
 {% endblock %}
 
+{% block script_search %}
+    {% load static %}
+    <script defer src="{% static 'tutoringApp/js/searchTutor.js' %}"></script>
+{% endblock %}
+
 {% block search %}
 <div class="mobile header-left-search header-side-item_mobile">
     <div class="header-left-search-icon">
