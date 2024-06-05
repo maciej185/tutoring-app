@@ -1,5 +1,6 @@
 {% load profiles_extras %}
 {% load availability_extras %}
+{% load lesson_extras %}
 
 {% block script %}
 {% load static %}
@@ -139,6 +140,34 @@
                 Reviews
             </div>
             <div class="tutor-left-reviews-main tutor-side-section-main">
+                {% for review in reviews %}
+                    <div class="tutor-left-reviews-main-review">
+                        <div class="tutor-left-reviews-main-review-left">
+                            <div class="tutor-left-reviews-main-review-left-pic">
+                                <img src="{{review.subscription.student.profile_pic.url}}">
+                            </div>
+                        </div>
+                        <div class="tutor-left-reviews-main-review-right">
+                            <div class="tutor-left-reviews-main-review-right-top">
+                                <div class="tutor-left-reviews-main-review-right-top-info">
+                                    <div class="tutor-left-reviews-main-review-right-top-info-name">
+                                        {{review.subscription.student.full_name}}
+                                    </div>
+                                    <div class="tutor-left-reviews-main-review-right-top-info-subject">
+                                        {{ review.subscription.subject }}
+                                    </div>
+                                </div>  
+                                <div class="tutor-left-reviews-main-review-right-top-delete"></div>
+                            </div>
+                            <div class="tutor-left-reviews-main-review-rating list-element-top">
+                                Rating: {{ review.star_rating }}
+                            </div>
+                            <div class="tutor-left-reviews-main-review-bottom">
+                                {{ review.text }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
