@@ -2,6 +2,7 @@ from .create_appointment import create_appointment_view
 from .delete_appointment import DeleteAppointmentView
 from .learning_student import LearningStudentView
 from .learning_tutor import LearningTutorView
+from .review import CreateReviewView
 from .subscriptions import (
     CreateSubscriptionView,
     ListSubscriptionsStudentView,
@@ -16,4 +17,5 @@ __all__ = [
     "LearningStudentView",
     "ListSubscriptionsStudentView",
     "ListSubscriptionsTutorView",
+    "CreateReviewView",
 ]

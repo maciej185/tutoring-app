@@ -2,7 +2,7 @@
 from django import forms
 
 from profiles.models import Profile
-from subscriptions.models import ServiceSubscriptionList, Subscription
+from subscriptions.models import Review, ServiceSubscriptionList, Subscription
 from tutors.models import Service, Subject
 
 
@@ -51,3 +51,11 @@ class ServiceSubscriptionListForm(forms.ModelForm):
     class Meta:
         model = ServiceSubscriptionList
         fields = ["service"]
+
+
+class ReviewForm(forms.ModelForm):
+    """Form for the Review model."""
+
+    class Meta:
+        model = Review
+        fields = ["subscription", "star_rating", "text"]
