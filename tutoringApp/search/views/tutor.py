@@ -19,6 +19,12 @@ class TutorSearchResultsView(ListView, LoginRequiredMixin):
     template_name = r"search\tutor.html"
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        """Ensure that correct page for given account type is displayed.
+
+        In case that the logged in user is a Student, they get redirected to
+        a page with search results for Students while preserving the query
+        parameters provided in the initial request.
+        """
         if request.session.get("account_type") == AccountType.STUDENT.value:
             return HttpResponseRedirect(request.get_full_path_info().replace("tutor", "student"))
         return super().get(request, *args, **kwargs)

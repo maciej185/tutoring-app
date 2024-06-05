@@ -7,8 +7,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.db.models.functions import Lower
 from django.db.models.query import QuerySet
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.views.generic.list import ListView
 
+from profiles.forms import AccountType
 from profiles.models import Profile
 from tutors.models import Service, Subject
 
@@ -19,6 +21,17 @@ class StudentSearchResultsView(ListView, LoginRequiredMixin):
     model = Profile
     paginate_by = 10
     template_name = "search\student.html"
+
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        """Ensure that correct page for given account type is displayed.
+
+        In case that the logged in user is a Tutor, they get redirected to
+        a page with search results for Tutors while preserving the query
+        parameters provided in the initial request.
+        """
+        if request.session.get("account_type") == AccountType.TUTOR.value:
+            return HttpResponseRedirect(request.get_full_path_info().replace("student", "tutor"))
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         """Add additional information to the context."""
