@@ -1,6 +1,6 @@
 """View for generating search results for Students."""
 from math import floor
-from typing import Any
+from typing import Any, Optional
 
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -12,6 +12,7 @@ from django.views.generic.list import ListView
 
 from profiles.forms import AccountType
 from profiles.models import Profile
+from subscriptions.models import Review
 from tutors.models import Service, Subject
 
 
@@ -46,6 +47,7 @@ class StudentSearchResultsView(ListView, LoginRequiredMixin):
             if self.request.GET.get("subject", None)
             else None
         )
+        context["average_ratings"] = [self._get_average_rating(profile) for profile in profiles]
         return context
 
     def get_queryset(self) -> QuerySet[Any]:
@@ -76,3 +78,12 @@ class StudentSearchResultsView(ListView, LoginRequiredMixin):
         """Return average price of services offered by the given Tutor."""
         services = Service.objects.filter(tutor=tutor)
         return floor(sum([service.price_per_hour for service in services]) / len(services))
+
+    def _get_average_rating(self, tutor: Profile) -> Optional[float]:
+        """Return average rating of a given Tutor."""
+        reviews = Review.objects.filter(subscription__tutor=tutor)
+        return (
+            sum([review.star_rating for review in reviews]) / len(reviews)
+            if len(reviews) > 0
+            else None
+        )

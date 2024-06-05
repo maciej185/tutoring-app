@@ -41,6 +41,15 @@
                                 {{ profile.full_name }}
                             </a>
                         </div>
+                        <div class="results-list-result-middle-rating list-element-top">
+                            {% with average_ratings|get_by_index:forloop.counter0 as rating %}
+                                {% if rating %}
+                                    Rating: {{rating}}
+                                {% else %}
+                                    No reviews
+                                {% endif %}
+                            {% endwith %}
+                        </div>
                         <div class="results-list-result-middle-experience">
                             Experience: {% render_experience profile.teaching_since %}
                         </div>
@@ -88,6 +97,15 @@
                             <a href="{% url 'profiles:tutor_display' profile.pk %}">
                                 {{ profile.full_name }}
                             </a>
+                        </div>
+                        <div class="results-list-result-middle-rating list-element-top">
+                            {% with average_ratings|get_by_index:forloop.counter0 as rating %}
+                                {% if rating %}
+                                    Rating: {{rating}}
+                                {% else %}
+                                    No reviews
+                                {% endif %}
+                            {% endwith %}
                         </div>
                         <div class="results-list-result-middle-experience">
                             Experience: {% render_experience profile.teaching_since %}
