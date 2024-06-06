@@ -10,6 +10,7 @@ from pandas import Timestamp, date_range
 
 from profiles.forms import AccountType
 from profiles.models import ProfileLanguageList
+from subscriptions.models import Review, ServiceSubscriptionList
 from tutors.models import Availability, Service
 
 from .display import DisplayProfileView
@@ -22,21 +23,14 @@ class DisplayTutorProfileView(DisplayProfileView):
         """Add info about Service and ProfileLanguageList objects related to given Tutor."""
         context = super().get_context_data(**kwargs)
 
-        context["language_data"] = ProfileLanguageList.objects.filter(
-            profile=self.get_object()
-        )
+        context["language_data"] = ProfileLanguageList.objects.filter(profile=self.get_object())
 
         context["service_data"] = Service.objects.filter(tutor=self.get_object())
 
         context["currency"] = settings.CURRENCY
 
         subjects = list(
-            set(
-                [
-                    service_object.subject.name
-                    for service_object in context["service_data"]
-                ]
-            )
+            set([service_object.subject.name for service_object in context["service_data"]])
         )
 
         context["subject_list"] = (
@@ -56,19 +50,18 @@ class DisplayTutorProfileView(DisplayProfileView):
 
         context["availabilites"] = self._get_availabilites()
 
-        context["current_week"] = self._get_dates_for_week(
-            self._get_week_days("current")
-        )
+        context["current_week"] = self._get_dates_for_week(self._get_week_days("current"))
 
         context["week_days_dates"] = self._get_week_days_dates()
 
-        context["default_services"] = Service.objects.filter(
-            tutor=self.get_object()
-        ).filter(is_default=True)
+        context["default_services"] = Service.objects.filter(tutor=self.get_object()).filter(
+            is_default=True
+        )
 
         context["first_service"] = context["default_services"][0]
         context["current_month"] = datetime.now().month
         context["current_year"] = datetime.now().year
+        context["reviews"] = self._get_reviews()
 
         return context
 
@@ -131,9 +124,7 @@ class DisplayTutorProfileView(DisplayProfileView):
             each with `Availability` objects defined for different
             days of the current week.
         """
-        services = Service.objects.filter(tutor=self.get_object()).filter(
-            is_default=True
-        )
+        services = Service.objects.filter(tutor=self.get_object()).filter(is_default=True)
         availabilites = {}
         for service in services:
             availabilites_service = {}
@@ -199,7 +190,18 @@ class DisplayTutorProfileView(DisplayProfileView):
         """
         week_days_dates = OrderedDict()
         for week in ["previous", "current", "next"]:
-            week_days_dates.update(
-                {week: self._get_dates_for_week(self._get_week_days(week))}
-            )
+            week_days_dates.update({week: self._get_dates_for_week(self._get_week_days(week))})
         return week_days_dates
+
+    def _get_reviews(self) -> QuerySet[Review]:
+        """Fetch all reviews related to the given Tutor.
+
+        The method fetches every Review related to
+        a Subscription that is associated with a
+        given Tutor.
+
+        Returns:
+            A QuerySet with Reviews of Subscriptions
+            related to the given Tutor.
+        """
+        return Review.objects.filter(subscription__tutor=self.get_object())
