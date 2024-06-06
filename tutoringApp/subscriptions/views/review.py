@@ -6,8 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import BaseModelForm
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
-from django.views.generic.edit import CreateView
+from django.urls import reverse, reverse_lazy
+from django.views.generic.edit import CreateView, DeleteView
 
 from subscriptions.forms import ReviewForm
 from subscriptions.models import Review, Subscription
@@ -87,3 +87,62 @@ class CreateReviewView(CreateView, LoginRequiredMixin):
                     "redirect_destination": "home page",
                 },
             )
+
+
+class DeleteReviewView(DeleteView, LoginRequiredMixin):
+    """View for deleting reviews."""
+
+    success_url = reverse_lazy
+    model = Review
+    pk_url_kwarg = "review_id"
+    template_name = "subscriptions/review/delete.html"
+
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        """Check if the currently logged in user is a Student and an author of the given Review."""
+        user_is_not_correct_student_response = self._user_is_not_correct_student_response()
+        return (
+            user_is_not_correct_student_response
+            if user_is_not_correct_student_response
+            else super().get(request, *args, **kwargs)
+        )
+
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        user_is_not_correct_student_response = self._user_is_not_correct_student_response()
+        return (
+            user_is_not_correct_student_response
+            if user_is_not_correct_student_response
+            else super().post(request, *args, **kwargs)
+        )
+
+    def _user_is_not_correct_student_response(self) -> Optional[HttpResponse]:
+        """Check if the current user is the Student related to the given Subcription.
+
+        Reviews can only be made by Students who are related to the given
+        Subscription. The method checks if the current user is that Student
+        and if not, a warnign page with redirection link is rendered.
+
+        Returns:
+            An instance of the HttpResponse class which
+            renders a warning page with redirection link
+            if the currently logged in user is not a correct Student,
+            None otherwise.
+        """
+        subscription = self.get_object().subscription
+        if self.request.user.pk != subscription.student.pk:
+            return render(
+                request=self.request,
+                template_name="tutoringApp/forbidden.html",
+                status=403,
+                context={
+                    "warning_message": "You are not allowed to delete the Review!",
+                    "redirect_link": reverse("home:home"),
+                    "redirect_destination": "home page",
+                },
+            )
+
+    def get_success_url(self) -> str:
+        """Redirect the user back to the Subscription page."""
+        return reverse_lazy(
+            "subscriptions:learning_student",
+            kwargs={"subscription_id": self.get_object().subscription.pk},
+        )

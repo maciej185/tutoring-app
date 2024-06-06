@@ -1,0 +1,30 @@
+{% extends 'tutoringApp/base_student.html' %}
+
+{% load widget_tweaks %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'subscriptions/css/review/delete.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="confirm box">
+        <div class="confirm-header box-header">
+            Confirm
+        </div>
+        <div class="confirm-main box-main_padded">
+            <form method="post">
+                {% csrf_token %}
+                <div class="confirm-main-inner stack-container">
+                    <div class="confirm-main-inner-text">
+                        Are you sure you want to delete the review?
+                    </div>
+                    {{ form }}
+                    <div class="confirm-main-inner-confirm centered_button_container">
+                        <button type="submit" class="button_fill_green">Confirm</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
