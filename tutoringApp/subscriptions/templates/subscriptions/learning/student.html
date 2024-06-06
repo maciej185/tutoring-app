@@ -81,12 +81,35 @@
         </div>
     </div>
     <div class="learning-right">
-        <div class="learning-right-rate">
-            <div class="learning-right-rate-btn button_fill_green">
-                <a href="{% url 'subscriptions:review_create' current_subscription.id %}">
-                    Rate
-                </a>
-            </div>
+        <div class="learning-right-rate stack-container">
+            {% if not review %}
+                <div class="learning-right-rate-btn button_fill_green">
+                    <a href="{% url 'subscriptions:review_create' current_subscription.id %}">
+                        Rate
+                    </a>
+                </div>
+            {% else %}
+                <div class="learning-right-rate-delete">
+                    <div class="learning-right-rate-delete button_fill_red">
+                        <a href="{% url 'subscriptions:review_delete' review.id %}">
+                            Delete review
+                        </a>
+                    </div>
+                </div>
+                <div class="learning-right-rate-review box">
+                    <div class="learning-right-rate-review-header box-header">
+                        Your review
+                    </div>
+                    <div class="learning-right-rate-review-main box-main_padded stack-container">
+                        <div class="learning-right-rate-review-main-rating info-top">
+                            Rating: {{ review.star_rating }}
+                        </div>
+                        <div class="learning-right-rate-review-main-text info-bottom">
+                            {{ review.text }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </div>
         <div class="learning-right-summary box">
             <div class="learning-right-summary-header box-header">
