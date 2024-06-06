@@ -8,7 +8,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 
-from subscriptions.models import Subscription
+from subscriptions.models import Review, Subscription
 
 LOGGER = getLogger(__name__)
 
@@ -38,6 +38,7 @@ class LearningStudentView(LearningView):
         """Add data to the default context."""
         context = super().get_context_data(**kwargs)
         context["subscriptions"] = self._get_subscriptions()
+        context["review"] = self._get_review()
 
         return context
 
@@ -78,3 +79,17 @@ class LearningStudentView(LearningView):
                     "redirect_destination": "home page",
                 },
             )
+
+    def _get_review(self) -> Optional[Review]:
+        """Fetch Review for a given Subscription.
+
+        Returns:
+            Review for a given Scubscription
+            if it was previously created, None
+            otherwise.
+        """
+        try:
+            review = Review.objects.get(subscription__pk=self.kwargs["subscription_id"])
+        except Review.DoesNotExist:
+            return
+        return review
