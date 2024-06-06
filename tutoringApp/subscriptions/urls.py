@@ -44,4 +44,9 @@ urlpatterns = [
         view=views.CreateReviewView.as_view(),
         name="review_create",
     ),
+    path(
+        "review/delete/<int:review_id>",
+        view=views.DeleteReviewView.as_view(),
+        name="review_delete",
+    ),
 ]
