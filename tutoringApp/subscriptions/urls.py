@@ -39,4 +39,9 @@ urlpatterns = [
         view=views.DeleteAppointmentView.as_view(),
         name="appointment_delete",
     ),
+    path(
+        "review/create/<int:subscription_id>",
+        view=views.CreateReviewView.as_view(),
+        name="review_create",
+    ),
 ]
