@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     "lessons.apps.LessonsConfig",
     "subscriptions.apps.SubscriptionsConfig",
     "search.apps.SearchConfig",
+    "chat.apps.ChatConfig",
 ]
 
 MIDDLEWARE = [
@@ -90,7 +92,7 @@ CACHES = {
 }
 
 WSGI_APPLICATION = "tutoringApp.wsgi.application"
-
+ASGI_APPLICATION = "tutoringApp.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -198,6 +200,15 @@ LOGGING = {
 }
 
 CURRENCY = "$"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 # Email settings for password reset.
 
