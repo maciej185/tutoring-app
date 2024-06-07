@@ -2,6 +2,7 @@
 
 {% block script %}
 {% load static %}
+    <script defer src="{% static 'chat/js/chatHandler.js' %}"></script>    
 {% endblock %}
 
 {% block window %}
@@ -9,6 +10,9 @@
     {{ tutor.full_name }}
 </div>
 <div class="chat-right_bottom-main box-main">
+    {{ tutor.pk|json_script:"tutor_id" }}
+    {{ user.id|json_script:"student_id" }}
+    {{ user.id|json_script:"current_user_id"}}
     <div class="chat-right_bottom-main-chat"></div>
     <div class="chat-right_bottom-main-message adjacent-container">
         <div class="chat-right_bottom-main-message-text">
