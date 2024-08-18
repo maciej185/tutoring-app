@@ -86,7 +86,7 @@ TEMPLATES = [
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
-        "LOCATION": environ.get("CACHE_LOCATION"),
+        "LOCATION": Path(BASE_DIR.parent, "cache"),
         "TIMEOUT": 1 * 60 * 60,
     }
 }
